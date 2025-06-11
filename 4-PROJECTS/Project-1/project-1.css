@@ -1,0 +1,260 @@
+.main-top {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "main-top-heading";
+
+    margin-bottom: 1rem;
+}
+
+.project-details-cont {
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: var(--white-100);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.back-to-projects-and-skills-used {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white-97);
+  padding: 0.4rem 0.8rem;
+  border-radius: 100px;
+}
+
+.tool {
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.big-picture-cont {
+  height: 30rem;
+  border-radius: 8px;
+  padding: 0.8rem;
+  background-color: #faf2eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.big-picture-cont img {
+  max-width: 84%;
+  max-height: 84%;
+  transition: all 0.4s;
+}
+
+.view-project-overlay {
+  background: rgba(var(--black-0-rgb), 0.25);
+  backdrop-filter: blur(5px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  z-index: 99;
+
+  text-decoration: none;
+
+  visibility: hidden;
+}
+
+.eye-icon {
+  height: 48px;
+  width: 48px;
+  background-color: var(--black-0);
+  border-radius: 100%;
+
+  transition: all 0.25s;
+  transform: scale(0);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-icon img {
+  height: 24px;
+  width: 24px;
+}
+
+.view-project-overlay .view-project-text {
+  color: var(--white-100);
+  transform: scale(0);
+  transition: all 0.25s;
+}
+
+.more-pictures-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.more-pic-cont {
+  height: 10rem;
+  width: 33%;
+  padding: 0.4rem;
+  border-radius: 8px;
+
+  background-color: #faf2eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Newly added */
+  border: 2px solid transparent;
+  overflow: hidden; /* Important for scaling effect */
+
+  margin-bottom: -1rem;
+}
+
+.more-pic-cont img {
+  max-width: 84%;
+  max-height: 84%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease; /* Smooth scaling */
+}
+
+.more-pic-cont.active {
+  border: 1px solid #000;
+}
+
+.project-details-text {
+}
+
+.heading-1 {
+  font-size: 2rem;
+  font-weight: 100;
+  margin-bottom: 24px;
+  margin-top: 24px;
+}
+
+.heading-2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.project-details-text p {
+  margin-bottom: 12px;
+}
+
+.project-details-text strong {
+  font-weight: 600;
+}
+
+.project-details-text ul {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+ul,
+ol {
+  text-indent: 0.2rem;
+  padding-left: 4px;
+}
+
+.project-details-text ol {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-details-text ol li {
+  font-weight: bold;
+}
+
+.project-details-text ol ul {
+  margin: 0 0.8rem;
+}
+
+.project-details-text ol ul li {
+  font-weight: normal;
+}
+
+.project-details-text ol ul ul {
+  margin: 0 0.8rem;
+}
+
+.alph-list {
+  display: flex;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.ul-circ {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.ul-circ .label {
+  height: 3px;
+  width: 3px;
+  background-color: var(--black-0);
+  border-radius: 1000px;
+}
+
+code {
+  background-color: var(--white-97);
+  padding: 0.2rem 0.4rem 0.2rem 0.2rem;
+  border-radius: 1000px;
+
+  font-family: monospace;
+  font-weight: 500;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- QUERIES ---------- */
+
+
+/*--- Mobile ---*/
+@media (max-width: 800px) {
+    .big-picture-cont {
+        height: 18rem
+    }
+
+    .more-pic-cont {
+        height: 6rem;
+    }
+}
+
+/*--- Tablet ---*/
+@media (min-width: 800px) and (max-width: 1200px) {
+    .big-picture-cont {
+        height: 24rem
+    }
+
+    .more-pic-cont {
+        height: 8rem;
+    }
+}

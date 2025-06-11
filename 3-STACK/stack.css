@@ -1,0 +1,68 @@
+.page-stack-container {
+  background-color: var(--white-100);
+  border-radius: 12px;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.div {
+  width: 100%;
+}
+
+.stack-items-set {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.stack-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.stack-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.stack-logo-and-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.stack-name {
+  font-size: 1.05rem;
+}
+
+.stack-item p {
+  font-size: 0.95rem;
+  color: var(--black-30);
+}
+
+.stack-logo {
+  height: 112px;
+  width: 112px;
+  background-color: var(--white-97);
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+}
+
+.stack-item img {
+  height: 56px;
+  width: 56px;
+  object-fit: contain;
+}

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imran's Portfolio</title>
+    <link rel="stylesheet" href="1-INDEX/index.css" />
+    <link rel="stylesheet" href="1-INDEX/index-mobile-queries.css" />
+    <link rel="stylesheet" href="1-INDEX/index-tablet-queries.css">
+  </head>
+  <body>
+    <!-- Float contact button for mobile devices -->
+    <a class="btn top-contact-btn-mobile" href="5-CONTACT/contact.html">
+        <img src="ICONS/envelope-white-100.svg" alt="envelope" />
+    </a>
+    <!-- End of float button -->
+    <div id="overlay"></div>
+    <div id="nav-blur"></div>
+    <!--------------------- NAV ----------------------->
+    <!------------------------------------------------->
+    <!------------------------------------------------->
+    <nav>
+      <div class="profile">
+        <div class="pic">
+          <img src="IMAGES/my-pic.webp" alt="Imran's pic" />
+        </div>
+        <div class="name">Muhammad Imran</div>
+        <div class="tagline-1">Frontend Developer <span class="hidden">& UI/UX Enthusiast</span></div>
+        <div class="tagline-2">& UI/UX Enthusiast</div>
+        <button class="toggle-btn" aria-label="Toggle Navigation"></button>
+      </div>
+      <div class="site-nav">
+        <!-- Home -->
+        <a class="site-nav-item site-nav-item-active" href="index.html">
+          <img class="site-nav-item-icon" src="ICONS/house-fill-black-0.svg" />
+          <span>Home</span>
+          <img class="arrow" src="ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- About -->
+        <a class="site-nav-item" href="2-ABOUT/about.html">
+          <img class="site-nav-item-icon" src="ICONS/user-black-30.svg" />
+          <span>About</span>
+          <img class="arrow" src="ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- Stack -->
+        <a class="site-nav-item" href="3-STACK/stack.html">
+          <img class="site-nav-item-icon" src="ICONS/stack-black-30.svg" />
+          <span>Stack</span>
+          <img class="arrow" src="ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- Projects -->
+        <a class="site-nav-item" href="4-PROJECTS/projects.html">
+          <img class="site-nav-item-icon" src="ICONS/suitcase-black-30.svg" />
+          <span>Projects</span>
+          <img class="arrow" src="ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- Contact -->
+        <a class="site-nav-item" href="5-CONTACT/contact.html">
+          <img class="site-nav-item-icon" src="ICONS/envelope-black-30.svg" />
+          <span>Contact</span>
+          <img class="arrow" src="ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+      </div>
+      <div class="hrule"></div>
+      <!-- SOCIAL ACCOUNTS -->
+      <div class="social-accounts">
+        <!-- LinkedIn -->
+        <a
+          class="social-account"
+          href="https://linkedin.com/in/imranbinmanzoor-dev/"
+          target="_blank"
+        >
+          <img
+            class="social-account-icon"
+            src="ICONS/linkedin-logo-black-30.svg"
+          />
+          <span>LinkedIn</span>
+          <img class="arrow" src="ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+        <!-- GitHub -->
+        <a
+          class="social-account"
+          href="https://github.com/ImranDirkhan"
+          target="_blank"
+        >
+          <img
+            class="social-account-icon"
+            src="ICONS/github-logo-black-30.svg"
+          />
+          <span>GitHub</span>
+          <img class="arrow" src="ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+        <!-- Instagram -->
+        <a
+          class="social-account"
+          href="https://instagram.com/imranbinmanzoor1/"
+          target="_blank"
+        >
+          <img
+            class="social-account-icon"
+            src="ICONS/instagram-logo-black-30.svg"
+          />
+          <span>Instagram</span>
+          <img class="arrow" src="ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+        <!-- Twitter -->
+        <a
+          class="social-account"
+          href="https://x.com/ImranDirkhan"
+          target="_blank"
+        >
+          <img class="social-account-icon" src="ICONS/x-twitter-black-30.svg" />
+          <span>Twitter</span>
+          <img class="arrow" src="ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+      </div>
+    </nav>
+    <!--------------------- MAIN ---------------------->
+    <!------------------------------------------------->
+    <!------------------------------------------------->
+    <main>
+      <div class="main-top">
+        <h1>Hey 👋, I'm Imran!</h1>
+        <div class="available-and-contact">
+          <div class="available">
+            <div class="green-ind"></div>
+            <span>Available for projects</span>
+          </div>
+          <a class="btn top-contact-btn" href="5-CONTACT/contact.html">
+            <div class="text-and-arrow">
+              <span class="text">Contact me</span>
+              <span class="arrow">
+                <img src="ICONS/arrow-right.svg" alt="arrow">
+              </span>
+            </div>
+          </a>
+        </div>
+        <p>
+          I craft pixel-perfect, intuitive web experiences that seamlessly blend
+          my mathematical precision with elegant design solutions. Let's build
+          something extraordinary.
+        </p>
+      </div>
+      <div class="fragments">
+
+        <!----- My expertise cards ----->
+        <div class="core-skill-cards">
+          <!-- Skill Card 1 -->
+          <div class="skill-card">
+            <div class="big-icon">
+              <div class="skill-icon">
+                <img src="ICONS/paint-brush-green-45.svg" alt="paint-brush-green">
+              </div>
+            </div>
+            <img class="caret-up" src="ICONS/caret-up.svg" alt="caret-up-icon">
+            <div class="text-card">
+              <h3 class="text-card-heading">
+                Design with intention
+              </h3>
+              <p class="text-card-para hidden">
+                I create thoughtful experiences with Figma and a strong sense of
+                layout, spacing, and usability. I care about user flow,
+                readability, and visual harmony.
+              </p>
+            </div>
+          </div>
+          <!-- Skill Card 2 -->
+          <div class="skill-card">
+            <div class="big-icon big-icon-2">
+              <div class="skill-icon">
+                <img src="ICONS/code-blue-50.svg" alt="code-blue">
+              </div>
+            </div>
+            <img class="caret-up" src="ICONS/caret-up.svg" alt="caret-up-icon">
+            <div class="text-card text-card-2">
+              <h3 class="text-card-heading text-card-heading-2">
+                Crafting clean, responsive UIs
+              </h3>
+              <p class="text-card-para hidden">
+                I craft sleek, user-focused UIs with HTML, CSS, and
+                JavaScript&mdash;clean, responsive, optimized for performance
+                and accessibility.
+              </p>
+            </div>
+          </div>
+          <!-- Skill Card 3 -->
+          <div class="skill-card">
+            <div class="big-icon big-icon-3">
+              <div class="skill-icon">
+                <img src="ICONS/calculator-purple-65.svg" alt="calculator">
+              </div>
+            </div>
+            <img class="caret-up" src="ICONS/caret-up.svg" alt="caret-up-icon">
+            <div class="text-card text-card-3">
+              <h3 class="text-card-heading text-card-heading-3">
+                Precision. Logic. Depth.
+              </h3>
+              <p class="text-card-para hidden">
+                As a mathematician, I bring analytical rigor and structured
+                problem-solving to everything I build. I see code not just as
+                logic, but as elegant systems.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!----- Brief about me ----->
+        <h1 class="index-heading">About me</h1>
+        <div class="about-details-container">
+          <!--- Formal education --->
+          <div class="about-me formal-education">
+            <div class="about-me-top">
+              <img src="ICONS/graduation-cap-black-30.svg" alt="graduation-cap">
+              <h4>Academic education</h4>
+            </div>
+            <div class="timeline">
+              <!-- Milestone 1 -->
+              <div class="milestone">
+                <div class="dot"></div>
+                <div class="tenure">2017&ndash;21</div>
+                <div class="achievement">BS in Mathematics</div>
+                <div class="institute">University of Education, Lahore</div>
+              </div>
+              <!-- Milestone 2 -->
+              <!-- Milestone 3 -->
+              <!-- Milestone 4 -->
+            </div>
+          </div>
+          <div class="vrule vrule-1"></div>
+          <div class="about-hrule about-hrule-1"></div>
+          <!--- Non-formal education --->
+          <div class="about-me non-formal-education">
+            <div class="about-me-top">
+              <img src="ICONS/book-bookmark-black-30.svg" alt="bookmark-icon">
+              <h4>Non-formal education</h4>
+            </div>
+            <div class="timeline">
+              <!-- Milestone 1 -->
+              <div class="milestone">
+                <div class="dot"></div>
+                <div class="tenure">2017&ndash;21</div>
+                <div class="achievement">BS in Mathematics</div>
+                <div class="institute">University of Education, Lahore</div>
+              </div>
+              <!-- Milestone 2 -->
+              <!-- Milestone 3 -->
+              <!-- Milestone 4 -->
+            </div>
+          </div>
+          <div class="about-hrule about-hrule-2"></div>
+          <!--- Experience --->
+          <div class="about-me experience">
+            <div class="about-me-top">
+              <img src="ICONS/steps-black-30.svg" alt="steps-icon">
+              <h4>Experience</h4>
+            </div>
+            <div class="timeline">
+              <!-- Milestone 1 -->
+              <div class="milestone">
+                <div class="dot"></div>
+                <div class="tenure">2021&ndash;</div>
+                <div class="achievement">Freelance Math Expert</div>
+                <div class="institute">Google</div>
+              </div>
+              <!-- Milestone 2 -->
+              <!-- Milestone 3 -->
+              <!-- Milestone 4 -->
+            </div>
+          </div>
+          <div class="vrule vrule-2"></div>
+          <div class="about-hrule about-hrule-3"></div>
+          <!--- Certificates --->
+          <div class="about-me certificates">
+            <div class="about-me-top">
+              <img src="ICONS/certificate-black-30.svg" alt="certificate-icon">
+              <h4>Certificates</h4>
+            </div>
+            <div class="timeline">
+              <!-- Milestone 1 -->
+              <div class="milestone">
+                <div class="dot"></div>
+                <div class="tenure">2017&ndash;21</div>
+                <div class="achievement">The Complete JavaScript Course</div>
+                <div class="institute">Udemy</div>
+              </div>
+              <!-- Milestone 2 -->
+              <!-- Milestone 3 -->
+              <!-- Milestone 4 -->
+            </div>
+          </div>
+          <!-- Link to more stack -->
+          <a class="link-btn more-about-link" href="3-STACK/stack.html">
+            <div class="text-and-arrow">
+              <span class="text">Know more about me</span>
+              <span class="arrow">
+                <img src="ICONS/arrow-right.svg" alt="arrow">
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!----- Brief stack ----->
+        <h1 class="index-heading">Stack</h1>
+        <!-- Brief stack container -->
+        <div class="brief-stack-cont">
+          <!-- Stack item - HTML -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/html5-colorful.svg" alt="HTML-logo">
+            </div>
+            <span class="brief-stack-name">HTML</span>
+          </div>
+          <!-- Stack item - CSS -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/css3-colorful.svg" alt="HTML-logo">
+            </div>
+            <span class="brief-stack-name">CSS</span>
+          </div>
+          <!-- Stack item - JavaScript -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/javascript-colorful.svg" alt="JavaScript-logo">
+            </div>
+            <span class="brief-stack-name">JavaScript</span>
+          </div>
+          <!-- Stack item - React -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/react-colorful.svg" alt="React-logo">
+            </div>
+            <span class="brief-stack-name">React</span>
+          </div>
+          <!-- Stack item - Figma -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/figma-colorful.svg" alt="Figma-logo">
+            </div>
+            <span class="brief-stack-name">Figma</span>
+          </div>
+          <!-- Stack item - Framer -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/framer-colorful.svg" alt="Framer-logo">
+            </div>
+            <span class="brief-stack-name">Framer</span>
+          </div>
+          <!-- Stack item - WordPress -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/wordpress-colorful.svg" alt="WordPress-logo">
+            </div>
+            <span class="brief-stack-name">WordPress</span>
+          </div>
+          <!-- Stack item - LaTeX -->
+          <div class="brief-stack-item">
+            <div class="brief-stack-logo-cont">
+              <img class="brief-stack-logo" src="ICONS/latex-colorful.svg" alt="LaTeX-logo">
+            </div>
+            <span class="brief-stack-name">LaTeX</span>
+          </div>
+          <!-- Link to more stack -->
+          <a class="link-btn more-stack-link" href="3-STACK/stack.html">
+            <div class="text-and-arrow">
+              <span class="text">See full stack</span>
+              <span class="arrow">
+                <img src="ICONS/arrow-right.svg" alt="arrow">
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!----- Brief projects ----->
+        <h1 class="index-heading">Projects</h1>
+        <div class="brief-projects-container">
+          <div class="proj-cont proj-1">
+            <div class="proj-img-cont">
+              <a class="view-project-overlay" href="4-PROJECTS/Project-1/project-1.html">
+                <div class="eye-icon"><img src="ICONS/eye.svg" alt="eye-icon"></div>
+                <span class="view-project-text">View project</span>
+              </a>
+              <img src="IMAGES/omnifood.webp" alt="omnifood-img" class="proj-img"/>
+            </div>
+            <h4>Omnifood</h4>
+          </div>
+          <div class="proj-cont proj-2">
+            <div class="proj-img-cont">
+              <a class="view-project-overlay" href="4-PROJECTS/Project-2/project-2.html">
+                <div class="eye-icon"><img src="ICONS/eye.svg" alt="eye-icon"></div>
+                <span class="view-project-text">View project</span>
+              </a>
+              <img
+                src="IMAGES/modern-page.webp"
+                alt="modern-page-img" class="proj-img"
+              />
+            </div>
+            <h4>Modern, animated login/signup page</h4>
+          </div>
+          <!-- Link to more projects -->
+          <a class="link-btn more-projects-link" href="4-PROJECTS/projects.html">
+            <div class="text-and-arrow">
+              <span class="text">View all projects</span>
+              <span class="arrow">
+                <img src="ICONS/arrow-right.svg" alt="arrow">
+              </span>
+            </div>
+          </a>
+        </div> 
+        
+        <!----- Bottom contact card ----->
+        <div class="frag frag-4">
+          <div class="frag-4-content">
+            <div class="contact-text">
+              Do you have any project idea you want to discuss about?
+            </div>
+            <a class="btn" href="5-CONTACT/contact.html">
+              <div class="text-and-arrow">
+                <span class="text">Contact me</span>
+                <span class="arrow">
+                  <img src="ICONS/arrow-right.svg" alt="arrow">
+                </span>
+              </div>
+            </a>
+            <div class="pattern">
+              <img src="IMAGES/pattern.svg" alt="grid">
+            </div>
+          </div>
+      </div>
+    </main>
+    <!--------------------- FOOTER -------------------->
+    <!------------------------------------------------->
+    <!------------------------------------------------->
+    <footer>
+      &copy; 2025 Muhammad Imran | Designed with love and code
+    </footer>
+    <script src="1-INDEX/index.js"></script>
+  </body>
+</html>

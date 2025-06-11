@@ -1,0 +1,98 @@
+/* ------------------------------- TABLET ------------------------------- */
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+@media (min-width: 800px) and (max-width: 1200px)
+ {
+  body {
+    grid-template-columns: 6rem 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "nav main"
+      "nav footer";
+  }
+
+  nav {
+    width: 6rem;
+  }
+
+  nav .profile {
+    grid-template-columns: auto;
+    grid-template-areas: "pic";
+  }
+
+  .profile .name,
+  .profile .tagline-1,
+  .profile .tagline-2 {
+    display: none;
+  }
+
+  .site-nav {
+    align-items: center;
+  }
+
+  .site-nav-item {
+    grid-template-columns: 24px;
+    width: fit-content;
+  }
+
+  .site-nav-item span,
+  .site-nav-item .arrow {
+    display: none;
+  }
+
+  .social-accounts {
+    align-items: center;
+  }
+
+  .social-account {
+    grid-template-columns: 24px;
+    width: fit-content;
+  }
+
+  .social-account span,
+  .social-account .arrow {
+    display: none;
+  }
+
+  .frag-4-content {
+    padding: 4rem 10rem;
+  }
+
+  .big-icon {
+    height: 160px;
+    width: 160px;
+  }
+
+  .big-icon-transformed {
+  transform: translate(-16%, -16%) scale(0.5);
+  position: absolute;
+}
+
+  .big-icon .skill-icon img {
+    height: 4rem;
+    width: 4rem;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  .caret-up {
+    right: 4px;
+    bottom: 4px;
+  }
+  .brief-stack-cont {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .brief-stack-logo-cont {
+    max-height: 96px;
+    max-width: 96px;
+}
+
+.brief-stack-logo-cont img {
+  height: 42px;
+  width: 42px;
+}
+}
+
+/* ////////////////// */
+

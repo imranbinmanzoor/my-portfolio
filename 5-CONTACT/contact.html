@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imran's Portfolio | Contact</title>
+    <link rel="stylesheet" href="../1-INDEX/index.css" />
+    <link rel="stylesheet" href="../1-INDEX/index-mobile-queries.css" />
+    <link rel="stylesheet" href="../1-INDEX/index-tablet-queries.css">
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="contact-mobile-queries.css">
+    <link rel="stylesheet" href="contact-tablet-queries.css">
+  </head>
+  <body>
+    <!-- Float contact button for mobile devices -->
+    <a class="btn top-contact-btn-mobile" href="../5-CONTACT/contact.html">
+        <img src="../ICONS/envelope-white-100.svg" alt="envelope" />
+    </a>
+    <!-- End of float button -->
+    <div id="overlay"></div> 
+    <div id="nav-blur"></div>
+    <!-- -------------------- NAV (HTML) -------------------- -->
+    <!-- ---------------------------------------------------- -->
+    <!-- ---------------------------------------------------- -->
+    <nav>
+      <div class="profile">
+        <div class="pic">
+          <img src="../IMAGES/my-pic.webp" alt="Imran's pic" />
+        </div>
+        <div class="name">Muhammad Imran</div>
+        <div class="tagline-1">Frontend Developer <span class="hidden">& UI/UX Enthusiast</span></div>
+        <div class="tagline-2">& UI/UX Enthusiast</div>
+        <button class="toggle-btn" aria-label="Toggle Navigation"></button>
+      </div>
+      <div class="site-nav">
+        <!-- Home -->
+        <a class="site-nav-item" href="../index.html">
+          <img class="site-nav-item-icon" src="../ICONS/house-black-30.svg" />
+          <span>Home</span>
+          <img class="arrow" src="../ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- About -->
+        <a class="site-nav-item" href="../2-ABOUT/about.html">
+          <img class="site-nav-item-icon" src="../ICONS/user-black-30.svg" />
+          <span>About</span>
+          <img class="arrow" src="../ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- Stack -->
+        <a class="site-nav-item" href="../3-STACK/stack.html">
+          <img class="site-nav-item-icon" src="../ICONS/stack-black-30.svg" />
+          <span>Stack</span>
+          <img class="arrow" src="../ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- Projects -->
+        <a class="site-nav-item" href="../4-PROJECTS/projects.html">
+          <img class="site-nav-item-icon" src="../ICONS/suitcase-black-30.svg" />
+          <span>Projects</span>
+          <img class="arrow" src="../ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+        <!-- Contact -->
+        <a class="site-nav-item site-nav-item-active" href="../5-CONTACT/contact.html">
+          <img class="site-nav-item-icon" src="../ICONS/envelope-fill-black-0.svg" />
+          <span>Contact</span>
+          <img class="arrow" src="../ICONS/arrow-right.svg" alt="arrow" />
+        </a>
+      </div>
+      <div class="hrule"></div>
+      <!-- ---------- SOCIAL ACCOUNTS ---------- -->
+      <div class="social-accounts">
+        <!-- LinkedIn -->
+        <a
+          class="social-account"
+          href="https://linkedin.com/in/imranbinmanzoor-dev/"
+          target="_blank"
+        >
+          <img
+            class="social-account-icon"
+            src="../ICONS/linkedin-logo-black-30.svg"
+          />
+          <span>LinkedIn</span>
+          <img class="arrow" src="../ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+        <!-- GitHub -->
+        <a
+          class="social-account"
+          href="https://github.com/ImranDirkhan"
+          target="_blank"
+        >
+          <img
+            class="social-account-icon"
+            src="../ICONS/github-logo-black-30.svg"
+          />
+          <span>GitHub</span>
+          <img class="arrow" src="../ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+        <!-- Instagram -->
+        <a
+          class="social-account"
+          href="https://instagram.com/imranbinmanzoor1/"
+          target="_blank"
+        >
+          <img
+            class="social-account-icon"
+            src="../ICONS/instagram-logo-black-30.svg"
+          />
+          <span>Instagram</span>
+          <img class="arrow" src="../ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+        <!-- Twitter -->
+        <a
+          class="social-account"
+          href="https://x.com/ImranDirkhan"
+          target="_blank"
+        >
+          <img class="social-account-icon" src="../ICONS/x-twitter-black-30.svg" />
+          <span>Twitter</span>
+          <img class="arrow" src="../ICONS/arrow-up-right.svg" alt="arrow" />
+        </a>
+      </div>
+    </nav>
+    <!-- -------------------- MAIN (HTML) -------------------- -->
+    <!-- ----------------------------------------------------- -->
+    <!-- ----------------------------------------------------- -->
+    <main>
+      <div class="main-top">
+        <h1>Let's connect!</h1>
+        <div class="available-and-contact">
+          <div class="available">
+            <div class="green-ind"></div>
+            <span>Available for projects</span>
+          </div>
+          <!-- <a class="btn top-contact-btn" href="5-CONTACT/contact.html">
+            <span class="text">Contact me</span>
+            <span class="arrow"><img src="../ICONS/arrow-right.svg" alt="arrow"></span>
+          </a> -->
+        </div>
+        <p>
+          Whether you have an exciting project, a collaboration idea, or just want to chat about code and design, feel free to reach out. I'm always open to new opportunities and interesting conversations.
+        </p>
+      </div>
+      <div class="fragments">
+        <!------------ CONTACT CARD ------------>
+        <!-- -------------------------------- -->
+        <div class="contact-cards-cont">
+          <a href="mailto:imranbinmanzoor1@gmail.com" target="_blank" class="contact-card">
+            <div class="contact-card-logo-bg email"><img src="../ICONS/envelope-black-30.svg" alt="envelope-icon"></div>
+            <div class="contact-card-name">Send me an email</div>
+            <div class="contact-card-arrow"><img src="../ICONS/arrow-up-right.svg" alt="up-right-arrow"></div>
+          </a>
+          <a href="tel:+923247051372" target="_blank" class="contact-card">
+            <div class="contact-card-logo-bg call"><img src="../ICONS/phone-orange.svg" alt="phone-icon"></div>
+            <div class="contact-card-name call">Book a call</div>
+            <div class="contact-card-arrow"><img src="../ICONS/arrow-up-right.svg" alt="up-right-arrow"></div>
+          </a>
+          <a href="https://linkedin.com/in/imranbinmanzoor-dev/" target="_blank" class="contact-card">
+            <div class="contact-card-logo-bg linkedin"><img src="../ICONS/linkedin-blue.svg" alt="LinkedIn-logo"></div>
+            <div class="contact-card-name">LinkedIn</div>
+            <div class="contact-card-arrow"><img src="../ICONS/arrow-up-right.svg" alt="up-right-arrow"></div>
+          </a>
+          <a href="https://instagram.com/imranbinmanzoor1/" target="_blank" class="contact-card">
+            <div class="contact-card-logo-bg instagram"><img src="../ICONS/instagram-purple.svg" alt="Instagram-logo"></div>
+            <div class="contact-card-name">Instagram</div>
+            <div class="contact-card-arrow"><img src="../ICONS/arrow-up-right.svg" alt="up-right-arrow"></div>
+          </a>
+          <a href="https://x.com/ImranDirkhan" target="_blank" class="contact-card">
+            <div class="contact-card-logo-bg twitter"><img src="../ICONS/x-twitter-red.svg" alt="Twitter-logo"></div>
+            <div class="contact-card-name">Twitter</div>
+            <div class="contact-card-arrow"><img src="../ICONS/arrow-up-right.svg" alt="up-right-arrow"></div>
+          </a>
+          <a href="https://facebook.com/imranbinmanzoor/" target="_blank" class="contact-card">
+            <div class="contact-card-logo-bg facebook"><img src="../ICONS/facebook-green.svg" alt="Facebook-logo"></div>
+            <div class="contact-card-name">Facebook</div>
+            <div class="contact-card-arrow"><img src="../ICONS/arrow-up-right.svg" alt="up-right-arrow"></div>
+          </a>
+        </div>
+        <!-- MESSAGE BOX -->
+        <div class="message-box">
+          <h4>Get in touch</h4>
+          <form action="">
+            <div class="name-input">
+              <label for="name">Name</label>
+              <input type="text" id="name">
+            </div>
+            <div class="email-input">
+              <label for="email">Email</label>
+              <input type="email" id="email">
+            </div>
+            <div class="message-input">
+              <label for="message">Message</label>
+              <textarea id="message"></textarea>
+            </div>
+            <a class="btn" id="submit-btn" href="../5-CONTACT/contact.html">
+              <div class="text-and-arrow">
+                <span class="text">Send your message</span>
+                <span class="arrow">
+                  <img src="../ICONS/arrow-right.svg" alt="arrow">
+                </span>
+              </div>
+            </a>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>&copy; 2025 Muhammad Imran | Designed with love and code</footer>
+    <script src="../1-INDEX/index.js"></script>
+  </body>
+</html>

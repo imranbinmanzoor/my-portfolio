@@ -1,0 +1,364 @@
+/* ------------------------------- MOBILE ------------------------------- */
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+@media (min-width: 480px) and (max-width: 800px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "main"
+      "footer";
+    column-gap: 0;
+  }
+
+  nav {
+    width: calc(100vw - 2rem);
+    height: calc(56px + 2rem);
+    overflow-y: hidden;
+    z-index: 999;
+  }
+
+  nav .profile {
+    grid-template-areas:
+    "pic name toggle-btn"
+    "pic tagline-1 toggle-btn";
+  }
+
+  .tagline-1 span {
+    display: inline-block !important;
+  }
+
+  .tagline-2 {
+    display: none !important;
+  }
+
+  .profile .toggle-btn {
+    display: block;
+  }
+
+  .nav-expanded .toggle-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: none; /* Hide the middle bar */
+  }
+
+  .nav-expanded .toggle-btn::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .nav-expanded {
+    height: calc(100vh - 2rem);
+    overflow-y: auto;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav:not(.nav-expanded) .site-nav,
+  nav:not(.nav-expanded) .social-accounts {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  }
+
+  nav:not(.nav-expanded).hrule {
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+  }
+
+  main {
+    margin-top: calc(64px + 2rem + 2rem);
+    padding: 0 0.5rem;
+  }
+
+  .main-top .available-and-contact {
+    display: none;
+  }
+
+  .top-contact-btn {
+    display: none !important;
+  }
+
+  .top-contact-btn-mobile {
+    display: flex !important;
+  }
+
+  .frag-4-content {
+    padding: 4rem 2rem;
+  }
+
+  .core-skill-cards {
+    flex-direction: column;
+  }
+
+  .skill-card {
+    width: 100%;
+    height: 8rem;
+  }
+
+  .text-card {
+    top: 64px;
+  }
+
+  .text-card-heading {
+    max-width: 100%;
+  }
+
+  .big-icon {
+    height: 140px;
+    width: 140px;
+
+    top: -2rem;
+    left: -2rem;
+
+  }
+
+  .big-icon-transformed {
+  transform: translate(-12%, -12%) scale(0.5);
+  position: absolute;
+}
+
+  .big-icon .skill-icon img {
+    height: 4rem;
+    width: 4rem;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  .caret-up {
+    right: 4px;
+    bottom: 4px;
+  }
+
+  .about-details-container {
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      auto 
+      auto 
+      auto
+      auto
+      auto
+      auto
+      auto
+      auto;
+    grid-template-areas:
+      "formal-education"
+      "about-hrule-1"
+      "non-formal-education"
+      "about-hrule-2"
+      "experience"
+      "about-hrule-3"
+      "certificates"
+      "more-about-link";
+    gap: 1.5rem;
+  }
+
+  .about-details-container .vrule-1,
+  .about-details-container .vrule-2 {
+    display: none;
+  }
+
+  .about-hrule-2, .about-hrule-3 {
+    display: block;
+  }
+
+  .brief-stack-cont {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brief-stack-logo-cont {
+    max-height: 96px;
+    max-width: 96px;
+}
+
+.brief-stack-logo-cont img {
+  height: 42px;
+  width: 42px;
+}
+
+.brief-projects-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "main"
+      "footer";
+    column-gap: 0;
+  }
+
+  nav {
+    width: calc(100vw - 2rem);
+    height: calc(56px + 2rem);
+    overflow-y: hidden;
+    z-index: 999;
+  }
+
+  nav .profile {
+    grid-template-areas:
+    "pic name toggle-btn"
+    "pic tagline-1 toggle-btn";
+  }
+
+  .tagline-1 span {
+    display: inline-block !important;
+  }
+
+  .tagline-2 {
+    display: none !important;
+  }
+
+  .profile .toggle-btn {
+    display: block;
+  }
+
+  .nav-expanded .toggle-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: none; /* Hide the middle bar */
+  }
+
+  .nav-expanded .toggle-btn::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .nav-expanded {
+    height: calc(100vh - 2rem);
+    overflow-y: auto;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav:not(.nav-expanded) .site-nav,
+  nav:not(.nav-expanded) .social-accounts {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  }
+
+  nav:not(.nav-expanded).hrule {
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+  }
+
+  main {
+    margin-top: calc(64px + 2rem + 2rem);
+    padding: 0 0.5rem;
+  }
+
+  .main-top .available-and-contact {
+    display: none;
+  }
+
+  .top-contact-btn {
+    display: none !important;
+  }
+
+  .top-contact-btn-mobile {
+    display: flex !important;
+  }
+
+  .frag-4-content {
+    padding: 4rem 2rem;
+  }
+
+  .core-skill-cards {
+    flex-direction: column;
+  }
+
+  .skill-card {
+    width: 100%;
+    height: 8rem;
+  }
+
+  .text-card {
+    top: 64px;
+  }
+
+  .text-card-heading {
+    max-width: 100%;
+  }
+
+  .big-icon {
+    height: 140px;
+    width: 140px;
+
+    top: -2rem;
+    left: -2rem;
+
+  }
+
+  .big-icon-transformed {
+  transform: translate(-12%, -12%) scale(0.5);
+  position: absolute;
+}
+
+  .big-icon .skill-icon img {
+    height: 4rem;
+    width: 4rem;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  .caret-up {
+    right: 4px;
+    bottom: 4px;
+  }
+
+  .about-details-container {
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      auto 
+      auto 
+      auto
+      auto
+      auto
+      auto
+      auto
+      auto;
+    grid-template-areas:
+      "formal-education"
+      "about-hrule-1"
+      "non-formal-education"
+      "about-hrule-2"
+      "experience"
+      "about-hrule-3"
+      "certificates"
+      "more-about-link";
+    gap: 1.5rem;
+  }
+
+  .about-details-container .vrule-1,
+  .about-details-container .vrule-2 {
+    display: none;
+  }
+
+  .about-hrule-2, .about-hrule-3 {
+    display: block;
+  }
+
+  .brief-stack-cont {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .brief-stack-logo-cont {
+    max-height: 112px;
+    max-width: 112px;
+}
+
+.brief-stack-logo-cont img {
+  height: 56px;
+  width: 56px;
+}
+
+.brief-stack-name {
+  font-size: 0.9rem;
+}
+
+.brief-projects-container {
+        grid-template-columns: 1fr;
+    }
+}

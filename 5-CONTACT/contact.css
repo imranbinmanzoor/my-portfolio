@@ -1,0 +1,144 @@
+.contact-cards-cont {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-card {
+  height: 70px;
+  background-color: var(--white-100);
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 1rem;
+
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+
+  color: var(--black-0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card-logo-bg {
+  height: 100px;
+  width: 100px;
+  border-radius: 999px;
+  background-color: rgba(var(--black-30-rgb), 0.1);
+
+  position: absolute;
+  left: -1.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.contact-card-logo-bg img {
+  height: 3rem;
+  width: 3rem;
+  opacity: 0.4;
+}
+
+.call {
+  background-color: var(--orange-98);
+}
+
+.linkedin {
+  background-color: var(--blue-98);
+}
+
+.instagram {
+  background-color: var(--purple-98);
+}
+
+.twitter {
+  background-color: var(--red-98);
+}
+
+.facebook {
+  background-color: var(--green-98);
+}
+
+.contact-card-name {
+  margin-left: 5.6rem;
+}
+
+.contact-card-arrow {
+  height: 1.2rem;
+  width: 1.2rem;
+  /* transition: all 0.25s ease-in-out; */
+}
+
+/* --- */
+.message-box {
+  background-color: var(--white-100);
+  border-radius: 12px;
+  padding: 1.2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.message-box form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "name email"
+    "message message"
+    "submit-btn submit-btn";
+  gap: 1rem;
+}
+
+.message-box input {
+  height: 2.4rem;
+  background-color: var(--white-97);
+  border: none;
+  border-radius: 8px;
+  padding: 0 0.8rem;
+  font-size: 1rem;
+}
+
+.message-box textarea {
+  min-height: 8rem;
+  background-color: var(--white-97);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+}
+
+.name-input {
+  grid-area: name;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.email-input {
+  grid-area: email;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.message-input {
+  grid-area: message;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#submit-btn {
+  grid-area: submit-btn;
+}

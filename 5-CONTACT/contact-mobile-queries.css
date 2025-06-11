@@ -1,0 +1,22 @@
+/* ------------------------------- MOBILE ------------------------------- */
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 800px) {
+    .top-contact-btn-mobile {
+        display: none !important;
+    }
+
+    .contact-cards-cont {
+        grid-template-columns: 1fr;
+    }
+
+    .message-box form {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "name"
+            "email"
+            "message"
+            "submit-btn";
+        gap: 1rem;
+    }
+}
