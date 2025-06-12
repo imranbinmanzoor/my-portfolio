@@ -127,8 +127,6 @@ for (let i = 0; i < projCont.length; i++) {
 //
 //
 document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.querySelector('nav'); // Select your main nav element
-
   // Exit if the nav element doesn't exist
   if (!nav) {
     console.warn("Navigation element not found. Scroll-hide effect won't be applied.");
@@ -146,12 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const navBottomPosition = nav.offsetTop + nav.offsetHeight;
 
     // Check if the current screen width is within the target mobile range (480px to 800px)
-    const isMobileBreakpoint = window.matchMedia('(min-width: 480px) and (max-width: 800px)').matches;
+    const isMobileBreakpoint1 = window.matchMedia('(min-width: 480px) and (max-width: 800px)').matches;
+    const isMobileBreakpoint2 = window.matchMedia('(max-width: 480px)').matches;
 
     // Check if the navigation is currently expanded (has the 'nav-expanded' class)
     const isNavExpanded = nav.classList.contains('nav-expanded');
 
-    if (isMobileBreakpoint) {
+    if (isMobileBreakpoint1 || isMobileBreakpoint2) {
       // If the nav is expanded, it should always be visible.
       // Remove the hide class and reset lastScrollY to prevent hiding while open.
       if (isNavExpanded) {
