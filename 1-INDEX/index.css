@@ -63,6 +63,10 @@ body {
 /* ----------- NAV ----------- */
 /* ----------- --- ----------- */
 /* ----------- --- ----------- */
+#nav-top-blur-area {
+  display: none;
+}
+
 nav {
   width: 16rem;
   background-color: var(--white-100);
@@ -85,7 +89,7 @@ nav {
   scrollbar-width: none;
   scroll-behavior: smooth;
   
-  z-index: 9999;
+  z-index: 999;
 }
 
 nav .profile {

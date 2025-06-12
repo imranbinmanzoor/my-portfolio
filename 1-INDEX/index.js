@@ -2,30 +2,41 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Navigation Elements ---
+    // --- Navigation Elements (Consolidated) ---
     const nav = document.querySelector("nav");
     const toggleBtn = document.querySelector(".toggle-btn");
     const body = document.body;
+    const blurAreaElement = document.getElementById('nav-top-blur-area'); // <--- Correctly defined here
 
-    if (!nav || !toggleBtn) {
-        console.warn("Essential navigation elements not found.");
+    // Essential element check
+    if (!nav || !toggleBtn || !blurAreaElement) { // <--- Added blurAreaElement to check
+        console.warn("Essential navigation elements (nav, toggleBtn, or #nav-top-blur-area) not found. Some functionality may not work.");
         return;
     }
 
-    // --- Function to Toggle Navigation ---
+    // --- Function to Toggle Navigation (Open/Close) ---
     const toggleNav = () => {
         const isExpanded = nav.classList.toggle("nav-expanded");
-        toggleBtn.setAttribute("aria-expanded", isExpanded.toString());
-        body.classList.toggle("body-no-scroll", isExpanded); // Prevents background scroll
+        toggleBtn.setAttribute("aria-expanded", isExpanded.toString()); // Update ARIA attribute for accessibility
+        body.classList.toggle("body-no-scroll", isExpanded); // Prevent background scrolling when nav is open
+
+        // When the nav is expanded, ensure both nav and blur area are visible
+        // This overrides any 'hide-on-scroll' state that might be active
+        if (isExpanded) {
+            nav.classList.remove('hide-on-scroll');
+            blurAreaElement.classList.remove('hide-blur-area'); // Ensure blur is visible when nav is expanded
+        }
     };
 
+    // Event listener for the hamburger/toggle button
     toggleBtn.addEventListener("click", toggleNav);
 
-    // --- Close Nav on Item Click or Resize ---
+    // --- Close Nav on Navigation Item Click ---
+    // If nav is expanded on mobile, close it when a nav item or social link is clicked
     document.querySelectorAll(".site-nav-item, .social-account").forEach(item => {
         item.addEventListener("click", () => {
             if (nav.classList.contains("nav-expanded")) {
-                toggleNav();
+                toggleNav(); // Call toggleNav to close the nav
             }
         });
     });
@@ -80,58 +91,75 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener("mouseleave", () => handleProjectAnimation(container, false));
     });
 
-    // --- Hide/Show Nav on Scroll ---
+    // --- Hide/Show Nav and Blur on Scroll (Mobile Only) ---
     let lastScrollY = window.scrollY;
     let animationFrameId = null;
 
     const applyNavVisibility = () => {
         const currentScrollY = window.scrollY;
         const isNavExpanded = nav.classList.contains('nav-expanded');
-        const isMobile = window.innerWidth <= 800;
+        const isMobileBreakpoint = window.matchMedia('(max-width: 800px)').matches;
 
-        if (isMobile) {
+        if (isMobileBreakpoint) {
+            // Logic for mobile (top-fixed nav)
             if (isNavExpanded) {
+                // If nav is expanded, ensure it and the blur are visible regardless of scroll direction
                 nav.classList.remove('hide-on-scroll');
-                lastScrollY = currentScrollY;
-                return;
+                blurAreaElement.classList.remove('hide-blur-area'); // Ensure blur is visible
+                lastScrollY = currentScrollY; // Reset lastScrollY to prevent immediate hide on close
+                return; // Exit, as expanded nav doesn't hide on scroll
             }
 
             const scrollingDown = currentScrollY > lastScrollY;
+            // Determine if the nav should hide. It hides only if scrolling down AND
+            // current scroll position is beyond the bottom of the nav (to avoid hiding too early)
             const shouldHide = scrollingDown && currentScrollY > (nav.offsetTop + nav.offsetHeight);
-            
+
+            // Apply/remove the 'hide-on-scroll' class to the nav and 'hide-blur-area' to the blur element
             nav.classList.toggle('hide-on-scroll', shouldHide);
-            
+            blurAreaElement.classList.toggle('hide-blur-area', shouldHide); // <--- Toggling blur area visibility here
+
+            // Always show nav and blur when scrolled back to the very top of the page
             if (currentScrollY <= 0) {
                 nav.classList.remove('hide-on-scroll');
+                blurAreaElement.classList.remove('hide-blur-area'); // <--- Ensure blur is visible at top
             }
         } else {
+            // Logic for tablet/desktop (side-fixed nav)
+            // Ensure nav is always visible and blur area is hidden (CSS display: none also contributes here)
             nav.classList.remove('hide-on-scroll');
+            blurAreaElement.classList.add('hide-blur-area'); // Explicitly hide blur on non-mobile
         }
 
-        lastScrollY = currentScrollY;
+        lastScrollY = currentScrollY; // Update last scroll position for the next check
     };
 
+    // Use requestAnimationFrame for scroll events to improve performance
     const scheduleNavVisibilityCheck = () => {
-        if (animationFrameId) return;
+        if (animationFrameId) return; // If a frame is already scheduled, do nothing
         animationFrameId = requestAnimationFrame(() => {
-            applyNavVisibility();
-            animationFrameId = null;
+            applyNavVisibility(); // Execute the visibility check
+            animationFrameId = null; // Clear the ID after execution
         });
     };
 
     // --- Unified Resize Handler ---
     const handleResize = () => {
+        // If resizing from mobile to tablet/desktop AND nav is expanded, close it
         if (window.innerWidth > 800 && nav.classList.contains("nav-expanded")) {
-            toggleNav();
+            toggleNav(); // This will also reset hide-on-scroll/hide-blur-area states
         }
+        // If resizing into mobile breakpoint, reset nav scroll to prevent awkward states
         if (window.innerWidth <= 800) {
-            nav.scrollTop = 0; // Reset nav scroll on mobile
+            nav.scrollTop = 0; // Ensure nav is scrolled to top when it becomes mobile
         }
-        applyNavVisibility(); // Re-check nav visibility on resize
+        applyNavVisibility(); // Re-check nav and blur visibility based on new screen size
     };
 
+    // --- Event Listeners ---
     window.addEventListener('scroll', scheduleNavVisibilityCheck);
     window.addEventListener('resize', handleResize);
 
-    applyNavVisibility(); // Initial check on load
+    // Initial checks on page load to set the correct nav and blur state
+    applyNavVisibility();
 });
