@@ -11,6 +11,10 @@
     column-gap: 0;
   }
 
+  body.body-no-scroll {
+  overflow: hidden;
+}
+
   nav {
     width: calc(100vw - 2rem);
     height: calc(56px + 2rem);
@@ -198,6 +202,10 @@
       "footer";
     column-gap: 0;
   }
+
+  body.body-no-scroll {
+  overflow: hidden;
+}
 
   nav {
     width: calc(100vw - 2rem);

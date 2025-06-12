@@ -1,222 +1,137 @@
 "use strict";
 
-const nav = document.querySelector("nav");
-const toggleBtn = document.querySelector(".toggle-btn");
-
-// Select all skill cards
-const skillCards = document.querySelectorAll(".skill-card");
-const bigIcons = document.querySelectorAll(".big-icon");
-const textCards = document.querySelectorAll(".text-card");
-const textCardParas = document.querySelectorAll(".text-card-para");
-const caretUps = document.querySelectorAll(".caret-up");
-
-// Iterate over each skill card and attach event listeners
-skillCards.forEach((skillCard, index) => {
-  skillCard.addEventListener("mouseover", function () {
-    bigIcons[index].classList.add("big-icon-transformed");
-    textCards[index].classList.add("move-up");
-    textCardParas[index].classList.remove("hidden");
-    caretUps[index].style.transform = "scale(0)";
-  });
-
-  skillCard.addEventListener("mouseleave", function () {
-    bigIcons[index].classList.remove("big-icon-transformed");
-    textCards[index].classList.remove("move-up");
-    textCardParas[index].classList.add("hidden");
-    caretUps[index].style.transform = "scale(1)";
-  });
-});
-/////////////////////// end of skills cards animations
-
-// Function to toggle navigation state
-function toggleNav() {
-  nav.classList.toggle("nav-expanded");
-  // Set aria-expanded attribute for accessibility
-  const isExpanded = nav.classList.contains("nav-expanded");
-  toggleBtn.setAttribute("aria-expanded", isExpanded);
-}
-
-// Event listener for the toggle button
-toggleBtn.addEventListener("click", toggleNav);
-
-// Optional: Close nav when a nav item or social account is clicked (common mobile pattern)
-document.querySelectorAll(".site-nav-item, .social-account").forEach((item) => {
-  item.addEventListener("click", () => {
-    if (nav.classList.contains("nav-expanded")) {
-      toggleNav(); // Use the toggleNav function to also update aria-expanded
-    }
-  });
-});
-
-// Optional: Close nav if window is resized above mobile breakpoint (e.g., from expanded mobile to desktop view)
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 800 && nav.classList.contains("nav-expanded")) {
-    toggleNav(); // Collapse nav if resized to desktop while expanded
-  }
-});
-
-// To scroll the nav to the top in mobile mode
-window.addEventListener('resize', () => {
-  if (window.innerWidth <= 800) {
-    nav.scrollTop = 0;
-  }
-});
-
-function stopScrollPropagation(event) {
-  if (nav.classList.contains('expanded') && window.innerWidth <= 800) {
-    event.stopPropagation();
-  }
-}
-
-// Prevent scroll and touchmove from bubbling to the body
-['wheel', 'touchmove'].forEach(evt => {
-  nav.addEventListener(evt, stopScrollPropagation, { passive: false });
-});
-
-// Overlay for mobile view
-
-
-
-// Scrollbar for nav
-
-// Projects animation
-const projCont = document.querySelectorAll(".proj-cont");
-
-for (let i = 0; i < projCont.length; i++) {
-  // Get elements relative to the current projCont[i]
-  const currentProjImg = projCont[i].querySelector(".proj-img");
-  const currentViewProjectOverlay = projCont[i].querySelector(
-    ".view-project-overlay"
-  );
-  const currentEyeIcon = projCont[i].querySelector(".eye-icon");
-  const currentViewProjectText =
-    projCont[i].querySelector(".view-project-text");
-
-  projCont[i].addEventListener("mouseover", function () {
-    if (currentProjImg) currentProjImg.style.transform = "scale(0.95)";
-    if (currentViewProjectOverlay)
-      currentViewProjectOverlay.style.visibility = "visible";
-    if (currentEyeIcon) {
-      currentEyeIcon.style.visibility = "visible";
-      currentEyeIcon.style.transform = "scale(1)";
-    }
-    if (currentViewProjectText) {
-      currentViewProjectText.style.visibility = "visible";
-      currentViewProjectText.style.transform = "scale(1)";
-    }
-  });
-
-  projCont[i].addEventListener("mouseleave", function () {
-    if (currentProjImg) currentProjImg.style.transform = "scale(1)";
-    if (currentViewProjectOverlay)
-      currentViewProjectOverlay.style.visibility = "hidden";
-    if (currentEyeIcon) {
-      currentEyeIcon.style.visibility = "hidden";
-      currentEyeIcon.style.transform = "scale(0)";
-    }
-    if (currentViewProjectText) {
-      currentViewProjectText.style.visibility = "hidden";
-      currentViewProjectText.style.transform = "scale(0)";
-    }
-  });
-}
-
-
-// SCROLL NAV HIDE / SHOW
-//
-//
-//
 document.addEventListener('DOMContentLoaded', () => {
-  // Exit if the nav element doesn't exist
-  if (!nav) {
-    console.warn("Navigation element not found. Scroll-hide effect won't be applied.");
-    return;
-  }
 
-  let lastScrollY = 0; // Stores the previous scroll position
-  const scrollTolerance = 0; // Pixels to scroll before considering it a significant movement
-  let isScrollingDown = false; // Flag to track the active scroll direction
-  let animationFrameId = null; // Used to optimize scroll handling with requestAnimationFrame
+    // --- Navigation Elements ---
+    const nav = document.querySelector("nav");
+    const toggleBtn = document.querySelector(".toggle-btn");
+    const body = document.body;
 
-  function applyNavVisibility() {
-    const currentScrollY = window.scrollY;
-    // Get the actual bottom position of the nav (top offset + its computed height)
-    const navBottomPosition = nav.offsetTop + nav.offsetHeight;
-
-    // Check if the current screen width is within the target mobile range (480px to 800px)
-    const isMobileBreakpoint1 = window.matchMedia('(min-width: 480px) and (max-width: 800px)').matches;
-    const isMobileBreakpoint2 = window.matchMedia('(max-width: 480px)').matches;
-
-    // Check if the navigation is currently expanded (has the 'nav-expanded' class)
-    const isNavExpanded = nav.classList.contains('nav-expanded');
-
-    if (isMobileBreakpoint1 || isMobileBreakpoint2) {
-      // If the nav is expanded, it should always be visible.
-      // Remove the hide class and reset lastScrollY to prevent hiding while open.
-      if (isNavExpanded) {
-        nav.classList.remove('hide-on-scroll');
-        lastScrollY = currentScrollY; // Reset last scroll to current when expanded
-        return; // Exit the function early as expanded nav should not hide
-      }
-
-      // Determine scroll direction only if movement is significant (more than scrollTolerance)
-      if (Math.abs(currentScrollY - lastScrollY) > scrollTolerance) {
-        // Scrolling down: Hide nav only if current scroll is significantly below nav's bottom edge
-        if (currentScrollY > lastScrollY && currentScrollY > navBottomPosition) {
-          isScrollingDown = true;
-        }
-        // Scrolling up: Show nav only if current scroll is significantly above last scroll
-        // (and not at the very top, which is handled separately)
-        else if (currentScrollY < lastScrollY) {
-          isScrollingDown = false;
-        }
-      }
-
-      // Apply or remove the 'hide-on-scroll' class based on the determined direction
-      if (isScrollingDown) {
-        nav.classList.add('hide-on-scroll');
-      } else {
-        nav.classList.remove('hide-on-scroll');
-      }
-
-      // Always show the nav when at or very near the top of the page (within scrollTolerance pixels)
-      if (currentScrollY <= scrollTolerance) {
-        nav.classList.remove('hide-on-scroll');
-        isScrollingDown = false; // Reset scroll direction flag as we are at the top
-      }
-
-    } else {
-      // On desktop or outside the defined mobile breakpoint, ensure nav is always visible
-      nav.classList.remove('hide-on-scroll');
+    if (!nav || !toggleBtn) {
+        console.warn("Essential navigation elements not found.");
+        return;
     }
 
-    // Update the last scroll position for the next event check
-    lastScrollY = currentScrollY;
-  }
+    // --- Function to Toggle Navigation ---
+    const toggleNav = () => {
+        const isExpanded = nav.classList.toggle("nav-expanded");
+        toggleBtn.setAttribute("aria-expanded", isExpanded.toString());
+        body.classList.toggle("body-no-scroll", isExpanded); // Prevents background scroll
+    };
 
-  // Optimize scroll event handling using requestAnimationFrame for smoother performance
-  function scheduleApplyNavVisibility() {
-    if (!animationFrameId) {
-      animationFrameId = requestAnimationFrame(() => {
-        applyNavVisibility();
-        animationFrameId = null; // Reset the animation frame ID for the next scroll
-      });
-    }
-  }
+    toggleBtn.addEventListener("click", toggleNav);
 
-  // Attach the scroll event listener to the window
-  window.addEventListener('scroll', scheduleApplyNavVisibility);
+    // --- Close Nav on Item Click or Resize ---
+    document.querySelectorAll(".site-nav-item, .social-account").forEach(item => {
+        item.addEventListener("click", () => {
+            if (nav.classList.contains("nav-expanded")) {
+                toggleNav();
+            }
+        });
+    });
 
-  // Also handle window resize events to ensure the nav state is correct
-  // when switching between different screen sizes (e.g., rotating a tablet)
-  window.addEventListener('resize', () => {
-    // Run the visibility check immediately on resize
-    applyNavVisibility();
-    // And schedule for subsequent scrolls
-    scheduleApplyNavVisibility();
-  });
+    // --- Skill Card Animations ---
+    const skillCards = document.querySelectorAll(".skill-card");
 
-  // Perform an initial check when the page loads, in case the user
-  // refreshed the page while already scrolled down.
-  applyNavVisibility();
+    const handleSkillCardAnimation = (card, isMouseOver) => {
+        const bigIcon = card.querySelector(".big-icon");
+        const textCard = card.querySelector(".text-card");
+        const textCardPara = card.querySelector(".text-card-para");
+        const caretUp = card.querySelector(".caret-up");
+
+        if (bigIcon) bigIcon.classList.toggle("big-icon-transformed", isMouseOver);
+        if (textCard) textCard.classList.toggle("move-up", isMouseOver);
+        if (textCardPara) textCardPara.classList.toggle("hidden", !isMouseOver);
+        if (caretUp) caretUp.style.transform = isMouseOver ? "scale(0)" : "scale(1)";
+    };
+
+    skillCards.forEach(card => {
+        card.addEventListener("mouseover", () => handleSkillCardAnimation(card, true));
+        card.addEventListener("mouseleave", () => handleSkillCardAnimation(card, false));
+    });
+
+    // --- Project Card Animations ---
+    const projectContainers = document.querySelectorAll(".proj-cont");
+
+    const handleProjectAnimation = (container, isMouseOver) => {
+        const projImg = container.querySelector(".proj-img");
+        const overlay = container.querySelector(".view-project-overlay");
+        const eyeIcon = container.querySelector(".eye-icon");
+        const viewText = container.querySelector(".view-project-text");
+
+        const scale = isMouseOver ? "scale(0.95)" : "scale(1)";
+        const visibility = isMouseOver ? "visible" : "hidden";
+        const transform = isMouseOver ? "scale(1)" : "scale(0)";
+
+        if (projImg) projImg.style.transform = scale;
+        if (overlay) overlay.style.visibility = visibility;
+        if (eyeIcon) {
+            eyeIcon.style.visibility = visibility;
+            eyeIcon.style.transform = transform;
+        }
+        if (viewText) {
+            viewText.style.visibility = visibility;
+            viewText.style.transform = transform;
+        }
+    };
+
+    projectContainers.forEach(container => {
+        container.addEventListener("mouseover", () => handleProjectAnimation(container, true));
+        container.addEventListener("mouseleave", () => handleProjectAnimation(container, false));
+    });
+
+    // --- Hide/Show Nav on Scroll ---
+    let lastScrollY = window.scrollY;
+    let animationFrameId = null;
+
+    const applyNavVisibility = () => {
+        const currentScrollY = window.scrollY;
+        const isNavExpanded = nav.classList.contains('nav-expanded');
+        const isMobile = window.innerWidth <= 800;
+
+        if (isMobile) {
+            if (isNavExpanded) {
+                nav.classList.remove('hide-on-scroll');
+                lastScrollY = currentScrollY;
+                return;
+            }
+
+            const scrollingDown = currentScrollY > lastScrollY;
+            const shouldHide = scrollingDown && currentScrollY > (nav.offsetTop + nav.offsetHeight);
+            
+            nav.classList.toggle('hide-on-scroll', shouldHide);
+            
+            if (currentScrollY <= 0) {
+                nav.classList.remove('hide-on-scroll');
+            }
+        } else {
+            nav.classList.remove('hide-on-scroll');
+        }
+
+        lastScrollY = currentScrollY;
+    };
+
+    const scheduleNavVisibilityCheck = () => {
+        if (animationFrameId) return;
+        animationFrameId = requestAnimationFrame(() => {
+            applyNavVisibility();
+            animationFrameId = null;
+        });
+    };
+
+    // --- Unified Resize Handler ---
+    const handleResize = () => {
+        if (window.innerWidth > 800 && nav.classList.contains("nav-expanded")) {
+            toggleNav();
+        }
+        if (window.innerWidth <= 800) {
+            nav.scrollTop = 0; // Reset nav scroll on mobile
+        }
+        applyNavVisibility(); // Re-check nav visibility on resize
+    };
+
+    window.addEventListener('scroll', scheduleNavVisibilityCheck);
+    window.addEventListener('resize', handleResize);
+
+    applyNavVisibility(); // Initial check on load
 });
