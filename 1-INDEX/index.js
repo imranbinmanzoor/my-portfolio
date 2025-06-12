@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let lastScrollY = 0; // Stores the previous scroll position
-  const scrollTolerance = 10; // Pixels to scroll before considering it a significant movement
+  const scrollTolerance = 0; // Pixels to scroll before considering it a significant movement
   let isScrollingDown = false; // Flag to track the active scroll direction
   let animationFrameId = null; // Used to optimize scroll handling with requestAnimationFrame
 
