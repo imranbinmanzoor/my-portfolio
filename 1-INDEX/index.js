@@ -120,3 +120,104 @@ for (let i = 0; i < projCont.length; i++) {
     }
   });
 }
+
+
+// SCROLL NAV HIDE / SHOW
+//
+//
+//
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.querySelector('nav'); // Select your main nav element
+
+  // Exit if the nav element doesn't exist
+  if (!nav) {
+    console.warn("Navigation element not found. Scroll-hide effect won't be applied.");
+    return;
+  }
+
+  let lastScrollY = 0; // Stores the previous scroll position
+  const scrollTolerance = 10; // Pixels to scroll before considering it a significant movement
+  let isScrollingDown = false; // Flag to track the active scroll direction
+  let animationFrameId = null; // Used to optimize scroll handling with requestAnimationFrame
+
+  function applyNavVisibility() {
+    const currentScrollY = window.scrollY;
+    // Get the actual bottom position of the nav (top offset + its computed height)
+    const navBottomPosition = nav.offsetTop + nav.offsetHeight;
+
+    // Check if the current screen width is within the target mobile range (480px to 800px)
+    const isMobileBreakpoint = window.matchMedia('(min-width: 480px) and (max-width: 800px)').matches;
+
+    // Check if the navigation is currently expanded (has the 'nav-expanded' class)
+    const isNavExpanded = nav.classList.contains('nav-expanded');
+
+    if (isMobileBreakpoint) {
+      // If the nav is expanded, it should always be visible.
+      // Remove the hide class and reset lastScrollY to prevent hiding while open.
+      if (isNavExpanded) {
+        nav.classList.remove('hide-on-scroll');
+        lastScrollY = currentScrollY; // Reset last scroll to current when expanded
+        return; // Exit the function early as expanded nav should not hide
+      }
+
+      // Determine scroll direction only if movement is significant (more than scrollTolerance)
+      if (Math.abs(currentScrollY - lastScrollY) > scrollTolerance) {
+        // Scrolling down: Hide nav only if current scroll is significantly below nav's bottom edge
+        if (currentScrollY > lastScrollY && currentScrollY > navBottomPosition) {
+          isScrollingDown = true;
+        }
+        // Scrolling up: Show nav only if current scroll is significantly above last scroll
+        // (and not at the very top, which is handled separately)
+        else if (currentScrollY < lastScrollY) {
+          isScrollingDown = false;
+        }
+      }
+
+      // Apply or remove the 'hide-on-scroll' class based on the determined direction
+      if (isScrollingDown) {
+        nav.classList.add('hide-on-scroll');
+      } else {
+        nav.classList.remove('hide-on-scroll');
+      }
+
+      // Always show the nav when at or very near the top of the page (within scrollTolerance pixels)
+      if (currentScrollY <= scrollTolerance) {
+        nav.classList.remove('hide-on-scroll');
+        isScrollingDown = false; // Reset scroll direction flag as we are at the top
+      }
+
+    } else {
+      // On desktop or outside the defined mobile breakpoint, ensure nav is always visible
+      nav.classList.remove('hide-on-scroll');
+    }
+
+    // Update the last scroll position for the next event check
+    lastScrollY = currentScrollY;
+  }
+
+  // Optimize scroll event handling using requestAnimationFrame for smoother performance
+  function scheduleApplyNavVisibility() {
+    if (!animationFrameId) {
+      animationFrameId = requestAnimationFrame(() => {
+        applyNavVisibility();
+        animationFrameId = null; // Reset the animation frame ID for the next scroll
+      });
+    }
+  }
+
+  // Attach the scroll event listener to the window
+  window.addEventListener('scroll', scheduleApplyNavVisibility);
+
+  // Also handle window resize events to ensure the nav state is correct
+  // when switching between different screen sizes (e.g., rotating a tablet)
+  window.addEventListener('resize', () => {
+    // Run the visibility check immediately on resize
+    applyNavVisibility();
+    // And schedule for subsequent scrolls
+    scheduleApplyNavVisibility();
+  });
+
+  // Perform an initial check when the page loads, in case the user
+  // refreshed the page while already scrolled down.
+  applyNavVisibility();
+});

@@ -18,6 +18,10 @@
     z-index: 999;
   }
 
+  nav.hide-on-scroll {
+    transform: translateY(-150%); /* Slide it up by its full height */
+  }
+
   nav .profile {
     grid-template-areas:
     "pic name toggle-btn"
@@ -200,6 +204,10 @@
     height: calc(56px + 2rem);
     overflow-y: hidden;
     z-index: 999;
+  }
+
+  nav.hide-on-scroll {
+    transform: translateY(-150%); /* Slide it up by its full height */
   }
 
   nav .profile {
