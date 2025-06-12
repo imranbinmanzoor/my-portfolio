@@ -1,5 +1,13 @@
+.about-details-container {
+  padding: 1rem;
+}
+
 .milestone::before {
   display: block;
+}
+
+.milestone:last-child::before {
+  display: none;
 }
 
 .about-me-card {
