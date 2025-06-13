@@ -258,6 +258,18 @@ code {
     .more-pic-cont {
         height: 6rem;
     }
+
+    .code-pic {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .code-pics-cont {
+      display: flex;
+      flex-direction: column;
+      /* gap: 8px; */
+      align-items: start;
+    }
 }
 
 /*--- Tablet ---*/
