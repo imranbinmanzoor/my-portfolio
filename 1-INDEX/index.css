@@ -719,17 +719,19 @@ main {
   height: 6px;
   width: 6px;
   background-color: var(--black-0);
+  border: 3px solid var(--white-100);
   border-radius: 999px;
   z-index: 1;
+  box-sizing:content-box;
 }
 
 .milestone::before {
   display: none;
   content: "";
   position: absolute;
-  top: 16px;
-  left: 2.2px;
-  height: calc(83.33% + 1rem);
+  top: 10px;
+  left: 4.5px;
+  height: calc(100% + 1rem);
   width: 2px;
   background-color: var(--black-30);
   border-radius: 99px;
