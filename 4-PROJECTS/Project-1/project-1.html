@@ -136,31 +136,36 @@
             <!-- Project's complete details -->
             <div class="project-details-cont">
                 <div class="back-to-projects-and-skills-used">
-                    <a class="link-1" href="../../4-PROJECTS/projects.html">
-                        &larr; Back to all projects
-                    </a>
-                    <div class="tools">
-                        <img
-                            class="tool"
-                            src="../../ICONS/figma-colorful.svg"
-                            alt="figma-icon"
-                        />
-                        <img
-                            class="tool"
-                            src="../../ICONS/html5-colorful.svg"
-                            alt="html-icon"
-                        />
-                        <img
-                            class="tool"
-                            src="../../ICONS/css3-colorful.svg"
-                            alt="css-icon"
-                        />
-                        <img
-                            class="tool"
-                            src="../../ICONS/javascript-colorful.svg"
-                            alt="javascript-icon"
-                        />
+                  <a class="back-link-btn" href="../../4-PROJECTS/projects.html">
+                    <div class="text-and-arrow">
+                      <span class="arrow">
+                        <img src="../../ICONS/arrow-left.svg" alt="arrow">
+                      </span>
+                      <span class="text">Back to all projects</span>
                     </div>
+                  </a>
+                  <div class="tools">
+                    <img
+                      class="tool"
+                        src="../../ICONS/figma-colorful.svg"
+                        alt="figma-icon"
+                    />
+                    <img
+                      class="tool"
+                      src="../../ICONS/html5-colorful.svg"
+                      alt="html-icon"
+                    />
+                    <img
+                      class="tool"
+                      src="../../ICONS/css3-colorful.svg"
+                      alt="css-icon"
+                    />
+                    <img
+                      class="tool"
+                        src="../../ICONS/javascript-colorful.svg"
+                        alt="javascript-icon"
+                    />
+                  </div>
                 </div>
                 <div class="big-picture-cont">
                     <a
@@ -268,7 +273,7 @@
                   <ul>
                     <li>
                       <strong>WebP images:</strong> I implemented the <code>&lt;picture&gt;</code> element to serve modern <code>.webp</code> image formats for the hero section, with a <code>.png</code> fallback for wider browser compatibility. This significantly reduced image file sizes.
-                      <div class="code-pics-cont" id="pic-3-cont">
+                      <div class="code-pics-cont" id="code-pic-3-cont">
                         <img src="../../IMAGES/code-3.png" alt="code" class="code-pic">
                       </div>
                     </li>
@@ -286,45 +291,35 @@
                   <p>
                     <strong>Solution:</strong> I utilized the powerful <code>IntersectionObserver</code> API to precisely detect when the hero section moved out of view, triggering the sticky class addition. This is a much more performant solution than traditional scroll event listeners.
                   </p>
-                  <div class="code-pics-cont" id="pic-4-cont">
+                  <div class="code-pics-cont" id="code-pic-4-cont">
                     <img src="../../IMAGES/code-4.png" alt="code" class="code-pic">
                   </div>
                   <h1 class="heading-1">Challenges & solutions</h1>
-                  <table>
-                    <thead>
-                      <tr class="header-row">
-                        <th>Challenge</th>
-                        <th>Solution</th>
-                        <th>Lesson learned</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Row 1 -->
-                      <tr class="row-1">
-                        <td>
-                          Safari's <code>flex-gap</code> bug
-                        </td>
-                        <td>
-                          Implemented a JavaScript <code>checkFlexGap()</code> polyfill to detect lack of support and add a <code>no-flexbox-gap</code> class, activating CSS fallbacks.
-                        </td>
-                        <td>
-                          Always test on multiple browsers, especially Safari, early in development.
-                        </td>
-                      </tr>
-                      <!-- Row 2 -->
-                      <tr class="row-2">
-                        <td>
-                          Smooth scrolling
-                        </td>
-                        <td>
-                          Used <code>scrollIntoView({ behavior: "smooth" })</code> and included a <code>smoothscroll-polyfill</code> for broader browser support.
-                        </td>
-                        <td>
-                          Native browser features are great, but polyfills ensure wider compatibility.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="c-and-s">
+                    <div class="challenge">
+                      <p>
+                        <strong>Challenge:</strong> Safari's <code>flex-gap</code> bug
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Implemented a JavaScript <code>checkFlexGap()</code> polyfill to detect lack of support and add a <code>no-flexbox-gap</code> class, activating CSS fallbacks.
+                      </p>
+                      <p style="margin-bottom: 24px;">
+                        <strong>Lesson learned:</strong> Always test on multiple browsers, especially Safari, early in development.
+                      </p>
+                    </div>
+                    <div class="hrule"></div>
+                    <div class="challenge">
+                      <p style="margin-top: 16px;">
+                        <strong>Challenge:</strong> Smooth scrolling
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Used <code>scrollIntoView({ behavior: "smooth" })</code> and included a <code>smoothscroll-polyfill</code> for broader browser support.
+                      </p>
+                      <p>
+                        <strong>Lesson learned:</strong> Native browser features are great, but polyfills ensure wider compatibility.
+                      </p>
+                    </div>
+                  </div>
                   <h1 class="heading-1">Accessibility (A11y)</h1>
                   <p>
                     I prioritized accessibility throughout the build:

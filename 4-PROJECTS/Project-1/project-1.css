@@ -190,7 +190,7 @@ ol {
 
 code {
   background-color: var(--white-97);
-  padding: 0.2rem 0.4rem;
+  padding: 0rem 0.4rem;
   border-radius: 1000px;
 
   font-family: monospace;
@@ -206,13 +206,13 @@ code {
   object-fit: contain;
 }
 
-#pic-3-cont{
+#code-pic-3-cont{
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
 }
 
-#pic-3-cont .code-pic {
+#code-pic-3-cont .code-pic {
   min-width: 70%;
 }
 
@@ -234,34 +234,21 @@ code {
   margin-bottom: 12px;
 }
 
-.project-details-cont table {
+.project-details-cont .c-and-s {
   background-color: var(--white-97);
   border-radius: 8px;
   padding: 1rem;
 }
 
-.project-details-cont table .header-row {
-  /* background-color: red; */
-  text-align: left;
-}
-
-.project-details-cont table .row-1 {
-  /* background-color: red; */
-}
-
-.project-details-cont table .row-2 {
-  /* background-color: red; */
-}
-
-.project-details-cont table code {
-  border: 1px solid var(--black-30);
+.project-details-cont .c-and-s code {
+  background-color: var(--white-100);
 }
 
 /* ---------- QUERIES ---------- */
 
 
 /*--- Mobile ---*/
-@media (max-width: 800px) {
+@media (min-width: 480px) and (max-width: 800px) {
     .big-picture-cont {
         height: 18rem
     }
@@ -281,6 +268,30 @@ code {
       /* gap: 8px; */
       align-items: start;
     }
+}
+
+@media (max-width: 480px) {
+  .big-picture-cont {
+        height: 12rem
+    }
+
+    .more-pic-cont {
+        height: 4rem;
+    }
+
+    .code-pic {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .code-pics-cont {
+      display: flex;
+      flex-direction: column;
+      /* gap: 8px; */
+      align-items: start;
+    }
+
+    
 }
 
 /*--- Tablet ---*/
