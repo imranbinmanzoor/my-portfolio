@@ -155,7 +155,7 @@
 .heading-2 {
   font-size: 1.05rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .project-details-text p {
@@ -176,7 +176,7 @@
 
 ul,
 ol {
-  text-indent: 0.2rem;
+  text-indent: 0rem;
   padding-left: 4px;
 }
 
@@ -223,7 +223,7 @@ ol {
 
 code {
   background-color: var(--white-97);
-  padding: 0.2rem 0.4rem 0.2rem 0.2rem;
+  padding: 0.2rem 0.4rem;
   border-radius: 1000px;
 
   font-family: monospace;
@@ -232,6 +232,18 @@ code {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.code-pic {
+  width: 50%;
+  object-fit: contain;
+  margin-top: 8px;
+}
+
+.code-pics-cont {
+  display: flex;
+  gap: 8px;
+  align-items: start;
 }
 
 /* ---------- QUERIES ---------- */

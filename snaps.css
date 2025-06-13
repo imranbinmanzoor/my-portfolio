@@ -1,0 +1,8 @@
+/* From queries.css & style.css - Mobile nav styles */
+.main-nav {
+  transform: translateX(100%); /* Initially hidden */
+  transition: all 0.5s ease-in;
+}
+.nav-open .main-nav {
+  transform: translateX(0); /* Slides in */
+}
