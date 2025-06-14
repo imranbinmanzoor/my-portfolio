@@ -1,19 +1,21 @@
-// From script.js: IntersectionObserver for sticky nav
-const sectionHeroEl = document.querySelector(".section-hero");
+// From script.js: Hold score and switch player logic
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    // 1. Add current score to active player's score
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
 
-const obs = new IntersectionObserver(
-  function (entries) {
-    const ent = entries[0];
-    if (!ent.isIntersecting) {
-      document.body.classList.add("sticky"); /* Adds class to body for sticky styles */
+    // 2. Check if player's score is >= 100
+    if (scores[activePlayer] >= 100) {
+      // Finish the game
+      playing = false;
+      diceEl.classList.add('hidden');
+      document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+      document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
     } else {
-      document.body.classList.remove("sticky");
+      // Switch to the next player
+      switchPlayer();
     }
-  },
-  {
-    root: null, // Observe the viewport
-    threshold: 0, // Trigger when 0% of target is visible
-    rootMargin: "-80px", // Trigger 80px before target leaves viewport (accounting for header height)
   }
-);
-obs.observe(sectionHeroEl);
+});

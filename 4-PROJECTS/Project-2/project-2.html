@@ -3,7 +3,8 @@
     <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Imran's Portfolio | Modern Login/Signup Page Project</title>
+    <title>Imran's Portfolio | Modern animated login/signup UI</title>
+    <link rel="shortcut icon" href="../../IMAGES/my-pic.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../1-INDEX/index.css" />
     <link rel="stylesheet" href="../../1-INDEX/index-mobile-queries.css" />
     <link rel="stylesheet" href="../../1-INDEX/index-tablet-queries.css">
@@ -129,7 +130,7 @@
         <!----- Main top ----->
         <!-------------------->
         <div class="main-top">
-          <h1>Modern, animated login/signup page</h1>
+          <h1>Modern animated login/signup UI: A seamless authentication experience</h1>
         </div>
         <!----- Fragments ----->
         <!--------------------->
@@ -212,38 +213,162 @@
                 <div class="heading-1">Project background</div>
                 <div class="heading-2">The problem</div>
                 <p>
-                My initial motivation for this project stemmed from a common
-                challenge: busy individuals often struggle to maintain a healthy
-                and balanced diet due due to time constraints. I wanted to explore
-                how a digital solution could address this, specifically by
-                offering an AI-generated meal plan service with convenient
-                doorstep delivery.
+                My motivation for this project stemmed from the often static and unengaging nature of traditional login and signup pages. I aimed to create a dynamic and visually appealing authentication interface that would offer users a fluid and intuitive way to switch between sign-in and sign-up forms, thereby elevating the standard user experience.
                 </p>
                 <div class="heading-2">My role</div>
                 <p>
-                I took on the role of the sole developer and designer for this
-                project, handling everything from conceptualizing the user
-                interface to writing the core HTML, CSS, and JavaScript, and
-                ensuring its responsiveness and performance.
+                As the sole developer and designer for this project, I was responsible for the entire lifecycle&mdash;from conceptualizing the interactive design to implementing the HTML structure, styling with CSS, and adding interactivity with JavaScript.
                 </p>
                 <div class="heading-1">Why I built this</div>
                 <div class="heading-2">Learning goals</div>
                 <p>
-                This project was a significant learning opportunity for me. My key
-                objectives included:
+                This project served as an immersive challenge for me to:
                 <ul>
-                    <li><strong>Mastering CSS Grid and Flexbox:</strong> To create
-                    complex, modern layouts efficiently and responsively.</li>
-                    <li><strong>Implementing Mobile-First Responsive Design:</strong> Ensuring the site looked and
-                    functioned flawlessly across a vast range of screen sizes, from
-                    mobile (320px) to larger desktops.</li>
-                    <li><strong>Exploring Performance Optimizations:</strong> Aiming for a high Lighthouse performance score by applying best practices.</li>
+                    <li><strong>Master CSS animations and transitions:</strong> Delving into complex <code>transform</code>, <code>transition</code>, and <code>@keyframes</code> properties to orchestrate a seamless visual flow.</li>
+                    <li><strong>Implement advanced CSS positioning:</strong> Understanding how <code>position: absolute</code>, <code>z-index</code>, and <code>overflow: hidden</code> interact to create overlapping and sliding panel effects.</li>
+                    <li><strong>Refine JavaScript DOM manipulation:</strong> Using fundamental JavaScript to toggle classes and control complex UI states.</li>
                 </ul>
                 </p>
                 <div class="heading-2">Personal motivation</div>
-                <p>Beyond the technical goals, I was personally driven to build a pixel-perfect, production-ready website that showcased my ability to transform a concept into a tangible, polished product.</p>
+                <p>I was driven to build a polished, interactive UI that demonstrated my ability to create more than just functional forms, but delightful user experiences. This project allowed me to push my CSS animation skills and create something visually impactful.</p>
                 <div class="heading-1">Deep dive: How I built it</div>
-                </div>
+                <h2 class="heading-2">1. Architecture & tech stack</h2>
+                  <h3 class="heading-3">Frontend</h3>
+                  <ul>
+                    <li>
+                      <strong>HTML5</strong> The core structure is a single <code>div</code> container (<code>.container</code>) holding distinct <code>form-container</code> elements for sign-up and sign-in, along with a <code>toggle-container</code> for the animated panels. This modular HTML was key to the animation strategy.
+                    </li>
+                    <li>
+                      <strong>CSS3</strong> This is where the magic happens. I used extensive CSS for layout, styling, and the intricate animations. Key properties included <code>position: absolute</code>, <code>transform</code>, <code>transition</code>, <code>z-index</code>, and <code>@keyframes</code>. The body uses a linear gradient background.
+                    </li>
+                    <li>
+                      <strong>JavaScript:</strong> Minimal but crucial, handling the click events to add or remove a single <code>active</code> class on the main container (<code>#container</code>), which then triggers all CSS-driven animations.
+                    </li>
+                  </ul>
+                  <h2 class="heading-2">2. Key features</h2>
+                  <h3 class="heading-3">(A) Seamless toggle animation</h3>
+                  <p>
+                    <strong>Challenge:</strong> Creating a smooth, coordinated animation where the sign-in and sign-up forms slide and fade, while the background toggle panel also slides and changes shape.
+                  </p>
+                  <p>
+                    <strong>Solution:</strong> I leveraged a single <code>active</code> class on the main <code>.container</code> element. When this class is present, CSS <code>transform</code> and <code>opacity</code> properties, combined with <code>transition: all 0.6s ease-in-out</code> on multiple elements (<code>.form-container</code>, <code>.toggle-container</code>, <code>.toggle</code>, <code>.toggle-panel</code>), orchestrate the entire visual sequence. The <code>sign-up</code> form also uses a <code>@keyframes move</code> animation for its opacity transition.
+                  </p>
+                  <div class="code-pics-cont">
+                    <img src="../../IMAGES/code-1-proj-2.png" alt="code" class="code-pic">
+                    <img src="../../IMAGES/code-2-proj-2.png" alt="code" class="code-pic">
+                  </div>
+                  <p>
+                    This elegant solution minimizes JavaScript, offloading the heavy lifting of animation to CSS for better performance.
+                  </p>
+                  <h3 class="heading-3">(B) Visually engaging design</h3>
+                  <p>
+                    The UI incorporates a clean, modern aesthetic with:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Gradient backgrounds:</strong> A subtle linear gradient for the <code>body</code> and a more prominent one for the <code>toggle</code> panel, adding depth and visual interest.
+                    </li>
+                    <li>
+                      <strong>Shadows and rounded corners:</strong> Soft <code>box-shadow (0 5px 15px rgba(0, 0, 0, 0.35))</code> and <code>border-radius</code> (e.g., <code>30px</code> on <code>.container</code>, <code>8px</code> on buttons and inputs) give elements a modern, friendly feel.
+                    </li>
+                    <li>
+                      <strong>Social sign-in placeholders:</strong> Placeholder text for Google, Microsoft, GitHub, and Facebook provide a familiar feel for users expecting multiple login options.
+                    </li>
+                    <li>
+                      <strong>Clean typography:</strong> Using <code>system-ui</code> as the font family for a modern, native look.
+                    </li>
+                  </ul>
+                  <h1 class="heading-1">Challenges & solutions</h1>
+                  <div class="c-and-s">
+                    <div class="challenge">
+                      <p>
+                        <strong>Challenge:</strong> Orchestrating complex overlapping animations
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Precise use of <code>position: absolute</code>, <code>z-index</code>, <code>transform</code>, <code>opacity</code>, and <code>transition</code> on multiple layered elements, all triggered by a single class on the parent container.
+                      </p>
+                      <p style="margin-bottom: 1rem;">
+                        <strong>Lesson learned:</strong> CSS animations can be incredibly powerful for complex UI states when carefully choreographed.
+                      </p>
+                    </div>
+                    <div class="hrule"></div>
+                    <div class="challenge">
+                      <p style="margin-top: 1rem;">
+                        <strong>Challenge:</strong> Synchronizing form and toggle panel movement
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Applying consistent <code>transition</code> properties (<code>all 0.6s ease-in-out</code>) across all animating elements, ensuring they move together smoothly when the <code>active</code> class is toggled.
+                      </p>
+                      <p style="margin-bottom: 1rem;">
+                        <strong>Lesson learned:</strong> A single state change (e.g., <code>active</code> class) can control multiple, synchronized animations via CSS.
+                      </p>
+                    </div>
+                    <div class="hrule"></div>
+                    <div class="challenge">
+                      <p style="margin-top: 1rem;">
+                        <strong>Challenge:</strong> Ensuring responsive scaling
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Using <code>max-width: 100%</code> on the main container allows the UI to scale down gracefully on smaller screens, while maintaining its intended fixed <code>width</code> (768px) for desktop views.
+                      </p>
+                      <p style="margin-bottom: 0;">
+                        <strong>Lesson learned:</strong> Balancing fixed dimensions for aesthetic precision on larger screens with flexible units for mobile adaptability is key.
+                      </p>
+                    </div>
+                  </div>
+                  <h1 class="heading-1">Accessibility (A11y)</h1>
+                  <p>
+                    While primarily a visual demonstration, I ensured basic accessibility:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Semantic form elements:</strong> Standard <code>&lt;form&gt;</code>, <code>&lt;input&gt;</code>, and <code>&lt;button&gt;</code> elements provide inherent accessibility.
+                    </li>
+                    <li>
+                      <strong>Clear labels/placeholders:</strong> Input fields have descriptive <code>placeholder</code> attributes (e.g., "Name", "Email", "Password") to guide users.
+                    </li>
+                    <li>
+                      <strong>Focusable elements:</strong> Buttons and links are naturally focusable, allowing keyboard navigation.
+                    </li>
+                  </ul>
+                  <h1 class="heading-1">Results & metrics</h1>
+                  <p>
+                    This project successfully delivered a highly interactive and visually appealing login/signup experience. The smooth animations create a "wow" factor, transforming a typically mundane interaction into an engaging one.
+                  </p>
+                  <h3 class="heading-3">User feedback</h3>
+                  <div class="user-feedback">
+                    <div class="feedback">
+                      <img src="../../ICONS/block-quote.svg" alt="quote">
+                      <p>
+                        The animation is super slick, I love how it transitions!
+                      </p>
+                    </div>
+                    <div class="feedback">
+                      <img src="../../ICONS/block-quote.svg" alt="quote">
+                      <p>
+                        It feels really modern and easy to switch between login and sign-up.
+                      </p>
+                    </div>
+                  </div>
+                  <h1 class="heading-1">What I'd do differently</h1>
+                  <p>
+                    Reflecting on the project, a few areas I would explore for future enhancements include:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Form validation:</strong> Implementing client-side and potentially server-side form validation for a more robust user experience.
+                    </li>
+                    <li>
+                      <strong>Real social integration:</strong> Connecting the social icons to actual OAuth providers (e.g., Google, GitHub, Facebook login APIs) instead of placeholder links.
+                    </li>
+                    <li>
+                      <strong>Enhanced mobile responsiveness:</strong> Fine-tuning layouts for very small mobile devices to ensure optimal touch targets and readability, especially given the fixed <code>width</code> for the main container.
+                    </li>
+                    <li>
+                      <strong>Custom fonts & icons:</strong> Integrating custom fonts (e.g., Google Fonts) and actual SVG icon libraries for the social links for a more polished production look, rather than relying on <code>system-ui</code> and simple text links.
+                    </li>
+                  </ul>
+              </div>
             </div>
             <!----- Brief projects ----->
             <h1 class="index-heading">Other projects</h1>

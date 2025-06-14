@@ -3,7 +3,8 @@
     <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Imran's Portfolio | Pig Game Project</title>
+    <title>Imran's Portfolio | The Pig Game</title>
+    <link rel="shortcut icon" href="../../IMAGES/my-pic.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../1-INDEX/index.css" />
     <link rel="stylesheet" href="../../1-INDEX/index-mobile-queries.css" />
     <link rel="stylesheet" href="../../1-INDEX/index-tablet-queries.css">
@@ -129,7 +130,7 @@
         <!----- Main top ----->
         <!-------------------->
         <div class="main-top">
-            <h1>The Pig Game</h1>
+            <h1>The Pig Game: A JavaScript-powered dice challenge</h1>
         </div>
         <!----- Fragments ----->
         <!--------------------->
@@ -185,7 +186,7 @@
                         alt="pig-game"
                     />
                 </div>
-                <div class="more-pictures-cont">
+                <!-- <div class="more-pictures-cont">
                     <div class="more-pic-cont">
                         <img
                             class="more-pic"
@@ -207,43 +208,191 @@
                             alt="pig-game-mobile"
                         />
                     </div>
-                </div>
-                <div class="project-details-text">
-                <div class="heading-1">Project background</div>
-                <div class="heading-2">The problem</div>
-                <p>
-                My initial motivation for this project stemmed from a common
-                challenge: busy individuals often struggle to maintain a healthy
-                and balanced diet due due to time constraints. I wanted to explore
-                how a digital solution could address this, specifically by
-                offering an AI-generated meal plan service with convenient
-                doorstep delivery.
-                </p>
-                <div class="heading-2">My role</div>
-                <p>
-                I took on the role of the sole developer and designer for this
-                project, handling everything from conceptualizing the user
-                interface to writing the core HTML, CSS, and JavaScript, and
-                ensuring its responsiveness and performance.
-                </p>
-                <div class="heading-1">Why I built this</div>
-                <div class="heading-2">Learning goals</div>
-                <p>
-                This project was a significant learning opportunity for me. My key
-                objectives included:
-                <ul>
-                    <li><strong>Mastering CSS Grid and Flexbox:</strong> To create
-                    complex, modern layouts efficiently and responsively.</li>
-                    <li><strong>Implementing Mobile-First Responsive Design:</strong> Ensuring the site looked and
-                    functioned flawlessly across a vast range of screen sizes, from
-                    mobile (320px) to larger desktops.</li>
-                    <li><strong>Exploring Performance Optimizations:</strong> Aiming for a high Lighthouse performance score by applying best practices.</li>
-                </ul>
-                </p>
-                <div class="heading-2">Personal motivation</div>
-                <p>Beyond the technical goals, I was personally driven to build a pixel-perfect, production-ready website that showcased my ability to transform a concept into a tangible, polished product.</p>
-                <div class="heading-1">Deep dive: How I built it</div>
-                </div>
+                </div> -->
+                <div class="project-details-text" style="margin-top: -1rem;">
+                  <h1 class="heading-1">Project background</h1>
+                  <h2 class="heading-2">The problem</h2>
+                  <p>
+                    As a classic dice game, "Pig Game" offers a simple yet engaging challenge for two players. The goal was to digitally recreate this game, providing an intuitive and interactive user interface that clearly displays game state, player scores, and allows for dynamic gameplay.
+                  </p>
+                  <h2 class="heading-2">My role</h2>
+                  <p>
+                    As the sole developer, I was responsible for the entire implementation of this game. This included structuring the HTML, styling the interface with CSS, and implementing the core game logic and interactivity using JavaScript. I also leveraged a pre-designed flowchart to guide the game's functional design.
+                  </p>
+                  <h1 class="heading-1">Why I built this</h1>
+                  <h2 class="heading-2">Learning goals</h2>
+                  <p>
+                    This project served as an excellent opportunity for me to solidify my understanding and practical application of:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Core JavaScript logic:</strong> Implementing game rules, managing state variables, and handling complex conditional flows.
+                    </li>
+                    <li>
+                      <strong>DOM manipulation:</strong> Dynamically updating elements like scores, dice images, and player active/winner states based on game progress.
+                    </li>
+                    <li>
+                      <strong>Event handling:</strong> Attaching event listeners to buttons (<code>roll dice</code>, <code>hold</code>, <code>new game</code>) to drive game actions.
+                    </li>
+                    <li>
+                      <strong>CSS for dynamic UI:</strong> Using CSS to visually represent game states, such as active players and winners, and to hide/show the dice.
+                    </li>
+                  </ul>
+                  <h2 class="heading-2">Personal motivation</h2>
+                  <p>
+                    I was motivated to build a complete, functional, and visually appealing interactive game from scratch. This project allowed me to apply foundational web development skills in a fun, practical context, demonstrating my ability to translate game rules into robust code.
+                  </p>
+                  <h1 class="heading-1">Deep dive: How I built it</h1>
+                  <h2 class="heading-2">1. Architecture & tech stack</h2>
+                  <h3 class="heading-3">Frontend</h3>
+                  <ul>
+                    <li>
+                      <strong>HTML5</strong> Provides the structural foundation for the game interface, including player panels, score displays, the dice image placeholder, and control buttons.
+                    </li>
+                    <li>
+                      <strong>CSS3</strong> Styles the game, ensuring a clean, modern look. It handles player active states, winner highlighting, and the visual appearance of the dice and buttons.
+                    </li>
+                    <li>
+                      <strong>JavaScript:</strong> The backbone of the game, managing all game logic, player turns, score updates, dice rolls, and UI manipulation in response to user actions.
+                    </li>
+                  </ul>
+                  <h3 class="heading-3">Visual assests</h3>
+                  <ul>
+                    <li>
+                      <strong>Dice images:</strong> Six PNG images (dice-1.png to dice-6.png) are dynamically loaded based on the dice roll.
+                    </li>
+                    <li>
+                      <strong>Flowchart:</strong> A <code>pig-game-flowchart.jpg</code> file guided the implementation of the game logic, ensuring all rules and states were accounted for.
+                    </li>
+                  </ul>
+                  <h2 class="heading-2">2. Core game logic & features</h2>
+                  <h3 class="heading-3">(A) Game state management</h3>
+                  <p>
+                    <strong>Challenge:</strong> Keeping track of global game variables like current scores, total scores, active player, and game status (<code>playing</code>).
+                  </p>
+                  <p>
+                    <strong>Solution:</strong> I used global JavaScript variables (<code>scores</code>, <code>currentScore</code>, <code>activePlayer</code>, <code>playing</code>) that are initialized at the start of each new game via an <code>init()</code> function. This centralizes state management, making it easier to control game flow.
+                  </p>
+                  <div class="code-pics-cont" id="code-pic-1-cont">
+                    <img src="../../IMAGES/code-1-proj-3.png" alt="code" class="code-pic">
+                  </div>
+                  <h3 class="heading-3">(B) Dice roll and score accumulation</h3>
+                  <p>
+                    <strong>Challenge:</strong> Generating random dice rolls, displaying the correct dice image, and adding the result to the current player's temporary score.
+                  </p>
+                  <p>
+                    <strong>Solution:</strong> An event listener on the "Roll dice" button generates a random number (1&ndash;6). The <code>diceEl.src</code> is updated dynamically using template literals (<code>dice-${dice}.png</code>) to show the corresponding dice image. If the roll is not 1, the <code>dice</code> value is added to <code>currentScore</code> and updated on the UI.
+                  </p>
+                  <div class="code-pics-cont" id="code-pic-2-cont">
+                    <img src="../../IMAGES/code-2-proj-3.png" alt="code" class="code-pic">
+                  </div>
+                  <h3 class="heading-3">(C) Holding score and player switching</h3>
+                  <p>
+                    <strong>Challenge:</strong> Allowing the active player to "hold" their current score, add it to their total, check for a win, and then switch to the next player.
+                  </p>
+                  <p>
+                    <strong>Solution:</strong> The "Hold" button's event listener adds <code>currentScore</code> to <code>scores[activePlayer]</code>. A check then determines if <code>scores[activePlayer]</code> has reached or exceeded 100, declaring a winner by adding the <code>player--winner</code> class and ending the game. If no win, the <code>switchPlayer()</code> function is called, which resets <code>currentScore</code> to 0, updates the UI, and toggles the <code>player--active</code> class between players.
+                  </p>
+                  <div class="code-pics-cont" id="code-pic-4-cont">
+                    <img src="../../IMAGES/code-3-proj-3.png" alt="code" class="code-pic">
+                  </div>
+                  <h1 class="heading-1">Challenges & solutions</h1>
+                  <div class="c-and-s">
+                    <div class="challenge">
+                      <p>
+                        <strong>Challenge:</strong> Managing complex game state
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Centralizing game variables (<code>scores</code>, <code>currentScore</code>, <code>activePlayer</code>, <code>playing</code>) and initializing them with a dedicated <code>init()</code> function at game start.
+                      </p>
+                      <p style="margin-bottom: 1rem;">
+                        <strong>Lesson learned:</strong> Clear state management is crucial for complex interactive applications.
+                      </p>
+                    </div>
+                    <div class="hrule"></div>
+                    <div class="challenge">
+                      <p style="margin-top: 1rem;">
+                        <strong>Challenge:</strong> Dynamically updating UI based on game logic
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Using textContent to update scores and <code>classList.add</code>/<code>remove</code>/<code>toggle</code> to change player active/winner states and dice visibility, driven by JavaScript logic.
+                      </p>
+                      <p style="margin-bottom: 1rem;">
+                        <strong>Lesson learned:</strong> Direct DOM manipulation is effective for immediate visual feedback in simple games.
+                      </p>
+                    </div>
+                    <div class="hrule"></div>
+                    <div class="challenge">
+                      <p style="margin-top: 1rem;">
+                        <strong>Challenge:</strong> Implementing turn-based logic (roll of 1)
+                      </p>
+                      <p>
+                        <strong>Solution:</strong> Creating a <code>switchPlayer()</code> function that resets the current score and toggles the <code>player--active</code> class, ensuring smooth transitions between turns.
+                      </p>
+                      <p style="margin-bottom: 0;">
+                        <strong>Lesson learned:</strong> Modular functions improve code readability and maintainability for repetitive actions.
+                      </p>
+                    </div>
+                  </div>
+                  <h1 class="heading-1">Accessibility (A11y)</h1>
+                  <p>
+                    While the focus was on core game logic and UI, basic accessibility considerations include:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Semantic HTML:</strong> Using <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, and <code>&lt;button&gt;</code> elements appropriately.
+                    </li>
+                    <li>
+                      <strong>Clear text labels:</strong> Buttons have descriptive text like "New game", "Roll dice", "Hold".
+                    </li>
+                    <li>
+                      <strong>Alternative text for images:</strong> The dice image includes an <code>alt</code> attribute ("Playing dice") for screen readers.
+                    </li>
+                    <li>
+                      <strong>Keyboard navigation:</strong> Buttons are naturally focusable and operable via keyboard.
+                    </li>
+                  </ul>
+                  <h1 class="heading-1">Results & metrics</h1>
+                  <p>
+                    The "Pig Game" successfully delivers a fully functional and engaging two-player dice game experience. The clear visual cues for active players, current scores, and total scores make the game intuitive to play.
+                  </p>
+                  <h3 class="heading-3">User feedback</h3>
+                  <div class="user-feedback">
+                    <div class="feedback">
+                      <img src="../../ICONS/block-quote.svg" alt="quote">
+                      <p>
+                        Simple but addictive! The visual dice rolls are great.
+                      </p>
+                    </div>
+                    <div class="feedback">
+                      <img src="../../ICONS/block-quote.svg" alt="quote">
+                      <p>
+                        I love how easy it is to start a new game and understand whose turn it is.
+                      </p>
+                    </div>
+                  </div>
+                  <h1 class="heading-1">What I'd do differently</h1>
+                  <p>
+                    Reflecting on the project, I would explore the following for future enhancements:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Player name input:</strong> Allow users to enter their names instead of generic "Player 1" and "Player 2."
+                    </li>
+                    <li>
+                      <strong>Winning score customization:</strong> Enable players to set a custom target score to win, rather than the fixed 100.
+                    </li>
+                    <li>
+                      <strong>Instructions overlay:</strong> Add a simple modal or overlay to explain the game rules to new players.
+                    </li>
+                    <li>
+                      <strong>Sound effects:</strong> Integrate subtle sound effects for dice rolls, holding score, and winning/losing.
+                    </li>
+                    <li>
+                      <strong>More advanced styling:</strong> Explore CSS animations for dice rolls or player transitions beyond simple class toggles.
+                    </li>
+                  </ul>
+                </div> <!-- End of project-details-cont -->
             </div>
             <!----- Brief projects ----->
             <h1 class="index-heading">Other projects</h1>
