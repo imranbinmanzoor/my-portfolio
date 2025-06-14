@@ -147,7 +147,7 @@
 
 .heading-1 {
   font-size: 2rem;
-  font-weight: 100;
+  font-weight: lighter;
   margin-bottom: 24px;
   margin-top: 24px;
 }
@@ -216,13 +216,13 @@ code {
   min-width: 70%;
 }
 
-#pic-4-cont{
+#code-pic-4-cont{
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
 }
 
-#pic-4-cont .code-pic {
+#code-pic-4-cont .code-pic {
   min-width: 80%;
 }
 
@@ -248,7 +248,7 @@ code {
 
 
 /*--- Mobile ---*/
-@media (min-width: 480px) and (max-width: 800px) {
+@media (min-width: 481px) and (max-width: 799px) {
     .big-picture-cont {
         height: 18rem
     }

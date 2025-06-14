@@ -846,13 +846,13 @@ main {
 }
 
 .back-link-btn:hover .text-and-arrow .text {
-  transform: translateX(1rem);
+  transform: translateX(1.4rem);
   /* background-color: var(--white-97); */
 }
 
 .back-link-btn:hover .text-and-arrow .arrow {
   opacity: 1;
-  transform: translateX(-2px);
+  /* transform: translateX(-2px); */
 }
 /* --- */
 
