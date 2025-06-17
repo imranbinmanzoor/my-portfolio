@@ -160,7 +160,7 @@
   }
 
   .brief-stack-cont {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-items: center;
   }
 
@@ -346,8 +346,9 @@
   }
 
   .brief-stack-cont {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-items: center;
+    gap: 0.4rem;
   }
 
   .brief-stack-item {
@@ -355,13 +356,13 @@
   }
 
   .brief-stack-logo-cont {
-    max-height: 84px;
-    max-width: 84px;
+    max-height: 64px;
+    max-width: 64px;
 }
 
 .brief-stack-logo-cont img {
-  height: 42px;
-  width: 42px;
+  height: 32px;
+  width: 32px;
 }
 
 .brief-stack-name {
