@@ -465,7 +465,10 @@ main {
   align-self: end;
   height: 48px;
   width: 48px;
-  padding: 0.4rem;
+  padding: 0.6rem;
+
+  background-color: var(--black-0);
+  border-radius: 999px;
 
   display: flex;
   align-items: center;
@@ -488,8 +491,8 @@ main {
 }
 
 .top-contact-btn-mobile a img {
-  height: 36px;
-  width: 36px;
+  height: 24px;
+  width: 24px;
 }
 
 .main-top p {
