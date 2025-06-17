@@ -696,9 +696,9 @@ main {
 }
 
 .text-card-heading-mob.transformed {
-  transform: scale(0.8);
+  transform: scale(0.85);
   position: absolute;
-  top: 0.7rem;
+  top: 0.75rem;
   left: 2.4rem;
   max-width: 100%;
 }
@@ -732,11 +732,11 @@ main {
   height: 24px;
   width: 24px;
   color: var(--black-30);
-  opacity: 0.15;
+  opacity: 0.25;
   transition: all 0.4s;
 
   position: absolute;
-  top: 1.4rem;
+  top: 1.6rem;
   right: 1rem;
 
   transform: translateY(-50%) rotate(180deg);
