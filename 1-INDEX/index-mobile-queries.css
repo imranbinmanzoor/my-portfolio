@@ -115,47 +115,17 @@
   }
 
   .core-skill-cards {
-    flex-direction: column;
+    display: none;
   }
 
-  .skill-card {
-    width: 100%;
-    height: 8rem;
-  }
-
-  .text-card {
-    top: 64px;
-  }
-
-  .text-card-heading {
-    max-width: 100%;
-  }
-
-  .big-icon {
-    height: 140px;
-    width: 140px;
-
-    top: -2rem;
-    left: -2rem;
-
-  }
-
-  .big-icon-transformed {
-  transform: translate(-12%, -12%) scale(0.5);
-  position: absolute;
+  /* SKILL CARDS FOR MOBILE */
+.core-skill-cards-mob {
+  display: flex;
 }
 
-  .big-icon .skill-icon img {
-    height: 4rem;
-    width: 4rem;
-    bottom: 2rem;
-    right: 2rem;
-  }
-
-  .caret-up {
-    right: 4px;
-    bottom: 4px;
-  }
+.skill-card-mob {
+  height: 7.6rem;
+}
 
   .about-details-container {
     grid-template-columns: 1fr;
@@ -327,47 +297,21 @@
   }
 
   .core-skill-cards {
-    flex-direction: column;
+    display: none;
   }
 
-  .skill-card {
-    width: 100%;
-    height: 8rem;
-  }
-
-  .text-card {
-    top: 64px;
-  }
-
-  .text-card-heading {
-    max-width: 100%;
-  }
-
-  .big-icon {
-    height: 140px;
-    width: 140px;
-
-    top: -2rem;
-    left: -2rem;
-
-  }
-
-  .big-icon-transformed {
-  transform: translate(-12%, -12%) scale(0.5);
-  position: absolute;
+  /* SKILL CARDS FOR MOBILE */
+.core-skill-cards-mob {
+  display: flex;
 }
 
-  .big-icon .skill-icon img {
-    height: 4rem;
-    width: 4rem;
-    bottom: 2rem;
-    right: 2rem;
-  }
+.skill-card-mob {
+  height: 10rem;
+}
 
-  .caret-up {
-    right: 4px;
-    bottom: 4px;
-  }
+.text-card-heading-mob {
+  font-size: 1.2rem;
+}
 
   .about-details-container {
     grid-template-columns: 1fr;
@@ -411,13 +355,13 @@
   }
 
   .brief-stack-logo-cont {
-    max-height: 112px;
-    max-width: 112px;
+    max-height: 84px;
+    max-width: 84px;
 }
 
 .brief-stack-logo-cont img {
-  height: 56px;
-  width: 56px;
+  height: 42px;
+  width: 42px;
 }
 
 .brief-stack-name {

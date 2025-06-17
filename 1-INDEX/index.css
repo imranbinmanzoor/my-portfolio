@@ -557,6 +557,12 @@ main {
   position: absolute;
 }
 
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .big-icon .skill-icon img {
   height: 7.2rem;
   width: 7.2rem;
@@ -609,6 +615,138 @@ main {
 }
 
 .move-up {
+  transform: translateY(-57%);
+}
+
+/* SKILL CARDS FOR MOBILE */
+.core-skill-cards-mob {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-card-mob {
+  height: 7.2rem;
+  width: 100%;
+  background-color: var(--white-100);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+
+  transform: height 2s ease-out;
+}
+
+.big-icon-mob {
+  background: radial-gradient(var(--green-98), var(--white-100));
+  height: 10rem;
+  width: 10rem;
+  border-radius: 100%;
+  position: absolute;
+  top: -3rem;
+  left: -3rem;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: 1.6rem;
+  padding-bottom: 2rem;
+
+  transition: all 0.4s ease-in-out;
+}
+
+.big-icon-2 {
+  background: radial-gradient(var(--blue-98), var(--white-100));
+}
+
+.big-icon-3 {
+  background: radial-gradient(var(--purple-98), var(--white-100));
+}
+
+.big-icon-mob.transformed {
+  transform: translate(-10%, -10%) scale(0.5);
+}
+
+.skill-icon-mob {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-icon-mob .skill-icon-mob img {
+  height: 4rem;
+  width: 4rem;
+}
+
+.text-card-heading-mob {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--green-45);
+  transition: all 0.4s ease-in-out, max-width 0.25s ease-in;
+  max-width: 142px;
+
+  position: absolute;
+  top: 50%;
+  left: 35%;
+
+  transform: translateY(-50%);
+}
+
+.text-card-heading-mob.transformed {
+  transform: scale(0.7);
+  position: absolute;
+  top: 0.7rem;
+  left: 1.4rem;
+  max-width: 100%;
+}
+
+.text-card-heading-2 {
+  color: var(--blue-50);
+}
+
+.text-card-heading-3 {
+  color: var(--purple-65);
+}
+
+.text-card-para-mob {
+  opacity: 0;
+  font-size: 0.9rem;
+  color: var(--black-30);
+  transition: all 0.4s ease-in-out, opacity 0.2s ease-in;
+
+  position: absolute;
+  top: 3rem;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+}
+
+.text-card-para-mob.shown {
+  opacity: 1;
+}
+
+.caret-up-mob {
+  height: 24px;
+  width: 24px;
+  color: var(--black-30);
+  opacity: 0.15;
+  transition: all 0.4s;
+
+  position: absolute;
+  top: 1.4rem;
+  right: 1rem;
+
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.caret-up-mob.flipped {
+  transform: translateY(-50%) rotate(0deg); /* Flipped back */
+}
+
+.move-up-mob {
   transform: translateY(-57%);
 }
 

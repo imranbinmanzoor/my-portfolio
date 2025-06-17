@@ -163,3 +163,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial checks on page load to set the correct nav and blur state
     applyNavVisibility();
 });
+
+
+// MOBILE SKILL CARDS
+const caretUpMob = document.querySelectorAll(".caret-up-mob");
+const skillCardMob = document.querySelectorAll(".skill-card-mob");
+const textCardParaMob = document.querySelectorAll(".text-card-para-mob");
+const bigIconMob = document.querySelectorAll(".big-icon-mob");
+const textCardHeadingMob = document.querySelectorAll(".text-card-heading-mob");
+
+caretUpMob.forEach((caret, index) => {
+  caret.addEventListener("click", () => {
+    caret.classList.toggle("flipped");
+    textCardHeadingMob[index].classList.toggle("transformed");
+    textCardParaMob[index].classList.toggle("shown");
+    bigIconMob[index].classList.toggle("transformed");
+  });
+});
