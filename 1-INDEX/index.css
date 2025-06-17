@@ -698,7 +698,7 @@ main {
 .text-card-heading-mob.transformed {
   transform: scale(0.85);
   position: absolute;
-  top: 0.75rem;
+  top: 0.8rem;
   left: 2.4rem;
   max-width: 100%;
 }
