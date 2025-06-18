@@ -16,17 +16,7 @@
 }
 
 #nav-top-blur-area {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 1rem;
-    z-index: 998;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    pointer-events: none;
-  }
+  display: block;
 
   nav {
     width: calc(100vw - 2rem);
@@ -198,17 +188,7 @@
 }
 
 #nav-top-blur-area {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 1rem;
-    z-index: 998;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    pointer-events: none;
-  }
+  display: block;
 
   nav {
     width: calc(100vw - 2rem);
