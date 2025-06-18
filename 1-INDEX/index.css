@@ -73,7 +73,7 @@ body {
     will-change: opacity;
     pointer-events: none;
     backdrop-filter: blur(10px); /* or your preferred blur effect */
-    z-index: 999; /* ensure it's below the nav */
+    z-index: 998; /* ensure it's below the nav */
 }
 
 /* When nav is at top (fully visible) */
