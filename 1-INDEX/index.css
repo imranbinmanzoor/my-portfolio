@@ -64,7 +64,22 @@ body {
 /* ----------- --- ----------- */
 /* ----------- --- ----------- */
 #nav-top-blur-area {
-  display: none;
+    position: fixed;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    height: 1.2rem;
+    transition: opacity 0.1s linear;
+    will-change: opacity;
+    pointer-events: none;
+    backdrop-filter: blur(10px); /* or your preferred blur effect */
+    z-index: 999; /* ensure it's below the nav */
+}
+
+/* When nav is at top (fully visible) */
+nav:not(.hide-on-scroll) + #nav-top-blur-area {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 nav {
