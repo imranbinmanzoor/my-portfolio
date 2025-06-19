@@ -39,7 +39,7 @@
 }
 
 .big-picture-cont {
-  height: 30rem;
+  height: 32rem;
   border-radius: 8px;
   padding: 0.8rem;
   background-color: #faf2eb;
@@ -308,7 +308,7 @@ code {
 /*--- Mobile ---*/
 @media (min-width: 481px) and (max-width: 799px) {
     .big-picture-cont {
-        height: 18rem
+        height: 18rem;
     }
 
     .more-pic-cont {
@@ -337,13 +337,21 @@ code {
     }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 320px) and (max-width: 480px) {
   .big-picture-cont {
-        height: 12rem
+      height: 18rem;
     }
 
+  .big-picture-cont img {
+    max-width: 100%;
+  }
+
+  .more-pictures-cont {
+    gap: 0.6rem;
+  }
+
     .more-pic-cont {
-        height: 4rem;
+      height: 5.6rem;
     }
 
     .code-pic {
@@ -369,12 +377,39 @@ code {
 }
 
 /*--- Tablet ---*/
+@media (min-width: 571px) and (max-width: 620px) {
+  .big-picture-cont {
+      height: 24rem;
+    }
+
+  .more-pictures-cont {
+    gap: 0.6rem;
+  }
+
+    .more-pic-cont {
+      height: 7rem;
+    }
+  }
+
+  @media (min-width: 621px) and (max-width: 799px) {
+  .big-picture-cont {
+      height: 24rem;
+    }
+
+  .more-pictures-cont {
+    gap: 0.6rem;
+  }
+
+    .more-pic-cont {
+      height: 9rem;
+    }
+  }
 @media (min-width: 800px) and (max-width: 1200px) {
     .big-picture-cont {
         height: 24rem
     }
 
     .more-pic-cont {
-        height: 8rem;
+        height: 12rem;
     }
 }

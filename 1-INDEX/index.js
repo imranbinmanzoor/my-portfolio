@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             // Smooth transition to final position
-            nav.style.transition = 'transform 0.2s ease-out';
-            blurAreaElement.style.transition = 'opacity 0.2s ease-out';
+            nav.style.transition = 'transform 0.25s ease-out';
+            blurAreaElement.style.transition = 'opacity 0.25s ease-out';
         } else {
             // During interaction - no transition, direct sync
             nav.style.transition = 'none';

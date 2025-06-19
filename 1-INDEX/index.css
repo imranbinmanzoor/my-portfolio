@@ -69,10 +69,10 @@ body {
 #nav-top-blur-area {
   display: none;
     position: fixed;
-    top: 1rem;
+    top: 0rem;
     left: 0;
     right: 0;
-    height: 1.2rem;
+    height: 2rem;
     transition: opacity 0.1s linear;
     will-change: opacity;
     pointer-events: none;
