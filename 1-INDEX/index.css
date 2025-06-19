@@ -8,7 +8,7 @@
 :root {
   /* Whites */
   --white-100: rgb(255, 255, 255);
-  --white-97: rgb(247, 247, 247);
+  --white-97: rgb(240, 241, 245);
   --white-90: rgb(230, 230, 230);
   --white-80: rgb(204, 204, 204);
 
@@ -39,11 +39,14 @@
 
   /* RGB versions */
   --white-100-rgb: 255, 255, 255;
-  --white-97-rgb: 247, 247, 247;
+  --white-97-rgb: 240, 241, 245;
   --white-90-rgb: 230, 230, 230;
   --white-80-rgb: 204, 204, 204;
   --black-30-rgb: 77, 77, 77;
   --black-0-rgb: 0, 0, 0;
+
+  /* Box shadows */
+  --shadow-1: 0 4px 12px rgba(52,72,84,.05);
 }
 
 body {
@@ -101,7 +104,7 @@ nav {
   overflow-y: auto;
   transition: height 0.25s ease-out, width 0.25s ease-out, top 0.25s ease-out,
     left 0.25s ease-out, transform 0.5s ease-out;
-  box-shadow: 0 4px 12px rgba(var(--black-0-rgb), 0.1);
+  box-shadow: var(--shadow-1);
   scrollbar-width: none;
   scroll-behavior: smooth;
   
@@ -530,7 +533,7 @@ main {
   background-color: var(--white-100);
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(var(--black-0-rgb), 0.1);
+  box-shadow: var(--shadow-1);
 }
 
 /* CORE SKILL CARS - MY EXPERTISE */
@@ -548,7 +551,7 @@ main {
   border-radius: 12px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-1);
 }
 
 .big-icon {
@@ -651,7 +654,7 @@ main {
   border-radius: 12px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-1);
 
   display: flex;
   align-items: center;
@@ -788,7 +791,7 @@ main {
   "about-hrule-1 about-hrule-1 about-hrule-1"
   "experience vrule-2 certificates";
   gap: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-1);
 
   position: relative;
 }
@@ -1024,7 +1027,7 @@ main {
   background-color: var(--white-100);
   border-radius: 12px;
   padding: 1rem 1rem 6rem 1rem;
-  box-shadow: 0 4px 12px rgba(var(--black-0-rgb), 0.1);
+  box-shadow: var(--shadow-1);
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1076,7 +1079,7 @@ main {
   background-color: var(--white-100);
   border-radius: 12px;
   padding: 1rem 1rem 6rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-1);
 
   display: grid;
   grid-template-columns: 1fr 1fr;

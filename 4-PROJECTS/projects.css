@@ -2,7 +2,7 @@
   background-color: var(--white-100);
   border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-1);
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -41,7 +41,7 @@
   background-color: #a7314c;
 }
 .proj-4 .proj-img-cont {
-  background-color: #f7f7f7;
+  background-color: rgb(240, 241, 245);
 }
 
 .proj-img-cont img {
