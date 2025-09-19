@@ -142,3 +142,9 @@
 #submit-btn {
   grid-area: submit-btn;
 }
+
+#success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
