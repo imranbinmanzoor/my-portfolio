@@ -1,7 +1,6 @@
 # Muhammad Imran's Portfolio Website
 
 ![Portfolio Website Screenshot](IMAGES/my-portfolio.webp)
-*(This is a placeholder. You should replace this with an actual screenshot of your portfolio's main page.)*
 
 ## Table of Contents
 
