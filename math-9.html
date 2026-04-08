@@ -1678,6 +1678,145 @@
         }
       }
 
+      /* ──── Mobile note popup + responsive annotation layout ──── */
+      .note-pop {
+        position: fixed;
+        inset: 0;
+        z-index: 140;
+        display: none;
+      }
+      .note-pop.show {
+        display: block;
+      }
+      .note-pop-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(18, 16, 13, 0.42);
+        backdrop-filter: blur(2px);
+      }
+      .note-pop-card {
+        position: absolute;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%);
+        width: min(680px, calc(100vw - 24px));
+        max-height: min(70vh, 560px);
+        overflow: auto;
+        background: #fffdf9;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: 0 18px 48px rgba(31, 28, 24, 0.22);
+        padding: 16px 16px 14px;
+      }
+      .note-pop-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .note-pop-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(30, 93, 77, 0.18);
+        background: rgba(30, 93, 77, 0.06);
+        color: rgba(30, 93, 77, 0.95);
+        font: 700 0.74rem var(--sans);
+        text-transform: lowercase;
+        letter-spacing: 0.02em;
+      }
+      .note-pop-tag::before {
+        content: "▸";
+        font-size: 0.72em;
+        opacity: 0.8;
+      }
+      .note-pop-close {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        color: #5f5a53;
+        font: 700 1rem/1 var(--sans);
+      }
+      .note-pop-close:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .note-pop-body {
+        font-size: 0.96rem;
+        color: #4b463f;
+        line-height: 1.8;
+      }
+      .note-pop-body p {
+        margin: 0 0 8px;
+      }
+      .note-pop-body .katex-display {
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+      .note-pop-body .step-reason,
+      .note-pop-body .eq-note-body {
+        display: block !important;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: transparent;
+        border-radius: 0;
+        font-size: inherit;
+        color: inherit;
+        line-height: inherit;
+      }
+
+      @media (max-width: 760px) {
+        .eq-annot {
+          display: block;
+          margin: 10px 0 12px;
+        }
+        .eq-annot-side {
+          display: flex;
+          justify-content: flex-end;
+          padding-top: 0;
+          margin: 0 0 6px;
+        }
+        .eq-annot-main {
+          width: 100%;
+        }
+        .eq-annot-main .eq-block,
+        .eq-annot-main .plain-block-math,
+        .eq-annot-main .mb {
+          margin: 0;
+        }
+        .eq-note-row {
+          justify-content: flex-start;
+          margin: 4px 0 6px;
+        }
+        .step-why,
+        .eq-note-toggle {
+          font-size: 0.7rem;
+          padding: 2px 8px;
+          max-width: 100%;
+        }
+        .step-reason,
+        .eq-note-body {
+          display: none !important;
+        }
+        .note-pop-card {
+          bottom: 10px;
+          width: calc(100vw - 16px);
+          max-height: 75vh;
+          border-radius: 16px;
+          padding: 14px 14px 12px;
+        }
+      }
+
       /* ──── Mobile equation fixes ──── */
       .eq-block {
         overflow-x: auto;
@@ -1776,6 +1915,28 @@
     </header>
     <main class="page">
       <div id="app"></div>
+      <div id="notePopup" class="note-pop" aria-hidden="true">
+        <div class="note-pop-backdrop"></div>
+        <div
+          class="note-pop-card"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Helpful note"
+        >
+          <div class="note-pop-head">
+            <div id="notePopupTag" class="note-pop-tag">note</div>
+            <button
+              id="notePopupClose"
+              class="note-pop-close"
+              type="button"
+              aria-label="Close note"
+            >
+              ×
+            </button>
+          </div>
+          <div id="notePopupBody" class="note-pop-body"></div>
+        </div>
+      </div>
       <div class="footer-note">
         Native HTML chapter for PTB Class 9 Mathematics, carefully formatted for
         classroom use
@@ -1928,14 +2089,7 @@
         const raw = normalizeBadgeText(item && item.n);
         const secNo = parseQuestionNo(section && section.label);
         const split = raw.match(/^(\d+)([ivxlcdm]+)$/i);
-        if (
-          secNo &&
-          raw === secNo &&
-          section &&
-          Array.isArray(section.items) &&
-          section.items.length === 1
-        )
-          return "i";
+        if (secNo && raw === secNo) return raw.toLowerCase();
         if (secNo && split && split[1] === secNo) return split[2].toLowerCase();
         return raw.toLowerCase();
       }
@@ -4334,7 +4488,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         return h;
       }
 
-      function toggleWhy(el) {
+      function getWhyBody(el) {
         var r = null;
         if (
           el.nextElementSibling &&
@@ -4369,13 +4523,60 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
           var idx = Array.from(whys).indexOf(el);
           if (idx >= 0 && idx < reasons.length) r = reasons[idx];
         }
-        if (r) {
-          var willOpen = !r.classList.contains("open");
-          r.classList.toggle("open", willOpen);
-          if (!willOpen) r.classList.remove("open");
-          el.classList.toggle("open-state", willOpen);
-          el.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        return r;
+      }
+      function notePopupEls() {
+        return {
+          box: document.getElementById("notePopup"),
+          body: document.getElementById("notePopupBody"),
+          tag: document.getElementById("notePopupTag"),
+        };
+      }
+      function isSmallNoteMode() {
+        return window.matchMedia("(max-width:760px)").matches;
+      }
+      function closeNotePopup() {
+        var els = notePopupEls();
+        if (!els.box) return;
+        els.box.classList.remove("show");
+        els.box.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        document
+          .querySelectorAll(".step-why.open-state, .eq-note-toggle.open-state")
+          .forEach(function (btn) {
+            btn.classList.remove("open-state");
+            btn.setAttribute("aria-expanded", "false");
+          });
+      }
+      function openNotePopup(btn, body) {
+        var els = notePopupEls();
+        if (!els.box || !els.body || !els.tag || !body) return;
+        els.tag.textContent = (btn.textContent || "note").trim().toLowerCase();
+        els.body.innerHTML = body.innerHTML;
+        els.box.classList.add("show");
+        els.box.setAttribute("aria-hidden", "false");
+        btn.classList.add("open-state");
+        btn.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+      }
+      function toggleWhy(el) {
+        var r = getWhyBody(el);
+        if (!r) return;
+        if (isSmallNoteMode()) {
+          var popup = document.getElementById("notePopup");
+          var alreadyOpen =
+            popup &&
+            popup.classList.contains("show") &&
+            el.classList.contains("open-state");
+          closeNotePopup();
+          if (!alreadyOpen) openNotePopup(el, r);
+          return;
         }
+        var willOpen = !r.classList.contains("open");
+        r.classList.toggle("open", willOpen);
+        if (!willOpen) r.classList.remove("open");
+        el.classList.toggle("open-state", willOpen);
+        el.setAttribute("aria-expanded", willOpen ? "true" : "false");
       }
 
       function renderChapter() {
@@ -4621,6 +4822,96 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
   margin-top:8px;
 }
 @keyframes fadeReason{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+
+/* ──── Mobile note popup + responsive annotation layout ──── */
+.note-pop{
+  position:fixed;inset:0;z-index:140;display:none;
+}
+.note-pop.show{display:block}
+.note-pop-backdrop{
+  position:absolute;inset:0;background:rgba(18,16,13,.42);
+  backdrop-filter:blur(2px);
+}
+.note-pop-card{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+  width:min(680px, calc(100vw - 24px));
+  max-height:min(70vh, 560px);
+  overflow:auto;
+  background:#fffdf9;border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 18px 48px rgba(31,28,24,.22);
+  padding:16px 16px 14px;
+}
+.note-pop-head{
+  display:flex;align-items:center;gap:10px;justify-content:space-between;
+  margin-bottom:10px;
+}
+.note-pop-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 10px;border-radius:999px;
+  border:1px solid rgba(30,93,77,.18);
+  background:rgba(30,93,77,.06);color:rgba(30,93,77,.95);
+  font:700 .74rem var(--sans);text-transform:lowercase;letter-spacing:.02em;
+}
+.note-pop-tag::before{content:"▸";font-size:.72em;opacity:.8}
+.note-pop-close{
+  appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;
+  width:34px;height:34px;display:grid;place-items:center;cursor:pointer;
+  color:#5f5a53;font:700 1rem/1 var(--sans);
+}
+.note-pop-close:hover{border-color:var(--accent);color:var(--accent)}
+.note-pop-body{
+  font-size:.96rem;color:#4b463f;line-height:1.8;
+}
+.note-pop-body p{margin:0 0 8px}
+.note-pop-body .katex-display{overflow-x:auto;overflow-y:hidden}
+.note-pop-body .step-reason,
+.note-pop-body .eq-note-body{
+  display:block!important;margin:0;padding:0;border:none;background:transparent;
+  border-radius:0;font-size:inherit;color:inherit;line-height:inherit;
+}
+
+@media(max-width:760px){
+  .eq-annot{
+    display:block;
+    margin:10px 0 12px;
+  }
+  .eq-annot-side{
+    display:flex;
+    justify-content:flex-end;
+    padding-top:0;
+    margin:0 0 6px;
+  }
+  .eq-annot-main{
+    width:100%;
+  }
+  .eq-annot-main .eq-block,
+  .eq-annot-main .plain-block-math,
+  .eq-annot-main .mb{
+    margin:0;
+  }
+  .eq-note-row{
+    justify-content:flex-start;
+    margin:4px 0 6px;
+  }
+  .step-why,
+  .eq-note-toggle{
+    font-size:.7rem;
+    padding:2px 8px;
+    max-width:100%;
+  }
+  .step-reason,
+  .eq-note-body{
+    display:none!important;
+  }
+  .note-pop-card{
+    bottom:10px;
+    width:calc(100vw - 16px);
+    max-height:75vh;
+    border-radius:16px;
+    padding:14px 14px 12px;
+  }
+}
 
 /* ──── Mobile equation fixes ──── */
 .eq-block{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
@@ -4870,6 +5161,14 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
               e.preventDefault();
               e.stopPropagation();
               toggleWhy(btn);
+              return;
+            }
+            if (
+              e.target.closest("#notePopupClose") ||
+              e.target.closest(".note-pop-backdrop")
+            ) {
+              e.preventDefault();
+              closeNotePopup();
             }
           });
           document.body.dataset.whyDelegationInstalled = "1";
@@ -4881,6 +5180,10 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
               e.preventDefault();
               toggleWhy(btn);
             }
+            if (e.key === "Escape") closeNotePopup();
+          });
+          window.addEventListener("resize", function () {
+            if (!isSmallNoteMode()) closeNotePopup();
           });
         }
         replaceNumberLineSolutions();
