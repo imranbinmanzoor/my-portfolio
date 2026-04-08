@@ -1571,53 +1571,101 @@
       }
 
       /* ──── Step Justification Dropdowns ──── */
-      .step-why {
+      .step-why,
+      .eq-note-toggle {
+        appearance: none;
         display: inline-flex;
         align-items: center;
-        gap: 3px;
+        gap: 5px;
         margin-left: 6px;
-        padding: 2px 8px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fbf8f2;
-        color: var(--gold);
+        padding: 2px 9px;
+        border: 1px solid rgba(30, 93, 77, 0.18);
+        border-radius: 999px;
+        background: rgba(30, 93, 77, 0.05);
+        color: rgba(30, 93, 77, 0.9);
         font: 600 0.72rem var(--sans);
         letter-spacing: 0.02em;
         cursor: pointer;
         vertical-align: middle;
         transition: all 0.18s ease;
         white-space: nowrap;
-        text-transform: uppercase;
+        text-transform: lowercase;
       }
-      .step-why:hover {
-        border-color: var(--gold);
-        background: var(--gold-soft);
+      .step-why::before,
+      .eq-note-toggle::before {
+        content: "▸";
+        font-size: 0.72em;
+        opacity: 0.78;
+        transform: translateY(-0.02em);
       }
-      .step-why svg {
-        width: 11px;
-        height: 11px;
-        flex: none;
+      .step-why:hover,
+      .eq-note-toggle:hover {
+        border-color: rgba(30, 93, 77, 0.35);
+        background: rgba(30, 93, 77, 0.09);
       }
-      .step-reason {
+      .step-why.open-state,
+      .eq-note-toggle.open-state {
+        background: rgba(30, 93, 77, 0.11);
+        border-color: rgba(30, 93, 77, 0.32);
+      }
+      .step-reason,
+      .eq-note-body {
         display: none;
-        margin: 6px 0 8px;
+        margin: 8px 0 8px;
         padding: 10px 14px;
-        border-left: 3px solid var(--gold);
-        background: var(--gold-soft);
+        border-left: 3px solid rgba(30, 93, 77, 0.72);
+        background: #f6faf8;
         border-radius: 0 12px 12px 0;
-        font-size: 0.88rem;
-        color: #5d4f37;
+        font-size: 0.9rem;
+        color: #4b463f;
         line-height: 1.75;
       }
-      .step-reason.open {
+      .step-reason.open,
+      .eq-note-body.open {
         display: block;
-        animation: fadeReason 0.25s ease;
+        animation: fadeReason 0.22s ease;
       }
       .why-row {
         margin: 8px 0 6px;
       }
+      .eq-note-row {
+        display: flex;
+        justify-content: flex-end;
+        margin: 2px 0 6px;
+      }
       .auto-why-block {
         margin: 8px 0 6px;
+      }
+
+      .eq-annot {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+        gap: 18px;
+        align-items: start;
+        margin: 12px 0;
+      }
+      .eq-annot-main {
+        min-width: 0;
+      }
+      .eq-annot-main .eq-block,
+      .eq-annot-main .plain-block-math,
+      .eq-annot-main .mb {
+        margin: 0;
+      }
+      .eq-annot-side {
+        align-self: start;
+        padding-top: 4px;
+      }
+      .eq-annot-side .eq-note-toggle {
+        margin-left: 0;
+        opacity: 0.72;
+      }
+      .eq-annot-side .eq-note-toggle:hover,
+      .eq-annot-side .eq-note-toggle.open-state {
+        opacity: 1;
+      }
+      .eq-annot-side .eq-note-body {
+        margin-top: 8px;
       }
       @keyframes fadeReason {
         from {
@@ -1711,28 +1759,6 @@
         .qs {
           max-height: none !important;
         }
-      }
-
-      /* Auto-injected why blocks */
-      .auto-why-block {
-        margin: 4px 0 2px;
-      }
-      .why-row {
-        display: flex;
-        margin: 2px 0;
-      }
-      .why-row.auto-why {
-        margin: 6px 0 2px;
-      }
-      .auto-why-block .step-reason {
-        margin-left: 0;
-      }
-      /* Prevent duplicate why blocks from looking cluttered */
-      .auto-why-block + .auto-why-block {
-        margin-top: 0;
-      }
-      .auto-why-block + .eq-block {
-        margin-top: 4px;
       }
     </style>
   </head>
@@ -2044,36 +2070,14 @@
           return "So the required value is shown in the last line.";
         return "This gives the required result.";
       }
-      function enrichSolutionNarration(root = document) {
-        root.querySelectorAll(".qb .sc, .answer-item").forEach((sc) => {
-          const qText =
-            sc.closest(".qb")?.querySelector(".qt")?.textContent || "";
-          const firstElement = [...sc.childNodes].find((n) => n.nodeType === 1);
-          if (
-            firstElement &&
-            firstElement.classList &&
-            firstElement.classList.contains("eq-block")
-          ) {
-            const p = document.createElement("p");
-            p.textContent = inferIntroText(qText);
-            sc.prepend(p);
-          }
-          const lastElement = [...sc.childNodes]
-            .filter((n) => n.nodeType === 1)
-            .slice(-1)[0];
-          if (
-            lastElement &&
-            lastElement.classList &&
-            lastElement.classList.contains("eq-block")
-          ) {
-            const p = document.createElement("p");
-            p.textContent = inferOutroText(qText);
-            sc.appendChild(p);
-          }
-        });
-      }
-      function whyRowHtml() {
-        return '<div class="why-row auto-why"><span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></div>';
+      function enrichSolutionNarration() {}
+      function whyRowHtml(label) {
+        label = label || "note";
+        return (
+          '<div class="eq-note-row"><span class="eq-note-toggle" role="button" tabindex="0" aria-expanded="false">' +
+          label +
+          "</span></div>"
+        );
       }
       function normalizeReasonKey(html) {
         return String(html || "")
@@ -2082,30 +2086,7 @@
           .trim()
           .toLowerCase();
       }
-      function inferGeneralWhy(qText, containerText) {
-        const q = String(qText || "").toLowerCase();
-        const c = String(containerText || "").toLowerCase();
-        // Only add general why to questions that don't already have specific ones
-        // and where a brief method note genuinely helps
-        if (
-          /identify|irrational|rational/.test(q) &&
-          !/simplif|express|find/.test(q)
-        )
-          return "<strong>Key rule:</strong> A number is <em>rational</em> if its decimal terminates or eventually repeats; it is <em>irrational</em> if its decimal goes on forever without any repeating pattern. The square root of a non-perfect-square integer is always irrational.";
-        if (/number line/.test(q) && /sqrt/.test(q))
-          return (
-            "<strong>Construction method:</strong> For " +
-            I("\\sqrt{n}") +
-            ", build a right triangle whose sides give " +
-            I("\\sqrt{n}") +
-            " via the Pythagorean theorem: " +
-            I("c=\\sqrt{a^2+b^2}") +
-            ". Then use a compass centred at the origin to transfer this length onto the number line."
-          );
-        if (/between/.test(q) && /rational/.test(q))
-          return "<strong>Averaging method:</strong> The average of any two distinct rational numbers is always rational and lies strictly between them. By repeating this, we can find as many rational numbers between two given rationals as we want.";
-        // Don't add generic why to property-naming questions (they're already explanatory)
-        // Don't add generic why to questions that have detailed step-by-step solutions
+      function inferGeneralWhy() {
         return "";
       }
       function inferEqReason(qText, latex, prevText) {
@@ -2419,8 +2400,18 @@
         if (container.__whyKeys.has(key)) return;
         const wrap = document.createElement("div");
         wrap.className = "auto-why-block";
+        var noteLabel = /identity|formula|theorem/i.test(html)
+          ? "identity"
+          : /rule|law/i.test(html)
+            ? "rule"
+            : /method|technique/i.test(html)
+              ? "method"
+              : "note";
         wrap.innerHTML =
-          whyRowHtml() + '<div class="step-reason">' + html + "</div>";
+          whyRowHtml(noteLabel) +
+          '<div class="eq-note-body">' +
+          html +
+          "</div>";
         target.before(wrap);
         container.__whyKeys.add(key);
       }
@@ -2430,29 +2421,16 @@
           .forEach((container) => {
             const qText =
               container.closest(".qb")?.querySelector(".qt")?.textContent || "";
-            // Track existing hand-written whys (never duplicate them)
+            // Track existing hand-written notes (never duplicate them)
             container.__whyKeys = new Set(
               Array.from(container.querySelectorAll(".step-reason")).map((el) =>
                 normalizeReasonKey(el.innerHTML),
               ),
             );
             let autoCount = 0;
-            const MAX_AUTO = 3; // Don't spam — max 3 auto-whys per solution
+            const MAX_AUTO = 3;
 
-            // General why at the top (only if no hand-written ones exist)
-            if (!container.querySelector(".step-why")) {
-              const general = inferGeneralWhy(
-                qText,
-                container.textContent || "",
-              );
-              if (general) {
-                const firstTarget = container.firstElementChild || container;
-                prependWhy(container, firstTarget, general);
-                autoCount++;
-              }
-            }
-
-            // Equation-specific whys
+            // Equation-specific notes
             container.querySelectorAll(".eq-block").forEach((block) => {
               if (autoCount >= MAX_AUTO) return;
               if (
@@ -2480,6 +2458,41 @@
             });
             delete container.__whyKeys;
           });
+      }
+      function groupEquationAnnotations(root = document) {
+        root.querySelectorAll(".auto-why-block").forEach((block) => {
+          if (block.dataset.grouped === "1") return;
+          const next = block.nextElementSibling;
+          if (!next) return;
+          if (
+            !(
+              next.classList.contains("eq-block") ||
+              next.classList.contains("plain-block-math") ||
+              next.classList.contains("mb")
+            )
+          )
+            return;
+          const row = block.querySelector(".eq-note-row");
+          const body = block.querySelector(".eq-note-body");
+          const btn = row ? row.querySelector(".eq-note-toggle") : null;
+          if (!btn || !body) return;
+
+          const wrap = document.createElement("div");
+          wrap.className = "eq-annot";
+
+          const main = document.createElement("div");
+          main.className = "eq-annot-main";
+          main.appendChild(next);
+
+          const side = document.createElement("div");
+          side.className = "eq-annot-side";
+          side.appendChild(btn);
+          side.appendChild(body);
+
+          wrap.appendChild(main);
+          wrap.appendChild(side);
+          block.replaceWith(wrap);
+        });
       }
       function repairKnownContentIssues() {
         if (Array.isArray(RMCQ) && RMCQ[6]) {
@@ -2643,130 +2656,146 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
       // ════════════════════════════════════════
       const EX11_CONCEPTS = `
 <h4>Rational Numbers</h4>
-<p>A rational number is any number expressible as ${I("\\frac{p}{q}")} where ${I("p,q \\in \\mathbb{Z}")} and ${I("q \\neq 0")}. The set is denoted ${I("\\mathbb{Q}")}. Rational numbers have terminating or nonterminating recurring decimal expansions.</p>
+<p>A rational number is any number that can be expressed as ${I("\\frac{p}{q}")}, where ${I("p")} and ${I("q")} are integers and ${I("q \\neq 0")}. The set of rational numbers is denoted by ${I("\\mathbb{Q}")}:</p>
+<div class="eq-block">${K("\\mathbb{Q} = \\left\\{ x \\mid x = \\frac{p}{q},\\; p,q \\in \\mathbb{Z} \\text{ and } q \\neq 0 \\right\\}", true)}</div>
+<p>Examples: ${I("\\frac{1}{2}")}, ${I("57 = \\frac{57}{1}")}, ${I("-\\frac{4}{9}")}, and ${I("0.75 = \\frac{3}{4}")}.</p>
+
+<h4>Terminating Decimals</h4>
+<p>A decimal number with a finite number of digits after the decimal point. Example: ${I("0.5 = \\frac{1}{2}")} and ${I("2.75 = \\frac{11}{4}")}.</p>
+
+<h4>Nonterminating-and-Recurring Decimals</h4>
+<p>A decimal with infinitely many digits that repeat in a pattern. Example: ${I("0.\\overline{3} = \\frac{1}{3}")} and ${I("3.\\overline{142857} = \\frac{22}{7}")}.</p>
+
 <h4>Irrational Numbers</h4>
-<p>An irrational number cannot be expressed as ${I("\\frac{p}{q}")}. They have nonterminating, nonrecurring decimal expansions. Examples: ${I("\\sqrt{2}")}, ${I("\\pi")}, ${I("e")}.</p>
-<h4>Real Numbers</h4>
-<p>${I("\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{Q}\\prime")} - the union of all rational and irrational numbers.</p>
-<h4>Properties</h4>
+<p>A number that <em>cannot</em> be expressed as ${I("\\frac{p}{q}")} for any integers. Irrational numbers have nonterminating, nonrecurring decimal expansions. Examples: ${I("\\sqrt{2}")}, ${I("\\pi")}, ${I("e")}.</p>
+<p><strong>Key fact:</strong> ${I("\\sqrt{n}")} is irrational whenever ${I("n")} is a positive integer that is <em>not</em> a perfect square.</p>
+
+<h4>The Set of Real Numbers</h4>
+<p>${I("\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{Q}\\prime")} — the union of all rational and irrational numbers.</p>
+
+<h4>Properties of Real Numbers</h4>
 <p><strong>Additive:</strong> Closure, Commutative (${I("a+b=b+a")}), Associative (${I("(a+b)+c=a+(b+c)")}), Identity (${I("a+0=a")}), Inverse (${I("a+(-a)=0")}).</p>
 <p><strong>Multiplicative:</strong> Closure, Commutative (${I("ab=ba")}), Associative (${I("(ab)c=a(bc)")}), Identity (${I("a \\cdot 1=a")}), Inverse (${I("a \\cdot \\frac{1}{a}=1")}).</p>
 <p><strong>Distributive:</strong> ${I("a(b+c)=ab+ac")} and ${I("(a+b)c=ac+bc")}.</p>
-<p><strong>Order Properties:</strong> Trichotomy, Transitive, Additive, Multiplicative, Division, Reciprocal.</p>`;
+<p><strong>Equality:</strong> Reflexive (${I("a=a")}), Symmetric, Transitive, Additive, Multiplicative, Cancellation.</p>
+<p><strong>Order:</strong> Trichotomy (exactly one of ${I("a < b")}, ${I("a = b")}, ${I("a > b")}), Transitive, Additive, Multiplicative, Division, Reciprocal.</p>`;
 
       const EX11 = [
         {
-          label: "Question 1 - Identify Rational or Irrational",
+          label:
+            "Question 1: Identify each of the following as a rational or an irrational number.",
           items: [
             {
               n: "i",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="2.353535"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="2.353535"></span>',
               s: '<p><span class="math-slot" data-display="0" data-latex="2.353535"></span> has a finite number of digits after the decimal point; there are <span class="math-slot" data-display="0" data-latex="6"></span> digits after the decimal point. Thus, <span class="math-slot" data-display="0" data-latex="2.353535"></span> is a <em>terminating decimal</em>, so it is a <strong>rational number</strong>.</p>',
             },
             {
               n: "ii",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="0.\\overline{6}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="0.\\overline{6}"></span>',
               s: '<p>The bar over <span class="math-slot" data-display="0" data-latex="6"></span> indicates that the digit <span class="math-slot" data-display="0" data-latex="6"></span> repeats infinitely (<span class="math-slot" data-display="0" data-latex="0.\\overline{6}=0.666\\ldots"></span>). Thus, <span class="math-slot" data-display="0" data-latex="0.\\overline{6}"></span> is a <em>nonterminating-and-recurring decimal</em>, so it is a <strong>rational number</strong>.</p>',
             },
             {
               n: "iii",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="2.236067\\ldots"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="2.236067\\ldots"></span>',
               s: '<p>Note that the number <em>does not repeat</em> a pattern of digits after the decimal point and the three dots indicate that the digits <em>continue indefinitely without terminating</em>. Hence, <span class="math-slot" data-display="0" data-latex="2.236067\\ldots"></span> is an <strong>irrational number</strong>.</p>',
             },
             {
               n: "iv",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="\\sqrt{7}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\sqrt{7}"></span>',
               s: '<p>The square root of a number which is not a perfect square is an irrational number. Since <span class="math-slot" data-display="0" data-latex="7"></span> is not a perfect square, <span class="math-slot" data-display="0" data-latex="\\sqrt{7}"></span> is an <strong>irrational number</strong>.</p>',
             },
             {
               n: "v",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="e"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="e"></span>',
               s: '<p>The number <span class="math-slot" data-display="0" data-latex="e"></span> (Euler\'s number) is an <strong>irrational number</strong> because it cannot be expressed as a fraction of two integers. It has an infinite number of nonrecurring digits after the decimal point. The decimal representation of <span class="math-slot" data-display="0" data-latex="e"></span> up to <span class="math-slot" data-display="0" data-latex="20"></span> digits is</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="e=2.71828182845904523536\\ldots."></span></div>',
             },
             {
               n: "vi",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="\\pi"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\pi"></span>',
               s: '<p>The number <span class="math-slot" data-display="0" data-latex="\\pi"></span> (pi) is an <strong>irrational number</strong> because it cannot be expressed as a fraction of two integers. It has an infinite number of nonrecurring digits after the decimal point. The decimal representation of <span class="math-slot" data-display="0" data-latex="\\pi"></span> up to <span class="math-slot" data-display="0" data-latex="20"></span> digits is</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\pi=3.14159265358979323846\\ldots."></span></div><p>Remember that <span class="math-slot" data-display="0" data-latex="\\pi"></span> is <em>not equal to</em> <span class="math-slot" data-display="0" data-latex="\\frac{22}{7}"></span> or any other fraction but this is just a rational approximation of the irrational number <span class="math-slot" data-display="0" data-latex="\\pi"></span>.</p>',
             },
             {
               n: "vii",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="5 + \\sqrt{11}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="5 + \\sqrt{11}"></span>',
               s: '<p>The sum of a rational and an irrational number is always an irrational number. <span class="math-slot" data-display="0" data-latex="5"></span> is rational because <span class="math-slot" data-display="0" data-latex="5=\\frac{5}{1}"></span>, whereas <span class="math-slot" data-display="0" data-latex="\\sqrt{11}"></span> is an irrational number because it is the square root of <span class="math-slot" data-display="0" data-latex="11"></span> which is not a perfect square. Hence, the sum <span class="math-slot" data-display="0" data-latex="5+\\sqrt{11}"></span> is <strong>irrational</strong>.</p>',
             },
             {
               n: "viii",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="\\sqrt{3} + \\sqrt{13}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\sqrt{3} + \\sqrt{13}"></span>',
               s: '<p>The sum of two irrational numbers is always an irrational number. Since both <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span> and <span class="math-slot" data-display="0" data-latex="\\sqrt{13}"></span> are irrational numbers, the sum <span class="math-slot" data-display="0" data-latex="\\sqrt{3}+\\sqrt{13}"></span> is an <strong>irrational number</strong>.</p>',
             },
             {
               n: "ix",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="\\frac{15}{4}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\frac{15}{4}"></span>',
               s: '<p>This is a <strong>rational number</strong> because it is the quotient of two integers, i.e., <span class="math-slot" data-display="0" data-latex="15"></span> and <span class="math-slot" data-display="0" data-latex="4"></span>.</p>',
             },
             {
               n: "x",
-              q: 'Identify: <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2})"></span>',
-              s: '<p>We simplify using an algebraic identity. <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason"><strong>Difference of two squares:</strong> <span class="math-slot" data-display="0" data-latex="(a-b)(a+b) = a^2 - b^2"></span>. Here <span class="math-slot" data-display="0" data-latex="a = 2"></span> and <span class="math-slot" data-display="0" data-latex="b = \\sqrt{2}"></span>, so <span class="math-slot" data-display="0" data-latex="a^2 = 4"></span> and <span class="math-slot" data-display="0" data-latex="b^2 = (\\sqrt{2})^2 = 2"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(2-\\sqrt{2})(2+\\sqrt{2}) &= (2)^2 - (\\sqrt{2})^2 \\\\ &= 4 - 2 \\\\ &= 2.\\end{aligned}"></span></div><p>Thus, <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2}) = 2"></span> is a <strong>rational number</strong>.</p>',
+              q: '<span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2})"></span>',
+              s: '<p>We simplify using an algebraic identity. <span class="step-why" role="button" tabindex="0" aria-expanded="false">rule</span></p><div class="step-reason"><strong>Difference of two squares:</strong> <span class="math-slot" data-display="0" data-latex="(a-b)(a+b) = a^2 - b^2"></span>. Here <span class="math-slot" data-display="0" data-latex="a = 2"></span> and <span class="math-slot" data-display="0" data-latex="b = \\sqrt{2}"></span>, so <span class="math-slot" data-display="0" data-latex="a^2 = 4"></span> and <span class="math-slot" data-display="0" data-latex="b^2 = (\\sqrt{2})^2 = 2"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(2-\\sqrt{2})(2+\\sqrt{2}) &= (2)^2 - (\\sqrt{2})^2 \\\\ &= 4 - 2 \\\\ &= 2.\\end{aligned}"></span></div><p>Thus, <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2}) = 2"></span> is a <strong>rational number</strong>.</p>',
             },
           ],
         },
         {
-          label: "Question 2 - Represent on Number Line",
+          label:
+            "Question 2: Represent the following numbers on the number line.",
           items: [
             {
               n: "i",
-              q: 'Represent <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> on the number line.',
+              q: '<span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span>',
               s: '<p>To represent <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark a point <span class="math-slot" data-display="0" data-latex="O"></span> on it. This point will represent <span class="math-slot" data-display="0" data-latex="0"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>From <span class="math-slot" data-display="0" data-latex="O"></span>, mark a point <span class="math-slot" data-display="0" data-latex="A"></span> at a distance of <span class="math-slot" data-display="0" data-latex="1"></span> unit to the right. This point will represent <span class="math-slot" data-display="0" data-latex="1"></span> on the number line.</p></li><li><p>Draw a vertical line from <span class="math-slot" data-display="0" data-latex="A"></span> and mark a point <span class="math-slot" data-display="0" data-latex="B"></span> at a distance of <span class="math-slot" data-display="0" data-latex="1"></span> unit above <span class="math-slot" data-display="0" data-latex="A"></span>.</p></li><li><p>Draw <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span>. Thus, a right triangle <span class="math-slot" data-display="0" data-latex="OAB"></span> is formed.</p></li><li><p>Using a compass, take the length of <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span>. This length is <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> units since <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span> is the hypotenuse of the right triangle with legs of <span class="math-slot" data-display="0" data-latex="1"></span> unit each. This can be verified using the Pythagorean theorem:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(OB)^2 &amp;= (OA)^2 + (AB)^2 \\\\\n          \\Rightarrow (OB)^2 &amp;= 1^2 + 1^2 \\\\\n          \\Rightarrow (OB)^2 &amp;= 2 \\\\\n          \\Rightarrow OB &amp;= \\sqrt{2}.\\end{aligned}"></span></div></li><li><p>With <span class="math-slot" data-display="0" data-latex="O"></span> as the center and <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span> as the radius, draw an arc that intersects the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>. Mark the intersection point as <span class="math-slot" data-display="0" data-latex="C"></span>.</p></li><li><p>The point <span class="math-slot" data-display="0" data-latex="C"></span> represents <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:</p><svg class="nl-svg" viewBox="0 0 340 110" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="80" x2="320" y2="80" stroke="#1A1612" stroke-width="1.5"/><line x1="60" y1="75" x2="60" y2="85" stroke="#1A1612" stroke-width="1.5"/><text x="60" y="98" text-anchor="middle" font-size="12" font-family="DM Sans" fill="#1A1612">O (0)</text><line x1="140" y1="75" x2="140" y2="85" stroke="#1A1612" stroke-width="1.5"/><text x="140" y="98" text-anchor="middle" font-size="12" font-family="DM Sans" fill="#1A1612">A (1)</text><line x1="140" y1="80" x2="140" y2="20" stroke="#2A5FC4" stroke-width="1.5" stroke-dasharray="4,3"/><line x1="136" y1="20" x2="144" y2="20" stroke="#2A5FC4" stroke-width="1.5"/><text x="152" y="24" font-size="11" font-family="DM Sans" fill="#2A5FC4">B (1 unit up)</text><line x1="60" y1="80" x2="140" y2="20" stroke="#C4652A" stroke-width="1.8"/><text x="85" y="42" font-size="11" font-family="DM Sans" fill="#C4652A">√2</text><path d="M 60 80 A 93 93 0 0 0 153 80" fill="none" stroke="#1B6B4A" stroke-width="1.5" stroke-dasharray="4,3"/><circle cx="153" cy="80" r="4" fill="#1B6B4A"/><text x="153" y="98" text-anchor="middle" font-size="12" font-family="DM Sans" fill="#1B6B4A" font-weight="600">C (√2)</text></svg>',
             },
             {
               n: "ii",
-              q: 'Represent <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span> on the number line.',
+              q: '<span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span>',
               s: '<p>To represent <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span> on the number line, we first need a length of <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span>. Steps (a)--(g) below are to get <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> on the number line and then from steps (h) through {l}, we finally get <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span>:</p><ol class="alpha"><li><p>Draw a horizontal line and mark a point <span class="math-slot" data-display="0" data-latex="O"></span> on it. This point will represent <span class="math-slot" data-display="0" data-latex="0"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>From <span class="math-slot" data-display="0" data-latex="O"></span>, mark a point <span class="math-slot" data-display="0" data-latex="A"></span> at a distance of <span class="math-slot" data-display="0" data-latex="1"></span> unit to the right. This point will represent <span class="math-slot" data-display="0" data-latex="1"></span> on the number line.</p></li><li><p>Draw a vertical line from <span class="math-slot" data-display="0" data-latex="A"></span> and mark a point <span class="math-slot" data-display="0" data-latex="B"></span> at a distance of <span class="math-slot" data-display="0" data-latex="1"></span> unit above <span class="math-slot" data-display="0" data-latex="A"></span>.</p></li><li><p>Draw <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span>. Thus, a right triangle <span class="math-slot" data-display="0" data-latex="OAB"></span> is formed.</p></li><li><p>Using a compass, take the length of <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span>. This length is <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> units since <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span> is the hypotenuse of a right triangle with legs of <span class="math-slot" data-display="0" data-latex="1"></span> unit each.</p></li><li><p>With <span class="math-slot" data-display="0" data-latex="O"></span> as the center and <span class="math-slot" data-display="0" data-latex="\\overline{OB}"></span> as the radius, draw an arc that intersects the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>. Mark the intersection point as <span class="math-slot" data-display="0" data-latex="C"></span>.</p></li><li><p>The point <span class="math-slot" data-display="0" data-latex="C"></span> represents <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> on the number line.</p></li><li><p>Draw a vertical line from <span class="math-slot" data-display="0" data-latex="C"></span> and mark a point <span class="math-slot" data-display="0" data-latex="D"></span> at a distance of <span class="math-slot" data-display="0" data-latex="1"></span> unit above <span class="math-slot" data-display="0" data-latex="C"></span>.</p></li><li><p>Draw <span class="math-slot" data-display="0" data-latex="\\overline{OD}"></span>. Thus, another right triangle <span class="math-slot" data-display="0" data-latex="OCD"></span> is formed.</p></li><li><p>Using a compass, take the length of <span class="math-slot" data-display="0" data-latex="\\overline{OD}"></span>. This length is <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span> units since <span class="math-slot" data-display="0" data-latex="\\overline{OD}"></span> is the hypotenuse of a right triangle with legs of <span class="math-slot" data-display="0" data-latex="\\sqrt{2}"></span> units and <span class="math-slot" data-display="0" data-latex="1"></span> unit. This can be verified using the Pythagorean theorem:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(OD)^2 &amp;= (OC)^2 + (CD)^2 \\\\\n          \\Rightarrow (OD)^2 &amp;= (\\sqrt{2})^2 + 1^2 \\\\\n          \\Rightarrow (OD)^2 &amp;= 2 + 1 \\\\\n          \\Rightarrow (OD)^2 &amp;= 3 \\\\\n          \\Rightarrow OD &amp;= \\sqrt{3}.\\end{aligned}"></span></div></li><li><p>With <span class="math-slot" data-display="0" data-latex="O"></span> as the center and <span class="math-slot" data-display="0" data-latex="\\overline{OD}"></span> as the radius, draw an arc that intersects the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>. Mark the intersection point as <span class="math-slot" data-display="0" data-latex="E"></span>.</p></li><li><p>The point <span class="math-slot" data-display="0" data-latex="E"></span> represents <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span> on the number line.</p></li></ol><p>Here is a diagram to illustrate the construction:</p>',
             },
             {
               n: "iii",
-              q: 'Represent <span class="math-slot" data-display="0" data-latex="4\\frac{1}{3}"></span> on the number line.',
+              q: '<span class="math-slot" data-display="0" data-latex="4\\frac{1}{3}"></span>',
               s: '<p>Note that <span class="math-slot" data-display="0" data-latex="4\\frac{1}{3}"></span> is greater than <span class="math-slot" data-display="0" data-latex="4"></span> and less than <span class="math-slot" data-display="0" data-latex="5"></span>. To represent it on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark points <span class="math-slot" data-display="0" data-latex="4"></span> and <span class="math-slot" data-display="0" data-latex="5"></span> on it. These points represent the integers <span class="math-slot" data-display="0" data-latex="4"></span> and <span class="math-slot" data-display="0" data-latex="5"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>Divide the segment between <span class="math-slot" data-display="0" data-latex="4"></span> and <span class="math-slot" data-display="0" data-latex="5"></span> into <span class="math-slot" data-display="0" data-latex="3"></span> equal parts. Each part represents <span class="math-slot" data-display="0" data-latex="\\frac{1}{3}"></span>.</p></li><li><p>The first division point after <span class="math-slot" data-display="0" data-latex="4"></span> represents <span class="math-slot" data-display="0" data-latex="4\\frac{1}{3}"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:</p><svg class="nl-svg" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="30" x2="280" y2="30" stroke="#1A1612" stroke-width="1.5"/><line x1="60" y1="25" x2="60" y2="35" stroke="#1A1612" stroke-width="1.5"/><text x="60" y="48" text-anchor="middle" font-size="12" font-family="DM Sans">3</text><line x1="130" y1="25" x2="130" y2="35" stroke="#1A1612" stroke-width="1.5"/><text x="130" y="48" text-anchor="middle" font-size="12" font-family="DM Sans">4</text><line x1="200" y1="25" x2="200" y2="35" stroke="#1A1612" stroke-width="1.5"/><text x="200" y="48" text-anchor="middle" font-size="12" font-family="DM Sans">5</text><line x1="153" y1="23" x2="153" y2="37" stroke="#1B6B4A" stroke-width="2"/><circle cx="153" cy="30" r="3.5" fill="#1B6B4A"/><text x="153" y="15" text-anchor="middle" font-size="11" font-family="DM Sans" fill="#1B6B4A" font-weight="600">4⅓</text></svg>',
             },
             {
               n: "iv",
-              q: 'Represent <span class="math-slot" data-display="0" data-latex="-2\\frac{1}{7}"></span> on the number line.',
+              q: '<span class="math-slot" data-display="0" data-latex="-2\\frac{1}{7}"></span>',
               s: '<p><span class="math-slot" data-display="0" data-latex="-2\\frac{1}{7}"></span> lies on the left of <span class="math-slot" data-display="0" data-latex="0"></span> and between <span class="math-slot" data-display="0" data-latex="-2"></span> and <span class="math-slot" data-display="0" data-latex="-3"></span>. To represent it on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark points <span class="math-slot" data-display="0" data-latex="-2"></span> and <span class="math-slot" data-display="0" data-latex="-3"></span> on it. These points represent the integers <span class="math-slot" data-display="0" data-latex="-2"></span> and <span class="math-slot" data-display="0" data-latex="-3"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>Divide the segment between <span class="math-slot" data-display="0" data-latex="-2"></span> and <span class="math-slot" data-display="0" data-latex="-3"></span> into <span class="math-slot" data-display="0" data-latex="7"></span> equal parts. Each part represents <span class="math-slot" data-display="0" data-latex="\\frac{1}{7}"></span>.</p></li><li><p>The first division point after <span class="math-slot" data-display="0" data-latex="-2"></span> represents <span class="math-slot" data-display="0" data-latex="-2\\frac{1}{7}"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:</p>',
             },
             {
               n: "v",
-              q: 'Represent <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span> on the number line.',
+              q: '<span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span>',
               s: '<p>Note that <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span> is positive number less than <span class="math-slot" data-display="0" data-latex="1"></span>. To represent it on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark points <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> on it. These points represent the integers <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>Divide the segment between <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> into <span class="math-slot" data-display="0" data-latex="8"></span> equal parts. Each part represents <span class="math-slot" data-display="0" data-latex="\\frac{1}{8}"></span>.</p></li><li><p>Count <span class="math-slot" data-display="0" data-latex="5"></span> parts from <span class="math-slot" data-display="0" data-latex="0"></span> to the right. The fifth division point represents <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:</p>',
             },
             {
               n: "vi",
-              q: 'Represent <span class="math-slot" data-display="0" data-latex="2\\frac{3}{4}"></span> on the number line.',
+              q: '<span class="math-slot" data-display="0" data-latex="2\\frac{3}{4}"></span>',
               s: '<p>The number <span class="math-slot" data-display="0" data-latex="2\\frac{3}{4}"></span> lies between <span class="math-slot" data-display="0" data-latex="3"></span> and <span class="math-slot" data-display="0" data-latex="4"></span>. To represent it on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark points <span class="math-slot" data-display="0" data-latex="2"></span> and <span class="math-slot" data-display="0" data-latex="3"></span> on it. These points represent the integers <span class="math-slot" data-display="0" data-latex="2"></span> and <span class="math-slot" data-display="0" data-latex="3"></span> on the number line.</p></li><li><p>Divide the segment between <span class="math-slot" data-display="0" data-latex="2"></span> and <span class="math-slot" data-display="0" data-latex="3"></span> into <span class="math-slot" data-display="0" data-latex="4"></span> equal parts. Each part represents <span class="math-slot" data-display="0" data-latex="\\frac{1}{4}"></span>.</p></li><li><p>Count <span class="math-slot" data-display="0" data-latex="3"></span> parts from <span class="math-slot" data-display="0" data-latex="2"></span> to the right. The third division point represents <span class="math-slot" data-display="0" data-latex="\\frac{3}{4}"></span>.</p></li><li><p>The point <span class="math-slot" data-display="0" data-latex="2\\frac{3}{4}"></span> is <span class="math-slot" data-display="0" data-latex="3"></span> parts to the right of <span class="math-slot" data-display="0" data-latex="2"></span>. Therefore, <span class="math-slot" data-display="0" data-latex="2\\frac{3}{4}"></span> is <span class="math-slot" data-display="0" data-latex="2"></span> units and <span class="math-slot" data-display="0" data-latex="\\frac{3}{4}"></span> units to the right of <span class="math-slot" data-display="0" data-latex="0"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:  </p>',
             },
           ],
         },
         {
-          label: "Question 3 - Express as Rational Number",
+          label:
+            'Question 3: Express the following recurring decimals as the rational number <span class="math-slot" data-display="0" data-latex="\\frac{p}{q}"></span>, where <span class="math-slot" data-display="0" data-latex="p"></span> and <span class="math-slot" data-display="0" data-latex="q"></span> are integers and <span class="math-slot" data-display="0" data-latex="q \\neq 0"></span>.',
           items: [
             {
               n: "i",
-              q: 'Express <span class="math-slot" data-display="0" data-latex="0.\\overline{4}"></span> as <span class="math-slot" data-display="0" data-latex="\\frac{p}{q}"></span>.',
-              s: '<p><strong>Method:</strong> Let the repeating decimal be a variable. Multiply by a power of <span class="math-slot" data-display="0" data-latex="10"></span> so the repeating block lines up, then subtract to eliminate it.</p><p>Let</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = 0.\\overline{4} = 0.444\\ldots"></span></div><p>Multiply both sides by <span class="math-slot" data-display="0" data-latex="10"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason">We multiply by <span class="math-slot" data-display="0" data-latex="10"></span> because the repeating block has <span class="math-slot" data-display="0" data-latex="1"></span> digit. If it had <span class="math-slot" data-display="0" data-latex="2"></span> repeating digits (like <span class="math-slot" data-display="0" data-latex="0.\\overline{37}"></span>), we would multiply by <span class="math-slot" data-display="0" data-latex="100"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="10x = 4.444\\ldots"></span></div><p>Now subtract <span class="math-slot" data-display="0" data-latex="x"></span> from <span class="math-slot" data-display="0" data-latex="10x"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason">Since <span class="math-slot" data-display="0" data-latex="x = 0.444\\ldots"></span> and <span class="math-slot" data-display="0" data-latex="10x = 4.444\\ldots"></span>, the repeating tails are identical. Subtracting cancels the infinite repetition: <span class="math-slot" data-display="0" data-latex="4.444\\ldots - 0.444\\ldots = 4"></span> exactly.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}10x - x &= 4.444\\ldots - 0.444\\ldots \\\\ 9x &= 4\\end{aligned}"></span></div><p>Divide both sides by <span class="math-slot" data-display="0" data-latex="9"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason">This is the <em>division property of equality</em>: if <span class="math-slot" data-display="0" data-latex="a = b"></span>, then <span class="math-slot" data-display="0" data-latex="\\frac{a}{c} = \\frac{b}{c}"></span> for any <span class="math-slot" data-display="0" data-latex="c \\neq 0"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\frac{9x}{9} = \\frac{4}{9} \\quad \\Rightarrow \\quad x = \\frac{4}{9}"></span></div><p>Therefore, <span class="math-slot" data-display="0" data-latex="0.\\overline{4} = \\frac{4}{9}"></span>.</p>',
+              q: '<span class="math-slot" data-display="0" data-latex="0.\\overline{4}"></span>',
+              s: '<p><strong>Method:</strong> Let the repeating decimal be a variable. Multiply by a power of <span class="math-slot" data-display="0" data-latex="10"></span> so the repeating block lines up, then subtract to eliminate it.</p><p>Let</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = 0.\\overline{4} = 0.444\\ldots"></span></div><p>Multiply both sides by <span class="math-slot" data-display="0" data-latex="10"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">rule</span></p><div class="step-reason">We multiply by <span class="math-slot" data-display="0" data-latex="10"></span> because the repeating block has <span class="math-slot" data-display="0" data-latex="1"></span> digit. If it had <span class="math-slot" data-display="0" data-latex="2"></span> repeating digits (like <span class="math-slot" data-display="0" data-latex="0.\\overline{37}"></span>), we would multiply by <span class="math-slot" data-display="0" data-latex="100"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="10x = 4.444\\ldots"></span></div><p>Now subtract <span class="math-slot" data-display="0" data-latex="x"></span> from <span class="math-slot" data-display="0" data-latex="10x"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">rule</span></p><div class="step-reason">Since <span class="math-slot" data-display="0" data-latex="x = 0.444\\ldots"></span> and <span class="math-slot" data-display="0" data-latex="10x = 4.444\\ldots"></span>, the repeating tails are identical. Subtracting cancels the infinite repetition: <span class="math-slot" data-display="0" data-latex="4.444\\ldots - 0.444\\ldots = 4"></span> exactly.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}10x - x &= 4.444\\ldots - 0.444\\ldots \\\\ 9x &= 4\\end{aligned}"></span></div><p>Divide both sides by <span class="math-slot" data-display="0" data-latex="9"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">rule</span></p><div class="step-reason">This is the <em>division property of equality</em>: if <span class="math-slot" data-display="0" data-latex="a = b"></span>, then <span class="math-slot" data-display="0" data-latex="\\frac{a}{c} = \\frac{b}{c}"></span> for any <span class="math-slot" data-display="0" data-latex="c \\neq 0"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\frac{9x}{9} = \\frac{4}{9} \\quad \\Rightarrow \\quad x = \\frac{4}{9}"></span></div><p>Therefore, <span class="math-slot" data-display="0" data-latex="0.\\overline{4} = \\frac{4}{9}"></span>.</p>',
             },
             {
               n: "ii",
-              q: 'Express <span class="math-slot" data-display="0" data-latex="0.\\overline{37}"></span> as <span class="math-slot" data-display="0" data-latex="\\frac{p}{q}"></span>.',
+              q: '<span class="math-slot" data-display="0" data-latex="0.\\overline{37}"></span>',
               s: '<p>Let <span class="math-slot" data-display="0" data-latex="x = 0.\\overline{37}"></span>. Then,</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = 0.373737\\ldots."></span></div><p>Multiply both sides by <span class="math-slot" data-display="0" data-latex="100"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="100x = 37.373737\\ldots."></span></div><p>Subtract the first equation from the second:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="100x - x = 37.373737\\ldots - 0.373737\\ldots."></span></div><p>This simplifies to:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="99x = 37."></span></div><p>Thus,</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = \\frac{37}{99}."></span></div><p>Therefore, <span class="math-slot" data-display="0" data-latex="0.\\overline{37} = \\frac{37}{99}"></span>.</p>',
             },
             {
               n: "iii",
-              q: 'Express <span class="math-slot" data-display="0" data-latex="0.\\overline{21}"></span> as <span class="math-slot" data-display="0" data-latex="\\frac{p}{q}"></span>.',
+              q: '<span class="math-slot" data-display="0" data-latex="0.\\overline{21}"></span>',
               s: '<p>Let <span class="math-slot" data-display="0" data-latex="x = 0.\\overline{21}"></span>. Then,</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = 0.212121\\ldots."></span></div><p>Multiply both sides by <span class="math-slot" data-display="0" data-latex="100"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="100x = 21.212121\\ldots."></span></div><p>Subtract the first equation from the second:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="100x - x = 21.212121\\ldots - 0.212121\\ldots."></span></div><p>This simplifies to:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="99x = 21."></span></div><p>Thus,</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = \\frac{21}{99}."></span></div><p>Therefore, <span class="math-slot" data-display="0" data-latex="0.\\overline{21} = \\frac{21}{99}"></span>. </p>',
             },
           ],
         },
         {
-          label: "Question 4 - Name the Property",
+          label: "Question 4: Name the property used in each of the following.",
           items: [
             {
               n: "i",
@@ -2811,7 +2840,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
           ],
         },
         {
-          label: "Question 5 - Name the Order Property",
+          label: "Question 5: Name the property used in each of the following.",
           items: [
             {
               n: "i",
@@ -2846,7 +2875,8 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
           ],
         },
         {
-          label: "Question 6 - Insert Rational Numbers",
+          label:
+            "Question 6: Insert two rational numbers between the given pairs.",
           items: [
             {
               n: "i",
@@ -2884,93 +2914,93 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
 
       const EX12 = [
         {
-          label: "Question 1 - Rationalize the Denominator",
+          label: "Question 1: Rationalize the denominators of the following.",
           items: [
             {
               n: "i",
-              q: 'Rationalize: <span class="math-slot" data-display="0" data-latex="\\dfrac{13}{4+\\sqrt{3}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{13}{4+\\sqrt{3}}"></span>',
               s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{13}{4 + \\sqrt{3}} &amp;= \\frac{13}{4 + \\sqrt{3}} \\cdot \\frac{4 - \\sqrt{3}}{4 - \\sqrt{3}} \\\\\n        &amp;= \\frac{13(4-\\sqrt{3})}{(4)^2-(\\sqrt{3})^2} \\\\\n        &amp;= \\frac{13(4 - \\sqrt{3})}{16 - 3} \\\\\n        &amp;= \\frac{13(4 - \\sqrt{3})}{13} \\\\\n        &amp;= 4 - \\sqrt{3}.\\end{aligned}"></span></div>',
             },
             {
               n: "ii",
-              q: 'Rationalize: <span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{2}+\\sqrt{5}}{\\sqrt{3}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{2}+\\sqrt{5}}{\\sqrt{3}}"></span>',
               s: '<p>Multiply the numerator and the denominator by <span class="math-slot" data-display="0" data-latex="\\sqrt{3}"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{\\sqrt{2}+\\sqrt{5}}{\\sqrt{3}} &amp;= \\frac{\\sqrt{2}+\\sqrt{5}}{\\sqrt{3}} \\cdot \\frac{\\sqrt{3}}{\\sqrt{3}} \\\\\n        &amp;= \\frac{(\\sqrt{2}+\\sqrt{5})\\sqrt{3}}{(\\sqrt{3})^2} \\\\\n        &amp;= \\frac{\\sqrt{2}\\sqrt{3} + \\sqrt{5}\\sqrt{3}}{3} \\\\\n        &amp;= \\frac{\\sqrt{6} + \\sqrt{15}}{3}.\\end{aligned}"></span></div>',
             },
             {
               n: "iii",
-              q: 'Rationalize: <span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{2}-1}{\\sqrt{5}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{2}-1}{\\sqrt{5}}"></span>',
               s: '<p>Multiply the numerator and the denominator by <span class="math-slot" data-display="0" data-latex="\\sqrt{5}"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{\\sqrt{2}-1}{\\sqrt{5}} &amp;= \\frac{\\sqrt{2}-1}{\\sqrt{5}} \\cdot \\frac{\\sqrt{5}}{\\sqrt{5}} \\\\\n        &amp;= \\frac{(\\sqrt{2}-1)\\sqrt{5}}{(\\sqrt{5})^2} \\\\\n        &amp;= \\frac{\\sqrt{2}\\sqrt{5} - \\sqrt{5}}{5} \\\\\n        &amp;= \\frac{\\sqrt{10} - \\sqrt{5}}{5}.\\end{aligned}"></span></div>',
             },
             {
               n: "iv",
-              q: 'Rationalize: <span class="math-slot" data-display="0" data-latex="\\dfrac{6-4\\sqrt{2}}{6+4\\sqrt{2}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{6-4\\sqrt{2}}{6+4\\sqrt{2}}"></span>',
               s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{6-4\\sqrt{2}}{6+4\\sqrt{2}} &amp;= \\frac{6-4\\sqrt{2}}{6+4\\sqrt{2}} \\cdot \\frac{6-4\\sqrt{2}}{6-4\\sqrt{2}} \\\\\n        &amp;= \\frac{(6-4\\sqrt{2})^2}{(6)^2-(4\\sqrt{2})^2} \\\\\n        &amp;= \\frac{(6)^2 - 2 \\cdot 6 \\cdot 4\\sqrt{2} + (4\\sqrt{2})^2}{36 - (4\\sqrt{2})^2} \\\\\n        &amp;= \\frac{36 - 48\\sqrt{2} + 16\\cdot2}{36 - 16 \\cdot 2} \\\\\n        &amp;= \\frac{36 - 48\\sqrt{2} + 32}{36 - 32} \\\\\n        &amp;= \\frac{68 - 48\\sqrt{2}}{4} \\\\\n        &amp;= \\frac{68}{4} - \\frac{48\\sqrt{2}}{4} \\\\\n        &amp;= 17 - 12\\sqrt{2}.\\end{aligned}"></span></div>',
             },
             {
               n: "v",
-              q: 'Rationalize: <span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}}"></span>',
               s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}} &amp;= \\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}} \\cdot \\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}-\\sqrt{2}} \\\\\n        &amp;= \\frac{(\\sqrt{3}-\\sqrt{2})^2}{(\\sqrt{3})^2-(\\sqrt{2})^2} \\\\\n        &amp;= \\frac{(\\sqrt{3})^2 - 2\\sqrt{3}\\sqrt{2} + (\\sqrt{2})^2}{3 - 2} \\\\\n        &amp;= \\frac{3 - 2\\sqrt{6} + 2}{1} \\\\\n        &amp;= 5 - 2\\sqrt{6}.\\end{aligned}"></span></div>',
             },
             {
               n: "vi",
-              q: 'Rationalize: <span class="math-slot" data-display="0" data-latex="\\dfrac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}}"></span>',
               s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}} &amp;= \\frac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}} \\cdot \\frac{\\sqrt{7}-\\sqrt{5}}{\\sqrt{7}-\\sqrt{5}} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{(\\sqrt{7})^2-(\\sqrt{5})^2} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{7-5} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{2} \\\\\n        &amp;= 2\\sqrt{3}(\\sqrt{7}-\\sqrt{5}) \\\\\n        &amp;= 2\\sqrt{21} - 2\\sqrt{15}.\\end{aligned}"></span></div>',
             },
           ],
         },
         {
-          label: "Question 2 - Simplify",
+          label: "Question 2: Simplify the following.",
           items: [
             {
               n: "i",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\left(\\frac{81}{16}\\right)^{-\\frac{3}{4}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\left(\\frac{81}{16}\\right)^{-\\frac{3}{4}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(\\frac{81}{16}\\right)^{-\\frac{3}{4}}&amp;=\\left(\\frac{16}{81}\\right)^{\\frac{3}{4}}=\\left(\\frac{2^4}{3^4}\\right)^{\\frac{3}{4}}=\\frac{2^{4\\times\\frac{3}{4}}}{3^{4\\times\\frac{3}{4}}} \\\\ \n          &amp;=\\frac{2^3}{3^3}=\\frac{8}{27}. \\end{aligned}"></span></div>',
             },
             {
               n: "ii",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\left(\\frac{3}{4}\\right)^{-2} \\div \\left(\\frac{4}{9}\\right)^{3} \\times \\frac{16}{27}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\left(\\frac{3}{4}\\right)^{-2} \\div \\left(\\frac{4}{9}\\right)^{3} \\times \\frac{16}{27}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(\\frac{3}{4}\\right)^{-2}\\div\\left(\\frac{4}{9}\\right)^3\\times\\frac{16}{27}&amp;=\\left(\\frac{4}{3}\\right)^2\\div\\left(\\frac{4}{9}\\right)^3\\times\\frac{16}{27} \\\\\n          &amp;=\\frac{4^2}{3^2}\\div\\frac{4^3}{9^3}\\times\\frac{16}{27} \\\\\n          &amp;=\\frac{4^2}{3^2}\\times\\frac{9^3}{4^3}\\times\\frac{4^2}{3^3} \\\\\n          &amp;=\\frac{4^2}{3^2}\\times\\frac{(3^2)^3}{4^3}\\times\\frac{4^2}{3^3} \\\\\n          &amp;=\\frac{4^2}{3^2}\\times\\frac{3^6}{4^3}\\times\\frac{4^2}{3^3} \\\\\n          &amp;=4^{2+2-3}\\cdot3^{6-2-3} \\\\\n          &amp;=4^1\\cdot3^1=12. \\end{aligned}"></span></div>',
             },
             {
               n: "iii",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="(0.027)^{-\\frac{1}{3}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="(0.027)^{-\\frac{1}{3}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(0.027)^{-\\frac{1}{3}} &amp;= \\left(\\frac{27}{1000}\\right)^{-\\frac{1}{3}}=\\left(\\frac{1000}{27}\\right)^{\\frac{1}{3}} \\\\\n          &amp;=\\left(\\frac{10^3}{3^3}\\right)^{\\frac{1}{3}}=\\frac{10^{3\\times\\frac{1}{3}}}{3^{3\\times\\frac{1}{3}}}=\\frac{10}{3}. \\end{aligned}"></span></div>',
             },
             {
               n: "iv",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\sqrt[7]{\\dfrac{x^{14} y^{21} z^{35}}{y^{14} z^{7}}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\sqrt[7]{\\dfrac{x^{14} y^{21} z^{35}}{y^{14} z^{7}}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\sqrt[7]{\\dfrac{x^{14}\\times y^{21}\\times z^{35}}{y^{14}\\times z^7}} &amp;= \\sqrt[7]{x^{14} \\times y^{21-14} \\times z^{35-7}} \\\\\n          &amp;= \\sqrt[7]{x^{14} \\times y^7 \\times z^{28}} \\\\\n          &amp;= \\left(x^{14}\\times y^7\\times z^{28}\\right)^{\\frac{1}{7}} \\\\\n          &amp;= x^{14\\times\\frac{1}{7}}\\times y^{7\\times\\frac{1}{7}}\\times z^{28\\times\\frac{1}{7}} \\\\\n          &amp;= x^2 \\times y \\times z^4=x^2yz^4.\\end{aligned}"></span></div>',
             },
             {
               n: "v",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\dfrac{5(25)^{n+1} - 25(5)^{2n}}{5(5)^{2n+3} - (25)^{n+1}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{5(25)^{n+1} - 25(5)^{2n}}{5(5)^{2n+3} - (25)^{n+1}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{5(25)^{n+1}-25(5)^{2n}}{5(5)^{2n+3}-(25)^{n+1}}&amp;=\\frac{5(5^2)^{n+1}-5^2(5)^{2n}}{5(5)^{2n+3}-(5^2)^{n+1}} \\\\\n          &amp;=\\frac{5^1\\cdot5^{2n+2}-5^2\\cdot5^{2n}}{5^1\\cdot5^{2n+3}-5^{2n+2}} \\\\\n          &amp;= \\frac{5^1\\cdot5^{2n}\\cdot5^2-5^2\\cdot5^{2n}}{5^1\\cdot5^{2n}\\cdot5^3-5^{2n}\\cdot5^2} \\\\\n          &amp;= \\frac{5^1\\cdot5^{2n}\\cdot5^2-5^2\\cdot5^{2n}}{5^2\\cdot5^{2n}\\cdot5^2-5^{2n}\\cdot5^2} \\\\\n          &amp;=\\frac{5^2\\cdot5^{2n}(5^1-1)}{5^2\\cdot5^{2n}(5^2-1)} \\\\\n          &amp;=\\frac{5-1}{25-1}=\\frac{4}{24}=\\frac{1}{6}.\\end{aligned}"></span></div>',
             },
             {
               n: "vi",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\dfrac{(16)^{x+1} + 20(4^{2x})}{2^{x-3} \\times 8^{x+2}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{(16)^{x+1} + 20(4^{2x})}{2^{x-3} \\times 8^{x+2}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\dfrac{(16)^{x+1}+20(4^{2x})}{2^{x-3}\\times 8^{x+2}} &amp;= \\dfrac{(2^4)^{x+1}+20(2^2)^{2x}}{2^{x-3}\\times (2^3)^{x+2}} \\\\\n          &amp;= \\dfrac{2^{4(x+1)}+20\\cdot2^{4x}}{2^{x-3}\\times 2^{3(x+2)}} \\\\\n          &amp;= \\dfrac{2^{4x+4}+20\\cdot2^{4x}}{2^{x-3+3x+6}} \\\\\n          &amp;= \\dfrac{2^{4x+4}+20\\cdot2^{4x}}{2^{4x+3}} \\\\\n          &amp;= \\dfrac{2^{4x}\\cdot2^{4}+20\\cdot2^{4x}}{2^{4x}\\cdot2^3} \\\\\n          &amp;= \\dfrac{2^{4x}(2^4+20)}{2^{4x}\\cdot2^3} \\\\\n          &amp;= \\dfrac{2^{4x}(16+20)}{2^{4x}\\cdot8} \\\\\n          &amp;= \\dfrac{36}{8}=\\frac{9}{2}. \\end{aligned}"></span></div>',
             },
             {
               n: "vii",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="(64)^{-\\frac{2}{3}} \\div (9)^{-\\frac{3}{2}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="(64)^{-\\frac{2}{3}} \\div (9)^{-\\frac{3}{2}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(64)^{-\\frac{2}{3}}\\div(9)^{-\\frac{3}{2}} &amp;= \\dfrac{(64)^{-\\frac{2}{3}}}{(9)^{-\\frac{3}{2}}}= \\frac{(9)^\\frac{3}{2}}{(64)^{\\frac{2}{3}}} \\\\\n          &amp;=\\frac{(3^2)^{\\frac{3}{2}}}{(2^6)^{\\frac{2}{3}}}=\\frac{(3)^3}{(2^2)^2} \\\\\n          &amp;=\\frac{27}{(4)^2}=\\frac{27}{16}. \\end{aligned}"></span></div>',
             },
             {
               n: "viii",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\dfrac{3^n \\times 9^{n+1}}{3^{n-1} \\times 9^{n-1}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{3^n \\times 9^{n+1}}{3^{n-1} \\times 9^{n-1}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\dfrac{3^n\\times9^{n+1}}{3^{n-1}\\times9^{n-1}} &amp;= \\dfrac{3^n\\times(3^2)^{n+1}}{3^{n-1}\\times(3^2)^{n-1}} \\\\\n          &amp;= \\dfrac{3^n\\times3^{2(n+1)}}{3^{n-1}\\times3^{2(n-1)}} \\\\\n          &amp;= \\dfrac{3^n\\times3^{2n+2}}{3^{n-1}\\times3^{2n-2}} \\\\\n          &amp;= \\dfrac{3^{n+2n+2}}{3^{n-1+2n-2}} \\\\\n          &amp;= \\dfrac{3^{3n+2}}{3^{3n-3}} \\\\\n          &amp;= 3^{3n+2-(3n-3)} \\\\\n          &amp;= 3^{5} \\\\\n          &amp;= 243. \\end{aligned}"></span></div>',
             },
             {
               n: "ix",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\dfrac{5^{n+3} - 6 \\cdot 5^{n+1}}{9 \\times 5^n - 2^n \\times 5^n}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{5^{n+3} - 6 \\cdot 5^{n+1}}{9 \\times 5^n - 2^n \\times 5^n}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{5^{n+3}-6\\cdot5^{n+1}}{9\\times5^n-2^n\\times5^n} &amp;= \\frac{5^{n}\\cdot5^3-6\\cdot5^{n}\\cdot5^1}{9\\times5^n-2^n\\times5^n} \\\\\n          &amp;=\\frac{5^n(5^3-6\\cdot5)}{5^n(9-2^n)} \\\\\n          &amp;=\\frac{125-30}{9-2^n} \\\\\n          &amp;=\\frac{95}{9-2^n}.  \\end{aligned}"></span></div><p> If <span class="math-slot" data-display="0" data-latex="x=3+\\sqrt{8}"></span></p>',
             },
           ],
         },
         {
           label:
-            'Question 3, given <span class="math-slot" data-display="0" data-latex="x=3+\\sqrt{8}"></span>',
+            'Question 3: If <span class="math-slot" data-display="0" data-latex="x = 3 + \\sqrt{8}"></span>, find the value of each of the following.',
           items: [
             {
               n: "i",
@@ -3008,14 +3038,14 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
           label: "Question 4",
           items: [
             {
-              n: "4",
+              n: "i",
               q: 'Find rational numbers <span class="math-slot" data-display="0" data-latex="p"></span> and <span class="math-slot" data-display="0" data-latex="q"></span> such that <span class="math-slot" data-display="0" data-latex="\\dfrac{8-3\\sqrt{2}}{4+3\\sqrt{2}} = p + q\\sqrt{2}"></span>.',
               s: '<p>We start by multiplying the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} &amp;= \\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} \\cdot \\frac{4 - 3\\sqrt{2}}{4 - 3\\sqrt{2}} \\\\\n      &amp;= \\frac{(8 - 3\\sqrt{2})(4 - 3\\sqrt{2})}{(4 + 3\\sqrt{2})(4 - 3\\sqrt{2})} \\\\\n      &amp;= \\frac{8 \\cdot 4 - 8 \\cdot 3\\sqrt{2} - 3\\sqrt{2} \\cdot 4 + 3\\sqrt{2} \\cdot 3\\sqrt{2}}{(4)^2 - (3\\sqrt{2})^2} \\\\\n      &amp;= \\frac{32 - 24\\sqrt{2} - 12\\sqrt{2} + 9 \\cdot 2}{16 - 9\\cdot2} \\\\\n      &amp;= \\frac{32 - 36\\sqrt{2} + 18}{16 - 18} \\\\\n      &amp;= \\frac{50 - 36\\sqrt{2}}{-2} \\\\\n      &amp;= \\frac{50}{-2} - \\frac{36\\sqrt{2}}{-2} \\\\\n      &amp;= -25 + 18\\sqrt{2}.\\end{aligned}"></span></div><p>Thus, comparing <span class="math-slot" data-display="0" data-latex="-25 + 18\\sqrt{2}"></span> with <span class="math-slot" data-display="0" data-latex="p + q\\sqrt{2}"></span>, we get</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="p = -25 \\quad \\text{and} \\quad q = 18."></span></div><details class="solution-video"><summary>Watch sample video solution</summary><div class="solution-video-body"><p class="solution-video-note">Sample embedded video solution for this question. Later, you can replace this with the exact lesson video that matches the worked solution.</p><div class="video-frame"><iframe width="560" height="315" src="https://www.youtube.com/embed/7cEoLM0AGcM?si=Q8b8ibFOJ4XdoSuK" title="YouTube video player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div></details>',
             },
           ],
         },
         {
-          label: "Question 5 - Simplify",
+          label: "Question 5: Simplify the following.",
           items: [
             {
               n: "i",
@@ -3024,7 +3054,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             },
             {
               n: "ii",
-              q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\sqrt[3]{(27)^{2x}}"></span>',
+              q: '<span class="math-slot" data-display="0" data-latex="\\sqrt[3]{(27)^{2x}}"></span>',
               s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}&amp;\\frac{54\\times\\sqrt[3]{(27)^{2x}}}{9^{x+1}+216(3^{2x-1})} \\\\\n        &amp;= \\frac{2\\times3\\times3\\times3\\times\\left[(27)^{2x}\\right]^{\\frac{1}{3}}}{(3^2)^{x+1}+(2\\times2\\times2\\times3\\times3\\times3)(3^{2x-1})} \\\\\n        &amp;= \\frac{2\\times3^3\\times\\left[(3^3)^{2x}\\right]^{\\frac{1}{3}}}{(3^2)^{x+1}+(2^3\\times3^3)(3^{2x-1})} \\\\\n        &amp;= \\frac{2\\times3^3\\times(3^{6x})^{\\frac{1}{3}}}{3^{2(x+1)}+2^3\\cdot3^{3+2x-1}} \\\\\n        &amp;= \\frac{2\\times3^3\\times3^{2x}}{3^{2x+2}+2^3\\cdot3^{2x+2}} \\\\\n        &amp;= \\frac{2\\times3^{3+2x}}{3^{2x+2}(1+2^3)} \\\\\n        &amp;= \\frac{2}{1+8}\\times3^{3+2x}\\times3^{-2x-2} \\\\\n        &amp;= \\frac{2}{9}\\times3^{3+2x-2x-2} \\\\\n        &amp;=\\frac{2}{9}\\times3^1=\\frac{2}{3}. \\end{aligned}"></span></div>',
             },
             {
@@ -3215,17 +3245,17 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         },
         {
           n: "6i",
-          q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\sqrt[5]{\\frac{x^{15}y^{35}}{z^{20}}}"></span>',
+          q: '<span class="math-slot" data-display="0" data-latex="\\sqrt[5]{\\frac{x^{15}y^{35}}{z^{20}}}"></span>',
           s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\sqrt[5]{\\dfrac{x^{15}y^{35}}{z^{20}}} &amp;= \\left( \\dfrac{x^{15}y^{35}}{z^{20}} \\right)^{\\frac{1}{5}} \\\\\n        &amp;= \\dfrac{x^{15 \\cdot \\frac{1}{5}} y^{35 \\cdot \\frac{1}{5}}}{z^{20 \\cdot \\frac{1}{5}}} \\\\\n        &amp;= \\dfrac{x^3 y^7}{z^4}. \\end{aligned}"></span></div>',
         },
         {
           n: "6ii",
-          q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\sqrt[3]{(27)^{2x}}"></span>',
+          q: '<span class="math-slot" data-display="0" data-latex="\\sqrt[3]{(27)^{2x}}"></span>',
           s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\sqrt[3]{(27)^{2x}} &amp;= \\left( 27 \\right)^{\\frac{2x}{3}} \\\\\n        &amp;= \\left( 3^3 \\right)^{\\frac{2x}{3}} \\\\\n        &amp;= 3^{3 \\cdot \\frac{2x}{3}} \\\\\n        &amp;= 3^{2x}. \\end{aligned}"></span></div>',
         },
         {
           n: "6iii",
-          q: 'Simplify: <span class="math-slot" data-display="0" data-latex="\\dfrac{6(3)^{n+2}}{3^{n-1}-3^n}"></span>',
+          q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{6(3)^{n+2}}{3^{n-1}-3^n}"></span>',
           s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{6(3)^{n+2}}{3^{n-1}-3^n}&amp;= \\frac{6\\cdot3^n\\cdot3^2}{3^n\\cdot3^{-1}-3^n} \\\\\n        &amp;= \\frac{6\\cdot3^n\\cdot3^{2}}{3^n(3^{-1}-1)} \\\\\n        &amp;= \\frac{6\\cdot3^2}{3^{-1}-1} \\\\\n        &amp;= \\frac{6\\cdot9}{\\frac{1}{3}-1} \\\\\n        &amp;= \\frac{54}{\\frac{1-3}{3}} \\\\\n        &amp;= \\frac{54\\times3}{-2} \\\\\n        &amp;= -81.  \\end{aligned}"></span></div>',
         },
         {
@@ -4305,36 +4335,46 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
       }
 
       function toggleWhy(el) {
-        // Strategy 1: parent <p>'s next sibling
-        var p = el.closest("p");
+        var r = null;
         if (
-          p &&
-          p.nextElementSibling &&
-          p.nextElementSibling.classList.contains("step-reason")
+          el.nextElementSibling &&
+          (el.nextElementSibling.classList.contains("step-reason") ||
+            el.nextElementSibling.classList.contains("eq-note-body"))
         ) {
-          var r = p.nextElementSibling;
-          r.classList.toggle("open");
-          var isOpen = r.classList.contains("open");
-          el.textContent = isOpen ? "▾ why" : "▸ why";
-          el.setAttribute("aria-expanded", isOpen ? "true" : "false");
-          return;
+          r = el.nextElementSibling;
         }
-        // Strategy 2: scan all .step-reason in the same solution container
-        var container =
-          el.closest(".sc") ||
-          el.closest(".si") ||
-          el.closest(".mex") ||
-          document;
-        var reasons = container.querySelectorAll(".step-reason");
-        var whys = container.querySelectorAll(".step-why");
-        var myIndex = Array.from(whys).indexOf(el);
-        if (myIndex >= 0 && myIndex < reasons.length) {
-          var r = reasons[myIndex];
-          r.classList.toggle("open");
-          var isOpen = r.classList.contains("open");
-          el.textContent = isOpen ? "▾ why" : "▸ why";
-          el.setAttribute("aria-expanded", isOpen ? "true" : "false");
-          return;
+        if (!r) {
+          var p =
+            el.closest("p") ||
+            el.closest(".why-row") ||
+            el.closest(".eq-note-row") ||
+            el.parentElement;
+          var candidate = p ? p.nextElementSibling : null;
+          if (
+            candidate &&
+            (candidate.classList.contains("step-reason") ||
+              candidate.classList.contains("eq-note-body"))
+          ) {
+            r = candidate;
+          }
+        }
+        if (!r) {
+          var container =
+            el.closest(".sc, .si, .mex, .eq-annot-side, .auto-why-block") ||
+            document;
+          var reasons = container.querySelectorAll(
+            ".step-reason, .eq-note-body",
+          );
+          var whys = container.querySelectorAll(".step-why, .eq-note-toggle");
+          var idx = Array.from(whys).indexOf(el);
+          if (idx >= 0 && idx < reasons.length) r = reasons[idx];
+        }
+        if (r) {
+          var willOpen = !r.classList.contains("open");
+          r.classList.toggle("open", willOpen);
+          if (!willOpen) r.classList.remove("open");
+          el.classList.toggle("open-state", willOpen);
+          el.setAttribute("aria-expanded", willOpen ? "true" : "false");
         }
       }
 
@@ -4357,7 +4397,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
  </div>
  </section>
  <div class="reading-note" style="margin:14px 0 18px">
- <strong>For Students:</strong> Every solution shows each small step — no arithmetic is skipped. Tap the <span class="step-why" style="pointer-events:none;display:inline-flex;vertical-align:baseline;margin:0 2px;padding:1px 6px;font-size:.68rem">▸ why</span> buttons beside steps to see which formula or rule is being used.
+ <strong>For Students:</strong> Every solution shows each small step — no arithmetic is skipped. Tap the small <span class="step-why" style="pointer-events:none;display:inline-flex;vertical-align:baseline;margin:0 2px;padding:1px 6px;font-size:.68rem">note</span> markers beside important steps to see the identity, rule, or idea being used.
  </div>
 
  <div class="chapter-flow">
@@ -4507,27 +4547,79 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
 
 
 /* ──── Step Justification Dropdowns ──── */
-.step-why{
-  display:inline-flex;align-items:center;gap:3px;
-  margin-left:6px;padding:2px 8px;
-  border:1px solid var(--line);border-radius:8px;
-  background:#fbf8f2;color:var(--gold);
+.step-why,
+.eq-note-toggle{
+  appearance:none;
+  display:inline-flex;align-items:center;gap:5px;
+  margin-left:6px;padding:2px 9px;
+  border:1px solid rgba(30,93,77,.18);border-radius:999px;
+  background:rgba(30,93,77,.05);color:rgba(30,93,77,.9);
   font:600 .72rem var(--sans);letter-spacing:.02em;
   cursor:pointer;vertical-align:middle;
   transition:all .18s ease;white-space:nowrap;
-  text-transform:uppercase;
+  text-transform:lowercase;
 }
-.step-why:hover{border-color:var(--gold);background:var(--gold-soft)}
-.step-why svg{width:11px;height:11px;flex:none}
-.step-reason{
-  display:none;margin:6px 0 8px;
-  padding:10px 14px;border-left:3px solid var(--gold);
-  background:var(--gold-soft);border-radius:0 12px 12px 0;
-  font-size:.88rem;color:#5d4f37;line-height:1.75;
+.step-why::before,
+.eq-note-toggle::before{
+  content:"▸";
+  font-size:.72em;
+  opacity:.78;
+  transform:translateY(-.02em);
 }
-.step-reason.open{display:block;animation:fadeReason .25s ease}
+.step-why:hover,
+.eq-note-toggle:hover{
+  border-color:rgba(30,93,77,.35);
+  background:rgba(30,93,77,.09);
+}
+.step-why.open-state,
+.eq-note-toggle.open-state{
+  background:rgba(30,93,77,.11);
+  border-color:rgba(30,93,77,.32);
+}
+.step-reason,
+.eq-note-body{
+  display:none;
+  margin:8px 0 8px;
+  padding:10px 14px;
+  border-left:3px solid rgba(30,93,77,.72);
+  background:#f6faf8;
+  border-radius:0 12px 12px 0;
+  font-size:.9rem;
+  color:#4b463f;
+  line-height:1.75;
+}
+.step-reason.open,
+.eq-note-body.open{display:block;animation:fadeReason .22s ease}
 .why-row{margin:8px 0 6px}
+.eq-note-row{display:flex;justify-content:flex-end;margin:2px 0 6px}
 .auto-why-block{margin:8px 0 6px}
+
+.eq-annot{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(220px,280px);
+  gap:18px;
+  align-items:start;
+  margin:12px 0;
+}
+.eq-annot-main{min-width:0}
+.eq-annot-main .eq-block,
+.eq-annot-main .plain-block-math,
+.eq-annot-main .mb{margin:0}
+.eq-annot-side{
+  align-self:start;
+  padding-top:4px;
+}
+.eq-annot-side .eq-note-toggle{
+  margin-left:0;
+  opacity:.72;
+}
+.eq-annot-side .eq-note-toggle:hover,
+.eq-annot-side .eq-note-toggle.open-state{
+  opacity:1;
+}
+.eq-annot-side .eq-note-body{
+  margin-top:8px;
+}
 @keyframes fadeReason{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
 /* ──── Mobile equation fixes ──── */
@@ -4771,7 +4863,9 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         // Event delegation for step-why buttons (must be after DOM is populated)
         if (!document.body.dataset.whyDelegationInstalled) {
           document.addEventListener("click", function (e) {
-            var btn = e.target.closest(".step-why");
+            var btn =
+              e.target.closest(".step-why") ||
+              e.target.closest(".eq-note-toggle");
             if (btn) {
               e.preventDefault();
               e.stopPropagation();
@@ -4780,7 +4874,9 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
           });
           document.body.dataset.whyDelegationInstalled = "1";
           document.addEventListener("keydown", function (e) {
-            var btn = e.target.closest(".step-why");
+            var btn =
+              e.target.closest(".step-why") ||
+              e.target.closest(".eq-note-toggle");
             if (btn && (e.key === "Enter" || e.key === " ")) {
               e.preventDefault();
               toggleWhy(btn);
@@ -4792,6 +4888,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         combineEquationBlocks(document);
         enrichSolutionNarration(document);
         injectWhyExplanations(document);
+        groupEquationAnnotations(document);
         filterQuestions("");
         renderMath(document);
         fixInlineMathSpacing(document);
