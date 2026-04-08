@@ -1613,6 +1613,12 @@
         display: block;
         animation: fadeReason 0.25s ease;
       }
+      .why-row {
+        margin: 8px 0 6px;
+      }
+      .auto-why-block {
+        margin: 8px 0 6px;
+      }
       @keyframes fadeReason {
         from {
           opacity: 0;
@@ -1706,6 +1712,28 @@
           max-height: none !important;
         }
       }
+
+      /* Auto-injected why blocks */
+      .auto-why-block {
+        margin: 4px 0 2px;
+      }
+      .why-row {
+        display: flex;
+        margin: 2px 0;
+      }
+      .why-row.auto-why {
+        margin: 6px 0 2px;
+      }
+      .auto-why-block .step-reason {
+        margin-left: 0;
+      }
+      /* Prevent duplicate why blocks from looking cluttered */
+      .auto-why-block + .auto-why-block {
+        margin-top: 0;
+      }
+      .auto-why-block + .eq-block {
+        margin-top: 4px;
+      }
     </style>
   </head>
   <body>
@@ -1736,8 +1764,20 @@
             ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '\"': "&quot;" })[m],
         );
       }
+      function sanitizeLatexArtifacts(s) {
+        let out = String(s || "");
+        out = out.replace(/\\boxed\{([^{}]*)\}/g, function (_, inner) {
+          let cleaned = String(inner || "")
+            .replace(/&/g, "")
+            .replace(/\s*\.\s*$/, "")
+            .trim();
+          return "\\boxed{" + cleaned + "}";
+        });
+        out = out.replace(/\\begin\{aligned\}\s*&/g, "\\begin{aligned}");
+        return out;
+      }
       function normalizeLatex(s) {
-        return String(s)
+        let out = String(s)
           .replace(/\\tfrac/g, "\\frac")
           .replace(/\^\\circ\s*F/g, "{}^\\circ\\!F")
           .replace(/\^\\circ\s*C/g, "{}^\\circ\\!C")
@@ -1766,7 +1806,9 @@
             /(?<![A-Za-z0-9\\])([0-9]+)\s*\/\s*([0-9]+)(?![A-Za-z0-9])/g,
             "\\frac{$1}{$2}",
           );
+        return sanitizeLatexArtifacts(out);
       }
+
       function smartAligned(src) {
         let s = normalizeLatex(src).trim();
         if (/\\begin\{/.test(s)) return s;
@@ -2030,6 +2072,433 @@
           }
         });
       }
+      function whyRowHtml() {
+        return '<div class="why-row auto-why"><span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></div>';
+      }
+      function normalizeReasonKey(html) {
+        return String(html || "")
+          .replace(/<[^>]+>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
+      }
+      function inferGeneralWhy(qText, containerText) {
+        const q = String(qText || "").toLowerCase();
+        const c = String(containerText || "").toLowerCase();
+        // Only add general why to questions that don't already have specific ones
+        // and where a brief method note genuinely helps
+        if (
+          /identify|irrational|rational/.test(q) &&
+          !/simplif|express|find/.test(q)
+        )
+          return "<strong>Key rule:</strong> A number is <em>rational</em> if its decimal terminates or eventually repeats; it is <em>irrational</em> if its decimal goes on forever without any repeating pattern. The square root of a non-perfect-square integer is always irrational.";
+        if (/number line/.test(q) && /sqrt/.test(q))
+          return (
+            "<strong>Construction method:</strong> For " +
+            I("\\sqrt{n}") +
+            ", build a right triangle whose sides give " +
+            I("\\sqrt{n}") +
+            " via the Pythagorean theorem: " +
+            I("c=\\sqrt{a^2+b^2}") +
+            ". Then use a compass centred at the origin to transfer this length onto the number line."
+          );
+        if (/between/.test(q) && /rational/.test(q))
+          return "<strong>Averaging method:</strong> The average of any two distinct rational numbers is always rational and lies strictly between them. By repeating this, we can find as many rational numbers between two given rationals as we want.";
+        // Don't add generic why to property-naming questions (they're already explanatory)
+        // Don't add generic why to questions that have detailed step-by-step solutions
+        return "";
+      }
+      function inferEqReason(qText, latex, prevText) {
+        const raw = normalizeLatex(latex);
+        const s = raw.toLowerCase();
+        const q = String(qText || "").toLowerCase();
+        const p = String(prevText || "").toLowerCase();
+
+        // ─── IDENTITY DETECTIONS (specific) ───
+        // Difference of two squares: (a-b)(a+b) = a²-b²
+        if (
+          /\(.*[\+\-].*sqrt.*\)\(.*[\+\-].*sqrt.*\)|a\^2\s*-\s*\(\\sqrt/.test(
+            raw,
+          ) ||
+          /\(2-\\sqrt\{2\}\)\(2\+\\sqrt\{2\}\)/.test(raw)
+        )
+          return (
+            "<strong>Difference of squares identity:</strong> " +
+            I("(a-b)(a+b)=a^2-b^2") +
+            ". The cross terms " +
+            I("+ab") +
+            " and " +
+            I("-ab") +
+            " cancel each other, leaving only the difference of the squares."
+          );
+
+        // Conjugate multiplication in rationalisation
+        if (/rationalize/i.test(q) && /\\cdot\s*\\frac\{/.test(raw))
+          return (
+            "We multiply both numerator and denominator by the <em>conjugate</em> of the denominator. This works because " +
+            I("(a+\\sqrt{b})(a-\\sqrt{b})=a^2-b^2") +
+            ", which eliminates the surd from the denominator while keeping the fraction value unchanged (since we multiply by " +
+            I("\\frac{\\text{conjugate}}{\\text{conjugate}}=1") +
+            ")."
+          );
+
+        // Negative exponent: flip the fraction
+        if (
+          /\^\{-\\frac\{|\\left\(\\frac\{[^}]+\}\{[^}]+\}\\right\)\^\{-/.test(
+            raw,
+          )
+        )
+          return (
+            "<strong>Negative exponent rule:</strong> " +
+            I("a^{-n}=\\frac{1}{a^n}") +
+            ". For fractions, " +
+            I(
+              "\\left(\\frac{a}{b}\\right)^{-n}=\\left(\\frac{b}{a}\\right)^{n}",
+            ) +
+            " — the fraction flips and the sign of the exponent becomes positive."
+          );
+
+        // Power of a power: (a^m)^n = a^{mn}
+        if (
+          /\(a\^\{?[0-9]\}?\)\^\{?\\frac|\(2\^\{?[0-9]\}?\)\^\{|3\^[0-9]\)/.test(
+            raw,
+          ) ||
+          /\^\{[0-9]+\\cdot\\frac/.test(raw) ||
+          /\^\{[0-9]+\\times\\frac/.test(raw)
+        )
+          return (
+            "<strong>Power of a power rule:</strong> " +
+            I("(a^m)^n = a^{m \\times n}") +
+            ". The exponents are multiplied, not added. This rule lets us convert between radical and exponential forms."
+          );
+
+        // Product of powers: a^m · a^n = a^{m+n}
+        if (
+          /(2|3|5)\^\{[^}]*\}\\cdot\s*(2|3|5)\^\{/.test(raw) ||
+          /a\^\{m\+n\}/.test(raw) ||
+          /3\^\{n\+2n\+2\}|3\^\{3n\+2\}|5\^\{n\+3\}/.test(raw)
+        )
+          return (
+            "<strong>Product of powers rule:</strong> " +
+            I("a^m \\cdot a^n = a^{m+n}") +
+            ". When multiplying powers with the same base, we add the exponents."
+          );
+
+        // Quotient of powers: a^m / a^n = a^{m-n}
+        if (
+          /3\^\{3n\+2-\(3n-3\)\}|3\^\{3n\+2\-|a\^\{m-n\}/.test(raw) ||
+          (/\\frac\{[235]\^\{/.test(raw) && /[235]\^\{/.test(raw))
+        )
+          return (
+            "<strong>Quotient of powers rule:</strong> " +
+            I("\\frac{a^m}{a^n} = a^{m-n}") +
+            ". When dividing powers with the same base, we subtract the exponents."
+          );
+
+        // Factoring out common base
+        if (
+          /[235]\^\{[^}]*\}\([235]\^\{?[0-9]|[235]\^\{[^}]*\}\(.*-\s*[0-9]+\)/.test(
+            raw,
+          )
+        )
+          return (
+            "<strong>Factoring out a common power:</strong> We take " +
+            I("a^k") +
+            " as a common factor from all terms, similar to factoring " +
+            I("ax+ay=a(x+y)") +
+            ". This simplifies the expression into a single fraction with common factors that cancel."
+          );
+
+        // Square root simplification: √(a·b) = √a · √b
+        if (
+          /\\sqrt\{[0-9]+\\times|\\sqrt\{25\}\\sqrt\{3\}|\\sqrt\{9\}\\sqrt/.test(
+            raw,
+          ) ||
+          /\\sqrt\{[0-9]+\\cdot[0-9]/.test(raw)
+        )
+          return (
+            "<strong>Product rule for radicals:</strong> " +
+            I("\\sqrt{a \\cdot b} = \\sqrt{a} \\cdot \\sqrt{b}") +
+            ". We factor the radicand so that one factor is a perfect square, then simplify."
+          );
+
+        // nth root conversion
+        if (/\\sqrt\[[0-9]+\]\{|a\^\{\\frac\{1\}\{[0-9]+\}\}/.test(raw))
+          return (
+            "<strong>Radical ↔ exponent conversion:</strong> " +
+            I("\\sqrt[n]{a} = a^{\\frac{1}{n}}") +
+            ". Then apply " +
+            I("(a^m)^n = a^{mn}") +
+            " to simplify the resulting fractional exponent."
+          );
+
+        // Recurring decimal: multiply by 10^k
+        if (/10x\s*=|100x\s*=/.test(raw) && /\\ldots/.test(raw))
+          return (
+            "Multiplying by " +
+            I("10^k") +
+            " (where " +
+            I("k") +
+            " is the number of repeating digits) shifts the decimal point right by " +
+            I("k") +
+            " places, so the repeating block lines up exactly under the original. Subtracting then cancels the infinite tail."
+          );
+
+        // Subtraction step in recurring decimal
+        if (/(10x|100x)\s*-\s*x\s*=/.test(raw))
+          return (
+            "Since both " +
+            I("10x") +
+            " (or " +
+            I("100x") +
+            ") and " +
+            I("x") +
+            " have the same infinitely repeating tail, subtraction cancels it completely, leaving a finite number on the right."
+          );
+
+        // Division to isolate variable
+        if (/(9x|99x|4x|3x|2x)\s*=\s*[0-9]/.test(raw) && !/\\frac/.test(raw))
+          return (
+            "<strong>Division property of equality:</strong> if " +
+            I("a=b") +
+            ", then " +
+            I("\\frac{a}{c}=\\frac{b}{c}") +
+            " for any " +
+            I("c\\neq 0") +
+            ". We divide both sides by the coefficient of " +
+            I("x") +
+            " to isolate it."
+          );
+
+        // Pythagorean theorem
+        if (
+          /\(OB\)\^2|OA\)\^2|OD\)\^2|OC\)\^2/.test(raw) ||
+          /pythagorean/i.test(p)
+        )
+          return (
+            "<strong>Pythagorean theorem:</strong> In a right triangle, " +
+            I("c^2 = a^2 + b^2") +
+            " where " +
+            I("c") +
+            " is the hypotenuse. Taking the square root gives the required length for the compass construction."
+          );
+
+        // Temperature formula
+        if (
+          /\\frac\{9\}\{5\}.*48|\\frac\{432\}\{5\}|86\.4\s*\+\s*32|118\.4/.test(
+            raw,
+          )
+        )
+          return (
+            "Direct substitution into " +
+            I("{}^\\circ F = \\frac{9}{5} \\times {}^\\circ C + 32") +
+            ". Perform multiplication first, then addition (order of operations)."
+          );
+
+        // Profit/loss/tax percentage calculation
+        if (
+          /\\frac\{15\}\{100\}|\\frac\{0\.75\}\{100\}|0\.15\s*\\times|0\.0075/.test(
+            raw,
+          )
+        )
+          return (
+            "<strong>Percentage to fraction:</strong> " +
+            I("r\\% = \\frac{r}{100}") +
+            ". Multiply this fraction by the base amount to find the part."
+          );
+
+        // Compound interest substitution
+        if (/1\s*\+\s*\\frac\{0\.14|\\times\s*1\.14/.test(raw))
+          return (
+            "Substitute " +
+            I("P, r, n, t") +
+            " into the compound interest formula " +
+            I("A=P\\left(1+\\frac{r}{n}\\right)^{nt}") +
+            " and evaluate step by step."
+          );
+
+        // Algebraic identity: (x+1/x)² = x²+2+1/x²
+        if (
+          /\\left\(x\s*[\+\-]\s*\\frac\{1\}\{x\}\\right\)\^2/.test(raw) ||
+          /x\^2\s*[\+\-]\s*2\s*[\+\-]\s*\\frac\{1\}\{x\^2\}/.test(raw)
+        )
+          return (
+            "<strong>Perfect square identity:</strong> " +
+            I("(a \\pm b)^2 = a^2 \\pm 2ab + b^2") +
+            ". Here " +
+            I("a=x") +
+            " and " +
+            I("b=\\frac{1}{x}") +
+            ", so the middle term " +
+            I("2 \\cdot x \\cdot \\frac{1}{x} = 2") +
+            " simplifies neatly."
+          );
+
+        // Sum of cubes identity
+        if (
+          /a\^\{\\frac\{1\}\{3\}\}.*b\^\{\\frac\{2\}\{3\}\}|x\^3\+y\^3/.test(
+            raw,
+          )
+        )
+          return (
+            "<strong>Sum of cubes identity:</strong> " +
+            I("(p+q)(p^2-pq+q^2)=p^3+q^3") +
+            ". Set " +
+            I("p=a^{\\frac{1}{3}}") +
+            " and " +
+            I("q=b^{\\frac{2}{3}}") +
+            ", then " +
+            I("p^3=a") +
+            " and " +
+            I("q^3=b^2") +
+            ". All the middle terms cancel in pairs."
+          );
+
+        // Simultaneous equations: adding/subtracting
+        if (/x\+y\+x-y|x\+y-\(x-y\)|2x\s*=\s*90|2y\s*=\s*46/.test(raw))
+          return (
+            "<strong>Elimination method:</strong> Adding the two equations eliminates " +
+            I("y") +
+            "; subtracting eliminates " +
+            I("x") +
+            ". This is a standard technique for solving simultaneous linear equations."
+          );
+
+        // Systems with ages/word problems
+        if (/2s-6\+s|3s-6\s*=\s*72|3s\s*=\s*78/.test(raw))
+          return "<strong>Substitution method:</strong> Express one variable in terms of the other using one equation, then substitute into the second equation. This reduces two unknowns to one.";
+
+        // Area expansion with surds
+        if (
+          /\(2\s*\+\s*3\\sqrt\{2\}\)\(5\s*-\s*2\\sqrt\{2\}\)/.test(raw) ||
+          /10\s*-\s*4\\sqrt\{2\}\s*\+\s*15\\sqrt\{2\}\s*-\s*12/.test(raw)
+        )
+          return (
+            "<strong>FOIL expansion:</strong> Multiply each term in the first bracket by each term in the second: First, Outer, Inner, Last. Then collect like surd terms (those with " +
+            I("\\sqrt{2}") +
+            ") and rational terms separately."
+          );
+
+        // Equating rational and irrational parts
+        if (
+          /rational and irrational parts/i.test(p) ||
+          /3a\+5b\s*=\s*2|a\+b\s*=\s*2/.test(raw)
+        )
+          return (
+            "Since " +
+            I("\\sqrt{15}") +
+            " is irrational, a sum " +
+            I("p + q\\sqrt{15}") +
+            " can equal " +
+            I("1+\\sqrt{15}") +
+            " only when the rational parts match (" +
+            I("p=1") +
+            ") and the irrational coefficients match (" +
+            I("q=1") +
+            ")."
+          );
+
+        // Generic simplify with exponents (if nothing specific matched)
+        if (/\\frac\{[235]\^\{/.test(raw) && /^[235]/.test(raw))
+          return (
+            "Apply the laws of indices: " +
+            I("a^m \\cdot a^n = a^{m+n}") +
+            ", " +
+            I("(a^m)^n = a^{mn}") +
+            ", and " +
+            I("\\frac{a^m}{a^n} = a^{m-n}") +
+            ". Express all terms with the same base first."
+          );
+
+        return "";
+      }
+      function prependWhy(container, target, html) {
+        if (!html) return;
+        const key = normalizeReasonKey(html);
+        container.__whyKeys = container.__whyKeys || new Set();
+        if (container.__whyKeys.has(key)) return;
+        const wrap = document.createElement("div");
+        wrap.className = "auto-why-block";
+        wrap.innerHTML =
+          whyRowHtml() + '<div class="step-reason">' + html + "</div>";
+        target.before(wrap);
+        container.__whyKeys.add(key);
+      }
+      function injectWhyExplanations(root = document) {
+        root
+          .querySelectorAll(".qb .sc, .review-mcq .mex, .answer-item")
+          .forEach((container) => {
+            const qText =
+              container.closest(".qb")?.querySelector(".qt")?.textContent || "";
+            // Track existing hand-written whys (never duplicate them)
+            container.__whyKeys = new Set(
+              Array.from(container.querySelectorAll(".step-reason")).map((el) =>
+                normalizeReasonKey(el.innerHTML),
+              ),
+            );
+            let autoCount = 0;
+            const MAX_AUTO = 3; // Don't spam — max 3 auto-whys per solution
+
+            // General why at the top (only if no hand-written ones exist)
+            if (!container.querySelector(".step-why")) {
+              const general = inferGeneralWhy(
+                qText,
+                container.textContent || "",
+              );
+              if (general) {
+                const firstTarget = container.firstElementChild || container;
+                prependWhy(container, firstTarget, general);
+                autoCount++;
+              }
+            }
+
+            // Equation-specific whys
+            container.querySelectorAll(".eq-block").forEach((block) => {
+              if (autoCount >= MAX_AUTO) return;
+              if (
+                block.previousElementSibling &&
+                (block.previousElementSibling.classList.contains(
+                  "auto-why-block",
+                ) ||
+                  block.previousElementSibling.classList.contains(
+                    "step-reason",
+                  ))
+              )
+                return;
+              const slot = block.querySelector(".math-slot");
+              const latex = slot
+                ? slot.getAttribute("data-latex") || ""
+                : block.textContent || "";
+              const prevText = block.previousElementSibling
+                ? block.previousElementSibling.textContent
+                : "";
+              const why = inferEqReason(qText, latex, prevText);
+              if (why) {
+                prependWhy(container, block, why);
+                autoCount++;
+              }
+            });
+            delete container.__whyKeys;
+          });
+      }
+      function repairKnownContentIssues() {
+        if (Array.isArray(RMCQ) && RMCQ[6]) {
+          RMCQ[6].ex =
+            "<p>Write both powers with the same base " +
+            I("2") +
+            " and then compare exponents.</p>" +
+            '<div class="eq-block">' +
+            K(
+              "\\begin{aligned}2^x\\times8^x &= 64 \\\\ 2^x\\times(2^3)^x &= 2^6 \\\\ 2^x\\times2^{3x} &= 2^6 \\\\ 2^{x+3x} &= 2^6 \\\\ 4x &= 6 \\\\ x &= \\frac{6}{4} \\\\ x &= \\frac{3}{2}.\\end{aligned}",
+              true,
+            ) +
+            "</div>" +
+            "<p>Therefore, the correct option is " +
+            I("\\frac{3}{2}") +
+            ".</p>";
+        }
+      }
+
       function renderMath(root = document) {
         root.querySelectorAll(".math-slot").forEach((el) => {
           const latex = el.getAttribute("data-latex") || "";
@@ -2222,7 +2691,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "vii",
               q: 'Identify: <span class="math-slot" data-display="0" data-latex="5 + \\sqrt{11}"></span>',
-              s: '<p>The sum of a rational and an irrational number is always an irrational number. <span class="math-slot" data-display="0" data-latex="5"></span> is rational because <span class="math-slot" data-display="0" data-latex="5=\\frac{5}{1}"></span>, whereas <span class="math-slot" data-display="0" data-latex="\\sqrt{11}"></span> is an irrational number becasue it is the square root of <span class="math-slot" data-display="0" data-latex="11"></span> which is not a perfect square. Hence, the sum <span class="math-slot" data-display="0" data-latex="5+\\sqrt{11}"></span> is <strong>irrational</strong>.</p>',
+              s: '<p>The sum of a rational and an irrational number is always an irrational number. <span class="math-slot" data-display="0" data-latex="5"></span> is rational because <span class="math-slot" data-display="0" data-latex="5=\\frac{5}{1}"></span>, whereas <span class="math-slot" data-display="0" data-latex="\\sqrt{11}"></span> is an irrational number because it is the square root of <span class="math-slot" data-display="0" data-latex="11"></span> which is not a perfect square. Hence, the sum <span class="math-slot" data-display="0" data-latex="5+\\sqrt{11}"></span> is <strong>irrational</strong>.</p>',
             },
             {
               n: "viii",
@@ -2232,12 +2701,12 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "ix",
               q: 'Identify: <span class="math-slot" data-display="0" data-latex="\\frac{15}{4}"></span>',
-              s: '<p>This is an <strong>rational number</strong> because it is the quotient of two integers, i.e., <span class="math-slot" data-display="0" data-latex="15"></span> and <span class="math-slot" data-display="0" data-latex="4"></span>.</p>',
+              s: '<p>This is a <strong>rational number</strong> because it is the quotient of two integers, i.e., <span class="math-slot" data-display="0" data-latex="15"></span> and <span class="math-slot" data-display="0" data-latex="4"></span>.</p>',
             },
             {
               n: "x",
               q: 'Identify: <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2})"></span>',
-              s: '<p>We simplify using an algebraic identity. <span class="step-why" onclick="toggleWhy(this)">▸ why</span></p><div class="step-reason"><strong>Difference of two squares:</strong> <span class="math-slot" data-display="0" data-latex="(a-b)(a+b) = a^2 - b^2"></span>. Here <span class="math-slot" data-display="0" data-latex="a = 2"></span> and <span class="math-slot" data-display="0" data-latex="b = \\sqrt{2}"></span>, so <span class="math-slot" data-display="0" data-latex="a^2 = 4"></span> and <span class="math-slot" data-display="0" data-latex="b^2 = (\\sqrt{2})^2 = 2"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(2-\\sqrt{2})(2+\\sqrt{2}) &= (2)^2 - (\\sqrt{2})^2 \\\\ &= 4 - 2 \\\\ &= 2.\\end{aligned}"></span></div><p>Thus, <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2}) = 2"></span> is a <strong>rational number</strong>.</p>',
+              s: '<p>We simplify using an algebraic identity. <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason"><strong>Difference of two squares:</strong> <span class="math-slot" data-display="0" data-latex="(a-b)(a+b) = a^2 - b^2"></span>. Here <span class="math-slot" data-display="0" data-latex="a = 2"></span> and <span class="math-slot" data-display="0" data-latex="b = \\sqrt{2}"></span>, so <span class="math-slot" data-display="0" data-latex="a^2 = 4"></span> and <span class="math-slot" data-display="0" data-latex="b^2 = (\\sqrt{2})^2 = 2"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(2-\\sqrt{2})(2+\\sqrt{2}) &= (2)^2 - (\\sqrt{2})^2 \\\\ &= 4 - 2 \\\\ &= 2.\\end{aligned}"></span></div><p>Thus, <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2}) = 2"></span> is a <strong>rational number</strong>.</p>',
             },
           ],
         },
@@ -2267,7 +2736,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "v",
               q: 'Represent <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span> on the number line.',
-              s: '<p>Note that <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span> is positive number less less than <span class="math-slot" data-display="0" data-latex="1"></span>. To represent it on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark points <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> on it. These points represent the integers <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>Divide the segment between <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> into <span class="math-slot" data-display="0" data-latex="8"></span> equal parts. Each part represents <span class="math-slot" data-display="0" data-latex="\\frac{1}{8}"></span>.</p></li><li><p>Count <span class="math-slot" data-display="0" data-latex="5"></span> parts from <span class="math-slot" data-display="0" data-latex="0"></span> to the right. The fifth division point represents <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:</p>',
+              s: '<p>Note that <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span> is positive number less than <span class="math-slot" data-display="0" data-latex="1"></span>. To represent it on the number line, follow these steps:</p><ol class="alpha"><li><p>Draw a horizontal line and mark points <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> on it. These points represent the integers <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> on the number line <span class="math-slot" data-display="0" data-latex="\\ell"></span>.</p></li><li><p>Divide the segment between <span class="math-slot" data-display="0" data-latex="0"></span> and <span class="math-slot" data-display="0" data-latex="1"></span> into <span class="math-slot" data-display="0" data-latex="8"></span> equal parts. Each part represents <span class="math-slot" data-display="0" data-latex="\\frac{1}{8}"></span>.</p></li><li><p>Count <span class="math-slot" data-display="0" data-latex="5"></span> parts from <span class="math-slot" data-display="0" data-latex="0"></span> to the right. The fifth division point represents <span class="math-slot" data-display="0" data-latex="\\frac{5}{8}"></span>.</p></li></ol><p>Here is a diagram to illustrate the construction:</p>',
             },
             {
               n: "vi",
@@ -2282,7 +2751,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "i",
               q: 'Express <span class="math-slot" data-display="0" data-latex="0.\\overline{4}"></span> as <span class="math-slot" data-display="0" data-latex="\\frac{p}{q}"></span>.',
-              s: '<p><strong>Method:</strong> Let the repeating decimal be a variable. Multiply by a power of <span class="math-slot" data-display="0" data-latex="10"></span> so the repeating block lines up, then subtract to eliminate it.</p><p>Let</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = 0.\\overline{4} = 0.444\\ldots"></span></div><p>Multiply both sides by <span class="math-slot" data-display="0" data-latex="10"></span>: <span class="step-why" onclick="toggleWhy(this)">▸ why</span></p><div class="step-reason">We multiply by <span class="math-slot" data-display="0" data-latex="10"></span> because the repeating block has <span class="math-slot" data-display="0" data-latex="1"></span> digit. If it had <span class="math-slot" data-display="0" data-latex="2"></span> repeating digits (like <span class="math-slot" data-display="0" data-latex="0.\\overline{37}"></span>), we would multiply by <span class="math-slot" data-display="0" data-latex="100"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="10x = 4.444\\ldots"></span></div><p>Now subtract <span class="math-slot" data-display="0" data-latex="x"></span> from <span class="math-slot" data-display="0" data-latex="10x"></span>: <span class="step-why" onclick="toggleWhy(this)">▸ why</span></p><div class="step-reason">Since <span class="math-slot" data-display="0" data-latex="x = 0.444\\ldots"></span> and <span class="math-slot" data-display="0" data-latex="10x = 4.444\\ldots"></span>, the repeating tails are identical. Subtracting cancels the infinite repetition: <span class="math-slot" data-display="0" data-latex="4.444\\ldots - 0.444\\ldots = 4"></span> exactly.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}10x - x &= 4.444\\ldots - 0.444\\ldots \\\\ 9x &= 4\\end{aligned}"></span></div><p>Divide both sides by <span class="math-slot" data-display="0" data-latex="9"></span>: <span class="step-why" onclick="toggleWhy(this)">▸ why</span></p><div class="step-reason">This is the <em>division property of equality</em>: if <span class="math-slot" data-display="0" data-latex="a = b"></span>, then <span class="math-slot" data-display="0" data-latex="\\frac{a}{c} = \\frac{b}{c}"></span> for any <span class="math-slot" data-display="0" data-latex="c \\neq 0"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\frac{9x}{9} = \\frac{4}{9} \\quad \\Rightarrow \\quad x = \\frac{4}{9}"></span></div><p>Therefore, <span class="math-slot" data-display="0" data-latex="0.\\overline{4} = \\frac{4}{9}"></span>.</p>',
+              s: '<p><strong>Method:</strong> Let the repeating decimal be a variable. Multiply by a power of <span class="math-slot" data-display="0" data-latex="10"></span> so the repeating block lines up, then subtract to eliminate it.</p><p>Let</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="x = 0.\\overline{4} = 0.444\\ldots"></span></div><p>Multiply both sides by <span class="math-slot" data-display="0" data-latex="10"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason">We multiply by <span class="math-slot" data-display="0" data-latex="10"></span> because the repeating block has <span class="math-slot" data-display="0" data-latex="1"></span> digit. If it had <span class="math-slot" data-display="0" data-latex="2"></span> repeating digits (like <span class="math-slot" data-display="0" data-latex="0.\\overline{37}"></span>), we would multiply by <span class="math-slot" data-display="0" data-latex="100"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="10x = 4.444\\ldots"></span></div><p>Now subtract <span class="math-slot" data-display="0" data-latex="x"></span> from <span class="math-slot" data-display="0" data-latex="10x"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason">Since <span class="math-slot" data-display="0" data-latex="x = 0.444\\ldots"></span> and <span class="math-slot" data-display="0" data-latex="10x = 4.444\\ldots"></span>, the repeating tails are identical. Subtracting cancels the infinite repetition: <span class="math-slot" data-display="0" data-latex="4.444\\ldots - 0.444\\ldots = 4"></span> exactly.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}10x - x &= 4.444\\ldots - 0.444\\ldots \\\\ 9x &= 4\\end{aligned}"></span></div><p>Divide both sides by <span class="math-slot" data-display="0" data-latex="9"></span>: <span class="step-why" role="button" tabindex="0" aria-expanded="false">▸ why</span></p><div class="step-reason">This is the <em>division property of equality</em>: if <span class="math-slot" data-display="0" data-latex="a = b"></span>, then <span class="math-slot" data-display="0" data-latex="\\frac{a}{c} = \\frac{b}{c}"></span> for any <span class="math-slot" data-display="0" data-latex="c \\neq 0"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\frac{9x}{9} = \\frac{4}{9} \\quad \\Rightarrow \\quad x = \\frac{4}{9}"></span></div><p>Therefore, <span class="math-slot" data-display="0" data-latex="0.\\overline{4} = \\frac{4}{9}"></span>.</p>',
             },
             {
               n: "ii",
@@ -3845,7 +4314,9 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         ) {
           var r = p.nextElementSibling;
           r.classList.toggle("open");
-          el.textContent = r.classList.contains("open") ? "▾ why" : "▸ why";
+          var isOpen = r.classList.contains("open");
+          el.textContent = isOpen ? "▾ why" : "▸ why";
+          el.setAttribute("aria-expanded", isOpen ? "true" : "false");
           return;
         }
         // Strategy 2: scan all .step-reason in the same solution container
@@ -3860,7 +4331,9 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         if (myIndex >= 0 && myIndex < reasons.length) {
           var r = reasons[myIndex];
           r.classList.toggle("open");
-          el.textContent = r.classList.contains("open") ? "▾ why" : "▸ why";
+          var isOpen = r.classList.contains("open");
+          el.textContent = isOpen ? "▾ why" : "▸ why";
+          el.setAttribute("aria-expanded", isOpen ? "true" : "false");
           return;
         }
       }
@@ -4053,6 +4526,8 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
   font-size:.88rem;color:#5d4f37;line-height:1.75;
 }
 .step-reason.open{display:block;animation:fadeReason .25s ease}
+.why-row{margin:8px 0 6px}
+.auto-why-block{margin:8px 0 6px}
 @keyframes fadeReason{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
 /* ──── Mobile equation fixes ──── */
@@ -4294,18 +4769,29 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
       }
       function installEnhancements() {
         // Event delegation for step-why buttons (must be after DOM is populated)
-        document.addEventListener("click", function (e) {
-          var btn = e.target.closest(".step-why");
-          if (btn) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleWhy(btn);
-          }
-        });
+        if (!document.body.dataset.whyDelegationInstalled) {
+          document.addEventListener("click", function (e) {
+            var btn = e.target.closest(".step-why");
+            if (btn) {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWhy(btn);
+            }
+          });
+          document.body.dataset.whyDelegationInstalled = "1";
+          document.addEventListener("keydown", function (e) {
+            var btn = e.target.closest(".step-why");
+            if (btn && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              toggleWhy(btn);
+            }
+          });
+        }
         replaceNumberLineSolutions();
         addPrintButtons();
         combineEquationBlocks(document);
         enrichSolutionNarration(document);
+        injectWhyExplanations(document);
         filterQuestions("");
         renderMath(document);
         fixInlineMathSpacing(document);
@@ -4322,6 +4808,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
       }
 
       function bootChapter() {
+        repairKnownContentIssues();
         renderChapter();
         installEnhancements();
       }
