@@ -1570,250 +1570,208 @@
         margin: 0 0 0.45rem;
       }
 
-      /* ──── Step Justification Dropdowns ──── */
+      /* ──── Solution Footnotes ──── */
       .step-why,
-      .eq-note-toggle {
+      .eq-note-toggle,
+      .footnote-ref {
         appearance: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        margin-left: 6px;
-        padding: 2px 9px;
-        border: 1px solid rgba(30, 93, 77, 0.18);
-        border-radius: 999px;
-        background: rgba(30, 93, 77, 0.05);
-        color: rgba(30, 93, 77, 0.9);
-        font: 600 0.72rem var(--sans);
-        letter-spacing: 0.02em;
+        display: inline-grid;
+        place-items: center;
+        width: 1.42rem;
+        height: 1.42rem;
+        min-width: 1.42rem;
+        margin-left: 0.12rem;
+        padding: 0;
+        border: 1px solid rgba(30, 93, 77, 0.28);
+        border-radius: 4px;
+        background: #f6faf8;
+        color: var(--accent);
+        font: 700 0.65rem/1 var(--sans);
         cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 1px 2px rgba(31, 28, 24, 0.04);
+      }
+      .footnote-ref.inline-ref {
+        vertical-align: super;
+        transform: translateY(-0.06em);
+      }
+      .footnote-ref.eq-display-ref {
         vertical-align: middle;
-        transition: all 0.18s ease;
-        white-space: nowrap;
-        text-transform: lowercase;
+        transform: translateY(-0.18em);
+        margin: 0 0.06rem 0 0.16rem;
       }
       .step-why::before,
-      .eq-note-toggle::before {
-        content: "▸";
-        font-size: 0.72em;
-        opacity: 0.78;
-        transform: translateY(-0.02em);
+      .eq-note-toggle::before,
+      .footnote-ref::before {
+        content: none;
       }
       .step-why:hover,
-      .eq-note-toggle:hover {
-        border-color: rgba(30, 93, 77, 0.35);
-        background: rgba(30, 93, 77, 0.09);
-      }
-      .step-why.open-state,
-      .eq-note-toggle.open-state {
-        background: rgba(30, 93, 77, 0.11);
-        border-color: rgba(30, 93, 77, 0.32);
+      .eq-note-toggle:hover,
+      .footnote-ref:hover {
+        background: rgba(30, 93, 77, 0.1);
+        border-color: rgba(30, 93, 77, 0.38);
       }
       .step-reason,
-      .eq-note-body {
-        display: none;
-        margin: 8px 0 8px;
-        padding: 10px 14px;
-        border-left: 3px solid rgba(30, 93, 77, 0.72);
-        background: #f6faf8;
-        border-radius: 0 12px 12px 0;
-        font-size: 0.9rem;
-        color: #4b463f;
-        line-height: 1.75;
-      }
-      .step-reason.open,
-      .eq-note-body.open {
-        display: block;
-        animation: fadeReason 0.22s ease;
-      }
-      .why-row {
-        margin: 8px 0 6px;
-      }
-      .eq-note-row {
-        display: flex;
-        justify-content: flex-end;
-        margin: 2px 0 6px;
-      }
-      .auto-why-block {
-        margin: 8px 0 6px;
-      }
-
-      .eq-annot {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
-        gap: 18px;
-        align-items: start;
-        margin: 12px 0;
-      }
+      .eq-note-body,
+      .note-pop,
+      .eq-annot,
+      .eq-annot-side,
       .eq-annot-main {
-        min-width: 0;
+        display: none !important;
       }
-      .eq-annot-main .eq-block,
-      .eq-annot-main .plain-block-math,
-      .eq-annot-main .mb {
+      .why-row,
+      .eq-note-row,
+      .auto-why-block {
+        display: inline;
         margin: 0;
       }
-      .eq-annot-side {
-        align-self: start;
-        padding-top: 4px;
+      .equation-footnote-holder {
+        display: flex;
+        justify-content: flex-start;
+        margin: 4px 0 0;
       }
-      .eq-annot-side .eq-note-toggle {
-        margin-left: 0;
-        opacity: 0.72;
+      .eq-block .katex-display.footnote-host {
+        display: block !important;
+        text-align: center;
       }
-      .eq-annot-side .eq-note-toggle:hover,
-      .eq-annot-side .eq-note-toggle.open-state {
-        opacity: 1;
+      .eq-block .katex-display.footnote-host > .katex {
+        max-width: 100%;
+        text-align: center;
       }
-      .eq-annot-side .eq-note-body {
-        margin-top: 8px;
+      .eq-block .katex-display .footnote-ref.eq-display-ref {
+        position: relative;
+        z-index: 2;
       }
-      @keyframes fadeReason {
-        from {
-          opacity: 0;
-          transform: translateY(-4px);
-        }
-        to {
-          opacity: 1;
-          transform: none;
-        }
+      .solution-footnotes {
+        margin: 16px 0 4px;
+        padding-top: 10px;
+        border-top: 1px solid #e6ddd1;
       }
-
-      /* ──── Mobile note popup + responsive annotation layout ──── */
-      .note-pop {
-        position: fixed;
-        inset: 0;
-        z-index: 140;
-        display: none;
+      .solution-footnotes-title {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font: 700 0.72rem var(--sans);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
-      .note-pop.show {
-        display: block;
-      }
-      .note-pop-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(18, 16, 13, 0.42);
-        backdrop-filter: blur(2px);
-      }
-      .note-pop-card {
-        position: absolute;
-        left: 50%;
-        bottom: 18px;
-        transform: translateX(-50%);
-        width: min(680px, calc(100vw - 24px));
-        max-height: min(70vh, 560px);
-        overflow: auto;
-        background: #fffdf9;
+      .solution-footnote-item {
+        margin: 8px 0;
         border: 1px solid var(--line);
-        border-radius: 18px;
-        box-shadow: 0 18px 48px rgba(31, 28, 24, 0.22);
-        padding: 16px 16px 14px;
+        border-radius: 12px;
+        background: #fbfaf7;
+        overflow: hidden;
       }
-      .note-pop-head {
+      .solution-footnote-item summary {
+        list-style: none;
+        cursor: pointer;
         display: flex;
         align-items: center;
         gap: 10px;
-        justify-content: space-between;
-        margin-bottom: 10px;
+        padding: 10px 12px;
+        color: #3f3a34;
+        font-size: 0.92rem;
       }
-      .note-pop-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 3px 10px;
-        border-radius: 999px;
-        border: 1px solid rgba(30, 93, 77, 0.18);
-        background: rgba(30, 93, 77, 0.06);
-        color: rgba(30, 93, 77, 0.95);
-        font: 700 0.74rem var(--sans);
-        text-transform: lowercase;
-        letter-spacing: 0.02em;
+      .solution-footnote-item summary::-webkit-details-marker {
+        display: none;
       }
-      .note-pop-tag::before {
-        content: "▸";
-        font-size: 0.72em;
-        opacity: 0.8;
+      .solution-footnote-item[open] summary {
+        background: #f6faf8;
       }
-      .note-pop-close {
-        appearance: none;
-        border: 1px solid var(--line);
-        background: #fff;
-        border-radius: 999px;
-        width: 34px;
-        height: 34px;
+      .fn-num {
+        flex: 0 0 auto;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 4px;
         display: grid;
         place-items: center;
-        cursor: pointer;
-        color: #5f5a53;
-        font: 700 1rem/1 var(--sans);
-      }
-      .note-pop-close:hover {
-        border-color: var(--accent);
+        border: 1px solid rgba(30, 93, 77, 0.18);
+        background: rgba(30, 93, 77, 0.08);
         color: var(--accent);
+        font: 700 0.78rem/1 var(--sans);
       }
-      .note-pop-body {
-        font-size: 0.96rem;
+      .fn-label {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.86rem;
+      }
+      .fn-body {
+        padding: 0 12px 12px 44px;
         color: #4b463f;
-        line-height: 1.8;
+        font-size: 0.92rem;
+        line-height: 1.75;
       }
-      .note-pop-body p {
+      .fn-body p {
         margin: 0 0 8px;
       }
-      .note-pop-body .katex-display {
+      .fn-body p:first-child {
+        margin-top: 0;
+      }
+      .fn-body .katex-display {
         overflow-x: auto;
         overflow-y: hidden;
       }
-      .note-pop-body .step-reason,
-      .note-pop-body .eq-note-body {
-        display: block !important;
-        margin: 0;
-        padding: 0;
-        border: none;
-        background: transparent;
-        border-radius: 0;
-        font-size: inherit;
-        color: inherit;
-        line-height: inherit;
+      @media (max-width: 760px) {
+        .solution-footnotes {
+          margin-top: 14px;
+          padding-top: 9px;
+        }
+        .solution-footnote-item summary {
+          padding: 10px 11px;
+        }
+        .fn-body {
+          padding: 0 11px 11px 40px;
+          font-size: 0.9rem;
+        }
       }
 
+      /* ──── Solution video ──── */
+      .solution-video {
+        margin-top: 16px;
+        border: 1px solid rgba(30, 93, 77, 0.2);
+        border-radius: 16px;
+        background: linear-gradient(180deg, #f9fdfb, #f3faf6);
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(30, 93, 77, 0.06);
+      }
+      .solution-video summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 14px 16px;
+        font: 800 0.98rem var(--sans);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .solution-video summary::before {
+        content: "▶";
+        font-size: 0.88rem;
+        line-height: 1;
+        opacity: 0.9;
+      }
+      .solution-video[open] summary {
+        border-bottom: 1px solid rgba(30, 93, 77, 0.15);
+      }
+      .solution-video-body {
+        padding: 14px 16px 16px;
+        display: grid;
+        gap: 10px;
+      }
+      .solution-video-note {
+        margin: 0;
+        color: #4a453e;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+      .video-frame {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(30, 93, 77, 0.14);
+        background: #fff;
+      }
       @media (max-width: 760px) {
-        .eq-annot {
-          display: block;
-          margin: 10px 0 12px;
-        }
-        .eq-annot-side {
-          display: flex;
-          justify-content: flex-end;
-          padding-top: 0;
-          margin: 0 0 6px;
-        }
-        .eq-annot-main {
-          width: 100%;
-        }
-        .eq-annot-main .eq-block,
-        .eq-annot-main .plain-block-math,
-        .eq-annot-main .mb {
-          margin: 0;
-        }
-        .eq-note-row {
-          justify-content: flex-start;
-          margin: 4px 0 6px;
-        }
-        .step-why,
-        .eq-note-toggle {
-          font-size: 0.7rem;
-          padding: 2px 8px;
-          max-width: 100%;
-        }
-        .step-reason,
-        .eq-note-body {
-          display: none !important;
-        }
-        .note-pop-card {
-          bottom: 10px;
-          width: calc(100vw - 16px);
-          max-height: 75vh;
-          border-radius: 16px;
-          padding: 14px 14px 12px;
+        .solution-video-body {
+          padding: 12px;
         }
       }
 
@@ -1829,6 +1787,13 @@
         }
         .eq-block .katex-display > .katex {
           max-width: 100%;
+        }
+        .footnote-ref.eq-display-ref {
+          width: 1.24rem;
+          height: 1.24rem;
+          min-width: 1.24rem;
+          font-size: 0.68rem;
+          margin: 0 0.04rem 0 0.12rem;
         }
         .si {
           padding: 0 10px 14px 10px;
@@ -1899,6 +1864,89 @@
           max-height: none !important;
         }
       }
+
+      /* ──── v35 footnote alignment overrides ──── */
+      .eq-block .katex-display,
+      .plain-block-math .katex-display,
+      .mb .katex-display {
+        position: relative;
+      }
+      .eq-block .katex-display > .katex,
+      .plain-block-math .katex-display > .katex,
+      .mb .katex-display > .katex {
+        position: relative;
+        display: inline-block;
+      }
+      .footnote-ref,
+      .fn-num {
+        width: 1.42rem;
+        height: 1.42rem;
+        min-width: 1.42rem;
+        border: 1px solid rgba(30, 93, 77, 0.28);
+        border-radius: 4px;
+        background: #f6faf8;
+        color: var(--accent);
+        font: 700 0.65rem/1 var(--sans);
+        box-shadow: 0 1px 2px rgba(31, 28, 24, 0.04);
+      }
+      .footnote-ref.eq-display-ref {
+        position: absolute;
+        z-index: 6;
+        transform: none;
+        vertical-align: baseline;
+        margin: 0;
+      }
+      .solution-footnote-item {
+        background: #fffdf9;
+      }
+      .solution-footnote-item summary,
+      .solution-footnote-item[open] summary {
+        background: #fffdf9;
+      }
+      .fn-num {
+        display: inline-grid;
+        place-items: center;
+        flex: 0 0 auto;
+      }
+      .fn-body {
+        background: #fffdf9;
+      }
+      @media (max-width: 620px) {
+        .footnote-ref.eq-display-ref {
+          width: 1.22rem;
+          height: 1.22rem;
+          min-width: 1.22rem;
+          font-size: 0.68rem;
+        }
+      }
+
+      /* In-equation footnote markers (via \htmlClass in KaTeX) */
+      .katex .fn-inline,
+      .enclosing .fn-inline {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 1.15em !important;
+        height: 1.15em !important;
+        min-width: 1.15em !important;
+        padding: 0 !important;
+        margin: 0 0 0 0.15em !important;
+        border: 1.5px solid rgba(30, 93, 77, 0.4) !important;
+        border-radius: 3px !important;
+        background: #edf6f1 !important;
+        color: #1a5d4d !important;
+        font-size: 0.5em !important;
+        font-weight: 800 !important;
+        font-family: var(--sans) !important;
+        cursor: pointer;
+        vertical-align: super;
+        line-height: 1 !important;
+        box-shadow: 0 1px 2px rgba(30, 93, 77, 0.1);
+      }
+      .katex .fn-inline:hover {
+        background: rgba(30, 93, 77, 0.18) !important;
+        border-color: rgba(30, 93, 77, 0.55) !important;
+      }
     </style>
   </head>
   <body>
@@ -1915,28 +1963,6 @@
     </header>
     <main class="page">
       <div id="app"></div>
-      <div id="notePopup" class="note-pop" aria-hidden="true">
-        <div class="note-pop-backdrop"></div>
-        <div
-          class="note-pop-card"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Helpful note"
-        >
-          <div class="note-pop-head">
-            <div id="notePopupTag" class="note-pop-tag">note</div>
-            <button
-              id="notePopupClose"
-              class="note-pop-close"
-              type="button"
-              aria-label="Close note"
-            >
-              ×
-            </button>
-          </div>
-          <div id="notePopupBody" class="note-pop-body"></div>
-        </div>
-      </div>
       <div class="footer-note">
         Native HTML chapter for PTB Class 9 Mathematics, carefully formatted for
         classroom use
@@ -2089,7 +2115,13 @@
         const raw = normalizeBadgeText(item && item.n);
         const secNo = parseQuestionNo(section && section.label);
         const split = raw.match(/^(\d+)([ivxlcdm]+)$/i);
-        if (secNo && raw === secNo) return raw.toLowerCase();
+        if (
+          section &&
+          Array.isArray(section.items) &&
+          section.items.length === 1
+        ) {
+          return String(secNo || raw).toLowerCase();
+        }
         if (secNo && split && split[1] === secNo) return split[2].toLowerCase();
         return raw.toLowerCase();
       }
@@ -2614,39 +2646,7 @@
           });
       }
       function groupEquationAnnotations(root = document) {
-        root.querySelectorAll(".auto-why-block").forEach((block) => {
-          if (block.dataset.grouped === "1") return;
-          const next = block.nextElementSibling;
-          if (!next) return;
-          if (
-            !(
-              next.classList.contains("eq-block") ||
-              next.classList.contains("plain-block-math") ||
-              next.classList.contains("mb")
-            )
-          )
-            return;
-          const row = block.querySelector(".eq-note-row");
-          const body = block.querySelector(".eq-note-body");
-          const btn = row ? row.querySelector(".eq-note-toggle") : null;
-          if (!btn || !body) return;
-
-          const wrap = document.createElement("div");
-          wrap.className = "eq-annot";
-
-          const main = document.createElement("div");
-          main.className = "eq-annot-main";
-          main.appendChild(next);
-
-          const side = document.createElement("div");
-          side.className = "eq-annot-side";
-          side.appendChild(btn);
-          side.appendChild(body);
-
-          wrap.appendChild(main);
-          wrap.appendChild(side);
-          block.replaceWith(wrap);
-        });
+        return;
       }
       function repairKnownContentIssues() {
         if (Array.isArray(RMCQ) && RMCQ[6]) {
@@ -2794,7 +2794,12 @@
 </div><div class="concepts-body"><div class="concepts-inner">${concepts}</div></div></div>`;
         // Questions
         questions.forEach((sec, si) => {
-          if (sec.label) h += `<div class="sl">${sec.label}</div>`;
+          const plainSingleQuestionLabel =
+            /^Question\s+\d+\s*:?\s*$/i.test(String(sec.label || "")) &&
+            Array.isArray(sec.items) &&
+            sec.items.length === 1;
+          if (sec.label && !plainSingleQuestionLabel)
+            h += `<div class="sl">${sec.label}</div>`;
           sec.items.forEach((q, qi) => {
             const id = `q${num.replace(".", "")}-${si}-${qi}`;
             h += `<div class="qb trackable-question" id="${id}" data-track-question="${escHtml(exerciseTrackLabel(num, sec, q))}"><div class="qh" onclick="toggleQ('${id}')">
@@ -2887,7 +2892,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "x",
               q: '<span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2})"></span>',
-              s: '<p>We simplify using an algebraic identity. <span class="step-why" role="button" tabindex="0" aria-expanded="false">rule</span></p><div class="step-reason"><strong>Difference of two squares:</strong> <span class="math-slot" data-display="0" data-latex="(a-b)(a+b) = a^2 - b^2"></span>. Here <span class="math-slot" data-display="0" data-latex="a = 2"></span> and <span class="math-slot" data-display="0" data-latex="b = \\sqrt{2}"></span>, so <span class="math-slot" data-display="0" data-latex="a^2 = 4"></span> and <span class="math-slot" data-display="0" data-latex="b^2 = (\\sqrt{2})^2 = 2"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(2-\\sqrt{2})(2+\\sqrt{2}) &= (2)^2 - (\\sqrt{2})^2 \\\\ &= 4 - 2 \\\\ &= 2.\\end{aligned}"></span></div><p>Thus, <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2}) = 2"></span> is a <strong>rational number</strong>.</p>',
+              s: '<p>We simplify using an algebraic identity. <span class="step-why" role="button" tabindex="0" aria-expanded="false">rule</span></p><div class="step-reason"><strong>Difference of two squares:</strong> <span class="math-slot" data-display="0" data-latex="(a-b)(a+b) = a^2 - b^2"></span>. Here <span class="math-slot" data-display="0" data-latex="a = 2"></span> and <span class="math-slot" data-display="0" data-latex="b = \\sqrt{2}"></span>, so <span class="math-slot" data-display="0" data-latex="a^2 = 4"></span> and <span class="math-slot" data-display="0" data-latex="b^2 = (\\sqrt{2})^2 = 2"></span>.</div><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(2-\\sqrt{2})(2+\\sqrt{2}) &= (2)^2 - (\\sqrt{2})^2\\,\\htmlClass{fn-inline}{\\text{1}} \\\\ &= 4 - 2 \\\\ &= 2.\\end{aligned}"></span></div><p>Thus, <span class="math-slot" data-display="0" data-latex="(2-\\sqrt{2})(2+\\sqrt{2}) = 2"></span> is a <strong>rational number</strong>.</p>',
             },
           ],
         },
@@ -3073,7 +3078,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "i",
               q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{13}{4+\\sqrt{3}}"></span>',
-              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{13}{4 + \\sqrt{3}} &amp;= \\frac{13}{4 + \\sqrt{3}} \\cdot \\frac{4 - \\sqrt{3}}{4 - \\sqrt{3}} \\\\\n        &amp;= \\frac{13(4-\\sqrt{3})}{(4)^2-(\\sqrt{3})^2} \\\\\n        &amp;= \\frac{13(4 - \\sqrt{3})}{16 - 3} \\\\\n        &amp;= \\frac{13(4 - \\sqrt{3})}{13} \\\\\n        &amp;= 4 - \\sqrt{3}.\\end{aligned}"></span></div>',
+              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{13}{4 + \\sqrt{3}} &amp;= \\frac{13}{4 + \\sqrt{3}} \\cdot \\frac{4 - \\sqrt{3}}{4 - \\sqrt{3}} \\\\\n        &amp;= \\frac{13(4-\\sqrt{3})}{(4)^2-(\\sqrt{3})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n        &amp;= \\frac{13(4 - \\sqrt{3})}{16 - 3} \\\\\n        &amp;= \\frac{13(4 - \\sqrt{3})}{13} \\\\\n        &amp;= 4 - \\sqrt{3}.\\end{aligned}"></span></div>',
             },
             {
               n: "ii",
@@ -3088,17 +3093,17 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "iv",
               q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{6-4\\sqrt{2}}{6+4\\sqrt{2}}"></span>',
-              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{6-4\\sqrt{2}}{6+4\\sqrt{2}} &amp;= \\frac{6-4\\sqrt{2}}{6+4\\sqrt{2}} \\cdot \\frac{6-4\\sqrt{2}}{6-4\\sqrt{2}} \\\\\n        &amp;= \\frac{(6-4\\sqrt{2})^2}{(6)^2-(4\\sqrt{2})^2} \\\\\n        &amp;= \\frac{(6)^2 - 2 \\cdot 6 \\cdot 4\\sqrt{2} + (4\\sqrt{2})^2}{36 - (4\\sqrt{2})^2} \\\\\n        &amp;= \\frac{36 - 48\\sqrt{2} + 16\\cdot2}{36 - 16 \\cdot 2} \\\\\n        &amp;= \\frac{36 - 48\\sqrt{2} + 32}{36 - 32} \\\\\n        &amp;= \\frac{68 - 48\\sqrt{2}}{4} \\\\\n        &amp;= \\frac{68}{4} - \\frac{48\\sqrt{2}}{4} \\\\\n        &amp;= 17 - 12\\sqrt{2}.\\end{aligned}"></span></div>',
+              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{6-4\\sqrt{2}}{6+4\\sqrt{2}} &amp;= \\frac{6-4\\sqrt{2}}{6+4\\sqrt{2}} \\cdot \\frac{6-4\\sqrt{2}}{6-4\\sqrt{2}} \\\\\n        &amp;= \\frac{(6-4\\sqrt{2})^2}{(6)^2-(4\\sqrt{2})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n        &amp;= \\frac{(6)^2 - 2 \\cdot 6 \\cdot 4\\sqrt{2} + (4\\sqrt{2})^2}{36 - (4\\sqrt{2})^2} \\\\\n        &amp;= \\frac{36 - 48\\sqrt{2} + 16\\cdot2}{36 - 16 \\cdot 2} \\\\\n        &amp;= \\frac{36 - 48\\sqrt{2} + 32}{36 - 32} \\\\\n        &amp;= \\frac{68 - 48\\sqrt{2}}{4} \\\\\n        &amp;= \\frac{68}{4} - \\frac{48\\sqrt{2}}{4} \\\\\n        &amp;= 17 - 12\\sqrt{2}.\\end{aligned}"></span></div>',
             },
             {
               n: "v",
               q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}}"></span>',
-              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}} &amp;= \\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}} \\cdot \\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}-\\sqrt{2}} \\\\\n        &amp;= \\frac{(\\sqrt{3}-\\sqrt{2})^2}{(\\sqrt{3})^2-(\\sqrt{2})^2} \\\\\n        &amp;= \\frac{(\\sqrt{3})^2 - 2\\sqrt{3}\\sqrt{2} + (\\sqrt{2})^2}{3 - 2} \\\\\n        &amp;= \\frac{3 - 2\\sqrt{6} + 2}{1} \\\\\n        &amp;= 5 - 2\\sqrt{6}.\\end{aligned}"></span></div>',
+              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}} &amp;= \\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}+\\sqrt{2}} \\cdot \\frac{\\sqrt{3}-\\sqrt{2}}{\\sqrt{3}-\\sqrt{2}} \\\\\n        &amp;= \\frac{(\\sqrt{3}-\\sqrt{2})^2}{(\\sqrt{3})^2-(\\sqrt{2})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n        &amp;= \\frac{(\\sqrt{3})^2 - 2\\sqrt{3}\\sqrt{2} + (\\sqrt{2})^2}{3 - 2} \\\\\n        &amp;= \\frac{3 - 2\\sqrt{6} + 2}{1} \\\\\n        &amp;= 5 - 2\\sqrt{6}.\\end{aligned}"></span></div>',
             },
             {
               n: "vi",
               q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}}"></span>',
-              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}} &amp;= \\frac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}} \\cdot \\frac{\\sqrt{7}-\\sqrt{5}}{\\sqrt{7}-\\sqrt{5}} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{(\\sqrt{7})^2-(\\sqrt{5})^2} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{7-5} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{2} \\\\\n        &amp;= 2\\sqrt{3}(\\sqrt{7}-\\sqrt{5}) \\\\\n        &amp;= 2\\sqrt{21} - 2\\sqrt{15}.\\end{aligned}"></span></div>',
+              s: '<p>Multiply the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}} &amp;= \\frac{4\\sqrt{3}}{\\sqrt{7}+\\sqrt{5}} \\cdot \\frac{\\sqrt{7}-\\sqrt{5}}{\\sqrt{7}-\\sqrt{5}} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{(\\sqrt{7})^2-(\\sqrt{5})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{7-5} \\\\\n        &amp;= \\frac{4\\sqrt{3}(\\sqrt{7}-\\sqrt{5})}{2} \\\\\n        &amp;= 2\\sqrt{3}(\\sqrt{7}-\\sqrt{5}) \\\\\n        &amp;= 2\\sqrt{21} - 2\\sqrt{15}.\\end{aligned}"></span></div>',
             },
           ],
         },
@@ -3108,7 +3113,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "i",
               q: '<span class="math-slot" data-display="0" data-latex="\\left(\\frac{81}{16}\\right)^{-\\frac{3}{4}}"></span>',
-              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(\\frac{81}{16}\\right)^{-\\frac{3}{4}}&amp;=\\left(\\frac{16}{81}\\right)^{\\frac{3}{4}}=\\left(\\frac{2^4}{3^4}\\right)^{\\frac{3}{4}}=\\frac{2^{4\\times\\frac{3}{4}}}{3^{4\\times\\frac{3}{4}}} \\\\ \n          &amp;=\\frac{2^3}{3^3}=\\frac{8}{27}. \\end{aligned}"></span></div>',
+              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(\\frac{81}{16}\\right)^{-\\frac{3}{4}}&amp;=\\left(\\frac{16}{81}\\right)^{\\frac{3}{4}}\\,\\htmlClass{fn-inline}{\\text{1}}=\\left(\\frac{2^4}{3^4}\\right)^{\\frac{3}{4}}=\\frac{2^{4\\times\\frac{3}{4}}}{3^{4\\times\\frac{3}{4}}} \\\\ \n          &amp;=\\frac{2^3}{3^3}=\\frac{8}{27}. \\end{aligned}"></span></div>',
             },
             {
               n: "ii",
@@ -3118,7 +3123,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "iii",
               q: '<span class="math-slot" data-display="0" data-latex="(0.027)^{-\\frac{1}{3}}"></span>',
-              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(0.027)^{-\\frac{1}{3}} &amp;= \\left(\\frac{27}{1000}\\right)^{-\\frac{1}{3}}=\\left(\\frac{1000}{27}\\right)^{\\frac{1}{3}} \\\\\n          &amp;=\\left(\\frac{10^3}{3^3}\\right)^{\\frac{1}{3}}=\\frac{10^{3\\times\\frac{1}{3}}}{3^{3\\times\\frac{1}{3}}}=\\frac{10}{3}. \\end{aligned}"></span></div>',
+              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}(0.027)^{-\\frac{1}{3}} &amp;= \\left(\\frac{27}{1000}\\right)^{-\\frac{1}{3}}=\\left(\\frac{1000}{27}\\right)^{\\frac{1}{3}}\\,\\htmlClass{fn-inline}{\\text{1}} \\\\\n          &amp;=\\left(\\frac{10^3}{3^3}\\right)^{\\frac{1}{3}}=\\frac{10^{3\\times\\frac{1}{3}}}{3^{3\\times\\frac{1}{3}}}=\\frac{10}{3}. \\end{aligned}"></span></div>',
             },
             {
               n: "iv",
@@ -3159,17 +3164,17 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "i",
               q: 'If <span class="math-slot" data-display="0" data-latex="x = 3+\\sqrt{8}"></span>, find <span class="math-slot" data-display="0" data-latex="x + \\frac{1}{x}"></span>.',
-              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}x + \\frac{1}{x} &amp;= 3 + \\sqrt{8} + \\frac{1}{3 + \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{1}{3 + \\sqrt{8}} \\cdot \\frac{3 - \\sqrt{8}}{3 - \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{(3 + \\sqrt{8})(3 - \\sqrt{8})} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{(3)^2 - (\\sqrt{8})^2} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{9 - 8} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{1} \\\\\n        &amp;= 3 + \\sqrt{8} + 3 - \\sqrt{8} \\\\\n        &amp;= 6. \\end{aligned}"></span></div>',
+              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}x + \\frac{1}{x} &amp;= 3 + \\sqrt{8} + \\frac{1}{3 + \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{1}{3 + \\sqrt{8}} \\cdot \\frac{3 - \\sqrt{8}}{3 - \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{(3 + \\sqrt{8})(3 - \\sqrt{8})} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{(3)^2 - (\\sqrt{8})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{9 - 8} \\\\\n        &amp;= 3 + \\sqrt{8} + \\frac{3 - \\sqrt{8}}{1} \\\\\n        &amp;= 3 + \\sqrt{8} + 3 - \\sqrt{8} \\\\\n        &amp;= 6. \\end{aligned}"></span></div>',
             },
             {
               n: "ii",
               q: 'Find <span class="math-slot" data-display="0" data-latex="x - \\frac{1}{x}"></span>.',
-              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}x - \\frac{1}{x} &amp;= 3 + \\sqrt{8} - \\frac{1}{3 + \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{1}{3 + \\sqrt{8}} \\cdot \\frac{3 - \\sqrt{8}}{3 - \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{(3 + \\sqrt{8})(3 - \\sqrt{8})} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{(3)^2 - (\\sqrt{8})^2} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{9 - 8} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{1} \\\\\n        &amp;= 3 + \\sqrt{8} - 3 + \\sqrt{8} \\\\\n        &amp;= 2\\sqrt{8} \\\\\n        &amp;= 2\\sqrt{4\\times2}=2 \\cdot 2\\sqrt{2}= 4\\sqrt{2}. \\end{aligned}"></span></div>',
+              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}x - \\frac{1}{x} &amp;= 3 + \\sqrt{8} - \\frac{1}{3 + \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{1}{3 + \\sqrt{8}} \\cdot \\frac{3 - \\sqrt{8}}{3 - \\sqrt{8}} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{(3 + \\sqrt{8})(3 - \\sqrt{8})} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{(3)^2 - (\\sqrt{8})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{9 - 8} \\\\\n        &amp;= 3 + \\sqrt{8} - \\frac{3 - \\sqrt{8}}{1} \\\\\n        &amp;= 3 + \\sqrt{8} - 3 + \\sqrt{8} \\\\\n        &amp;= 2\\sqrt{8} \\\\\n        &amp;= 2\\sqrt{4\\times2}=2 \\cdot 2\\sqrt{2}= 4\\sqrt{2}. \\end{aligned}"></span></div>',
             },
             {
               n: "iii",
               q: 'Find <span class="math-slot" data-display="0" data-latex="x^2 + \\frac{1}{x^2}"></span>.',
-              s: '<p>Using the identity <span class="math-slot" data-display="0" data-latex="(a + b)^2 = a^2 + 2ab + b^2"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(x + \\frac{1}{x}\\right)^2 &amp;= x^2 + 2 \\cdot x \\cdot \\frac{1}{x} + \\frac{1}{x^2} \\\\\n          &amp;= x^2 + 2 + \\frac{1}{x^2} \\\\\n          6^2 &amp;= x^2 + 2 + \\frac{1}{x^2} \\\\\n          36 &amp;= x^2 + 2 + \\frac{1}{x^2} \\\\\n          x^2 + \\frac{1}{x^2} &amp;= 36 - 2=34. \\end{aligned}"></span></div>',
+              s: '<p>Using the identity <span class="math-slot" data-display="0" data-latex="(a + b)^2 = a^2 + 2ab + b^2"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(x + \\frac{1}{x}\\right)^2 &amp;= x^2 + 2 \\cdot x \\cdot \\frac{1}{x} + \\frac{1}{x^2}\\,\\htmlClass{fn-inline}{\\text{1}} \\\\\n          &amp;= x^2 + 2 + \\frac{1}{x^2} \\\\\n          6^2 &amp;= x^2 + 2 + \\frac{1}{x^2} \\\\\n          36 &amp;= x^2 + 2 + \\frac{1}{x^2} \\\\\n          x^2 + \\frac{1}{x^2} &amp;= 36 - 2=34. \\end{aligned}"></span></div>',
             },
             {
               n: "iv",
@@ -3184,7 +3189,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "vi",
               q: 'Find <span class="math-slot" data-display="0" data-latex="\\left(x - \\frac{1}{x}\\right)^2"></span>.',
-              s: '<p>Using the identity <span class="math-slot" data-display="0" data-latex="(a - b)^2 = a^2 - 2ab + b^2"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(x - \\frac{1}{x}\\right)^2 &amp;= x^2 - 2 \\cdot x \\cdot \\frac{1}{x} + \\frac{1}{x^2} \\\\\n            &amp;= x^2 - 2 + \\frac{1}{x^2} \\\\\n            &amp;= x^2 + \\frac{1}{x^2}-2 \\\\\n            &amp;= 34 - 2 = 32. &amp;\\because x^2+\\frac{1}{x^2}=34\\end{aligned}"></span></div><p> Find the rational numbers <span class="math-slot" data-display="0" data-latex="p"></span> and <span class="math-slot" data-display="0" data-latex="q"></span> such that <span class="math-slot" data-display="0" data-latex="\\dfrac{8-3\\sqrt{2}}{4+3\\sqrt{2}}=p+q\\sqrt{2}"></span>. We start by multiplying the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} &amp;= \\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} \\cdot \\frac{4 - 3\\sqrt{2}}{4 - 3\\sqrt{2}} \\\\\n      &amp;= \\frac{(8 - 3\\sqrt{2})(4 - 3\\sqrt{2})}{(4 + 3\\sqrt{2})(4 - 3\\sqrt{2})} \\\\\n      &amp;= \\frac{8 \\cdot 4 - 8 \\cdot 3\\sqrt{2} - 3\\sqrt{2} \\cdot 4 + 3\\sqrt{2} \\cdot 3\\sqrt{2}}{(4)^2 - (3\\sqrt{2})^2} \\\\\n      &amp;= \\frac{32 - 24\\sqrt{2} - 12\\sqrt{2} + 9 \\cdot 2}{16 - 9\\cdot2} \\\\\n      &amp;= \\frac{32 - 36\\sqrt{2} + 18}{16 - 18} \\\\\n      &amp;= \\frac{50 - 36\\sqrt{2}}{-2} \\\\\n      &amp;= \\frac{50}{-2} - \\frac{36\\sqrt{2}}{-2} \\\\\n      &amp;= -25 + 18\\sqrt{2}.\\end{aligned}"></span></div><p>Thus, comparing <span class="math-slot" data-display="0" data-latex="-25 + 18\\sqrt{2}"></span> with <span class="math-slot" data-display="0" data-latex="p + q\\sqrt{2}"></span>, we get</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="p = -25 \\quad \\text{and} \\quad q = 18."></span></div>',
+              s: '<p>Using the identity <span class="math-slot" data-display="0" data-latex="(a - b)^2 = a^2 - 2ab + b^2"></span>:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\left(x - \\frac{1}{x}\\right)^2 &amp;= x^2 - 2 \\cdot x \\cdot \\frac{1}{x} + \\frac{1}{x^2} \\\\\n            &amp;= x^2 - 2 + \\frac{1}{x^2} \\\\\n            &amp;= x^2 + \\frac{1}{x^2}-2 \\\\\n            &amp;= 34 - 2 = 32. &amp;\\because x^2+\\frac{1}{x^2}=34\\end{aligned}"></span></div><p> Find the rational numbers <span class="math-slot" data-display="0" data-latex="p"></span> and <span class="math-slot" data-display="0" data-latex="q"></span> such that <span class="math-slot" data-display="0" data-latex="\\dfrac{8-3\\sqrt{2}}{4+3\\sqrt{2}}=p+q\\sqrt{2}"></span>. We start by multiplying the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} &amp;= \\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} \\cdot \\frac{4 - 3\\sqrt{2}}{4 - 3\\sqrt{2}} \\\\\n      &amp;= \\frac{(8 - 3\\sqrt{2})(4 - 3\\sqrt{2})}{(4 + 3\\sqrt{2})(4 - 3\\sqrt{2})} \\\\\n      &amp;= \\frac{8 \\cdot 4 - 8 \\cdot 3\\sqrt{2} - 3\\sqrt{2} \\cdot 4 + 3\\sqrt{2} \\cdot 3\\sqrt{2}}{(4)^2 - (3\\sqrt{2})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n      &amp;= \\frac{32 - 24\\sqrt{2} - 12\\sqrt{2} + 9 \\cdot 2}{16 - 9\\cdot2} \\\\\n      &amp;= \\frac{32 - 36\\sqrt{2} + 18}{16 - 18} \\\\\n      &amp;= \\frac{50 - 36\\sqrt{2}}{-2} \\\\\n      &amp;= \\frac{50}{-2} - \\frac{36\\sqrt{2}}{-2} \\\\\n      &amp;= -25 + 18\\sqrt{2}.\\end{aligned}"></span></div><p>Thus, comparing <span class="math-slot" data-display="0" data-latex="-25 + 18\\sqrt{2}"></span> with <span class="math-slot" data-display="0" data-latex="p + q\\sqrt{2}"></span>, we get</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{gathered}p = -25 \\quad \\text{and} \\quad q = 18.\\end{gathered}"></span></div>',
             },
           ],
         },
@@ -3192,9 +3197,9 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
           label: "Question 4",
           items: [
             {
-              n: "i",
+              n: "4",
               q: 'Find rational numbers <span class="math-slot" data-display="0" data-latex="p"></span> and <span class="math-slot" data-display="0" data-latex="q"></span> such that <span class="math-slot" data-display="0" data-latex="\\dfrac{8-3\\sqrt{2}}{4+3\\sqrt{2}} = p + q\\sqrt{2}"></span>.',
-              s: '<p>We start by multiplying the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} &amp;= \\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} \\cdot \\frac{4 - 3\\sqrt{2}}{4 - 3\\sqrt{2}} \\\\\n      &amp;= \\frac{(8 - 3\\sqrt{2})(4 - 3\\sqrt{2})}{(4 + 3\\sqrt{2})(4 - 3\\sqrt{2})} \\\\\n      &amp;= \\frac{8 \\cdot 4 - 8 \\cdot 3\\sqrt{2} - 3\\sqrt{2} \\cdot 4 + 3\\sqrt{2} \\cdot 3\\sqrt{2}}{(4)^2 - (3\\sqrt{2})^2} \\\\\n      &amp;= \\frac{32 - 24\\sqrt{2} - 12\\sqrt{2} + 9 \\cdot 2}{16 - 9\\cdot2} \\\\\n      &amp;= \\frac{32 - 36\\sqrt{2} + 18}{16 - 18} \\\\\n      &amp;= \\frac{50 - 36\\sqrt{2}}{-2} \\\\\n      &amp;= \\frac{50}{-2} - \\frac{36\\sqrt{2}}{-2} \\\\\n      &amp;= -25 + 18\\sqrt{2}.\\end{aligned}"></span></div><p>Thus, comparing <span class="math-slot" data-display="0" data-latex="-25 + 18\\sqrt{2}"></span> with <span class="math-slot" data-display="0" data-latex="p + q\\sqrt{2}"></span>, we get</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="p = -25 \\quad \\text{and} \\quad q = 18."></span></div><details class="solution-video"><summary>Watch sample video solution</summary><div class="solution-video-body"><p class="solution-video-note">Sample embedded video solution for this question. Later, you can replace this with the exact lesson video that matches the worked solution.</p><div class="video-frame"><iframe width="560" height="315" src="https://www.youtube.com/embed/7cEoLM0AGcM?si=Q8b8ibFOJ4XdoSuK" title="YouTube video player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div></details>',
+              s: '<p>We start by multiplying the numerator and the denominator by the conjugate of the denominator:</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} &amp;= \\frac{8 - 3\\sqrt{2}}{4 + 3\\sqrt{2}} \\cdot \\frac{4 - 3\\sqrt{2}}{4 - 3\\sqrt{2}} \\\\\n      &amp;= \\frac{(8 - 3\\sqrt{2})(4 - 3\\sqrt{2})}{(4 + 3\\sqrt{2})(4 - 3\\sqrt{2})} \\\\\n      &amp;= \\frac{8 \\cdot 4 - 8 \\cdot 3\\sqrt{2} - 3\\sqrt{2} \\cdot 4 + 3\\sqrt{2} \\cdot 3\\sqrt{2}}{(4)^2 - (3\\sqrt{2})^2\\,\\htmlClass{fn-inline}{\\text{1}}} \\\\\n      &amp;= \\frac{32 - 24\\sqrt{2} - 12\\sqrt{2} + 9 \\cdot 2}{16 - 9\\cdot2} \\\\\n      &amp;= \\frac{32 - 36\\sqrt{2} + 18}{16 - 18} \\\\\n      &amp;= \\frac{50 - 36\\sqrt{2}}{-2} \\\\\n      &amp;= \\frac{50}{-2} - \\frac{36\\sqrt{2}}{-2} \\\\\n      &amp;= -25 + 18\\sqrt{2}.\\end{aligned}"></span></div><p>Thus, comparing <span class="math-slot" data-display="0" data-latex="-25 + 18\\sqrt{2}"></span> with <span class="math-slot" data-display="0" data-latex="p + q\\sqrt{2}"></span>, we get</p><div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{gathered}p = -25 \\quad \\text{and} \\quad q = 18.\\end{gathered}"></span></div><details class="solution-video"><summary>Watch sample video solution</summary><div class="solution-video-body"><p class="solution-video-note">Sample embedded video solution for this question. Later, you can replace this with the exact lesson video that matches the worked solution.</p><div class="video-frame"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7cEoLM0AGcM?si=Q8b8ibFOJ4XdoSuK" title="YouTube video player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div></details>',
             },
           ],
         },
@@ -3204,7 +3209,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             {
               n: "i",
               q: '<span class="math-slot" data-display="0" data-latex="\\dfrac{(25)^{\\frac{3}{2}} \\times (243)^{\\frac{3}{5}}}{(16)^{\\frac{5}{4}} \\times (8)^{\\frac{4}{3}}}"></span>',
-              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\dfrac{(25)^{\\frac{3}{2}}\\times(243)^{\\frac{3}{5}}}{(16)^{\\frac{5}{4}}\\times(8)^{\\frac{4}{3}}} &amp;= \\dfrac{(5^2)^{\\frac{3}{2}}\\times(3^5)^{\\frac{3}{5}}}{(2^4)^{\\frac{5}{4}}\\times(2^3)^{\\frac{4}{3}}} \\\\\n        &amp;= \\dfrac{5^{2 \\cdot \\frac{3}{2}}\\times3^{5 \\cdot \\frac{3}{5}}}{2^{4 \\cdot \\frac{5}{4}}\\times2^{3 \\cdot \\frac{4}{3}}} \\\\\n        &amp;= \\dfrac{5^3 \\times 3^3}{2^5 \\times 2^4} \\\\\n        &amp;= \\dfrac{5^3 \\times 3^3}{2^9} \\\\\n        &amp;= \\dfrac{125 \\times 27}{512} \\\\\n        &amp;= \\dfrac{3375}{512}. \\end{aligned}"></span></div>',
+              s: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\dfrac{(25)^{\\frac{3}{2}}\\times(243)^{\\frac{3}{5}}}{(16)^{\\frac{5}{4}}\\times(8)^{\\frac{4}{3}}} &amp;= \\dfrac{(5^2)^{\\frac{3}{2}}\\times(3^5)^{\\frac{3}{5}}}{(2^4)^{\\frac{5}{4}}\\times(2^3)^{\\frac{4}{3}}} \\\\\n        &amp;= \\dfrac{5^{2 \\cdot \\frac{3}{2}}\\times3^{5 \\cdot \\frac{3}{5}}}{2^{4 \\cdot \\frac{5}{4}}\\times2^{3 \\cdot \\frac{4}{3}}}\\,\\htmlClass{fn-inline}{\\text{1}} \\\\\n        &amp;= \\dfrac{5^3 \\times 3^3}{2^5 \\times 2^4} \\\\\n        &amp;= \\dfrac{5^3 \\times 3^3}{2^9} \\\\\n        &amp;= \\dfrac{125 \\times 27}{512} \\\\\n        &amp;= \\dfrac{3375}{512}. \\end{aligned}"></span></div>',
             },
             {
               n: "ii",
@@ -3366,7 +3371,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
             '<span class="math-slot" data-display="0" data-latex="8\\sqrt{3}"></span>',
           ],
           ans: 3,
-          ex: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\sqrt{75}+\\sqrt{27}&amp;=\\sqrt{25\\times3}+\\sqrt{9\\times3} \\\\\n        &amp;=\\sqrt{25}\\sqrt{3}+\\sqrt{9}\\sqrt{3} \\\\\n        &amp;=5\\sqrt{3}+3\\sqrt{3} \\\\\n        &amp;=\\sqrt{3}(5+3) \\\\\n        &amp;=8\\sqrt{3}.\\end{aligned}"></span></div>',
+          ex: '<div class="eq-block"><span class="math-slot" data-display="1" data-latex="\\begin{aligned}\\sqrt{75}+\\sqrt{27}&amp;=\\sqrt{25\\times3}+\\sqrt{9\\times3} \\\\\n        &amp;=\\sqrt{25}\\sqrt{3}+\\sqrt{9}\\sqrt{3}\\,\\htmlClass{fn-inline}{\\text{1}} \\\\\n        &amp;=5\\sqrt{3}+3\\sqrt{3} \\\\\n        &amp;=\\sqrt{3}(5+3) \\\\\n        &amp;=8\\sqrt{3}.\\end{aligned}"></span></div>',
         },
         {
           q: 'Product of <span class="math-slot" data-display="0" data-latex="(3+\\sqrt{5})(3-\\sqrt{5})"></span> is:',
@@ -4514,8 +4519,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         }
         if (!r) {
           var container =
-            el.closest(".sc, .si, .mex, .eq-annot-side, .auto-why-block") ||
-            document;
+            el.closest(".sc, .si, .mex, .auto-why-block") || document;
           var reasons = container.querySelectorAll(
             ".step-reason, .eq-note-body",
           );
@@ -4525,58 +4529,289 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         }
         return r;
       }
-      function notePopupEls() {
-        return {
-          box: document.getElementById("notePopup"),
-          body: document.getElementById("notePopupBody"),
-          tag: document.getElementById("notePopupTag"),
-        };
+      function footnoteLabel(html, fallbackText) {
+        const wrap = document.createElement("div");
+        wrap.innerHTML = String(html || "");
+        const strong = wrap.querySelector("strong");
+        if (strong) {
+          const label = strong.textContent.replace(/[\s:.]+$/g, "").trim();
+          if (label) return label;
+        }
+        const plain = wrap.textContent.replace(/\s+/g, " ").trim();
+        if (/conjugate/i.test(plain)) return "Conjugate method";
+        if (/pythagorean/i.test(plain)) return "Pythagorean theorem";
+        if (/division property of equality/i.test(plain))
+          return "Division property of equality";
+        if (/product of powers rule/i.test(plain))
+          return "Product of powers rule";
+        if (/quotient of powers rule/i.test(plain))
+          return "Quotient of powers rule";
+        if (/power of a power rule/i.test(plain))
+          return "Power of a power rule";
+        if (/negative exponent rule/i.test(plain))
+          return "Negative exponent rule";
+        if (/difference of squares/i.test(plain))
+          return "Difference of squares identity";
+        const t = String(fallbackText || "note")
+          .trim()
+          .toLowerCase();
+        if (t === "identity") return "Identity used";
+        if (t === "rule") return "Rule used";
+        if (t === "method") return "Method";
+        return "Note";
       }
-      function isSmallNoteMode() {
-        return window.matchMedia("(max-width:760px)").matches;
+      function ensureSolutionFootnotes(container) {
+        let box = container.querySelector(".solution-footnotes");
+        if (box) return box;
+        box = document.createElement("div");
+        box.className = "solution-footnotes";
+        box.innerHTML =
+          '<div class="solution-footnotes-title">Notes for this solution</div>';
+        container.appendChild(box);
+        return box;
       }
-      function closeNotePopup() {
-        var els = notePopupEls();
-        if (!els.box) return;
-        els.box.classList.remove("show");
-        els.box.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
-        document
-          .querySelectorAll(".step-why.open-state, .eq-note-toggle.open-state")
-          .forEach(function (btn) {
-            btn.classList.remove("open-state");
-            btn.setAttribute("aria-expanded", "false");
+      function buildFootnoteRef(num, kind = "inline-ref") {
+        const ref = document.createElement("button");
+        ref.type = "button";
+        ref.className = "footnote-ref " + kind;
+        ref.textContent = String(num);
+        ref.setAttribute("data-footnote-ref", String(num));
+        ref.setAttribute("aria-label", "Open note " + num);
+        return ref;
+      }
+      function stripDuplicateFootnoteLead(html, label) {
+        let out = String(html || "").trim();
+        const esc = String(label || "")
+          .trim()
+          .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        if (esc) {
+          out = out.replace(
+            new RegExp(
+              "^\\s*(?:<p>)?\\s*<strong>\\s*" +
+                esc +
+                "\\s*[:.]?\\s*<\\/strong>\\s*",
+              "i",
+            ),
+            "",
+          );
+          out = out.replace(/^\s*<\/p>\s*/i, "");
+          out = out.replace(/^\s*[:\-–—]\s*/, "");
+          out = out.replace(/^\s*<p>\s*<\/p>\s*/i, "");
+        }
+        return out;
+      }
+      function buildFootnoteItem(num, label, html) {
+        const item = document.createElement("details");
+        item.className = "solution-footnote-item";
+        item.setAttribute("data-note-num", String(num));
+        const bodyHtml = stripDuplicateFootnoteLead(html, label);
+        item.innerHTML =
+          '<summary><span class="fn-num">' +
+          num +
+          '</span><span class="fn-label">' +
+          escHtml(label) +
+          '</span></summary><div class="fn-body">' +
+          bodyHtml +
+          "</div>";
+        return item;
+      }
+      function refreshEqFootnotePositions(root = document) {
+        root
+          .querySelectorAll('.footnote-ref.eq-display-ref[data-eq-overlay="1"]')
+          .forEach((ref) => {
+            const host = ref.closest(".katex") || ref.parentElement;
+            if (!host) return;
+            const selector =
+              ref.getAttribute("data-anchor-selector") || ".mrel, .mbin";
+            const anchor = host.querySelector(selector);
+            if (!anchor) return;
+            const refW = ref.offsetWidth || 22;
+            const refH = ref.offsetHeight || 22;
+            let left = anchor.offsetLeft + anchor.offsetWidth + 6;
+            let top = anchor.offsetTop - Math.round(refH * 0.45);
+            if (top < 0) top = 0;
+            ref.style.left = left + "px";
+            ref.style.top = top + "px";
           });
       }
-      function openNotePopup(btn, body) {
-        var els = notePopupEls();
-        if (!els.box || !els.body || !els.tag || !body) return;
-        els.tag.textContent = (btn.textContent || "note").trim().toLowerCase();
-        els.body.innerHTML = body.innerHTML;
-        els.box.classList.add("show");
-        els.box.setAttribute("aria-hidden", "false");
-        btn.classList.add("open-state");
-        btn.setAttribute("aria-expanded", "true");
-        document.body.style.overflow = "hidden";
-      }
-      function toggleWhy(el) {
-        var r = getWhyBody(el);
-        if (!r) return;
-        if (isSmallNoteMode()) {
-          var popup = document.getElementById("notePopup");
-          var alreadyOpen =
-            popup &&
-            popup.classList.contains("show") &&
-            el.classList.contains("open-state");
-          closeNotePopup();
-          if (!alreadyOpen) openNotePopup(el, r);
-          return;
+      function insertEqFootnoteNearFirstRelation(display, ref) {
+        if (!display || !ref) return false;
+        const anchor =
+          display.querySelector(".mrel") || display.querySelector(".mbin");
+        const host =
+          display.querySelector(".katex") ||
+          display.querySelector(".katex-html") ||
+          display;
+        if (!host || !anchor) {
+          (host || display).appendChild(ref);
+          return true;
         }
-        var willOpen = !r.classList.contains("open");
-        r.classList.toggle("open", willOpen);
-        if (!willOpen) r.classList.remove("open");
-        el.classList.toggle("open-state", willOpen);
-        el.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        host.style.position = "relative";
+        ref.classList.add("eq-display-ref");
+        ref.dataset.eqOverlay = "1";
+        ref.setAttribute(
+          "data-anchor-selector",
+          anchor.classList.contains("mrel") ? ".mrel" : ".mbin",
+        );
+        ref.style.position = "absolute";
+        ref.style.margin = "0";
+        ref.style.visibility = "hidden";
+        host.appendChild(ref);
+        requestAnimationFrame(() => {
+          refreshEqFootnotePositions(display);
+          ref.style.visibility = "";
+        });
+        return true;
+      }
+      function addSolutionFootnote(container, registry, html, label) {
+        const key = normalizeReasonKey(html);
+        if (registry.has(key)) return registry.get(key);
+        const num = registry.size + 1;
+        registry.set(key, num);
+        const box = ensureSolutionFootnotes(container);
+        box.appendChild(buildFootnoteItem(num, label, html));
+        return num;
+      }
+      function convertWhyToFootnotes(root = document) {
+        root
+          .querySelectorAll(".qb .sc, .review-mcq .mex, .answer-item")
+          .forEach((container) => {
+            const registry = new Map();
+
+            container.querySelectorAll(".step-why").forEach((btn) => {
+              const body = getWhyBody(btn);
+              const html = body ? body.innerHTML : "";
+              if (!html.trim()) {
+                btn.remove();
+                if (body) body.remove();
+                return;
+              }
+              const num = addSolutionFootnote(
+                container,
+                registry,
+                html,
+                footnoteLabel(html, btn.textContent),
+              );
+              const ref = buildFootnoteRef(num, "inline-ref");
+              btn.replaceWith(ref);
+              if (body) body.remove();
+            });
+
+            container.querySelectorAll(".auto-why-block").forEach((block) => {
+              const btn = block.querySelector(".eq-note-toggle");
+              const body = block.querySelector(".eq-note-body");
+              const html = body ? body.innerHTML : "";
+              if (!html.trim()) {
+                block.remove();
+                return;
+              }
+              const num = addSolutionFootnote(
+                container,
+                registry,
+                html,
+                footnoteLabel(html, btn ? btn.textContent : "note"),
+              );
+              const prev = block.previousElementSibling;
+              if (
+                prev &&
+                prev.classList &&
+                prev.classList.contains("eq-block")
+              ) {
+                const ref = buildFootnoteRef(num, "eq-display-ref");
+                const display = prev.querySelector(".katex-display");
+                if (display) {
+                  display.classList.add("footnote-host");
+                  insertEqFootnoteNearFirstRelation(display, ref);
+                } else {
+                  prev.appendChild(ref);
+                }
+                block.remove();
+              } else if (prev && /^(P|LI)$/.test(prev.tagName)) {
+                const ref = buildFootnoteRef(num, "inline-ref");
+                prev.appendChild(document.createTextNode(" "));
+                prev.appendChild(ref);
+                block.remove();
+              } else {
+                const holder = document.createElement("div");
+                holder.className = "equation-footnote-holder";
+                holder.appendChild(buildFootnoteRef(num, "inline-ref"));
+                block.replaceWith(holder);
+              }
+            });
+
+            const box = container.querySelector(".solution-footnotes");
+            if (box && !box.querySelector(".solution-footnote-item"))
+              box.remove();
+          });
+      }
+
+      function hideRedundantInlineRefs(root = document) {
+        root
+          .querySelectorAll(".qb .sc, .review-mcq .mex")
+          .forEach((container) => {
+            const eqMarkers = container.querySelectorAll(".fn-inline");
+            if (!eqMarkers.length) return;
+            const covered = new Set();
+            eqMarkers.forEach((m) => {
+              const n = m.textContent.trim();
+              if (n) covered.add(n);
+            });
+            container
+              .querySelectorAll(
+                ".footnote-ref.inline-ref, .equation-footnote-holder",
+              )
+              .forEach((el) => {
+                const btn = el.classList.contains("footnote-ref")
+                  ? el
+                  : el.querySelector(".footnote-ref");
+                if (btn && covered.has(btn.textContent.trim())) el.remove();
+              });
+            eqMarkers.forEach((m) => {
+              const num = m.textContent.trim();
+              m.addEventListener("click", function () {
+                const item = container.querySelector(
+                  '.solution-footnote-item[data-note-num="' + num + '"]',
+                );
+                if (item) {
+                  item.open = !item.open;
+                  item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                }
+              });
+            });
+          });
+      }
+      function finalizeSolutionSupplementOrder(root = document) {
+        root
+          .querySelectorAll(".qb .sc, .review-mcq .mex, .answer-item")
+          .forEach((container) => {
+            const notes = container.querySelector(".solution-footnotes");
+            const video = container.querySelector(".solution-video");
+            if (notes && video) container.appendChild(video);
+            if (video && video.previousElementSibling) {
+              if (
+                !video.previousElementSibling.classList.contains(
+                  "solution-separator",
+                )
+              ) {
+                const sep = document.createElement("div");
+                sep.className = "solution-separator";
+                sep.style.cssText =
+                  "margin:14px 0 0;border-top:1px solid #e6ddd1;";
+                video.before(sep);
+              }
+            }
+          });
+      }
+      function toggleFootnote(ref) {
+        const container = ref.closest(".sc, .mex, .answer-item");
+        if (!container) return;
+        const num = ref.getAttribute("data-footnote-ref");
+        const item = container.querySelector(
+          '.solution-footnote-item[data-note-num="' + CSS.escape(num) + '"]',
+        );
+        if (!item) return;
+        item.open = !item.open;
+        item.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
 
       function renderChapter() {
@@ -4598,7 +4833,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
  </div>
  </section>
  <div class="reading-note" style="margin:14px 0 18px">
- <strong>For Students:</strong> Every solution shows each small step — no arithmetic is skipped. Tap the small <span class="step-why" style="pointer-events:none;display:inline-flex;vertical-align:baseline;margin:0 2px;padding:1px 6px;font-size:.68rem">note</span> markers beside important steps to see the identity, rule, or idea being used.
+ <strong>For Students:</strong> Every solution shows each small step — no arithmetic is skipped. Tap the small numbered note markers beside important steps to open a short note at the bottom of that solution.
  </div>
 
  <div class="chapter-flow">
@@ -4918,6 +5153,7 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
 @media(max-width:620px){
   .eq-block .katex-display{font-size:.88em!important}
   .eq-block .katex-display>.katex{max-width:100%}
+  .footnote-ref.eq-display-ref{width:1.24rem;height:1.24rem;min-width:1.24rem;font-size:.68rem;margin:0 .04rem 0 .12rem}
   .si{padding:0 10px 14px 10px}
 }
 
@@ -5151,39 +5387,22 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         scheduleViewportTracker();
       }
       function installEnhancements() {
-        // Event delegation for step-why buttons (must be after DOM is populated)
-        if (!document.body.dataset.whyDelegationInstalled) {
+        if (!document.body.dataset.footnoteDelegationInstalled) {
           document.addEventListener("click", function (e) {
-            var btn =
-              e.target.closest(".step-why") ||
-              e.target.closest(".eq-note-toggle");
-            if (btn) {
+            var ref = e.target.closest(".footnote-ref");
+            if (ref) {
               e.preventDefault();
               e.stopPropagation();
-              toggleWhy(btn);
-              return;
-            }
-            if (
-              e.target.closest("#notePopupClose") ||
-              e.target.closest(".note-pop-backdrop")
-            ) {
-              e.preventDefault();
-              closeNotePopup();
+              toggleFootnote(ref);
             }
           });
-          document.body.dataset.whyDelegationInstalled = "1";
+          document.body.dataset.footnoteDelegationInstalled = "1";
           document.addEventListener("keydown", function (e) {
-            var btn =
-              e.target.closest(".step-why") ||
-              e.target.closest(".eq-note-toggle");
-            if (btn && (e.key === "Enter" || e.key === " ")) {
+            var ref = e.target.closest(".footnote-ref");
+            if (ref && (e.key === "Enter" || e.key === " ")) {
               e.preventDefault();
-              toggleWhy(btn);
+              toggleFootnote(ref);
             }
-            if (e.key === "Escape") closeNotePopup();
-          });
-          window.addEventListener("resize", function () {
-            if (!isSmallNoteMode()) closeNotePopup();
           });
         }
         replaceNumberLineSolutions();
@@ -5191,10 +5410,21 @@ ${badgeMarkup(exerciseBadgeText(sec, q), "qn")}<div class="qt">${q.q}</div><div 
         combineEquationBlocks(document);
         enrichSolutionNarration(document);
         injectWhyExplanations(document);
-        groupEquationAnnotations(document);
         filterQuestions("");
         renderMath(document);
         fixInlineMathSpacing(document);
+        convertWhyToFootnotes(document);
+        hideRedundantInlineRefs(document);
+        renderMath(document);
+        fixInlineMathSpacing(document);
+        finalizeSolutionSupplementOrder(document);
+        refreshEqFootnotePositions(document);
+        if (!document.body.dataset.eqFootnoteResizeInstalled) {
+          window.addEventListener("resize", () =>
+            refreshEqFootnotePositions(document),
+          );
+          document.body.dataset.eqFootnoteResizeInstalled = "1";
+        }
         installViewportTracker();
       }
 
