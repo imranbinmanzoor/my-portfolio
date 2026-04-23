@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Muhammad Imran — AI research contributor, frontend developer, tutor</title>
+  <meta name="description" content="Muhammad Imran — contributes to frontier LLM training (Mindrift, Photomath), builds pixel-perfect interfaces, and tutors mathematics, coding, and Arabic. Based in Multan, Pakistan.">
+  <meta name="author" content="Muhammad Imran">
+  <meta name="theme-color" content="#f4efe4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15120e" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Muhammad Imran — Research · Frontend · Tutoring">
+  <meta property="og:description" content="AI research contributor, frontend developer, and tutor. Training state-of-the-art LLMs, building clean UIs, teaching math, coding, and Arabic.">
+
+  <link rel="icon" href="IMAGES/my-pic.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =========================================================
+       NAV (desktop + hamburger trigger for mobile)
+       ========================================================= -->
+  <header class="nav" data-nav-sticky>
+    <div class="nav__inner">
+      <a href="#home" class="brand" aria-label="Muhammad Imran — home">
+        <span class="brand__mark" aria-hidden="true">MI</span>
+        <span class="brand__name">Muhammad Imran</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#research" data-nav-link data-accent="research">Research</a>
+        <a href="#work" data-nav-link data-accent="frontend">Work</a>
+        <a href="#tutoring" data-nav-link data-accent="tutoring">Tutoring</a>
+        <a href="#about" data-nav-link>About</a>
+        <a href="#contact" data-nav-link>Contact</a>
+      </nav>
+
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+
+        <a href="#contact" class="btn btn--ghost">
+          <span class="btn__inner">
+            <span class="btn__text">Get in touch</span>
+            <span class="btn__arrow" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <button class="nav__mobile-toggle" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="8" x2="20" y2="8"/>
+            <line x1="4" y1="16" x2="20" y2="16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       MOBILE MENU (separate element, outside nav stacking context)
+       ========================================================= -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu">
+    <div class="mobile-menu__header">
+      <a href="#home" class="brand" aria-label="Muhammad Imran — home">
+        <span class="brand__mark" aria-hidden="true">MI</span>
+        <span class="brand__name">Muhammad Imran</span>
+      </a>
+      <button class="mobile-menu__close" data-menu-close aria-label="Close menu" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"/>
+          <line x1="6" y1="18" x2="18" y2="6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__links" aria-label="Mobile primary">
+        <a href="#research"><span class="num">01</span><span>Research</span></a>
+        <a href="#work"><span class="num">02</span><span>Work</span></a>
+        <a href="#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+        <a href="#about"><span class="num">04</span><span>About</span></a>
+        <a href="#contact"><span class="num">05</span><span>Contact</span></a>
+      </nav>
+    </div>
+
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__footer-left">Multan, Pakistan</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+    <section class="hero wrap" id="home">
+      <p class="eyebrow hero__eyebrow reveal" style="--d:0ms">muhammad imran · multan, pakistan</p>
+
+      <h1 class="display hero__headline reveal" style="--d:120ms">
+        I help train <em>frontier AI</em>, <span class="ampersand">&amp;</span> build clean things when the sun goes down.
+      </h1>
+
+      <p class="lede hero__lede reveal" style="--d:240ms">
+        Primarily, I contribute STEM annotations and benchmark tasks to the projects that train state-of-the-art language models. Alongside that — a deep love for pixel-perfect interface design, and one-on-one tutoring in mathematics, coding, and Arabic.
+      </p>
+
+      <div class="hero__cta reveal" style="--d:360ms">
+        <span class="available">
+          <span class="dot" aria-hidden="true"></span>
+          Open to research projects, frontend work, and tutoring enquiries
+        </span>
+      </div>
+
+      <div class="hero__cta reveal" style="--d:480ms" aria-label="Quick contacts">
+        <div class="hero__quick-links">
+          <a class="underline-link" href="mailto:imranbinmanzoor1@gmail.com">Email</a>
+          <a class="underline-link" href="https://github.com/imranbinmanzoor" target="_blank" rel="noopener">GitHub</a>
+          <a class="underline-link" href="https://linkedin.com/in/imranbinmanzoor-dev/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         PILLARS OVERVIEW — ranked by priority
+         ====================================================== -->
+    <section class="pillars">
+      <div class="wrap">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">three disciplines</span>
+            <h2 class="section-header__title">What I do, ranked by how much time it gets.</h2>
+          </div>
+          <span class="section-header__meta">primary · secondary · tertiary</span>
+        </div>
+
+        <div class="pillars__grid">
+          <a class="pillar-card is-primary reveal" data-pillar="research" href="#research">
+            <div class="pillar-card__num"><span>01 — research</span><span class="rank">primary</span></div>
+            <h3 class="pillar-card__title"><span class="pillar-dot" aria-hidden="true"></span>Training <em>frontier AI</em></h3>
+            <p class="pillar-card__desc">STEM annotations, agent trajectories, benchmark authoring — with Mindrift, SciCode, and previously Photomath. Mathematics, graphs, and agents are where I spend most of my days.</p>
+            <div class="pillar-card__footer">
+              <span>projects &amp; areas</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="pillar-card reveal" data-pillar="frontend" href="#work">
+            <div class="pillar-card__num"><span>02 — frontend</span><span class="rank">secondary</span></div>
+            <h3 class="pillar-card__title"><span class="pillar-dot" aria-hidden="true"></span>Pixel-perfect <em>interfaces</em></h3>
+            <p class="pillar-card__desc">My passion. HTML, CSS, JavaScript, React — obsessed with typography, spacing, motion, and accessibility. The craft I do when I'm not annotating.</p>
+            <div class="pillar-card__footer">
+              <span>selected work</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="pillar-card reveal" data-pillar="tutoring" href="#tutoring">
+            <div class="pillar-card__num"><span>03 — tutoring</span><span class="rank">tertiary</span></div>
+            <h3 class="pillar-card__title"><span class="pillar-dot" aria-hidden="true"></span>Mathematics, coding, <em>Arabic</em></h3>
+            <p class="pillar-card__desc">Online tutoring in three disciplines — secondary &amp; intermediate mathematics, programming, and Quranic Arabic. Also: an open library of interactive chapter solutions.</p>
+            <div class="pillar-card__footer">
+              <span>services &amp; solutions</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         [1] RESEARCH — Primary role
+         ====================================================== -->
+    <section id="research" data-pillar="research">
+      <div class="wrap">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">01 — research · primary</span>
+            <h2 class="section-header__title">Training <em>frontier AI</em>, one careful annotation at a time.</h2>
+          </div>
+          <span class="section-header__meta">ongoing · 2023 — present</span>
+        </div>
+
+        <p class="lede reveal" style="max-width: 66ch; margin-bottom: 3rem;">
+          My main work is contributing the human signal that makes state-of-the-art language models better — mostly in STEM, agents, and graph-structured reasoning. It's <em>meticulous</em>, rigorous, and quietly important.
+        </p>
+
+        <div class="research-grid">
+          <div class="research-card reveal">
+            <div class="research-card__label">prompt design · active</div>
+            <h3 class="research-card__title">Mindrift CI-STEM</h3>
+            <div class="research-card__org">Computationally Intensive STEM prompts for frontier LLM evaluation</div>
+            <p class="research-card__desc">Crafting prompts with structurally hard number-theoretic backbones — Collatz dynamics, Mertens function, aliquot sequences — designed to force genuine computation rather than pattern-matched answers. Framework currently at v6.</p>
+            <div class="research-card__tags"><span>Number theory</span><span>Python</span><span>SymPy</span><span>LLM eval</span></div>
+          </div>
+
+          <div class="research-card reveal">
+            <div class="research-card__label">benchmark authoring · active</div>
+            <h3 class="research-card__title">SciCode Benchmark</h3>
+            <div class="research-card__org">STEM scientific-computation task review &amp; authoring</div>
+            <p class="research-card__desc">Reviewing and authoring scientific computation tasks in structured JSON — e.g. a corrected ETDRK4 solver for the nonlinear Schrödinger equation. Each task audited against a seven-point structural-defect checklist.</p>
+            <div class="research-card__tags"><span>Numerical methods</span><span>JSON schemas</span><span>Python</span></div>
+          </div>
+
+          <div class="research-card reveal">
+            <div class="research-card__label">annotation · past</div>
+            <h3 class="research-card__title">Photomath</h3>
+            <div class="research-card__org">Math problem-solving annotation · 2023 — 2024</div>
+            <p class="research-card__desc">Authored and reviewed step-by-step solutions for the Photomath training corpus — across algebra, geometry, calculus, and word problems. The work taught me how much a correct <em>final answer</em> can hide a broken <em>middle</em>.</p>
+            <div class="research-card__tags"><span>Step annotation</span><span>Math reasoning</span><span>QA</span></div>
+          </div>
+        </div>
+
+        <!-- Areas subsection -->
+        <div class="subsection">
+          <div class="subsection__header reveal">
+            <h3 class="subsection__title">Where I focus.</h3>
+            <span class="subsection__meta">at the seam of maths &amp; code</span>
+          </div>
+
+          <div class="areas-grid">
+            <div class="area-item reveal">
+              <div class="area-item__num">→ 01</div>
+              <div class="area-item__body">
+                <div class="area-item__title">STEM annotation for LLM training</div>
+                <div class="area-item__desc">Worked solutions, rubric-grounded scoring, chain-of-thought quality review across mathematics, physics, and computer science.</div>
+              </div>
+            </div>
+            <div class="area-item reveal">
+              <div class="area-item__num">→ 02</div>
+              <div class="area-item__body">
+                <div class="area-item__title">Agent trajectories &amp; tool-use</div>
+                <div class="area-item__desc">Designing and evaluating multi-step agent problems — where the answer depends on the right tool calls in the right order.</div>
+              </div>
+            </div>
+            <div class="area-item reveal">
+              <div class="area-item__num">→ 03</div>
+              <div class="area-item__body">
+                <div class="area-item__title">Graph-structured reasoning</div>
+                <div class="area-item__desc">Problems whose structure is a graph or a tree — dependency chains, state transitions, causal diagrams — and how models do (or don't) traverse them.</div>
+              </div>
+            </div>
+            <div class="area-item reveal">
+              <div class="area-item__num">→ 04</div>
+              <div class="area-item__body">
+                <div class="area-item__title">Benchmark design for frontier models</div>
+                <div class="area-item__desc">Structural properties that make a STEM task actually hard — as opposed to looking hard — and resistant to shortcut exploitation.</div>
+              </div>
+            </div>
+            <div class="area-item reveal">
+              <div class="area-item__num">→ 05</div>
+              <div class="area-item__body">
+                <div class="area-item__title">Numerical precision &amp; reproducibility</div>
+                <div class="area-item__desc">Deterministic floating-point summation, fixed-point arithmetic, MCMC samplers with explicit RNG seeds — correctness as a property of the code, not a vibe.</div>
+              </div>
+            </div>
+            <div class="area-item reveal">
+              <div class="area-item__num">→ 06</div>
+              <div class="area-item__body">
+                <div class="area-item__title">Chart &amp; figure analysis</div>
+                <div class="area-item__desc">Extracting precise values from scientific figures — interpolation, error bars, axis calibration — with full reasoning traces.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research tools subsection -->
+        <div class="subsection">
+          <div class="subsection__header reveal">
+            <h3 class="subsection__title">The bench.</h3>
+            <span class="subsection__meta">tools I use for research work</span>
+          </div>
+
+          <div class="stack-grid">
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Computation</div>
+              <ul class="stack-group__list"><li>Python</li><li>NumPy</li><li>SymPy</li><li>SciPy</li><li>Matplotlib</li></ul>
+            </div>
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Writing &amp; typesetting</div>
+              <ul class="stack-group__list"><li>LaTeX</li><li>Overleaf</li><li>KaTeX</li><li>Pandoc</li></ul>
+            </div>
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Authoring tooling</div>
+              <ul class="stack-group__list"><li>Jupyter</li><li>Git</li><li>JSON schemas</li><li>React (eval UIs)</li></ul>
+            </div>
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Frontier-model work</div>
+              <ul class="stack-group__list"><li>Claude</li><li>ChatGPT</li><li>Gemini</li><li>Custom prompt harnesses</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         [2] FRONTEND — Secondary role (passion)
+         ====================================================== -->
+    <section id="work" data-pillar="frontend">
+      <div class="wrap">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">02 — frontend · secondary</span>
+            <h2 class="section-header__title">Selected <em>frontend work</em>.</h2>
+          </div>
+          <span class="section-header__meta">2024 — now</span>
+        </div>
+
+        <p class="lede reveal" style="max-width: 62ch; margin-bottom: 3rem;">
+          A passion project that's become a second discipline. I care about <em>typography</em>, spacing, motion, and the small details that separate a page that works from a page that feels right.
+        </p>
+
+        <div class="work-grid">
+          <a class="work-card reveal" href="projects/omnifood.html" aria-label="Omnifood case study">
+            <div class="work-card__media m-frontend" data-fallback="Omnifood.">
+              <img src="IMAGES/omnifood.webp" alt="Omnifood landing page screenshot" loading="lazy">
+              <div class="work-card__overlay" aria-hidden="true"><span>View project →</span></div>
+            </div>
+            <div class="work-card__body">
+              <div class="work-card__meta"><span>case study</span><span>2024</span></div>
+              <h3 class="work-card__title">Omnifood</h3>
+              <p class="work-card__desc">Fully responsive marketing landing page for a fictional AI-powered food delivery service. Fluid layouts, accessible forms, careful vertical rhythm.</p>
+              <div class="work-card__tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive</span></div>
+            </div>
+          </a>
+
+          <a class="work-card reveal" href="projects/modern-page.html" aria-label="Modern animated login and signup UI">
+            <div class="work-card__media m-research" data-fallback="Modern auth UI.">
+              <img src="IMAGES/modern-page.webp" alt="Modern animated login and signup UI screenshot" loading="lazy">
+              <div class="work-card__overlay" aria-hidden="true"><span>View project →</span></div>
+            </div>
+            <div class="work-card__body">
+              <div class="work-card__meta"><span>ui experiment</span><span>2024</span></div>
+              <h3 class="work-card__title">Modern animated login / signup</h3>
+              <p class="work-card__desc">A smooth, animated authentication flow exploring state transitions, layered motion, and form validation — a study in how small interactions change perceived quality.</p>
+              <div class="work-card__tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Motion</span></div>
+            </div>
+          </a>
+
+          <a class="work-card reveal" href="projects/pig-game.html" aria-label="The Pig Game">
+            <div class="work-card__media m-tutoring" data-fallback="The Pig Game.">
+              <img src="IMAGES/pig-game.webp" alt="The Pig Game screenshot" loading="lazy">
+              <div class="work-card__overlay" aria-hidden="true"><span>View project →</span></div>
+            </div>
+            <div class="work-card__body">
+              <div class="work-card__meta"><span>game</span><span>2024</span></div>
+              <h3 class="work-card__title">The Pig Game</h3>
+              <p class="work-card__desc">Two-player dice game with clean state handling, turn management, and restrained visual feedback. An exercise in tight, readable vanilla JavaScript.</p>
+              <div class="work-card__tags"><span>JavaScript</span><span>DOM</span><span>Game logic</span></div>
+            </div>
+          </a>
+
+          <a class="work-card reveal" href="projects/portfolio.html" aria-label="This portfolio">
+            <div class="work-card__media m-frontend" data-fallback="This site.">
+              <img src="IMAGES/my-portfolio.webp" alt="Portfolio website screenshot" loading="lazy">
+              <div class="work-card__overlay" aria-hidden="true"><span>View project →</span></div>
+            </div>
+            <div class="work-card__body">
+              <div class="work-card__meta"><span>personal</span><span>2026</span></div>
+              <h3 class="work-card__title">The site you're reading</h3>
+              <p class="work-card__desc">A multi-page portfolio built to demonstrate typographic restraint, responsive grid work, motion on scroll, and accessible forms — no frameworks, everything handwritten.</p>
+              <div class="work-card__tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>A11y</span></div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Frontend stack subsection -->
+        <div class="subsection">
+          <div class="subsection__header reveal">
+            <h3 class="subsection__title">Frontend stack.</h3>
+            <span class="subsection__meta">what I reach for</span>
+          </div>
+
+          <div class="stack-grid">
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Design &amp; prototype</div>
+              <ul class="stack-group__list"><li>Figma</li><li>Framer</li><li>Canva</li><li>Miro</li></ul>
+            </div>
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Development</div>
+              <ul class="stack-group__list"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Tailwind CSS</li><li>WordPress</li></ul>
+            </div>
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Authoring</div>
+              <ul class="stack-group__list"><li>LaTeX</li><li>Overleaf</li><li>Notion</li><li>Markdown</li></ul>
+            </div>
+            <div class="stack-group reveal">
+              <div class="stack-group__label">Ecosystem</div>
+              <ul class="stack-group__list"><li>Git &amp; GitHub</li><li>Netlify</li><li>Chrome DevTools</li><li>ChatGPT</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         [3] TUTORING — Tertiary role
+         ====================================================== -->
+    <section id="tutoring" data-pillar="tutoring">
+      <div class="wrap">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">03 — tutoring · tertiary</span>
+            <h2 class="section-header__title">Three disciplines. One <em>approach.</em></h2>
+          </div>
+          <span class="section-header__meta">online · worldwide</span>
+        </div>
+
+        <p class="lede reveal" style="max-width: 66ch; margin-bottom: 3rem;">
+          I tutor in three things I care about deeply: <em>mathematics</em> for Pakistani secondary and intermediate students; <em>programming</em> for self-taught learners and university students; and <em>Quranic Arabic</em> for those wanting to understand what they recite. Live one-on-one sessions, online, worldwide.
+        </p>
+
+        <!-- Services -->
+        <div class="services-grid">
+          <a class="service-card reveal" href="tutoring/index.html#mathematics">
+            <div class="service-card__icon" aria-hidden="true">∑</div>
+            <h3 class="service-card__title">Mathematics</h3>
+            <p class="service-card__desc">Classes 9 – 12 on Punjab Textbook Board and Federal Board syllabi. Also: interactive chapter-by-chapter solution notebooks, free to use.</p>
+            <ul class="service-card__list">
+              <li>Matric &amp; FSc Mathematics</li>
+              <li>PTB + FBISE syllabi</li>
+              <li>Live sessions + written notes</li>
+              <li>Video walkthroughs</li>
+            </ul>
+            <div class="service-card__footer">
+              <span>read more</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="service-card reveal" href="tutoring/index.html#coding">
+            <div class="service-card__icon" aria-hidden="true">&lt;/&gt;</div>
+            <h3 class="service-card__title">Coding</h3>
+            <p class="service-card__desc">From first Python script to your first deployed web app. Programming fundamentals, algorithmic thinking, and front-end development — taught the way I wish I'd been taught.</p>
+            <ul class="service-card__list">
+              <li>Python fundamentals</li>
+              <li>Web dev (HTML, CSS, JS)</li>
+              <li>Algorithms &amp; problem solving</li>
+              <li>University CS support</li>
+            </ul>
+            <div class="service-card__footer">
+              <span>read more</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="service-card reveal" href="tutoring/index.html#arabic">
+            <div class="service-card__icon" aria-hidden="true">ع</div>
+            <h3 class="service-card__title">Arabic &amp; Quran</h3>
+            <p class="service-card__desc">Quranic recitation with tajweed, Classical (Quranic) Arabic grammar, and conversational Modern Standard Arabic. For learners who want to understand, not just recite.</p>
+            <ul class="service-card__list">
+              <li>Quran recitation &amp; tajweed</li>
+              <li>Classical Arabic grammar</li>
+              <li>Quranic vocabulary</li>
+              <li>Modern Standard Arabic basics</li>
+            </ul>
+            <div class="service-card__footer">
+              <span>read more</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Math classes (specific to Mathematics offering) -->
+        <div class="subsection">
+          <div class="subsection__header reveal">
+            <h3 class="subsection__title">Mathematics — classes I teach.</h3>
+            <span class="subsection__meta">Pakistani secondary &amp; intermediate</span>
+          </div>
+
+          <div class="classes-grid">
+            <div class="class-card reveal">
+              <div class="class-card__number">9<span class="suffix">th</span></div>
+              <div class="class-card__label">Matriculation · Year I</div>
+              <div class="class-card__curricula"><span>PTB</span><span>FBISE</span></div>
+              <div class="class-card__subjects">Real Numbers, Algebraic Manipulation, Linear Graphs, Geometry &amp; Proofs.</div>
+              <div class="class-card__footer"><span>17 units</span><span>live + notes</span></div>
+            </div>
+            <div class="class-card reveal">
+              <div class="class-card__number">10<span class="suffix">th</span></div>
+              <div class="class-card__label">Matriculation · Year II</div>
+              <div class="class-card__curricula"><span>PTB</span><span>FBISE</span></div>
+              <div class="class-card__subjects">Quadratics, Matrices, Trigonometric Identities, Chords &amp; Arcs, Basic Statistics.</div>
+              <div class="class-card__footer"><span>13 units</span><span>live + notes</span></div>
+            </div>
+            <div class="class-card reveal">
+              <div class="class-card__number">11<span class="suffix">th</span></div>
+              <div class="class-card__label">FSc · Part I</div>
+              <div class="class-card__curricula"><span>PTB</span><span>FBISE</span></div>
+              <div class="class-card__subjects">Sets, Sequences &amp; Series, Permutations &amp; Combinations, Induction, Trigonometry.</div>
+              <div class="class-card__footer"><span>14 units</span><span>live + notes</span></div>
+            </div>
+            <div class="class-card reveal">
+              <div class="class-card__number">12<span class="suffix">th</span></div>
+              <div class="class-card__label">FSc · Part II</div>
+              <div class="class-card__curricula"><span>PTB</span><span>FBISE</span></div>
+              <div class="class-card__subjects">Functions &amp; Limits, Differentiation, Integration, Vectors, Analytic Geometry, Linear Programming.</div>
+              <div class="class-card__footer"><span>10 units</span><span>live + notes</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Online Solutions subsection -->
+        <div class="subsection">
+          <div class="subsection__header reveal">
+            <h3 class="subsection__title">Online solutions.</h3>
+            <span class="subsection__meta">better than the old math keys</span>
+          </div>
+
+          <p class="lede reveal" style="max-width: 62ch; margin-bottom: 2rem;">
+            A growing library of <em>free, interactive, chapter-by-chapter</em> solution notebooks. Every example worked through step-by-step, with inline explanations, LaTeX-rendered equations, and short video walkthroughs — not the terse, hand-scribbled "key" style students have been stuck with for decades.
+          </p>
+
+          <div class="solutions-grid">
+            <a class="solution-card is-featured reveal" href="solutions/class-9-unit-1.html">
+              <div class="solution-card__status">
+                <span class="indicator" aria-hidden="true"></span>
+                <span>Live · free to use</span>
+              </div>
+              <h4 class="solution-card__title">Real Numbers — Class 9, Unit 1</h4>
+              <div class="solution-card__sub">PTB Mathematics · every example and exercise, fully worked</div>
+              <p class="solution-card__desc">The first complete notebook in the series. Every worked example, every exercise problem, every review question — with inline footnote explanations, LaTeX equations, and step-by-step reasoning you can follow at your own pace.</p>
+              <span class="btn btn--pillar solution-card__link">
+                <span class="btn__inner">
+                  <span class="btn__text">Open the chapter</span>
+                  <span class="btn__arrow" aria-hidden="true">→</span>
+                </span>
+              </span>
+            </a>
+
+            <div class="solution-card is-soon reveal">
+              <div class="solution-card__status">
+                <span class="indicator" aria-hidden="true"></span>
+                <span>Coming soon</span>
+              </div>
+              <h4 class="solution-card__title">Logarithms — Class 9, Unit 2</h4>
+              <div class="solution-card__sub">PTB Mathematics · in progress</div>
+              <p class="solution-card__desc">Next up in the Class 9 series. Common and natural log laws, change of base, solving exponential equations, and applied problems.</p>
+            </div>
+
+            <div class="solution-card is-soon reveal">
+              <div class="solution-card__status">
+                <span class="indicator" aria-hidden="true"></span>
+                <span>Planned</span>
+              </div>
+              <h4 class="solution-card__title">Integration — FSc Part II, Unit 3</h4>
+              <div class="solution-card__sub">PTB Mathematics · queued</div>
+              <p class="solution-card__desc">Definite and indefinite integrals, techniques of integration, applications — same structure as the Class 9 notebooks but for 12th-grade.</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; text-align: right;" class="reveal">
+            <a class="arrow-link" href="solutions/index.html">
+              See the full solutions library <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         ABOUT
+         ====================================================== -->
+    <section id="about">
+      <div class="wrap">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">about</span>
+            <h2 class="section-header__title">A mathematician who fell in love with <em>tech</em>.</h2>
+          </div>
+          <span class="section-header__meta">multan, pakistan · GMT+5</span>
+        </div>
+
+        <div class="about-grid">
+          <div class="reveal">
+            <div class="about-portrait">
+              <div class="about-portrait__img">
+                <img src="IMAGES/my-pic.webp" alt="Portrait of Muhammad Imran" loading="lazy">
+              </div>
+              <div class="about-portrait__text">
+                <div class="name">Muhammad Imran</div>
+                <div class="role">Research contributor · Developer · Tutor</div>
+              </div>
+            </div>
+
+            <div class="prose">
+              <p class="lede" style="color: var(--ink); margin-bottom: 1.5rem;">I was a mathematics major who kept being pulled toward tech. I eventually found my niche — but the maths never left.</p>
+              <p>My primary work is <em>STEM annotation and benchmark authoring</em> for the projects that train state-of-the-art language models. I've contributed to Mindrift's CI-STEM programme, SciCode's benchmark library, and previously to Photomath's step-solution corpus. The work sits at the seam of pure mathematics and engineering rigour, which is exactly where I like to be.</p>
+              <p>Frontend is my <em>passion</em>. I've always loved aesthetic, accurate, pixel-perfect work — interfaces that respect typography, spacing, and motion. It's the craft I reach for when I'm not annotating. I build with HTML, CSS, JavaScript, and React, and I care deeply about accessibility and performance.</p>
+              <p>Tutoring is my third thread. Because I loved maths so much as a student, I wanted to help students in Pakistan and worldwide have a better experience than the terse, hand-scribbled "keys" we grew up with. I teach Classes 9–12 mathematics, programming, and Quranic Arabic — and I'm building a library of interactive, beautifully-typeset solution notebooks to replace the old textbook keys.</p>
+              <p>One instinct runs through everything: <em>make the complicated thing feel obvious.</em></p>
+            </div>
+          </div>
+
+          <aside class="timeline reveal" aria-label="Education and timeline">
+            <div class="timeline__group">
+              <div class="timeline__label">now</div>
+              <div class="timeline__item">
+                <div class="timeline__title">Research, building, tutoring.</div>
+                <div class="timeline__sub">Mindrift &amp; SciCode by day · frontend work &amp; tutoring by evening.</div>
+              </div>
+            </div>
+
+            <div class="timeline__group">
+              <div class="timeline__label">previously</div>
+              <div class="timeline__item">
+                <div class="timeline__date">2023 — 2024</div>
+                <div class="timeline__title">Photomath</div>
+                <div class="timeline__sub">Math annotation &amp; step-solution QA</div>
+              </div>
+            </div>
+
+            <div class="timeline__group">
+              <div class="timeline__label">certificates</div>
+              <div class="timeline__item">
+                <div class="timeline__date">Jan — May 2025</div>
+                <div class="timeline__title">The Complete JavaScript Course 2025</div>
+                <div class="timeline__sub">Jonas Schmedtmann · Udemy</div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Sep — Dec 2024</div>
+                <div class="timeline__title">HTML &amp; CSS — build responsive, real-world websites</div>
+                <div class="timeline__sub">Jonas Schmedtmann · Udemy</div>
+              </div>
+            </div>
+
+            <div class="timeline__group">
+              <div class="timeline__label">education</div>
+              <div class="timeline__item">
+                <div class="timeline__date">2017 — 2021</div>
+                <div class="timeline__title">BS in Mathematics</div>
+                <div class="timeline__sub">University of Education, Lahore</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         CONTACT
+         ====================================================== -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">contact</span>
+            <h2 class="section-header__title">Research collab, frontend brief, or a tutoring enquiry?</h2>
+          </div>
+          <span class="section-header__meta">usually replies within a day</span>
+        </div>
+
+        <div class="contact-grid">
+          <div class="reveal">
+            <p class="lede contact-intro">All three welcome. Tell me what's on your mind — the more specific the better. If it's a tutoring enquiry, mention the subject and level; if it's frontend, link a reference or a brief; if it's research, tell me the project or platform.</p>
+
+            <form class="contact-form" id="contact-form" action="https://formspree.io/f/xzzangvz" method="POST" novalidate>
+              <div class="field">
+                <label for="f-name">name</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your name">
+              </div>
+              <div class="field">
+                <label for="f-email">email</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+              </div>
+              <div class="field">
+                <label for="f-message">message</label>
+                <textarea id="f-message" name="message" required placeholder="Tell me what you have in mind."></textarea>
+              </div>
+              <input type="hidden" name="_subject" value="New message from portfolio site">
+              <div class="contact-form__footer">
+                <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                <button type="submit" class="btn" id="submit-btn">
+                  <span class="btn__inner">
+                    <span class="btn__text">Send message</span>
+                    <span class="btn__arrow" aria-hidden="true">→</span>
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <aside class="contact-card reveal">
+            <div class="contact-card__label">Or reach me directly.</div>
+            <ul class="contact-card__list">
+              <li><a href="mailto:imranbinmanzoor1@gmail.com"><span class="label">email</span><span class="value">imranbinmanzoor1@gmail.com</span><span class="arrow" aria-hidden="true">↗</span></a></li>
+              <li><a href="tel:+923247051372"><span class="label">phone</span><span class="value">+92 324 7051372</span><span class="arrow" aria-hidden="true">↗</span></a></li>
+              <li><a href="https://linkedin.com/in/imranbinmanzoor-dev/" target="_blank" rel="noopener"><span class="label">linkedin</span><span class="value">imranbinmanzoor-dev</span><span class="arrow" aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/imranbinmanzoor" target="_blank" rel="noopener"><span class="label">github</span><span class="value">imranbinmanzoor</span><span class="arrow" aria-hidden="true">↗</span></a></li>
+              <li><a href="https://x.com/ImranDirkhan" target="_blank" rel="noopener"><span class="label">twitter</span><span class="value">@ImranDirkhan</span><span class="arrow" aria-hidden="true">↗</span></a></li>
+              <li><a href="https://instagram.com/imranbinmanzoor1/" target="_blank" rel="noopener"><span class="label">instagram</span><span class="value">imranbinmanzoor1</span><span class="arrow" aria-hidden="true">↗</span></a></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <span>© <span data-year>2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+      <span class="site-footer__mark">set in fraunces &amp; geist</span>
+    </div>
+  </footer>
+
+  <script src="assets/scripts.js"></script>
+</body>
+</html>
