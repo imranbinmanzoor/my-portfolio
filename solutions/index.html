@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Solutions library — Muhammad Imran</title>
+  <meta name="description" content="A free, interactive library of chapter-by-chapter mathematics solutions for Classes 9–12 under PTB and FBISE syllabi.">
+  <link rel="icon" href="../IMAGES/my-pic.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+
+  <style>
+    /* Page-specific */
+    .class-section { margin-top: clamp(3rem, 6vw, 4rem); }
+    .class-section__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .class-section__title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--ink);
+      font-variation-settings: "opsz" 36;
+    }
+    .class-section__title em { font-style: normal; color: var(--tutoring); margin-right: 0.5rem; }
+    .class-section__meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: lowercase;
+      letter-spacing: 0.05em;
+    }
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .unit-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem 1.25rem 1rem;
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color var(--med) var(--ease-out), transform var(--med) var(--ease-out);
+      min-height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+    .unit-card.is-live {
+      border-color: var(--tutoring-tint);
+      background: linear-gradient(135deg, var(--tutoring-soft) 0%, var(--sheet) 80%);
+    }
+    .unit-card.is-live:hover {
+      border-color: var(--tutoring);
+      transform: translateY(-2px);
+    }
+    .unit-card.is-soon, .unit-card.is-planned { opacity: 0.72; }
+    .unit-card__num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .unit-card__title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 0.35rem;
+      font-variation-settings: "opsz" 18;
+      flex: 1;
+    }
+    .unit-card__status {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .unit-card.is-live .unit-card__status { color: var(--tutoring); }
+    .unit-card__arrow {
+      color: var(--tutoring);
+      transition: transform var(--med) var(--ease-out);
+    }
+    .unit-card.is-live:hover .unit-card__arrow { transform: translate(3px, -3px); }
+
+    @media (max-width: 760px) {
+      .units-grid { grid-template-columns: 1fr; }
+      .class-section__header { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+    }
+  </style>
+</head>
+
+<body data-pillar="tutoring">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav-sticky>
+    <div class="nav__inner">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#tutoring" class="is-active" data-accent="tutoring">Tutoring</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn--ghost"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
+        <button class="nav__mobile-toggle" data-menu-open aria-label="Open menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+    <div class="mobile-menu__header">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <button class="mobile-menu__close" data-menu-close aria-label="Close menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+    </div>
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__links">
+        <a href="../index.html#research"><span class="num">01</span><span>Research</span></a>
+        <a href="../index.html#work"><span class="num">02</span><span>Work</span></a>
+        <a href="../index.html#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+        <a href="../index.html#about"><span class="num">04</span><span>About</span></a>
+        <a href="../index.html#contact"><span class="num">05</span><span>Contact</span></a>
+      </nav>
+    </div>
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__footer-left">Multan, Pakistan</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero wrap">
+      <a href="../index.html#tutoring" class="back-link reveal"><span class="arrow">←</span> back to tutoring</a>
+      <div class="page-hero__eyebrow reveal">
+        <span class="eyebrow">solutions library</span>
+        <span class="divider">·</span>
+        <span class="eyebrow" style="color: var(--tutoring);">● free · interactive</span>
+      </div>
+      <h1 class="page-hero__title reveal">
+        Every chapter, every exercise — <em>worked out</em>.
+      </h1>
+      <p class="lede page-hero__lede reveal">
+        A growing library of free, interactive solution notebooks for Pakistani secondary and intermediate mathematics. Designed to replace the terse, hand-scribbled "math keys" students have been stuck with for decades.
+      </p>
+    </section>
+
+    <div class="wrap">
+
+      <!-- CLASS 9 -->
+      <section class="class-section">
+        <div class="class-section__header reveal">
+          <h2 class="class-section__title"><em>9th</em> Class · Matriculation Year I</h2>
+          <span class="class-section__meta">17 units · PTB / FBISE</span>
+        </div>
+        <div class="units-grid">
+          <a class="unit-card is-live reveal" href="class-9-unit-1.html">
+            <div class="unit-card__num">unit 01</div>
+            <div class="unit-card__title">Real Numbers</div>
+            <div class="unit-card__status"><span>● Live</span><span class="unit-card__arrow">↗</span></div>
+          </a>
+          <div class="unit-card is-soon reveal">
+            <div class="unit-card__num">unit 02</div>
+            <div class="unit-card__title">Logarithms</div>
+            <div class="unit-card__status"><span>In progress</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 03</div>
+            <div class="unit-card__title">Algebraic Expressions &amp; Formulas</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 04</div>
+            <div class="unit-card__title">Factorization</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 05</div>
+            <div class="unit-card__title">Algebraic Manipulation</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 06</div>
+            <div class="unit-card__title">Linear Equations &amp; Inequalities</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 07</div>
+            <div class="unit-card__title">Linear Graphs &amp; Applications</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 08</div>
+            <div class="unit-card__title">Coordinate Geometry</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 09</div>
+            <div class="unit-card__title">Introduction to Geometry</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASS 10 -->
+      <section class="class-section">
+        <div class="class-section__header reveal">
+          <h2 class="class-section__title"><em>10th</em> Class · Matriculation Year II</h2>
+          <span class="class-section__meta">13 units · PTB / FBISE</span>
+        </div>
+        <div class="units-grid">
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 01</div>
+            <div class="unit-card__title">Quadratic Equations</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 02</div>
+            <div class="unit-card__title">Theory of Quadratic Equations</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 03</div>
+            <div class="unit-card__title">Variations</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 04</div>
+            <div class="unit-card__title">Partial Fractions</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 05</div>
+            <div class="unit-card__title">Sets and Functions</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 06</div>
+            <div class="unit-card__title">Basic Statistics</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 07</div>
+            <div class="unit-card__title">Introduction to Trigonometry</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASS 11 -->
+      <section class="class-section">
+        <div class="class-section__header reveal">
+          <h2 class="class-section__title"><em>11th</em> Class · FSc Part I</h2>
+          <span class="class-section__meta">14 units · PTB / FBISE</span>
+        </div>
+        <div class="units-grid">
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 01</div>
+            <div class="unit-card__title">Number Systems</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 02</div>
+            <div class="unit-card__title">Sets, Functions, Groups</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 03</div>
+            <div class="unit-card__title">Matrices &amp; Determinants</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 04</div>
+            <div class="unit-card__title">Quadratic Equations</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 06</div>
+            <div class="unit-card__title">Sequences &amp; Series</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 07</div>
+            <div class="unit-card__title">Permutations &amp; Combinations</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 08</div>
+            <div class="unit-card__title">Mathematical Induction</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 09</div>
+            <div class="unit-card__title">Binomial Theorem</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASS 12 -->
+      <section class="class-section">
+        <div class="class-section__header reveal">
+          <h2 class="class-section__title"><em>12th</em> Class · FSc Part II</h2>
+          <span class="class-section__meta">10 units · PTB / FBISE</span>
+        </div>
+        <div class="units-grid">
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 01</div>
+            <div class="unit-card__title">Functions &amp; Limits</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 02</div>
+            <div class="unit-card__title">Differentiation</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 03</div>
+            <div class="unit-card__title">Integration</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 04</div>
+            <div class="unit-card__title">Conic Sections &amp; Analytic Geometry</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 05</div>
+            <div class="unit-card__title">Vectors</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+          <div class="unit-card is-planned reveal">
+            <div class="unit-card__num">unit 06</div>
+            <div class="unit-card__title">Linear Inequalities &amp; Programming</div>
+            <div class="unit-card__status"><span>Planned</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="class-section">
+        <div style="padding: 2rem 0; text-align: center;" class="reveal">
+          <p class="lede" style="max-width: 50ch; margin: 0 auto 1.5rem;">New chapters ship as I finish them. If there's a particular unit you need next, <a class="underline-link" href="../index.html#contact">let me know</a> — user requests move to the front of the queue.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <span>© <span data-year>2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+      <span class="site-footer__mark">set in fraunces &amp; geist</span>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js"></script>
+</body>
+</html>

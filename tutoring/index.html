@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Tutoring — Mathematics, Coding, Arabic · Muhammad Imran</title>
+  <meta name="description" content="Online tutoring in mathematics (Classes 9-12 PTB/FBISE), programming, and Quranic Arabic with tajweed. One-on-one sessions, worldwide.">
+  <link rel="icon" href="../IMAGES/my-pic.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+
+  <style>
+    /* Page-specific additions */
+    .tutoring-section { padding: clamp(4rem, 8vw, 6rem) 0; position: relative; }
+    .tutoring-section + .tutoring-section { border-top: 1px solid var(--line); }
+    .tutoring-section__head {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      align-items: start;
+    }
+    .tutoring-section__icon {
+      width: 56px; height: 56px;
+      display: grid;
+      place-items: center;
+      background: var(--tutoring-soft);
+      border: 1px solid var(--tutoring-tint);
+      border-radius: 50%;
+      color: var(--tutoring);
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-style: italic;
+      font-variation-settings: "opsz" 36;
+    }
+    .tutoring-section__body { max-width: 62ch; }
+    .tutoring-section__eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--tutoring);
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
+      margin-bottom: 0.75rem;
+    }
+    .tutoring-section__title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      line-height: 1.15;
+      font-variation-settings: "opsz" 60;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .tutoring-section__title em { font-style: italic; color: var(--tutoring); }
+    .tutoring-section__lede { color: var(--ink-soft); }
+
+    .tutoring-offers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 2vw, 1.5rem);
+      margin-top: 2.5rem;
+    }
+    .offer-card {
+      padding: 1.5rem;
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color var(--med) var(--ease-out);
+    }
+    .offer-card:hover { border-color: var(--tutoring); }
+    .offer-card h4 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      font-variation-settings: "opsz" 18;
+    }
+    .offer-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+    .format-note {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--tutoring-soft);
+      border-left: 3px solid var(--tutoring);
+      border-radius: var(--radius-sm);
+      font-size: 0.93rem;
+      color: var(--ink-soft);
+    }
+    .format-note strong { color: var(--tutoring); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.35rem; }
+
+    @media (max-width: 760px) {
+      .tutoring-offers { grid-template-columns: 1fr; }
+      .tutoring-section__head { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body data-pillar="tutoring">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav-sticky>
+    <div class="nav__inner">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#tutoring" class="is-active" data-accent="tutoring">Tutoring</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn--ghost"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
+        <button class="nav__mobile-toggle" data-menu-open aria-label="Open menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+    <div class="mobile-menu__header">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <button class="mobile-menu__close" data-menu-close aria-label="Close menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+    </div>
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__links">
+        <a href="../index.html#research"><span class="num">01</span><span>Research</span></a>
+        <a href="../index.html#work"><span class="num">02</span><span>Work</span></a>
+        <a href="../index.html#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+        <a href="../index.html#about"><span class="num">04</span><span>About</span></a>
+        <a href="../index.html#contact"><span class="num">05</span><span>Contact</span></a>
+      </nav>
+    </div>
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__footer-left">Multan, Pakistan</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero wrap">
+      <a href="../index.html#tutoring" class="back-link reveal"><span class="arrow">←</span> back to home</a>
+      <div class="page-hero__eyebrow reveal">
+        <span class="eyebrow">tutoring · online · worldwide</span>
+        <span class="divider">·</span>
+        <span class="eyebrow" style="color: var(--tutoring);">● three disciplines</span>
+      </div>
+      <h1 class="page-hero__title reveal">
+        Mathematics, coding, <em>Arabic</em> — three subjects I teach one-on-one.
+      </h1>
+      <p class="lede page-hero__lede reveal">
+        Everything here happens online, in English or Urdu, in live sessions with shared notes and video walkthroughs. Scroll down for each discipline — curriculum, format, and how to get started.
+      </p>
+    </section>
+
+    <div class="wrap">
+
+      <!-- MATHEMATICS -->
+      <section class="tutoring-section" id="mathematics">
+        <div class="tutoring-section__head reveal">
+          <div class="tutoring-section__icon" aria-hidden="true">∑</div>
+          <div class="tutoring-section__body">
+            <div class="tutoring-section__eyebrow">01 · mathematics</div>
+            <h2 class="tutoring-section__title"><em>Mathematics</em> — Classes 9 to 12.</h2>
+            <p class="tutoring-section__lede">My home subject. I teach Pakistani secondary and intermediate mathematics under both Punjab Textbook Board and Federal Board (FBISE) syllabi — plus a growing library of free, interactive chapter solutions that replaces the old "math keys" most students rely on.</p>
+          </div>
+        </div>
+
+        <div class="tutoring-offers reveal">
+          <div class="offer-card">
+            <h4>Matriculation · Classes 9 &amp; 10</h4>
+            <p>Real Numbers, Logarithms, Algebraic Manipulation, Geometry &amp; Proofs, Quadratics, Matrices, Trigonometric Identities, Chords &amp; Arcs, Basic Statistics — the whole board syllabus, unit by unit.</p>
+          </div>
+          <div class="offer-card">
+            <h4>FSc · Classes 11 &amp; 12</h4>
+            <p>Sets &amp; Functions, Sequences &amp; Series, Permutations &amp; Combinations, Induction, Trigonometry, Differentiation, Integration, Vectors, Analytic Geometry, Linear Programming.</p>
+          </div>
+          <div class="offer-card">
+            <h4>Online solution notebooks</h4>
+            <p>Every worked example, every exercise, every review question — with inline explanations, LaTeX-typeset equations, and short video walkthroughs. Free to use, forever.</p>
+          </div>
+        </div>
+
+        <div class="format-note">
+          <strong>format</strong>
+          One-on-one sessions over Zoom or Google Meet. 60-minute slots, once or twice a week. Shared digital whiteboard, recorded if you want. Homework reviewed between sessions. Payment in PKR or USD.
+        </div>
+
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a class="btn btn--pillar" href="../solutions/index.html">
+            <span class="btn__inner"><span class="btn__text">Browse free solutions</span><span class="btn__arrow">→</span></span>
+          </a>
+          <a class="btn btn--ghost" href="../index.html#contact">
+            <span class="btn__inner"><span class="btn__text">Enquire about tutoring</span><span class="btn__arrow">→</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- CODING -->
+      <section class="tutoring-section" id="coding">
+        <div class="tutoring-section__head reveal">
+          <div class="tutoring-section__icon" aria-hidden="true">&lt;/&gt;</div>
+          <div class="tutoring-section__body">
+            <div class="tutoring-section__eyebrow">02 · coding</div>
+            <h2 class="tutoring-section__title"><em>Coding</em> — from first line to shipped app.</h2>
+            <p class="tutoring-section__lede">I teach programming the way I wish I had been taught it. We start with fundamentals that last — types, control flow, functions, data structures — then move to whatever direction you care about: Python, web development, or algorithmic problem-solving.</p>
+          </div>
+        </div>
+
+        <div class="tutoring-offers reveal">
+          <div class="offer-card">
+            <h4>Python fundamentals</h4>
+            <p>Variables, control flow, functions, classes, file I/O. We build small, complete projects along the way — a calculator, a word game, a data-processing script — because that's how the concepts stick.</p>
+          </div>
+          <div class="offer-card">
+            <h4>Web development</h4>
+            <p>HTML, CSS (Flexbox, Grid, modern CSS), and JavaScript. We build real responsive sites from scratch — not framework tutorials, the actual foundation that makes framework tutorials make sense.</p>
+          </div>
+          <div class="offer-card">
+            <h4>Algorithms &amp; interview prep</h4>
+            <p>Arrays, strings, trees, graphs, dynamic programming. For university students and self-taught learners preparing for technical interviews. Problem sets from LeetCode and CLRS, walked through line by line.</p>
+          </div>
+        </div>
+
+        <div class="format-note">
+          <strong>format</strong>
+          One-on-one sessions over Zoom. Live coding with a shared editor. Homework set between sessions, reviewed at the start of the next. Good fit for university CS students, self-taught learners, and career-switchers.
+        </div>
+      </section>
+
+      <!-- ARABIC -->
+      <section class="tutoring-section" id="arabic">
+        <div class="tutoring-section__head reveal">
+          <div class="tutoring-section__icon" aria-hidden="true">ع</div>
+          <div class="tutoring-section__body">
+            <div class="tutoring-section__eyebrow">03 · arabic &amp; quran</div>
+            <h2 class="tutoring-section__title"><em>Arabic</em> — for those who want to understand, not just recite.</h2>
+            <p class="tutoring-section__lede">A subject close to my heart. I teach Quranic recitation with tajweed, Classical (Quranic) Arabic grammar, and the basics of Modern Standard Arabic for conversation. For Muslim learners who want their relationship with the Quran to be one of comprehension, not just memorisation.</p>
+          </div>
+        </div>
+
+        <div class="tutoring-offers reveal">
+          <div class="offer-card">
+            <h4>Quran recitation &amp; tajweed</h4>
+            <p>Proper articulation of letters (<em>makharij</em>), rules of elongation (<em>madd</em>), stopping (<em>waqf</em>), and rhythmic recitation. Starting from the basics or refining existing practice — both welcome.</p>
+          </div>
+          <div class="offer-card">
+            <h4>Classical Arabic grammar</h4>
+            <p>The language of the Quran. <em>Nahw</em> (syntax) and <em>sarf</em> (morphology) taught with direct reference to Quranic verses, so every rule you learn immediately opens a passage you already know.</p>
+          </div>
+          <div class="offer-card">
+            <h4>Modern Standard Arabic</h4>
+            <p>Conversational MSA basics for travel, work, or connection with the wider Arabic-speaking world. Sound-and-script foundations, vocabulary around everyday topics, and short dialogues.</p>
+          </div>
+        </div>
+
+        <div class="format-note">
+          <strong>format</strong>
+          Live one-on-one sessions. Recitation sessions include detailed feedback on pronunciation and rhythm. Grammar sessions use both English and Urdu explanations, with exercises from classical textbooks (<em>al-Ajrumiyyah</em>, <em>Madinah books</em>) and modern sources.
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="tutoring-section">
+        <div class="section-header reveal">
+          <div class="section-header__left">
+            <span class="section-header__eyebrow">how to start</span>
+            <h2 class="section-header__title">Send a message with what you need.</h2>
+          </div>
+        </div>
+        <p class="lede reveal" style="max-width: 58ch; margin-bottom: 2rem;">The quickest route is the <a class="underline-link" href="../index.html#contact">contact form</a> on the home page. Tell me which subject, which level, and roughly when you'd like to start. I reply within a day.</p>
+        <a class="btn btn--pillar reveal" href="../index.html#contact">
+          <span class="btn__inner"><span class="btn__text">Start an enquiry</span><span class="btn__arrow">→</span></span>
+        </a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <span>© <span data-year>2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+      <span class="site-footer__mark">set in fraunces &amp; geist</span>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js"></script>
+</body>
+</html>

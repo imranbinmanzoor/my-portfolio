@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>This portfolio — Muhammad Imran</title>
+  <meta name="description" content="The site you're reading — a multi-page portfolio hand-written in HTML, CSS, and JavaScript.">
+  <link rel="icon" href="../IMAGES/my-pic.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+
+<body data-pillar="frontend">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav-sticky>
+    <div class="nav__inner">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#work" class="is-active" data-accent="frontend">Work</a>
+        <a href="../index.html#tutoring">Tutoring</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn--ghost"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
+        <button class="nav__mobile-toggle" data-menu-open aria-label="Open menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+    <div class="mobile-menu__header">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <button class="mobile-menu__close" data-menu-close aria-label="Close menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+    </div>
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__links">
+        <a href="../index.html#research"><span class="num">01</span><span>Research</span></a>
+        <a href="../index.html#work"><span class="num">02</span><span>Work</span></a>
+        <a href="../index.html#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+        <a href="../index.html#about"><span class="num">04</span><span>About</span></a>
+        <a href="../index.html#contact"><span class="num">05</span><span>Contact</span></a>
+      </nav>
+    </div>
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__footer-left">Multan, Pakistan</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero wrap">
+      <a href="../index.html#work" class="back-link reveal"><span class="arrow">←</span> back to work</a>
+      <div class="page-hero__eyebrow reveal">
+        <span class="eyebrow">personal · 2026</span>
+        <span class="divider">·</span>
+        <span class="eyebrow" style="color: var(--frontend);">● frontend</span>
+      </div>
+      <h1 class="page-hero__title reveal">
+        This portfolio — a multi-page <em>single-CSS-file</em> site.
+      </h1>
+      <p class="lede page-hero__lede reveal">
+        The site you're currently reading. Built as an exercise in restraint — one shared stylesheet, one shared script, zero frameworks, and the typographic system that holds everything together.
+      </p>
+    </section>
+
+    <div class="wrap">
+      <div class="meta-grid">
+        <div class="meta-grid__item"><span class="meta-grid__label">year</span><span class="meta-grid__value">2026</span></div>
+        <div class="meta-grid__item"><span class="meta-grid__label">type</span><span class="meta-grid__value">Personal site</span></div>
+        <div class="meta-grid__item"><span class="meta-grid__label">stack</span><span class="meta-grid__value">HTML · CSS · JS</span></div>
+        <div class="meta-grid__item"><span class="meta-grid__label">status</span><span class="meta-grid__value">Live</span></div>
+      </div>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="project-screenshot"><img src="../IMAGES/my-portfolio.webp" alt="Portfolio homepage — desktop view"></div>
+
+        <div class="content-prose">
+          <h2>The brief (to myself)</h2>
+          <p>Build a portfolio that honestly reflects three parallel roles — <em>AI research contributor, frontend developer, tutor</em> — without mixing them into a single pile. Each role needs its own accent colour, its own section, its own hierarchy, but all three need to feel like parts of the same person.</p>
+          <p>No frameworks. No component libraries. No AI-slop design tropes (Inter on glassmorphism, purple-blue gradients, hero-with-stats-strip, etc.). Editorial type, warm paper, ink contrast.</p>
+
+          <h2>The architecture</h2>
+          <h3>One shared stylesheet, one shared script</h3>
+          <p>All pages — the homepage, four project pages, solutions hub, tutoring detail, math chapter — load the same <code>styles.css</code> and <code>scripts.js</code>. Every component I build on one page is automatically available to the others.</p>
+
+          <h3>Three accent colours, one per pillar</h3>
+          <p>Research gets a deep ink-navy. Frontend gets a forest sage. Tutoring gets an amber gold. Each section's <code>data-pillar</code> attribute switches a <code>--pillar</code> CSS custom property, which cascades to every child — borders, buttons, tags, focus rings.</p>
+
+          <h3>Mobile menu as a separate element</h3>
+          <p>An earlier version of this site had the mobile menu nested inside the sticky nav. That created a subtle stacking-context bug where the overlay didn't fully cover on some devices. In this version the mobile menu is a top-level element with its own <code>position: fixed</code> and <code>z-index</code> — bulletproof.</p>
+
+          <h3>Timeline without the chain</h3>
+          <p>An earlier version used a vertical-line-with-rings design for the About timeline. It looked fine, but it didn't <em>mean</em> anything — the rings weren't really connected to each other. The current design drops the chain entirely and uses clean sectional groups with strong typographic hierarchy.</p>
+
+          <h2>What I wanted it to feel like</h2>
+          <ul>
+            <li><em>Aesthetic</em> without being precious — it's a CV, not a coffee-table book.</li>
+            <li><em>Accurate</em> — every link resolves, every page loads, nothing is a placeholder.</li>
+            <li><em>Clean</em> — warm paper, deep ink, generous spacing, serif display type.</li>
+            <li><em>Pixel-perfect</em> on mobile and desktop, with motion that respects <code>prefers-reduced-motion</code>.</li>
+          </ul>
+
+          <blockquote>A portfolio is a credibility artefact. It has to be the best thing on the page, because it's the only argument the reader has to trust you with the next one.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <nav class="page-footer-nav" aria-label="Project navigation">
+          <a href="pig-game.html" class="align-right">
+            <span class="page-footer-nav__label">← previous</span>
+            <span class="page-footer-nav__title">The Pig Game</span>
+          </a>
+          <a href="omnifood.html">
+            <span class="page-footer-nav__label">next →</span>
+            <span class="page-footer-nav__title">Omnifood</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <span>© <span data-year>2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+      <span class="site-footer__mark">set in fraunces &amp; geist</span>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js"></script>
+</body>
+</html>

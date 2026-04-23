@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>The Pig Game — Muhammad Imran</title>
+  <meta name="description" content="Two-player dice game with clean state handling — case study by Muhammad Imran.">
+  <link rel="icon" href="../IMAGES/my-pic.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+
+<body data-pillar="frontend">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav-sticky>
+    <div class="nav__inner">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#work" class="is-active" data-accent="frontend">Work</a>
+        <a href="../index.html#tutoring">Tutoring</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn--ghost"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
+        <button class="nav__mobile-toggle" data-menu-open aria-label="Open menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+    <div class="mobile-menu__header">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <button class="mobile-menu__close" data-menu-close aria-label="Close menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+    </div>
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__links">
+        <a href="../index.html#research"><span class="num">01</span><span>Research</span></a>
+        <a href="../index.html#work"><span class="num">02</span><span>Work</span></a>
+        <a href="../index.html#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+        <a href="../index.html#about"><span class="num">04</span><span>About</span></a>
+        <a href="../index.html#contact"><span class="num">05</span><span>Contact</span></a>
+      </nav>
+    </div>
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__footer-left">Multan, Pakistan</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero wrap">
+      <a href="../index.html#work" class="back-link reveal"><span class="arrow">←</span> back to work</a>
+      <div class="page-hero__eyebrow reveal">
+        <span class="eyebrow">game · 2024</span>
+        <span class="divider">·</span>
+        <span class="eyebrow" style="color: var(--frontend);">● frontend</span>
+      </div>
+      <h1 class="page-hero__title reveal">
+        The Pig Game — clean state, <em>tight logic</em>, no libraries.
+      </h1>
+      <p class="lede page-hero__lede reveal">
+        A two-player dice game built as an exercise in disciplined vanilla JavaScript. State as a single object, UI as a pure render of that state — no magic, no frameworks, no surprises.
+      </p>
+    </section>
+
+    <div class="wrap">
+      <div class="meta-grid">
+        <div class="meta-grid__item"><span class="meta-grid__label">year</span><span class="meta-grid__value">2024</span></div>
+        <div class="meta-grid__item"><span class="meta-grid__label">type</span><span class="meta-grid__value">Browser game</span></div>
+        <div class="meta-grid__item"><span class="meta-grid__label">stack</span><span class="meta-grid__value">HTML · CSS · JS</span></div>
+        <div class="meta-grid__item"><span class="meta-grid__label">status</span><span class="meta-grid__value">Shipped</span></div>
+      </div>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="project-screenshot"><img src="../IMAGES/pig-game.webp" alt="The Pig Game — gameplay screenshot"></div>
+
+        <div class="content-prose">
+          <h2>The rules</h2>
+          <p>Two players take turns rolling a single die. Each roll adds to a <em>current-round</em> score — but roll a 1 and the whole round is lost. At any point a player can "hold" and bank their round score into their total. First to 100 wins.</p>
+          <p>Simple game, lots of state. Which is exactly what makes it a good exercise.</p>
+
+          <h2>Design decisions</h2>
+          <h3>One state object, one render function</h3>
+          <p>The entire game lives in a single JS object: <code>currentPlayer</code>, <code>scores</code>, <code>currentScore</code>, <code>isPlaying</code>, <code>winner</code>. Every user action mutates this object, then a single <code>render()</code> function diffs it to the DOM. No stray <code>innerHTML</code> writes, no orphaned event handlers.</p>
+
+          <h3>Discipline over cleverness</h3>
+          <p>I deliberately avoided reaching for classes, observers, or pub-sub patterns. Plain functions, plain state, plain DOM updates. The whole game is under 150 lines of JavaScript and fits on one screen.</p>
+
+          <h3>Accessible from day one</h3>
+          <p>Every action is a real <code>&lt;button&gt;</code>, every score has proper <code>aria-live</code> wiring, and the dice are announced as images with text alternatives. Keyboard-only play works identically to mouse play.</p>
+
+          <h2>What I learned</h2>
+          <ul>
+            <li>Keeping state in one place makes bugs <em>obvious</em>. Scattered state makes them invisible until ship.</li>
+            <li>"Render from state" is a discipline, not a framework. You can do it in vanilla JS if you commit to it.</li>
+            <li>A 150-line game is a better interview answer than a 1,500-line framework exercise.</li>
+          </ul>
+
+          <blockquote>The goal was not to make this game clever. It was to make it boring — in the good way, where every part does exactly what you'd expect.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <nav class="page-footer-nav" aria-label="Project navigation">
+          <a href="modern-page.html" class="align-right">
+            <span class="page-footer-nav__label">← previous</span>
+            <span class="page-footer-nav__title">Modern animated login</span>
+          </a>
+          <a href="portfolio.html">
+            <span class="page-footer-nav__label">next →</span>
+            <span class="page-footer-nav__title">This portfolio</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <span>© <span data-year>2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+      <span class="site-footer__mark">set in fraunces &amp; geist</span>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js"></script>
+</body>
+</html>

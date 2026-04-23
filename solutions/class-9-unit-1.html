@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Real Numbers — Class 9, Unit 1 · Muhammad Imran</title>
+  <meta name="description" content="Complete worked solutions for PTB Class 9 Mathematics, Unit 1: Real Numbers. Every example and exercise, step by step.">
+  <link rel="icon" href="../IMAGES/my-pic.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+
+  <!-- KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+
+  <style>
+    /* Chapter-specific layout */
+    body { background: var(--paper); }
+
+    .chapter-header {
+      padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--line);
+    }
+    .chapter-header__eyebrow {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      text-transform: lowercase;
+    }
+    .chapter-header__eyebrow .divider { color: var(--line); }
+    .chapter-header__title {
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      font-variation-settings: "opsz" 96;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-header__title em { font-style: italic; color: var(--tutoring); font-variation-settings: "opsz" 96, "SOFT" 50; }
+    .chapter-header__sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-variation-settings: "opsz" 18;
+    }
+
+    .chapter-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+      padding: clamp(2.5rem, 5vw, 4rem) 0;
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: calc(var(--nav-min-height) + 1.5rem);
+      padding: 1.25rem;
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .chapter-sidebar__title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-sidebar ul { display: flex; flex-direction: column; }
+    .chapter-sidebar li a {
+      display: block;
+      padding: 0.5rem 0;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--line-soft);
+      transition: color var(--fast) var(--ease-out), padding-left var(--fast) var(--ease-out);
+    }
+    .chapter-sidebar li:last-child a { border-bottom: 0; }
+    .chapter-sidebar li a:hover { color: var(--tutoring); padding-left: 0.35rem; }
+
+    .chapter-content {
+      max-width: 72ch;
+      min-width: 0;
+    }
+
+    .lesson-intro {
+      padding: 1.5rem 1.75rem;
+      background: var(--tutoring-soft);
+      border-left: 3px solid var(--tutoring);
+      border-radius: var(--radius-sm);
+      margin-bottom: 2.5rem;
+    }
+    .lesson-intro strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--tutoring);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-intro p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.7; }
+
+    .lesson-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: calc(var(--nav-min-height) + 1rem);
+    }
+    .lesson-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+      color: var(--ink);
+      font-variation-settings: "opsz" 36;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .lesson-section h2::after {
+      content: "";
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 48px; height: 1px;
+      background: var(--tutoring);
+    }
+    .lesson-section h2 .num {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--tutoring);
+      margin-right: 0.75rem;
+      letter-spacing: 0.05em;
+      font-weight: normal;
+      vertical-align: middle;
+      font-style: normal;
+    }
+    .lesson-section h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin: 1.75rem 0 0.75rem;
+      font-variation-settings: "opsz" 24;
+    }
+    .lesson-section p { color: var(--ink-soft); line-height: 1.75; margin-bottom: 1rem; }
+    .lesson-section p em { color: var(--tutoring); font-family: var(--serif); font-style: italic; }
+
+    .definition {
+      padding: 1.25rem 1.5rem;
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--tutoring);
+      border-radius: var(--radius-sm);
+      margin: 1.5rem 0;
+    }
+    .definition strong {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--tutoring);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .definition p:last-child { margin-bottom: 0; }
+
+    .example {
+      margin: 2rem 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--sheet);
+    }
+    .example__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 1.5rem;
+      background: var(--tutoring-soft);
+      border-bottom: 1px solid var(--tutoring-tint);
+    }
+    .example__num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--tutoring);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .example__tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .example__body { padding: 1.5rem; }
+    .example__prompt {
+      font-family: var(--serif);
+      font-size: 1.02rem;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      line-height: 1.65;
+      font-variation-settings: "opsz" 18;
+    }
+    .example__prompt strong { color: var(--tutoring); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; display: block; margin-bottom: 0.35rem; }
+
+    .solution-step {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-top: 1px solid var(--line-soft);
+    }
+    .solution-step:first-child { border-top: 0; }
+    .solution-step__num {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--tutoring);
+      letter-spacing: 0.05em;
+      padding-top: 0.15rem;
+    }
+    .solution-step__body p { margin-bottom: 0.5rem; line-height: 1.6; font-size: 0.95rem; }
+    .solution-step__body p:last-child { margin-bottom: 0; }
+    .solution-step__body .math-row {
+      padding: 0.4rem 0;
+      text-align: left;
+      color: var(--ink);
+    }
+    .solution-step__body .note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.87rem;
+      color: var(--muted);
+      padding: 0.5rem 0.85rem;
+      background: var(--paper);
+      border-left: 2px solid var(--tutoring-tint);
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      font-variation-settings: "opsz" 14;
+    }
+
+    .answer-pill {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--tutoring);
+      color: var(--paper);
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    .video-placeholder {
+      margin: 1.5rem 0;
+      padding: 1.25rem;
+      background: var(--sheet);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .video-placeholder__icon {
+      width: 42px; height: 42px;
+      background: var(--tutoring-soft);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--tutoring);
+      flex-shrink: 0;
+    }
+    .video-placeholder__icon::before {
+      content: "";
+      width: 0; height: 0;
+      border-left: 10px solid currentColor;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      margin-left: 3px;
+    }
+    .video-placeholder__text { flex: 1; }
+    .video-placeholder__text strong {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--tutoring);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .video-placeholder__text p { font-size: 0.87rem; color: var(--muted); margin-top: 0.25rem; }
+
+    .math-display {
+      margin: 1rem 0;
+      padding: 0.75rem 0;
+      font-size: 1.05rem;
+      text-align: left;
+    }
+
+    .chapter-footer {
+      padding: 2.5rem 0 4rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .chapter-layout { grid-template-columns: 1fr; }
+      .chapter-sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+      .solution-step { grid-template-columns: 24px 1fr; }
+      .example__header { padding: 0.75rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+      .example__body { padding: 1.25rem; }
+    }
+  </style>
+</head>
+
+<body data-pillar="tutoring">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav-sticky>
+    <div class="nav__inner">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#tutoring" class="is-active" data-accent="tutoring">Tutoring</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn--ghost"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
+        <button class="nav__mobile-toggle" data-menu-open aria-label="Open menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+    <div class="mobile-menu__header">
+      <a href="../index.html" class="brand"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+      <button class="mobile-menu__close" data-menu-close aria-label="Close menu" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+    </div>
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__links">
+        <a href="../index.html#research"><span class="num">01</span><span>Research</span></a>
+        <a href="../index.html#work"><span class="num">02</span><span>Work</span></a>
+        <a href="../index.html#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+        <a href="../index.html#about"><span class="num">04</span><span>About</span></a>
+        <a href="../index.html#contact"><span class="num">05</span><span>Contact</span></a>
+      </nav>
+    </div>
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__footer-left">Multan, Pakistan</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme" type="button">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main">
+    <div class="wrap">
+      <a href="index.html" class="back-link" style="margin-top: 2rem;"><span class="arrow">←</span> all solutions</a>
+
+      <div class="chapter-header">
+        <div class="chapter-header__eyebrow">
+          <span>Class 9 · Unit 01</span>
+          <span class="divider">·</span>
+          <span>Punjab Textbook Board</span>
+          <span class="divider">·</span>
+          <span style="color: var(--tutoring);">● live · free</span>
+        </div>
+        <h1 class="chapter-header__title"><em>Real Numbers</em></h1>
+        <p class="chapter-header__sub">Rational and irrational numbers, their properties, and operations on them.</p>
+      </div>
+
+      <div class="chapter-layout">
+        <aside class="chapter-sidebar" aria-label="Chapter contents">
+          <div class="chapter-sidebar__title">On this page</div>
+          <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#section-1">1.1 Rational Numbers</a></li>
+            <li><a href="#section-2">1.2 Irrational Numbers</a></li>
+            <li><a href="#section-3">1.3 Decimal Representation</a></li>
+            <li><a href="#section-4">1.4 Radicals &amp; Radicands</a></li>
+            <li><a href="#section-5">1.5 Laws of Exponents</a></li>
+            <li><a href="#section-6">Exercise 1.1</a></li>
+          </ul>
+        </aside>
+
+        <article class="chapter-content">
+
+          <div class="lesson-intro" id="intro">
+            <strong>How to use this chapter</strong>
+            <p>Every section here is set up the same way: a quick definition, a few worked examples, then the exercise problems from the textbook — all solved step by step. The small serif notes beside each line explain <em>why</em> we took that step, not just what the step is. Math equations are hand-typeset with LaTeX; short video walkthroughs accompany the harder examples.</p>
+          </div>
+
+          <!-- SECTION 1.1 -->
+          <section class="lesson-section" id="section-1">
+            <h2><span class="num">1.1</span> Rational Numbers</h2>
+
+            <div class="definition">
+              <strong>Definition</strong>
+              <p>A <em>rational number</em> is any number that can be expressed in the form $\dfrac{p}{q}$, where $p$ and $q$ are integers and $q \neq 0$. The set of rational numbers is denoted by $\mathbb{Q}$.</p>
+            </div>
+
+            <p>So integers, terminating decimals, and repeating decimals are all rational. The only numbers that get excluded from $\mathbb{Q}$ are ones whose decimal expansion is non-terminating and non-repeating — and we'll meet those in the next section.</p>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Example 1</span>
+                <span class="example__tag">identifying rationals</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Which of the following are rational numbers? $\quad \dfrac{3}{7}, \quad -5, \quad 0.75, \quad 0.\overline{3}, \quad \sqrt{2}$
+                </div>
+
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>Test each number against the definition — can it be written as $\dfrac{p}{q}$ with integer $p, q$ and $q \neq 0$?</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>$\dfrac{3}{7}$ is already in the form $\dfrac{p}{q}$. <strong>Rational.</strong></p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">03</span>
+                  <div class="solution-step__body">
+                    <p>$-5 = \dfrac{-5}{1}$. <strong>Rational.</strong></p>
+                    <div class="note">Every integer is rational — just place it over 1.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">04</span>
+                  <div class="solution-step__body">
+                    <p>$0.75 = \dfrac{75}{100} = \dfrac{3}{4}$. <strong>Rational.</strong></p>
+                    <div class="note">A terminating decimal can always be written with a power of 10 in the denominator, then simplified.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">05</span>
+                  <div class="solution-step__body">
+                    <p>$0.\overline{3}$ means $0.3333\ldots$ Let $x = 0.\overline{3}$. Then $10x = 3.\overline{3}$, and $10x - x = 3$, so $x = \dfrac{3}{9} = \dfrac{1}{3}$. <strong>Rational.</strong></p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">06</span>
+                  <div class="solution-step__body">
+                    <p>$\sqrt{2} = 1.41421356\ldots$ — non-terminating and non-repeating. <strong>Not rational.</strong></p>
+                    <div class="note">We'll prove this properly in the next section.</div>
+                  </div>
+                </div>
+
+                <div class="answer-pill">Rational: $\dfrac{3}{7},\ -5,\ 0.75,\ 0.\overline{3}$</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 1.2 -->
+          <section class="lesson-section" id="section-2">
+            <h2><span class="num">1.2</span> Irrational Numbers</h2>
+
+            <div class="definition">
+              <strong>Definition</strong>
+              <p>An <em>irrational number</em> is a real number that <em>cannot</em> be written as $\dfrac{p}{q}$ where $p, q \in \mathbb{Z}$ and $q \neq 0$. Equivalently, its decimal expansion is non-terminating and non-repeating.</p>
+            </div>
+
+            <p>Common irrationals: $\sqrt{2}$, $\sqrt{3}$, $\sqrt{5}$, $\pi$, $e$. The set of irrational numbers is denoted $\mathbb{Q}'$ (read "Q-prime"). The real numbers $\mathbb{R}$ are the union $\mathbb{Q} \cup \mathbb{Q}'$.</p>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Example 2</span>
+                <span class="example__tag">proof — by contradiction</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Prove that $\sqrt{2}$ is irrational.
+                </div>
+
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>Suppose, for contradiction, that $\sqrt{2}$ is rational. Then $\sqrt{2} = \dfrac{p}{q}$ where $p, q$ are integers with no common factor (i.e. the fraction is in lowest terms) and $q \neq 0$.</p>
+                    <div class="note">We always start contradiction proofs by assuming the <em>opposite</em> of what we want to show.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>Squaring both sides: $2 = \dfrac{p^2}{q^2}$, so $p^2 = 2q^2$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">03</span>
+                  <div class="solution-step__body">
+                    <p>Since $p^2 = 2q^2$, $p^2$ is even. But if $p^2$ is even, $p$ itself must be even (because the square of an odd number is odd). So write $p = 2k$ for some integer $k$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">04</span>
+                  <div class="solution-step__body">
+                    <p>Substitute back: $(2k)^2 = 2q^2$, giving $4k^2 = 2q^2$, so $q^2 = 2k^2$. By the same reasoning, $q$ must also be even.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">05</span>
+                  <div class="solution-step__body">
+                    <p>But now $p$ and $q$ are both even, so they share a factor of 2 — contradicting our assumption that $\dfrac{p}{q}$ was in lowest terms.</p>
+                    <div class="note">The contradiction shows our assumption was false.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">06</span>
+                  <div class="solution-step__body">
+                    <p>Therefore $\sqrt{2}$ cannot be rational. It is irrational. $\blacksquare$</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-placeholder">
+              <div class="video-placeholder__icon" aria-hidden="true"></div>
+              <div class="video-placeholder__text">
+                <strong>Video walkthrough</strong>
+                <p>4-minute walkthrough of this proof, with every step narrated. <em>Coming soon.</em></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 1.3 -->
+          <section class="lesson-section" id="section-3">
+            <h2><span class="num">1.3</span> Decimal Representation</h2>
+
+            <p>Every real number has a unique decimal representation. The key fact: rational numbers have <em>terminating</em> or <em>repeating</em> decimals; irrational numbers have <em>non-terminating non-repeating</em> decimals.</p>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Example 3</span>
+                <span class="example__tag">repeating decimal → fraction</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Convert $0.\overline{27}$ (i.e. $0.272727\ldots$) to a fraction in lowest terms.
+                </div>
+
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>Let $x = 0.\overline{27}$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>The repeating block has 2 digits, so multiply by $10^2 = 100$: $100x = 27.\overline{27}$.</p>
+                    <div class="note">We multiply by $10^n$ where $n$ is the length of the repeating block, so the repeating parts line up.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">03</span>
+                  <div class="solution-step__body">
+                    <p>Subtract: $100x - x = 27.\overline{27} - 0.\overline{27} = 27$, so $99x = 27$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">04</span>
+                  <div class="solution-step__body">
+                    <p>Solve: $x = \dfrac{27}{99} = \dfrac{3}{11}$ (dividing top and bottom by their HCF, 9).</p>
+                  </div>
+                </div>
+                <div class="answer-pill">$0.\overline{27} = \dfrac{3}{11}$</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 1.4 -->
+          <section class="lesson-section" id="section-4">
+            <h2><span class="num">1.4</span> Radicals &amp; Radicands</h2>
+
+            <div class="definition">
+              <strong>Definition</strong>
+              <p>In the expression $\sqrt[n]{a}$, the symbol $\sqrt{\ }$ is the <em>radical sign</em>, $n$ is the <em>index</em>, and $a$ is the <em>radicand</em>. If $n = 2$ we write just $\sqrt{a}$ for the square root.</p>
+            </div>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Example 4</span>
+                <span class="example__tag">simplifying surds</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Simplify: (a) $\sqrt{50}$, (b) $\sqrt{72}$, (c) $\sqrt{18} + \sqrt{8}$.
+                </div>
+
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>(a) Factor the radicand to pull out a perfect square: $50 = 25 \cdot 2$, so $\sqrt{50} = \sqrt{25 \cdot 2} = \sqrt{25} \cdot \sqrt{2} = 5\sqrt{2}$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>(b) $72 = 36 \cdot 2$, so $\sqrt{72} = 6\sqrt{2}$.</p>
+                    <div class="note">Always pull out the <em>largest</em> perfect square. If we'd used $72 = 4 \cdot 18$ we'd have to simplify again.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">03</span>
+                  <div class="solution-step__body">
+                    <p>(c) Simplify each term first: $\sqrt{18} = 3\sqrt{2}$ and $\sqrt{8} = 2\sqrt{2}$. Then $\sqrt{18} + \sqrt{8} = 3\sqrt{2} + 2\sqrt{2} = 5\sqrt{2}$.</p>
+                    <div class="note">You can only add surds if the part under the radical matches — just like combining like terms.</div>
+                  </div>
+                </div>
+                <div class="answer-pill">(a) $5\sqrt{2}$, (b) $6\sqrt{2}$, (c) $5\sqrt{2}$</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 1.5 -->
+          <section class="lesson-section" id="section-5">
+            <h2><span class="num">1.5</span> Laws of Exponents</h2>
+
+            <p>For any $a, b > 0$ and real numbers $m, n$, the following hold:</p>
+
+            <div class="definition">
+              <strong>The five laws</strong>
+              <p class="math-display">$a^m \cdot a^n = a^{m+n}$</p>
+              <p class="math-display">$\dfrac{a^m}{a^n} = a^{m-n}$</p>
+              <p class="math-display">$(a^m)^n = a^{mn}$</p>
+              <p class="math-display">$(ab)^n = a^n b^n$</p>
+              <p class="math-display">$\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}$</p>
+            </div>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Example 5</span>
+                <span class="example__tag">combining laws</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Simplify $\dfrac{x^5 \cdot x^{-2}}{x^3}$.
+                </div>
+
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>Combine the numerator using law 1: $x^5 \cdot x^{-2} = x^{5 + (-2)} = x^3$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>Now divide using law 2: $\dfrac{x^3}{x^3} = x^{3-3} = x^0 = 1$.</p>
+                    <div class="note">Any non-zero number to the power zero is 1, by convention and consistency with the laws.</div>
+                  </div>
+                </div>
+                <div class="answer-pill">Answer: $1$</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- EXERCISE 1.1 -->
+          <section class="lesson-section" id="section-6">
+            <h2><span class="num">Ex 1.1</span> Exercise 1.1 — selected problems</h2>
+
+            <p>Below are the textbook exercise problems with complete worked solutions. (Full exercise set — all 23 problems — will ship with the v1.1 update; these are the starters.)</p>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Q1</span>
+                <span class="example__tag">identify</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Classify each as rational or irrational: $\dfrac{4}{9}, \sqrt{16}, \sqrt{17}, \pi, -\dfrac{7}{2}, 1.75$
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>$\dfrac{4}{9}$ — already in $\dfrac{p}{q}$ form. <em>Rational.</em></p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>$\sqrt{16} = 4 = \dfrac{4}{1}$. <em>Rational.</em></p>
+                    <div class="note">The radical looks irrational at first glance, but it evaluates to an integer.</div>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">03</span>
+                  <div class="solution-step__body">
+                    <p>$\sqrt{17}$ — 17 is prime, not a perfect square. <em>Irrational.</em></p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">04</span>
+                  <div class="solution-step__body">
+                    <p>$\pi \approx 3.14159265\ldots$ — non-terminating, non-repeating. <em>Irrational.</em></p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">05</span>
+                  <div class="solution-step__body">
+                    <p>$-\dfrac{7}{2}$ — already in form. <em>Rational.</em></p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">06</span>
+                  <div class="solution-step__body">
+                    <p>$1.75 = \dfrac{175}{100} = \dfrac{7}{4}$. <em>Rational.</em></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Q2</span>
+                <span class="example__tag">convert</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Convert $0.\overline{6}$ to a fraction.
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>Let $x = 0.\overline{6}$. Then $10x = 6.\overline{6}$, so $10x - x = 6$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>$9x = 6 \Rightarrow x = \dfrac{6}{9} = \dfrac{2}{3}$.</p>
+                  </div>
+                </div>
+                <div class="answer-pill">$0.\overline{6} = \dfrac{2}{3}$</div>
+              </div>
+            </div>
+
+            <div class="example">
+              <div class="example__header">
+                <span class="example__num">Q3</span>
+                <span class="example__tag">simplify</span>
+              </div>
+              <div class="example__body">
+                <div class="example__prompt">
+                  <strong>Problem</strong>
+                  Simplify $\sqrt{45} + 2\sqrt{20} - \sqrt{80}$.
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">01</span>
+                  <div class="solution-step__body">
+                    <p>Simplify each radical: $\sqrt{45} = 3\sqrt{5}$, $\sqrt{20} = 2\sqrt{5}$, $\sqrt{80} = 4\sqrt{5}$.</p>
+                  </div>
+                </div>
+                <div class="solution-step">
+                  <span class="solution-step__num">02</span>
+                  <div class="solution-step__body">
+                    <p>Substitute: $3\sqrt{5} + 2(2\sqrt{5}) - 4\sqrt{5} = 3\sqrt{5} + 4\sqrt{5} - 4\sqrt{5} = 3\sqrt{5}$.</p>
+                  </div>
+                </div>
+                <div class="answer-pill">Answer: $3\sqrt{5}$</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FOOTER -->
+          <div class="chapter-footer">
+            <a href="index.html" class="back-link"><span class="arrow">←</span> all solutions</a>
+            <span style="font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em;">chapter v1.0 · last updated 2026</span>
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <span>© <span data-year>2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+      <span class="site-footer__mark">set in fraunces &amp; geist</span>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js"></script>
+</body>
+</html>
