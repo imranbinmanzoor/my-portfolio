@@ -14,6 +14,13 @@
   var themeToggles = document.querySelectorAll('[data-theme-toggle]');
   function readStoredTheme() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
   function storeTheme(t) { try { localStorage.setItem('theme', t); } catch (e) {} }
+  function syncThemeButtons() {
+    var isDark = html.getAttribute('data-theme') === 'dark';
+    themeToggles.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      btn.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+    });
+  }
 
   var stored = readStoredTheme();
   if (stored === 'light' || stored === 'dark') {
@@ -22,12 +29,14 @@
     var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
   }
+  syncThemeButtons();
   themeToggles.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
       var next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       storeTheme(next);
+      syncThemeButtons();
     });
   });
 
@@ -47,15 +56,26 @@
   var navToggle = document.querySelector('[data-menu-open]');
   var closeToggle = document.querySelector('[data-menu-close]');
 
+  if (mobileMenu) {
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    if ('inert' in mobileMenu) mobileMenu.inert = true;
+  }
+
   function openMenu() {
     if (!mobileMenu) return;
     mobileMenu.classList.add('is-open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    if ('inert' in mobileMenu) mobileMenu.inert = false;
     body.classList.add('nav-open');
     if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
+    var closeButton = mobileMenu.querySelector('[data-menu-close]');
+    if (closeButton) closeButton.focus({ preventScroll: true });
   }
   function closeMenu() {
     if (!mobileMenu) return;
     mobileMenu.classList.remove('is-open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    if ('inert' in mobileMenu) mobileMenu.inert = true;
     body.classList.remove('nav-open');
     if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
   }
