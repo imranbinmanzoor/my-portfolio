@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Modern animated login / signup — Muhammad Imran</title>
+<link rel="canonical" href="https://imranbinmanzoor.com/projects/modern-page/"/>
+<meta content="A smooth animated authentication flow — case study by Muhammad Imran." name="description"/>
+<link href="/IMAGES/my-pic.ico" rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Geist:wght@300;400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+</head>
+<body data-pillar="frontend">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav" data-nav-sticky="">
+<div class="nav__inner">
+<a class="brand" href="/"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+<nav aria-label="Primary" class="nav__links">
+<a href="/#research">Research</a>
+<a class="is-active" data-accent="frontend" href="/#work">Work</a>
+<a href="/#tutoring">Tutoring</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a>
+</nav>
+<div class="nav__right">
+<button aria-label="Toggle theme" class="theme-toggle" data-theme-toggle="" type="button">
+<svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+<svg class="sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
+<a class="btn btn--ghost" href="/#contact"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
+<button aria-label="Open menu" class="nav__mobile-toggle" data-menu-open="" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7" viewbox="0 0 24 24"><line x1="4" x2="20" y1="8" y2="8"></line><line x1="4" x2="20" y1="16" y2="16"></line></svg></button>
+</div>
+</div>
+</header>
+<div aria-hidden="true" aria-modal="true" class="mobile-menu" id="mobile-menu" role="dialog">
+<div class="mobile-menu__header">
+<a class="brand" href="/"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
+<button aria-label="Close menu" class="mobile-menu__close" data-menu-close="" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7" viewbox="0 0 24 24"><line x1="6" x2="18" y1="6" y2="18"></line><line x1="6" x2="18" y1="18" y2="6"></line></svg></button>
+</div>
+<div class="mobile-menu__body">
+<nav class="mobile-menu__links">
+<a href="/#research"><span class="num">01</span><span>Research</span></a>
+<a href="/#work"><span class="num">02</span><span>Work</span></a>
+<a href="/#tutoring"><span class="num">03</span><span>Tutoring</span></a>
+<a href="/#about"><span class="num">04</span><span>About</span></a>
+<a href="/#contact"><span class="num">05</span><span>Contact</span></a>
+</nav>
+</div>
+<div class="mobile-menu__footer">
+<span class="mobile-menu__footer-left">Multan, Pakistan</span>
+<button aria-label="Toggle theme" class="theme-toggle" data-theme-toggle="" type="button">
+<svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+<svg class="sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
+</div>
+</div>
+<main id="main">
+<section class="page-hero wrap">
+<a class="back-link reveal" href="/#work"><span class="arrow">←</span> back to work</a>
+<div class="page-hero__eyebrow reveal">
+<span class="eyebrow">ui experiment · 2024</span>
+<span class="divider">·</span>
+<span class="eyebrow" style="color: var(--frontend);">● frontend</span>
+</div>
+<h1 class="page-hero__title reveal">
+        Modern animated <em>login &amp; signup</em> — a study in state, motion, and trust.
+      </h1>
+<p class="lede page-hero__lede reveal">
+        An authentication flow that moves. Layered transitions between login, signup, and password-reset states, with micro-interactions on every field — the small stuff that changes whether an app feels cheap or trustworthy.
+      </p>
+</section>
+<div class="wrap">
+<div class="meta-grid">
+<div class="meta-grid__item"><span class="meta-grid__label">year</span><span class="meta-grid__value">2024</span></div>
+<div class="meta-grid__item"><span class="meta-grid__label">type</span><span class="meta-grid__value">UI experiment</span></div>
+<div class="meta-grid__item"><span class="meta-grid__label">stack</span><span class="meta-grid__value">HTML · CSS · JS</span></div>
+<div class="meta-grid__item"><span class="meta-grid__label">status</span><span class="meta-grid__value">Prototype</span></div>
+</div><div class="project-proof-row reveal"><span>State-driven UI</span><span>Reduced-motion aware</span><span>Pure CSS transitions</span><span>Form interaction study</span></div>
+</div>
+<section>
+<div class="wrap">
+<div class="project-screenshot"><img alt="Modern animated login / signup — desktop view" decoding="async" loading="eager" src="/IMAGES/modern-page.webp"/></div>
+<div class="content-prose">
+<h2>Why bother animating login?</h2>
+<p>Authentication screens are usually the first impression an app makes on a returning user. Most of them are <em>flat, abrupt, and untrusting</em> — inputs snap in, errors pop up like alarms, and switching to "sign up" means a full page reload. I wanted to prototype a version where every state change feels continuous.</p>
+<h2>Design decisions</h2>
+<h3>State as animation</h3>
+<p>Switching between login and signup doesn't swap the form — it reveals new fields underneath and gently pushes the button down. The same form <em>grows</em> and <em>shrinks</em> as you move between modes.</p>
+<h3>Field-level feedback</h3>
+<p>Inputs validate as you type, with smooth colour transitions on the border and a short message that slides in from below. Errors never block the layout; they're non-destructive.</p>
+<h3>Button-as-progress</h3>
+<p>The submit button doesn't disappear during submission — it morphs. The text slides out, a loader slides in, and on success the whole button briefly becomes a checkmark before redirecting.</p>
+<h2>Technical approach</h2>
+<ul>
+<li>All transitions built with pure CSS <code>transform</code> and <code>opacity</code> — no JS animation libraries.</li>
+<li>Form state (<code>login | signup | reset | submitting | success</code>) managed via a single data-attribute on the form root, which drives every child's styling.</li>
+<li>Motion respects <code>prefers-reduced-motion</code> — all transitions collapse to instantaneous when the OS requests it.</li>
+</ul>
+<blockquote>Motion is not decoration. Done well, it tells you what just happened and what's about to happen — before you have to read any text.</blockquote>
+</div>
+</div>
+</section>
+<section>
+<div class="wrap">
+<nav aria-label="Project navigation" class="page-footer-nav">
+<a class="align-right" href="/projects/omnifood/">
+<span class="page-footer-nav__label">← previous</span>
+<span class="page-footer-nav__title">Omnifood</span>
+</a>
+<a href="/projects/pig-game/">
+<span class="page-footer-nav__label">next →</span>
+<span class="page-footer-nav__title">The Pig Game</span>
+</a>
+</nav>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="wrap site-footer__inner">
+<span>© <span data-year="">2026</span> Muhammad Imran · Designed and shipped by hand.</span>
+<span class="site-footer__mark">set in fraunces &amp; geist</span>
+</div>
+</footer>
+<script src="/assets/scripts.js"></script>
+</body>
+</html>

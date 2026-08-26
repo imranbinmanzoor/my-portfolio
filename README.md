@@ -94,6 +94,12 @@ Applied via `data-pillar="research|frontend|tutoring"` on a `<section>` or `<bod
 ## Built with
 
 - Fraunces (serif display) and Geist (sans + mono), via Google Fonts
-- KaTeX for math rendering on the solutions pages
+- Pre-rendered mathematics SVGs embedded directly in the Class 9 and Class 10 solution books
 - No JS framework. Everything is vanilla.
 - Mobile menu is a top-level `position: fixed` overlay with its own stacking context.
+
+## URL structure
+
+This repo uses directory `index.html` files for clean GitHub Pages URLs. For example, `projects/omnifood/index.html` is served as `/projects/omnifood/`. Legacy `.html` files remain only as redirect stubs so existing bookmarks do not break.
+
+Mathematics content is organized as two self-contained book pages: `/solutions/class-9/` and `/solutions/class-10/`. Each book keeps its own internal unit/section router using URL fragments such as `#unit-1`; legacy Class 9 Unit 1 URLs are retained only as redirects.

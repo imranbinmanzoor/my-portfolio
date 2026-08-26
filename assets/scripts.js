@@ -10,6 +10,12 @@
   var html = document.documentElement;
   var body = document.body;
 
+  /* ---------- 0. CLEAN GITHUB PAGES URL ---------- */
+  if (window.location.pathname.endsWith('/index.html')) {
+    var cleanPath = window.location.pathname.slice(0, -10) || '/';
+    window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+  }
+
   /* ---------- 1. THEME ---------- */
   var themeToggles = document.querySelectorAll('[data-theme-toggle]');
   function readStoredTheme() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
