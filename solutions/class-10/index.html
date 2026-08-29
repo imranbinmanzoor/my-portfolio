@@ -809,7 +809,11 @@ a.unit:hover,a.unit:focus-visible{border-color:var(--primary);
    else, so it inherits the palette and the control sizing. */
 .to-top{
   position:fixed;z-index:60;
-  right:max(var(--space-4), env(safe-area-inset-right));
+  /* Align the button's right edge with the reading column's right edge rather
+     than the window's, so on a wide screen it sits beside the content instead
+     of drifting out into the margin. On a narrow screen the column fills the
+     viewport, and the max() falls back to the ordinary screen inset. */
+  right:max(var(--space-4), env(safe-area-inset-right), var(--content-inset, 0px));
   bottom:max(var(--space-5), env(safe-area-inset-bottom));
   width:var(--control-lg);height:var(--control-lg);
   display:inline-flex;align-items:center;justify-content:center;
@@ -7506,6 +7510,22 @@ function bindBookRouter() {
 function bindBackToTop() {
   var btn = document.querySelector('.to-top');
   if (!btn) return;
+  /* Measure the reading column rather than computing it from tokens: the wrap
+     carries its own padding and the ch unit does not resolve to the same width
+     on the button as it does on the column. */
+  var syncInset = function () {
+    var panel = $('.panel:not([hidden])');
+    var wrap = panel ? panel.querySelector('.wrap') : $('.wrap');
+    if (!wrap) return;
+    /* Distance from the window's right edge to the reading column's. Sit the
+       button in the margin just beyond the column, so it is beside the content
+       rather than on top of it. Where there is no margin left, the CSS floor
+       takes over and it behaves like an ordinary floating control. */
+    var margin = Math.max(0, Math.round(window.innerWidth - wrap.getBoundingClientRect().right));
+    var gap = 12;
+    var target = margin - btn.offsetWidth - gap;
+    document.documentElement.style.setProperty('--content-inset', Math.max(0, target) + 'px');
+  };
   var show = function () {
     var on = document.body.dataset.view === 'chapter'
       && window.scrollY > Math.max(600, window.innerHeight * 0.9);
@@ -7520,9 +7540,10 @@ function bindBackToTop() {
     if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
   });
   window.addEventListener('scroll', show, { passive: true });
-  window.addEventListener('resize', debounce(show, 150));
-  window.addEventListener('hashchange', function () { setTimeout(show, 100); });
-  backToTopSync = show;
+  window.addEventListener('resize', debounce(function () { syncInset(); show(); }, 150));
+  window.addEventListener('hashchange', function () { setTimeout(function () { syncInset(); show(); }, 100); });
+  backToTopSync = function () { syncInset(); show(); };
+  syncInset();
   show();
 }
 var backToTopSync = function () {};
