@@ -968,16 +968,13 @@
           padding-top: 56.25%;
         }
       }
-      /* Centred and, when the file carries its own black padding, scaled up until
-   that padding sits outside the box. The default is 100% by 100%, so a video
-   that was never padded is untouched. */
+      /* The player fills the box exactly. The box is already the video's own shape,
+   so there is nothing to scale and nothing to crop. */
       .vid-frame iframe {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: var(--vid-w, 100%);
-        height: var(--vid-h, 100%);
+        inset: 0;
+        width: 100%;
+        height: 100%;
         border: 0;
         display: block;
       }
@@ -9403,25 +9400,16 @@
           page: (v) => `https://vimeo.com/${encodeURIComponent(v.id)}`,
         },
       };
-      /* A recording is often padded to sixteen by nine before it is uploaded, so the
-   file itself carries black bars. `aspect` is the size of the real picture
-   inside that frame, measured with measure_video.py. The box is then given the
-   picture's own shape and the player is scaled until the padding falls outside
-   it, which is the only way to remove bars that are part of the video.
-   Without `aspect` nothing is scaled and the player fills a sixteen by nine
-   box, which is right for a video that was never padded. */
+      /* Not every video is sixteen by nine. A screen recording from a sixteen by ten
+   laptop is not, and the player letterboxes anything whose box is the wrong
+   shape, which is where black bars come from. `aspect` is the video's own
+   shape, so the box can be cut to fit it and the picture fills the box exactly.
+   Nothing is scaled and nothing is cropped. Default sixteen by nine. */
       function videoFit(v) {
         const a = v.aspect;
         if (!Array.isArray(a) || a.length !== 2 || !(a[0] > 0) || !(a[1] > 0))
           return "";
-        const pic = a[0] / a[1],
-          frame = 16 / 9;
-        const pct = (n) => (n * 100).toFixed(3) + "%";
-        return (
-          ` style="aspect-ratio:${a[0]}/${a[1]};` +
-          `--vid-w:${pct(pic < frame ? frame / pic : 1)};` +
-          `--vid-h:${pct(pic > frame ? pic / frame : 1)}"`
-        );
+        return ` style="aspect-ratio:${a[0]}/${a[1]}"`;
       }
       function videoHTML(v) {
         if (!v || !v.id) return "";
