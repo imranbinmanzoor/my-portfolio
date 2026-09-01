@@ -968,11 +968,16 @@
           padding-top: 56.25%;
         }
       }
+      /* Centred and, when the file carries its own black padding, scaled up until
+   that padding sits outside the box. The default is 100% by 100%, so a video
+   that was never padded is untouched. */
       .vid-frame iframe {
         position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--vid-w, 100%);
+        height: var(--vid-h, 100%);
         border: 0;
         display: block;
       }
@@ -2748,7 +2753,8 @@
                     "video": {
                       "kind": "youtube",
                       "id": "00EdyprXr7M",
-                      "title": "Video solution for $i^{5}$"
+                      "title": "Video solution for $i^{5}$",
+                      "aspect": [1186, 720]
                     }
                   },
                   {
@@ -9397,6 +9403,26 @@
           page: (v) => `https://vimeo.com/${encodeURIComponent(v.id)}`,
         },
       };
+      /* A recording is often padded to sixteen by nine before it is uploaded, so the
+   file itself carries black bars. `aspect` is the size of the real picture
+   inside that frame, measured with measure_video.py. The box is then given the
+   picture's own shape and the player is scaled until the padding falls outside
+   it, which is the only way to remove bars that are part of the video.
+   Without `aspect` nothing is scaled and the player fills a sixteen by nine
+   box, which is right for a video that was never padded. */
+      function videoFit(v) {
+        const a = v.aspect;
+        if (!Array.isArray(a) || a.length !== 2 || !(a[0] > 0) || !(a[1] > 0))
+          return "";
+        const pic = a[0] / a[1],
+          frame = 16 / 9;
+        const pct = (n) => (n * 100).toFixed(3) + "%";
+        return (
+          ` style="aspect-ratio:${a[0]}/${a[1]};` +
+          `--vid-w:${pct(pic < frame ? frame / pic : 1)};` +
+          `--vid-h:${pct(pic > frame ? pic / frame : 1)}"`
+        );
+      }
       function videoHTML(v) {
         if (!v || !v.id) return "";
         const host = VIDEO[v.kind] || VIDEO.youtube;
@@ -9409,7 +9435,7 @@
       <span class="vid-lab">${label}</span>
       ${v.duration ? `<span class="vid-dur">${v.duration}</span>` : ""}</summary>
     <div class="vidin">
-      <div class="vid-frame" data-src="${host.embed(v).replace(/&/g, "&amp;")}" data-title="${name}"></div>
+      <div class="vid-frame"${videoFit(v)} data-src="${host.embed(v).replace(/&/g, "&amp;")}" data-title="${name}"></div>
       <p class="vid-alt"><a href="${host.page(v)}" target="_blank" rel="noopener">Open this video on ${host.site}</a> if it does not play here.</p>
     </div></details>`;
       }
