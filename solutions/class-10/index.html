@@ -817,6 +817,11 @@
         border-radius: var(--radius-md);
         background: var(--surface-raised);
       }
+      /* Two disclosures in a row would otherwise double their gap and drift apart
+   from the working they belong to. */
+      details.vid + details.notes {
+        margin-top: var(--space-3);
+      }
       details.notes > summary {
         cursor: pointer;
         min-height: var(--control-sm);
@@ -879,8 +884,11 @@
    when it closes. That is what keeps a page of forty parts free of forty
    third-party players, and it is also what stops the sound when a student
    shuts the panel. */
+      /* A peer of the answer box and the compact solution, so it takes their gap.
+   The notes below it keep the tighter space-3, which is what makes the notes
+   read as a tail rather than a fourth section. */
       details.vid {
-        margin-top: var(--space-3);
+        margin-top: var(--space-4);
         border: 1px solid var(--border);
         border-radius: var(--radius-md);
         background: var(--surface-raised);
@@ -986,9 +994,6 @@
       .vid-alt a {
         color: var(--primary);
         font-weight: 500;
-      }
-      details.vid[hidden] {
-        display: none;
       }
 
       /* ================================ concepts ============================== */
@@ -9378,10 +9383,11 @@
         return `<details class="notes"><summary>More on this part: ${labels.join(", ")}</summary>
           <div class="notesin">${bits.join("")}</div></details>`;
       }
-      /* A video solution is a second route to the same working, so it sits beside
-   the written solution, not inside it. A student who wants to watch can do so
-   without first uncovering the answer, and a student who never watches sees
-   one quiet extra line.
+      /* The video lives INSIDE the solution, at the bottom, under the working it
+   repeats. Beside the solution it wins every time: a video is one click and no
+   effort, so the written steps stop being read at all. Underneath, the reading
+   comes first and the video is what a student reaches for when the reading did
+   not land. Same content, opposite habit.
    The content file stores the bare video id, never an embed URL and never a
    pasted <iframe>. Building the player here is what keeps privacy mode, the
    aspect ratio, the accessible name and lazy loading in one place. */
@@ -9429,10 +9435,18 @@
       }
       /* The player is created when the panel opens and destroyed when it closes.
    Forty parts therefore cost nothing until a student asks for one, and
-   shutting the panel stops the sound, which is what shutting it means. */
+   shutting the panel stops the sound, which is what shutting it means.
+   Closing the whole solution has to stop it too. Now that the video sits
+   inside the solution, collapsing the solution would otherwise leave a player
+   running out of sight, and a student hears a voice with nothing on screen. */
       function wireVideos(root) {
         root.querySelectorAll("details.vid").forEach((d) => {
           const box = d.querySelector(".vid-frame");
+          const sol = d.closest("details.sol");
+          if (sol)
+            sol.addEventListener("toggle", () => {
+              if (!sol.open) d.open = false;
+            });
           d.addEventListener("toggle", () => {
             if (!d.open) {
               box.textContent = "";
@@ -9460,9 +9474,9 @@
       ${stepsHTML(p.steps)}
       <div class="ans"><b>Answer</b><span>${p.answer}</span></div>
       ${writtenHTML(p.written)}
+      ${videoHTML(p.video)}
       ${notesHTML(p.notes)}
-    </div></details>
-    ${videoHTML(p.video)}</article>`;
+    </div></details></article>`;
       }
       function blockHTML(label, stem, parts, isExample) {
         return `<section class="qblock">
@@ -9584,9 +9598,9 @@
     <details class="sol" hidden><summary>Solution</summary><div class="solin">
       ${writtenHTML(pt.written) || stepsHTML(pt.steps)}
       ${wrong}
+      ${videoHTML(pt.video)}
       ${notesHTML(pt.notes)}
-    </div></details>
-    ${videoHTML(pt.video).replace('<details class="vid">', '<details class="vid" hidden>')}</article>`;
+    </div></details></article>`;
       }
 
       function wireMCQs(root) {
@@ -9596,11 +9610,10 @@
           const verdict = part.querySelector(".mcq-verdict");
           const msg = part.querySelector(".mcq-msg");
           const sol = part.querySelector("details.sol");
-          const vid = part.querySelector("details.vid");
 
           /* The solution stays out of sight until a choice is made, so the student
-       cannot read the working before committing to an answer. The video is a
-       solution too, so it is covered by the same rule. */
+       cannot read the working before committing to an answer. The video is
+       inside it, so it is covered by the same rule with no extra code. */
           const clear = () => {
             opts.forEach((b) => {
               b.disabled = false;
@@ -9611,10 +9624,6 @@
             msg.textContent = "";
             sol.hidden = true;
             sol.open = false;
-            if (vid) {
-              vid.open = false;
-              vid.hidden = true;
-            }
           };
 
           opts.forEach((btn, picked) =>
@@ -9633,7 +9642,6 @@
                   ? "Correct."
                   : `Not correct. The right answer is (${KEYS[correct]}).`;
               sol.hidden = false;
-              if (vid) vid.hidden = false;
             }),
           );
 
