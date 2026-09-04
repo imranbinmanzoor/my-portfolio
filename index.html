@@ -646,6 +646,14 @@
         align-items:baseline}
       .pq-part+.pq-part{margin-top:var(--space-2)}
       .pq-ab{font-weight:700;color:var(--text-secondary)}
+      .pq-qtext{min-width:0}
+      /* Room to answer in. Each line is a bordered row, not a repeating background
+         gradient: most print dialogues have "Background graphics" switched off, so a
+         gradient would rule the box on screen and leave the sheet blank. */
+      /* More space below the last rule than above the first, so a block of ruling
+         reads as belonging to the question above it and not the one below. */
+      .pq-space{margin:var(--space-2) 0 var(--space-4)}
+      .pq-rule{height:1.7rem;border-bottom:1px solid var(--border)}
       /* auto-fit rather than a fixed four columns: a long option such as
          "x = 0 and y != 0" then gets a wider cell instead of wrapping mid-phrase. */
       .pq-opts{list-style:none;display:grid;
@@ -783,6 +791,9 @@
         .pq-m{font-size:9pt;color:#000;min-width:2.4em;text-align:right}
         .pq-long{padding:6pt 0}
         .pq-part+.pq-part{margin-top:3pt}
+        /* About 7mm between rules, which is what a school answer sheet uses. */
+        .pq-space{margin:3pt 0 9pt}
+        .pq-rule{height:20pt;border-bottom:.5pt solid #666}
         .pq-opts{gap:1pt 10pt;margin-top:2pt;font-size:9.5pt}
         .pq-opts.is-wide{grid-template-columns:repeat(2,minmax(0,1fr));gap:2pt 14pt}
 
@@ -13971,6 +13982,21 @@
       const numWord = (n) => WORDS[n] || String(n);
       const pad2 = (n) => String(n).padStart(2, "0");
 
+      /* Ruled space to write the answer in, drawn as a stack of bordered rows.
+
+   A repeating background gradient would be the shorter way to rule a box and it
+   is the wrong one: most browsers leave "Background graphics" off in the print
+   dialogue, so the rules would be there on screen and gone on the sheet. A
+   border prints. */
+      function ruledHTML(lines) {
+        if (!lines) return "";
+        return (
+          `<div class="pq-space" aria-hidden="true">` +
+          `<div class="pq-rule"></div>`.repeat(lines) +
+          `</div>`
+        );
+      }
+
       function paperHTML(paper) {
         let h = `<article class="paper">
     <header class="paper-head">
@@ -14010,7 +14036,7 @@
                       (it.parts.length > 1
                         ? `<span class="pq-ab">(${KEYS[j]})</span>`
                         : "") +
-                      `<span>${p.q}</span></div>`,
+                      `<div class="pq-qtext">${p.q}${ruledHTML(sec.rules)}</div></div>`,
                   )
                   .join("") +
                 `</div><span class="pq-m">${it.marksLabel || it.marks}</span></div>`;
@@ -14037,6 +14063,7 @@
                       .join("") +
                     `</ul>`
                   : "") +
+                ruledHTML(sec.rules) +
                 `</div>${sec.showMarks ? `<span class="pq-m">${it.marks}</span>` : ""}</div>`;
             }
           });
@@ -14282,6 +14309,13 @@
         const u = BOOK.units.find((x) => x.n === unit) || { title: "" };
         const sections = [];
 
+        /* Room to answer in, counted in ruled lines and sized to what the question is
+     worth. An objective question is answered by circling an option, so it gets
+     none. Turned off, the sheet is the compact one a class writes on a separate
+     answer book from. */
+        const rules = (marks) =>
+          o.space ? Math.max(2, Math.round(marks * 1.5)) : 0;
+
         if (mcqs.length)
           sections.push({
             tag: "Section A",
@@ -14290,6 +14324,7 @@
             numbering: "roman",
             arith: `${P.mcq.marks} × ${mcqs.length} = ${mcqMarks}`,
             note: "Attempt all parts. Each part carries one mark. Circle the correct option.",
+            rules: 0,
             items: mcqs.map((x) => ({
               q: x.q,
               opts: x.opts,
@@ -14307,6 +14342,7 @@
             numbering: "roman",
             newPage: true,
             showMarks: false,
+            rules: rules(P.short.marks),
             arith: `${P.short.marks} × ${shortAttempt} = ${shortMarks}`,
             note:
               shortAttempt < shorts.length
@@ -14327,6 +14363,7 @@
             numbering: "q",
             startNumber: 3,
             newPage: !shorts.length,
+            rules: rules(P.long.marks),
             arith: `${perQ * P.long.marks} × ${longAttempt} = ${longMarks}`,
             note:
               longAttempt < groups.length
@@ -14355,6 +14392,7 @@
           marks,
           code: "U" + unit + "-" + seedToCode(o.seed),
           coverage: coverageLabel(unit, o.sources),
+          space: !!o.space,
           sections,
           shortfall: {
             mcq: P.mcq.ask - mcqs.length,
@@ -14444,6 +14482,18 @@
           <label><input type="radio" name="diff" value="challenging"><span>Challenging</span></label>
         </div>
       </div>
+      <div class="field">
+        <span class="lbl" id="lab-space">Writing space</span>
+        <p class="hint">Ruled lines under every written question, as many as the marks
+           are worth. An objective question gets none, because it is answered by
+           circling an option.</p>
+        <div class="choice" role="radiogroup" aria-labelledby="lab-space">
+          <label><input type="radio" name="space" value="yes" checked>
+            <span>Leave room to write<b class="gen-note">the sheet runs to more pages</b></span></label>
+          <label><input type="radio" name="space" value="no">
+            <span>Questions only<b class="gen-note">for a class writing on a separate answer book</b></span></label>
+        </div>
+      </div>
       <div class="field" id="lengths" hidden>
         <span class="lbl">How many questions</span>
         <p class="hint">A long question always carries two parts, (a) and (b), so it is
@@ -14500,6 +14550,8 @@
 
         const sources = () =>
           boxes.filter((b) => b.checked).map((b) => b.value);
+        const wantsSpace = () =>
+          document.querySelector('input[name="space"]:checked').value === "yes";
         const asked = () => ({
           mcq: Math.max(0, Number(nums.mcq.value) || 0),
           short: Math.max(0, Number(nums.short.value) || 0),
@@ -14561,7 +14613,8 @@
             ` &middot; ${bits.join(", ")}` +
             (long
               ? ` &middot; every long question in two parts, ${parts} × ${BOARD.long.marks} = ${longMark}`
-              : "");
+              : "") +
+            ` &middot; ${wantsSpace() ? "ruled space to write in" : "questions only"}`;
         }
 
         boxes.forEach((b) =>
@@ -14571,7 +14624,7 @@
           }),
         );
         document
-          .querySelectorAll('input[name="kind"]')
+          .querySelectorAll('input[name="kind"], input[name="space"]')
           .forEach((r) => r.addEventListener("change", sync));
         Object.values(nums).forEach((el) => el.addEventListener("input", sync));
         document.getElementById("gen-all").addEventListener("click", () => {
@@ -14685,6 +14738,7 @@
             mix: document.querySelector('input[name="diff"]:checked').value,
             kind,
             pattern,
+            space: wantsSpace(),
           });
           render();
 
