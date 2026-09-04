@@ -615,60 +615,94 @@
       .paper-fill span{flex:1 1 9rem;border-bottom:1px solid var(--border-strong);padding-bottom:2px}
 
       .paper-body{padding:var(--space-5)}
+
+      /* A paper has three levels and they nest the way the unit's do:
+
+           section   Objective, Subjective          the heaviest rule on the sheet
+           part      Short-answer, Long-answer      a lighter rule under it
+           question  Q1 to Q9                       one number, running the whole paper
+
+         Only the question is numbered. A reader looking for Q7 looks for one thing,
+         not for a section letter and a number inside it. */
       .sec{margin-bottom:var(--space-6)}
       .sec:last-child{margin-bottom:0}
       .sec-head{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap;
-        padding-bottom:var(--space-2);border-bottom:1px solid var(--border-strong);
-        margin-bottom:var(--space-3)}
-      .sec-tag{flex:0 0 auto;font-size:var(--size-100);font-weight:700;letter-spacing:.07em;
-        text-transform:uppercase;color:var(--primary)}
-      .sec-head h4{margin:0;font-size:var(--size-400);font-weight:700;color:var(--text-strong)}
+        padding-bottom:var(--space-2);border-bottom:2px solid var(--text-strong);
+        margin-bottom:var(--space-4)}
+      .sec-title{margin:0;font-size:var(--size-400);font-weight:700;color:var(--text-strong);
+        letter-spacing:.02em}
       .sec-marks{margin-left:auto;font-size:var(--size-200);font-weight:600;color:var(--primary);
         font-variant-numeric:tabular-nums;white-space:nowrap}
-      .sec-note{width:100%;margin:0;font-size:var(--size-200);color:var(--text-secondary)}
 
-      /* Three columns: number, body, marks. The marks column is empty on a section
-         that does not carry per-question marks, which costs nothing. */
-      /* Baseline, not top. A question carrying a fraction has a tall first line, and
-         top alignment then floats its number above the text it belongs to. */
-      .pq{display:grid;grid-template-columns:2.1em minmax(0,1fr) auto;gap:0 var(--space-2);
-        align-items:baseline;padding:var(--space-3) 0;
-        border-bottom:1px dashed var(--border);break-inside:avoid}
-      .pq:last-child{border-bottom:0}
-      .pq-n{color:var(--text-chrome);font-size:var(--size-200);font-variant-numeric:tabular-nums;
-        white-space:nowrap}
-      .pq-body{min-width:0}
-      .pq-m{font-size:var(--size-100);font-weight:700;color:var(--primary);
+      .pq-part-block+.pq-part-block{margin-top:var(--space-6)}
+      .part-head{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap;
+        padding-bottom:var(--space-1);border-bottom:1px solid var(--border-strong);
+        margin-bottom:var(--space-4)}
+      .part-title{margin:0;font-size:var(--size-300);font-weight:700;color:var(--text-strong)}
+      .part-marks{margin-left:auto;font-size:var(--size-200);font-weight:600;color:var(--primary);
         font-variant-numeric:tabular-nums;white-space:nowrap}
-      .pq-long{padding:var(--space-4) 0}
-      .pq-long .pq-n{font-size:var(--size-300);font-weight:700;color:var(--text-strong)}
-      .pq-part{display:grid;grid-template-columns:1.7em minmax(0,1fr);gap:0 var(--space-2);
+      .part-note{width:100%;margin:var(--space-1) 0 0;font-size:var(--size-200);
+        color:var(--text-secondary)}
+
+      /* The question number. It leads a head line on a question made of subparts and
+         sits in the gutter on a long question, but it is the same label either way,
+         so Q1 and Q5 never read as two different kinds of thing. */
+      .q-no{flex:0 0 auto;font-weight:700;color:var(--primary);font-size:var(--size-300);
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+      .pq-q{margin-bottom:var(--space-5)}
+      .pq-q:last-child{margin-bottom:0}
+      .q-head{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap;
+        margin-bottom:var(--space-2)}
+      .q-note{flex:1 1 12rem;margin:0;font-size:var(--size-200);color:var(--text-secondary)}
+      .q-marks{margin-left:auto;font-size:var(--size-200);font-weight:600;color:var(--primary);
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+
+      /* A subpart is set exactly as a part is set in the exercise above: the same
+         label column width as .plabel, the same gap, the same weight and colour, so a
+         student reads a paper the way they already read the unit.
+
+         Baseline, not top. A question carrying a fraction has a tall first line, and
+         top alignment then floats its number above the text it belongs to. */
+      .pq{display:grid;grid-template-columns:1.9em minmax(0,1fr) auto;gap:0 var(--space-2);
+        align-items:baseline;padding:var(--space-3) 0}
+      .pq-n{font-weight:600;color:var(--accent);font-size:var(--size-300);
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+      .pq-body{min-width:0}
+      .pq-m{font-size:var(--size-200);font-weight:700;color:var(--primary);
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+
+      /* A long question is the number and then its two parts, so it takes two
+         columns where a subpart takes three. Its gutter fits "Q9", where a subpart
+         gutter fits "(i)". Getting this wrong squeezes the whole question into the
+         label column and sets it one character per line. */
+      .pq-long{grid-template-columns:2.6em minmax(0,1fr);break-inside:avoid}
+      .pq-part{display:grid;grid-template-columns:1.9em minmax(0,1fr) auto;gap:0 var(--space-2);
         align-items:baseline}
-      .pq-part+.pq-part{margin-top:var(--space-2)}
-      .pq-ab{font-weight:700;color:var(--text-secondary)}
+      .pq-part+.pq-part{margin-top:var(--space-3)}
+      .pq-ab{font-weight:600;color:var(--accent)}
       .pq-qtext{min-width:0}
-      /* Room to answer in. Each line is a bordered row, not a repeating background
-         gradient: most print dialogues have "Background graphics" switched off, so a
-         gradient would rule the box on screen and leave the sheet blank. */
-      /* More space below the last rule than above the first, so a block of ruling
-         reads as belonging to the question above it and not the one below. */
-      .pq-space{margin:var(--space-2) 0 var(--space-4)}
-      .pq-rule{height:1.7rem;border-bottom:1px solid var(--border)}
-      /* auto-fit rather than a fixed four columns: a long option such as
-         "x = 0 and y != 0" then gets a wider cell instead of wrapping mid-phrase. */
-      .pq-opts{list-style:none;display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+      /* The option set takes as few lines as it can. Four short answers go on one
+         line, two moderate ones per line, and anything two storeys tall keeps a line
+         to itself. `optionColumns` in the template picks which, and the class it sets
+         is honoured from 34rem up; below that everything halves, because a phone
+         cannot hold four of anything side by side. */
+      .pq-opts{list-style:none;display:grid;grid-template-columns:1fr;
         gap:var(--space-2) var(--space-4);
-        margin:var(--space-2) 0 0;padding:0;font-size:var(--size-300)}
-      /* Two even columns, not three plus an orphan. Matches the review MCQ grid. */
-      .pq-opts.is-wide{grid-template-columns:1fr}
-      @media (min-width:34rem){ .pq-opts.is-wide{grid-template-columns:1fr 1fr} }
+        margin:var(--space-3) 0 0;padding:0;font-size:var(--size-300)}
+      .pq-opts.is-c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      @media (min-width:34rem){
+        .pq-opts.is-c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+        .pq-opts.is-c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+      }
       /* The option letter only. A bare "li span" here also matched every span
          KaTeX builds inside the option, which put a 4px gap between each atom of
          the expression: "-7i" printed as "- 7 i", and on a narrow column the extra
          width broke it one symbol per line. */
       .pq-opts li .pq-k{color:var(--text-chrome);font-weight:600;margin-right:var(--space-1)}
       .paper-tools{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4)}
+      /* The controls that act on a paper sit under it, not above it. */
+      .paper-after{margin:var(--space-4) 0 var(--space-2);align-items:center}
+      .tools-hint{flex:1 1 18rem;margin:0;font-size:var(--size-100);color:var(--text-chrome)}
 
       /* ==========================================================================
          MARKING KEY
@@ -749,7 +783,9 @@
          Sizing that in rem would let a reader's browser settings break the layout of
          an exam.
          ========================================================================== */
-      @page{margin:14mm 13mm 15mm}
+      /* Room at the head and foot for the running header and footer the Print
+         button writes: what the paper is, when it was printed, which page. */
+      @page{margin:16mm 13mm 16mm}
 
       @media print{
         .gen-form,.paper-tools,.res-clear{display:none!important}
@@ -780,22 +816,39 @@
 
         .paper-body{padding:9pt 0 0}
         .sec{margin-bottom:13pt}
-        .sec-head{gap:8pt;margin-bottom:4pt;padding-bottom:2pt;border-bottom:.75pt solid #000}
-        .sec-head h4{font-size:11.5pt}
-        .sec-tag{font-size:8pt;color:#000}
-        .sec-marks{font-size:9pt;color:#000}
-        .sec-note{margin-top:1pt;font-size:9pt;color:#000}
 
         .pq{padding:3.5pt 0;border-bottom:0;gap:0 10pt;break-inside:avoid;page-break-inside:avoid}
-        .pq-n{font-size:9.5pt;color:#000}
-        .pq-m{font-size:9pt;color:#000;min-width:2.4em;text-align:right}
-        .pq-long{padding:6pt 0}
-        .pq-part+.pq-part{margin-top:3pt}
-        /* About 7mm between rules, which is what a school answer sheet uses. */
-        .pq-space{margin:3pt 0 9pt}
-        .pq-rule{height:20pt;border-bottom:.5pt solid #666}
+        .pq-n{font-size:9.5pt;color:#000;font-weight:600}
+        .pq-m{font-size:9pt;color:#000;min-width:2.4em;text-align:right;font-weight:700}
+        .pq-long{padding:4pt 0}
+        .pq-ab{color:#000}
+        .pq-part{gap:0 10pt}
+        .pq-part+.pq-part{margin-top:4pt}
+        /* The sheet is a fixed width, so the layout the template chose is used as it
+           stands rather than halved for a narrow screen. */
         .pq-opts{gap:1pt 10pt;margin-top:2pt;font-size:9.5pt}
-        .pq-opts.is-wide{grid-template-columns:repeat(2,minmax(0,1fr));gap:2pt 14pt}
+        .pq-opts.is-c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+        .pq-opts.is-c2{grid-template-columns:repeat(2,minmax(0,1fr));gap:2pt 14pt}
+        .q-no{font-size:10.5pt;color:#000}
+        .pq-q{margin-bottom:8pt}
+        .q-head{gap:8pt;margin-bottom:2pt}
+        .q-marks{font-size:9pt;color:#000}
+        .q-note{font-size:9pt;color:#000}
+        .sec-head{gap:8pt;margin-bottom:6pt;padding-bottom:2pt;border-bottom:1pt solid #000}
+        .sec-title{font-size:11.5pt}
+        .sec-marks{font-size:9pt;color:#000}
+        .pq-part-block+.pq-part-block{margin-top:12pt}
+        .part-head{gap:8pt;margin-bottom:5pt;padding-bottom:1pt;border-bottom:.5pt solid #666}
+        .part-title{font-size:10.5pt}
+        .part-marks{font-size:9pt;color:#000}
+        .part-note{margin-top:1pt;font-size:9pt;color:#000}
+        .pq-long{grid-template-columns:2.6em minmax(0,1fr);padding:4pt 0}
+        /* One question per block in the key, so a block never splits mid answer. */
+        /* One answer never splits across a page, and that is as far as the rule
+           goes. Putting break-inside:avoid on the whole question block instead threw
+           Q1 and its fifteen answers onto a fresh page and left the first page of the
+           key blank, because a block taller than a page cannot be kept together. */
+        .key-q{margin-bottom:8pt}
 
         /* The written portion always starts a fresh page, so a student is never
            turning back and forth between the objective part and a short question.
@@ -13828,6 +13881,7 @@
       /* ======================================================================
    REVIEW EXERCISE
    ====================================================================== */
+      const ROMAN_UC = (n) => ["I", "II", "III", "IV"][n] || String(n + 1);
       const ROMAN = (n) =>
         [
           "i",
@@ -13982,17 +14036,94 @@
       const numWord = (n) => WORDS[n] || String(n);
       const pad2 = (n) => String(n).padStart(2, "0");
 
-      /* Ruled space to write the answer in, drawn as a stack of bordered rows.
+      /* How many columns a set of options wants. Four short answers belong on one
+   line; two moderate ones per line reads better than four squeezed; anything
+   two storeys tall takes a line of its own. Measured on the source with each
+   LaTeX command counted as one character, which tracks the rendered width
+   closely enough to choose between the three layouts. */
+      function optionColumns(opts) {
+        if (!opts || !opts.length) return 0;
+        const width = (o) =>
+          o
+            .replace(/\$/g, "")
+            .replace(/\\[a-zA-Z]+\s?/g, "x")
+            .replace(/[{}]/g, "").length;
+        const longest = Math.max.apply(null, opts.map(width));
+        /* Anything with a fraction or a root is two storeys tall, so four across
+     would collide however short the text is. Two is the most it can take, and
+     a tall option that is also wide takes the line to itself. */
+        if (/\\[dt]?frac|\\sqrt|\\begin/.test(opts.join("")))
+          return longest > 16 ? 1 : 2;
+        if (longest <= 10) return 4;
+        if (longest <= 26) return 2;
+        return 1;
+      }
 
-   A repeating background gradient would be the shorter way to rule a box and it
-   is the wrong one: most browsers leave "Background graphics" off in the print
-   dialogue, so the rules would be there on screen and gone on the sheet. A
-   border prints. */
-      function ruledHTML(lines) {
-        if (!lines) return "";
+      function optionsHTML(opts) {
+        if (!opts) return "";
         return (
-          `<div class="pq-space" aria-hidden="true">` +
-          `<div class="pq-rule"></div>`.repeat(lines) +
+          `<ul class="pq-opts is-c${optionColumns(opts)}">` +
+          opts
+            .map((o, j) => `<li><span class="pq-k">${KEYS[j]})</span>${o}</li>`)
+            .join("") +
+          `</ul>`
+        );
+      }
+
+      /* One numbered question. Two shapes, one label.
+
+   A question made of subparts leads with a head line: the number, what to do,
+   and what it is worth. A long question is two parts and nothing else, so its
+   number sits in the gutter beside part (a) rather than costing a line of its
+   own. Both use .q-no, so Q1 and Q5 are the same label wherever they land. */
+      function questionHTML(q) {
+        if (q.parts) {
+          return (
+            `<div class="pq pq-long"><span class="q-no">${q.qno}</span>` +
+            `<div class="pq-body">` +
+            q.parts
+              .map(
+                (p, j) =>
+                  `<div class="pq-part">` +
+                  `<span class="pq-ab">(${KEYS[j]})</span>` +
+                  `<div class="pq-qtext">${p.q}</div>` +
+                  `<span class="pq-m">${p.marks}</span></div>`,
+              )
+              .join("") +
+            `</div></div>`
+          );
+        }
+        return (
+          `<div class="pq-q"><div class="q-head">` +
+          `<span class="q-no">${q.qno}</span>` +
+          `<p class="q-note">${q.note}</p>` +
+          `<span class="q-marks">${q.arith}</span></div>` +
+          q.items
+            .map(
+              (it, i) =>
+                `<div class="pq"><span class="pq-n">(${ROMAN(i)})</span>` +
+                `<div class="pq-body">${it.q}${optionsHTML(it.opts)}</div></div>`,
+            )
+            .join("") +
+          `</div>`
+        );
+      }
+
+      function paperPartHTML(part) {
+        const title = part.part
+          ? `${part.part} &middot; ${part.label}`
+          : part.label;
+        return (
+          `<div class="pq-part-block">` +
+          (part.label
+            ? `<header class="part-head"><h5 class="part-title">${title}</h5>` +
+              (part.arith
+                ? `<span class="part-marks">${part.arith}</span>`
+                : "") +
+              (part.note ? `<p class="part-note">${part.note}</p>` : "") +
+              `</header>`
+            : "") +
+          part.questions.map(questionHTML).join("") +
           `</div>`
         );
       }
@@ -14014,60 +14145,12 @@
     <div class="paper-body">`;
 
         paper.sections.forEach((sec) => {
-          h += `<section class="sec${sec.newPage ? " sec-break" : ""}">
-      <div class="sec-head">
-        <span class="sec-tag">${sec.tag}</span>
-        <h4>${sec.qno ? sec.qno + " &nbsp;" : ""}${sec.heading}</h4>
-        <span class="sec-marks">${sec.arith}</span>
-        <p class="sec-note">${sec.note}</p>
-      </div>`;
-
-          sec.items.forEach((it, i) => {
-            if (sec.numbering === "q") {
-              /* A long question owns its own number, the way a board paper sets one,
-           and its parts are lettered (a) and (b) underneath it. */
-              h +=
-                `<div class="pq pq-long"><span class="pq-n">Q.${sec.startNumber + i}</span>
-          <div class="pq-body">` +
-                it.parts
-                  .map(
-                    (p, j) =>
-                      `<div class="pq-part">` +
-                      (it.parts.length > 1
-                        ? `<span class="pq-ab">(${KEYS[j]})</span>`
-                        : "") +
-                      `<div class="pq-qtext">${p.q}${ruledHTML(sec.rules)}</div></div>`,
-                  )
-                  .join("") +
-                `</div><span class="pq-m">${it.marksLabel || it.marks}</span></div>`;
-            } else {
-              /* A fraction is a two storey thing. Four of them across a printed page
-           wrap in the middle of the number, so an option set that contains one
-           gets two columns instead of four. */
-              const wide =
-                it.opts &&
-                it.opts.some(
-                  (o) =>
-                    /\\[dt]?frac/.test(o) || o.replace(/\$/g, "").length > 22,
-                );
-              h +=
-                `<div class="pq"><span class="pq-n">(${ROMAN(i)})</span>
-          <div class="pq-body">${it.q}` +
-                (it.opts
-                  ? `<ul class="pq-opts${wide ? " is-wide" : ""}">` +
-                    it.opts
-                      .map(
-                        (o, j) =>
-                          `<li><span class="pq-k">${KEYS[j]})</span>${o}</li>`,
-                      )
-                      .join("") +
-                    `</ul>`
-                  : "") +
-                ruledHTML(sec.rules) +
-                `</div>${sec.showMarks ? `<span class="pq-m">${it.marks}</span>` : ""}</div>`;
-            }
-          });
-          h += `</section>`;
+          h +=
+            `<section class="sec${sec.newPage ? " sec-break" : ""}">
+      <header class="sec-head"><h4 class="sec-title">${sec.tag}</h4>
+        <span class="sec-marks">${sec.marks} marks</span></header>` +
+            sec.parts.map(paperPartHTML).join("") +
+            `</section>`;
         });
         return h + `</div></article>`;
       }
@@ -14092,25 +14175,27 @@
     </header>
     <div class="paper-body">`;
         paper.sections.forEach((sec) => {
-          h += `<section class="sec"><div class="sec-head">
-      <h4>${sec.qno ? sec.qno + " &nbsp;" : ""}${sec.heading}</h4></div>`;
-          sec.items.forEach((it, i) => {
-            if (sec.numbering === "q") {
-              it.parts.forEach((p, j) => {
-                const lab =
-                  `Q.${sec.startNumber + i}` +
-                  (it.parts.length > 1 ? ` (${KEYS[j]})` : "");
-                h += keyRow(lab, p.solution, null);
-              });
-            } else {
-              h += keyRow(
-                `(${ROMAN(i)})`,
-                it.solution,
-                it.opts ? KEYS[it.answer] : null,
-              );
-            }
+          sec.parts.forEach((part) => {
+            part.questions.forEach((q) => {
+              h +=
+                `<section class="sec key-q"><header class="q-head">` +
+                `<span class="q-no">${q.qno}</span></header>` +
+                (q.parts
+                  ? q.parts
+                      .map((p, j) => keyRow(`(${KEYS[j]})`, p.solution, null))
+                      .join("")
+                  : q.items
+                      .map((it, i) =>
+                        keyRow(
+                          `(${ROMAN(i)})`,
+                          it.solution,
+                          it.opts ? KEYS[it.answer] : null,
+                        ),
+                      )
+                      .join("")) +
+                `</section>`;
+            });
           });
-          h += `</section>`;
         });
         return h + `</div></article>`;
       }
@@ -14179,26 +14264,30 @@
       };
       const RANK = { easy: 0, medium: 1, hard: 2 };
 
-      /* The board pattern, taken from the Pairing Scheme printed on book page 242.
+      /* The board pattern, from the Pairing Scheme on book pages 242 and 243. It is
+   the whole paper, not a reduction of it.
 
-   The scheme describes a whole book paper: 15 multiple choice at one mark, then
-   three short question sets of any six out of nine at two marks, then three long
-   questions bifurcated into parts (a) and (b) at four marks each of which two
-   are attempted. A one unit paper cannot spread questions across twelve chapters
-   the way that scheme does, so it keeps every structural rule and takes one
-   short set instead of three: nine objective, any six of nine short, any two of
-   three long. That is 9 + 12 + 16 = 37 marks, and at roughly two minutes a mark
-   it is the 1 h 15 m paper it says it is. */
+     Objective    Q1              15 multiple choice        1 × 15 = 15
+     Subjective   Q2, Q3, Q4      any 6 of 9 short, each    2 × 6  = 12 each
+                  Q5 to Q9        any 3 of 5 long, (a)+(b)  3 × 8  = 24
+
+   15 + 36 + 24 = 75 marks in 2 hours 30 minutes, which is what the scheme
+   states. The scheme splits the long questions into two parts because it draws
+   them from named chapters; a unit paper has no chapters to spread across, so
+   the same five questions and the same 24 marks are set as one part with one
+   choice. Every long question is bifurcated into (a) and (b) at 4 marks each. */
       const BOARD = {
-        time: "1 hour 15 minutes",
-        mcq: { ask: 9, attempt: 9, marks: 1 },
-        short: { ask: 9, attempt: 6, marks: 2 },
-        long: { ask: 3, attempt: 2, marks: 4, parts: 2 },
+        time: "2 hours 30 minutes",
+        mcq: { ask: 15, marks: 1 },
+        short: { sets: 3, ask: 9, attempt: 6, marks: 2 },
+        long: { ask: 5, attempt: 3, parts: 2, marks: 4 },
       };
+      const LONG_PARTS = BOARD.long.parts;
+      const LONG_PART_MARKS = BOARD.long.marks;
       const BOARD_MARKS =
-        BOARD.mcq.attempt * BOARD.mcq.marks +
-        BOARD.short.attempt * BOARD.short.marks +
-        BOARD.long.attempt * BOARD.long.parts * BOARD.long.marks;
+        BOARD.mcq.ask * BOARD.mcq.marks +
+        BOARD.short.sets * BOARD.short.attempt * BOARD.short.marks +
+        BOARD.long.attempt * LONG_PARTS * LONG_PART_MARKS;
 
       function shuffled(list, rand) {
         const a = list.slice();
@@ -14216,7 +14305,7 @@
    family slip in once per bucket and end up owning a third of the objective
    section. Walking the families once caps it at one question each until every
    family has been asked. */
-      function select(pool, type, want, mix, rand, used) {
+      function select(pool, type, want, mix, rand, used, fams) {
         const avail = pool.filter((x) => x.type === type && !used.has(x.id));
 
         const order = ["easy", "medium", "hard"];
@@ -14237,14 +14326,32 @@
           byFamily.get(x.variant_family).push(x);
         });
         const families = shuffled([...byFamily.keys()], rand);
+        /* Carry the tally across the whole paper, not just this call. The three short
+     questions of a board paper are three separate draws, and counting from zero
+     each time let one family fill a slot in all three while another filled none. */
+        const taken = new Map(
+          families.map((f) => [f, (fams && fams.get(f)) || 0]),
+        );
         const out = [];
 
-        const sweep = (respectMix) => {
-          let moved = true;
-          while (out.length < want && moved) {
-            moved = false;
+        /* Draw in rounds. Within a round every family may give one item and no more,
+     so a family cannot take a second slot on the paper while another family is
+     still waiting for its first. Inside a round the mix is tried before the
+     fallback, which is the stated priority: topic spread beats the difficulty
+     target on a tie.
+
+     Counting per family is what makes this work. The earlier version ran the
+     mix pass and the fallback pass as two independent round robins, so the
+     fallback happily gave a family its second item in the same sweep that gave
+     another family its first, and a paper could ask the same question twice in
+     different numbers. */
+        const start = families.length ? Math.min(...taken.values()) : 0;
+        for (let round = start; out.length < want; round++) {
+          let moved = false;
+          for (const respectMix of [true, false]) {
             for (const f of families) {
               if (out.length >= want) break;
+              if (taken.get(f) > round) continue;
               const bucket = byFamily.get(f);
               if (!bucket.length) continue;
               const j = respectMix
@@ -14253,17 +14360,16 @@
               if (j < 0) continue;
               const pick = bucket.splice(j, 1)[0];
               need[pick.difficulty]--;
+              taken.set(f, taken.get(f) + 1);
               out.push(pick);
               moved = true;
             }
           }
-        };
-        sweep(true); /* fill the requested mix */
-        sweep(
-          false,
-        ); /* a bucket ran dry, so take what is left rather than a short paper */
+          if (!moved) break; /* every family is empty, so the paper is short */
+        }
 
         out.forEach((x) => used.add(x.id));
+        if (fams) taken.forEach((v, k) => fams.set(k, v));
         return out.sort((a, b) => RANK[a.difficulty] - RANK[b.difficulty]);
       }
 
@@ -14287,118 +14393,151 @@
       }
 
       function buildPaper(unit, bank, o) {
-        const rand = rngFrom(o.seed);
         const pool = bank.filter((x) => o.sources.includes(x.src));
         const mix = MIXES[o.mix] || MIXES.mixed;
+        const rand = rngFrom(o.seed);
         const used = new Set();
-        const P = o.pattern;
-
-        const mcqs = select(pool, "mcq", P.mcq.ask, mix, rand, used);
-        const shorts = select(pool, "short", P.short.ask, mix, rand, used);
-        const perQ = P.long.parts || 1;
-        const longs = select(pool, "long", P.long.ask * perQ, mix, rand, used);
-        const groups = pairUp(longs, perQ);
-
-        const shortAttempt = Math.min(P.short.attempt, shorts.length);
-        const longAttempt = Math.min(P.long.attempt, groups.length);
-        const mcqMarks = mcqs.length * P.mcq.marks;
-        const shortMarks = shortAttempt * P.short.marks;
-        const longMarks = longAttempt * perQ * P.long.marks;
-        const marks = mcqMarks + shortMarks + longMarks;
-
-        const u = BOOK.units.find((x) => x.n === unit) || { title: "" };
+        const fams = new Map();
+        const board = o.kind === "board";
+        const P = board ? BOARD : o.pattern;
+        const shortfall = { mcq: 0, short: 0, long: 0 };
         const sections = [];
+        let n = 1,
+          total = 0;
 
-        /* Room to answer in, counted in ruled lines and sized to what the question is
-     worth. An objective question is answered by circling an option, so it gets
-     none. Turned off, the sheet is the compact one a class writes on a separate
-     answer book from. */
-        const rules = (marks) =>
-          o.space ? Math.max(2, Math.round(marks * 1.5)) : 0;
-
-        if (mcqs.length)
+        /* Objective. One question holding every multiple choice part. */
+        const mcqs = select(pool, "mcq", P.mcq.ask, mix, rand, used, fams);
+        shortfall.mcq = P.mcq.ask - mcqs.length;
+        if (mcqs.length) {
+          const marks = mcqs.length * P.mcq.marks;
+          total += marks;
           sections.push({
-            tag: "Section A",
-            qno: "Q.1",
-            heading: "Multiple choice",
-            numbering: "roman",
-            arith: `${P.mcq.marks} × ${mcqs.length} = ${mcqMarks}`,
-            note: "Attempt all parts. Each part carries one mark. Circle the correct option.",
-            rules: 0,
-            items: mcqs.map((x) => ({
-              q: x.q,
-              opts: x.opts,
-              answer: x.answer,
-              marks: P.mcq.marks,
-              solution: x.solution,
-            })),
+            tag: "Objective",
+            marks,
+            parts: [
+              {
+                questions: [
+                  {
+                    qno: "Q" + n++,
+                    note: "Attempt all parts. Circle the correct option.",
+                    arith: `${P.mcq.marks} × ${mcqs.length} = ${marks}`,
+                    items: mcqs.map((x) => ({
+                      q: x.q,
+                      opts: x.opts,
+                      answer: x.answer,
+                      marks: P.mcq.marks,
+                      solution: x.solution,
+                    })),
+                  },
+                ],
+              },
+            ],
           });
+        }
 
-        if (shorts.length)
-          sections.push({
-            tag: "Section B",
-            qno: "Q.2",
-            heading: "Short answer questions",
-            numbering: "roman",
-            newPage: true,
-            showMarks: false,
-            rules: rules(P.short.marks),
-            arith: `${P.short.marks} × ${shortAttempt} = ${shortMarks}`,
+        /* Subjective, in two parts. The board paper sets three short questions, each
+     with its own choice; a practice paper sets one. */
+        const parts = [];
+        let subjective = 0;
+
+        const shortQs = [];
+        const sets = board ? P.short.sets : 1;
+        for (let i = 0; i < sets; i++) {
+          const picked = select(
+            pool,
+            "short",
+            P.short.ask,
+            mix,
+            rand,
+            used,
+            fams,
+          );
+          shortfall.short += P.short.ask - picked.length;
+          if (!picked.length) continue;
+          const take = Math.min(
+            P.short.attempt || picked.length,
+            picked.length,
+          );
+          const marks = take * P.short.marks;
+          subjective += marks;
+          shortQs.push({
+            qno: "Q" + n++,
             note:
-              shortAttempt < shorts.length
-                ? `Attempt any ${numWord(shortAttempt)} (${pad2(shortAttempt)}) parts of the ` +
-                  `following ${numWord(shorts.length)}. Each part carries ${P.short.marks} marks.`
-                : `Attempt all parts. Each part carries ${P.short.marks} marks.`,
-            items: shorts.map((x) => ({
+              take < picked.length
+                ? `Attempt any ${numWord(take)} of the following ${numWord(picked.length)} parts.`
+                : "Attempt all parts.",
+            arith: `${P.short.marks} × ${take} = ${marks}`,
+            items: picked.map((x) => ({
               q: x.q,
               marks: P.short.marks,
               solution: x.solution,
             })),
           });
+        }
+        if (shortQs.length)
+          parts.push({ label: "Short-answer questions", questions: shortQs });
 
-        if (groups.length)
-          sections.push({
-            tag: "Section C",
-            heading: "Long answer questions",
-            numbering: "q",
-            startNumber: 3,
-            newPage: !shorts.length,
-            rules: rules(P.long.marks),
-            arith: `${perQ * P.long.marks} × ${longAttempt} = ${longMarks}`,
+        const longItems = select(
+          pool,
+          "long",
+          P.long.ask * P.long.parts,
+          mix,
+          rand,
+          used,
+          fams,
+        );
+        const groups = pairUp(longItems, P.long.parts);
+        shortfall.long = P.long.ask - groups.length;
+        if (groups.length) {
+          const take = Math.min(P.long.attempt, groups.length);
+          const per = P.long.parts * P.long.marks;
+          const marks = take * per;
+          subjective += marks;
+          parts.push({
+            label: "Long-answer questions",
+            arith: `${take} × ${per} = ${marks}`,
             note:
-              longAttempt < groups.length
-                ? `Attempt any ${numWord(longAttempt)} (${pad2(longAttempt)}) questions of the ` +
-                  `following ${numWord(groups.length)}. Both parts of a question must be attempted.`
-                : `Attempt all questions. Both parts of a question must be attempted.`,
-            /* The question carries "2 x 4 = 8", so the reader can see where the eight
-       came from. Printing a 4 beside each of (a) and (b) as well says the same
-       thing twice and crowds the part label. */
-            items: groups.map((g) => ({
-              parts: g.map((x) => ({ q: x.q, solution: x.solution })),
-              marks: g.length * P.long.marks,
-              marksLabel:
-                g.length > 1
-                  ? `${g.length} × ${P.long.marks} = ${g.length * P.long.marks}`
-                  : String(P.long.marks),
+              (take < groups.length
+                ? `Attempt any ${numWord(take)} of the following ${numWord(groups.length)} questions`
+                : "Attempt all of the following questions") +
+              `, answering both parts of each.`,
+            questions: groups.map((g) => ({
+              qno: "Q" + n++,
+              parts: g.map((x) => ({
+                q: x.q,
+                solution: x.solution,
+                marks: P.long.marks,
+              })),
             })),
           });
+        }
 
+        /* "Part I" earns its label only when there is a Part II to tell it from. */
+        if (parts.length > 1)
+          parts.forEach((p, i) => {
+            p.part = "Part " + ROMAN_UC(i);
+          });
+        if (parts.length) {
+          total += subjective;
+          sections.push({
+            tag: "Subjective",
+            marks: subjective,
+            newPage: true,
+            parts,
+          });
+        }
+
+        const u = BOOK.units.find((x) => x.n === unit) || { title: "" };
         return {
           school: "PECTAA · Class 10 Mathematics",
           title: `Unit ${unit} · ${u.title}`,
-          subtitle:
-            o.kind === "board" ? "Unit paper, board pattern" : "Practice paper",
-          time: o.kind === "board" ? BOARD.time : timeFor(marks),
-          marks,
+          subtitle: board ? "Board pattern, full paper" : "Practice paper",
+          time: board ? BOARD.time : timeFor(total),
+          marks: total,
           code: "U" + unit + "-" + seedToCode(o.seed),
           coverage: coverageLabel(unit, o.sources),
-          space: !!o.space,
           sections,
-          shortfall: {
-            mcq: P.mcq.ask - mcqs.length,
-            short: P.short.ask - shorts.length,
-            long: P.long.ask - groups.length,
-          },
+          shortfall,
         };
       }
 
@@ -14428,8 +14567,6 @@
         const items = ready ? bank : [];
         const count = (src) => items.filter((x) => x.src === src).length;
 
-        /* Each box says what it holds. Ticking Exercise 1.3 and then being told the
-     paper is short is a worse way to learn the same fact. */
         const box = (value, label) =>
           `<label><input type="checkbox" class="gen-ex" value="${value}" checked>
        <span class="gen-ex-name">${label}<b class="gen-ex-n">${count(value)} questions</b></span></label>`;
@@ -14438,33 +14575,26 @@
           box("review", "Review Exercise");
 
         return `<section class="flow-section" id="generator-form">
-    <header class="flow-head"><h2>Practice paper generator</h2>
-    <p class="lede">Build a fresh paper from this unit, with a marking key and a code that
-       draws the same paper again. Nothing is padded: if the bank cannot fill what you ask
-       for, the paper comes out shorter and says so.</p></header>
+    <header class="flow-head"><h2>Practice papers</h2>
+    <p class="lede">Every paper comes with its marking key and a code that draws it again.</p></header>
     ${
       ready
         ? ""
         : `<div class="warn"><b>Bank not ready.</b> The question bank for Unit ${unit}
-       is still being written, so the controls below are live but no paper can be drawn yet.</div>`
+       is still being written, so no paper can be drawn yet.</div>`
     }
     <div class="gen-form">
       <div class="field">
         <span class="lbl" id="lab-kind">Paper type</span>
-        <p class="hint">The board pattern follows the Pairing Scheme on book page 242 and
-           draws from the whole unit. A practice paper lets you set the length and the scope.</p>
         <div class="choice" role="radiogroup" aria-labelledby="lab-kind">
           <label><input type="radio" name="kind" value="board" checked>
-            <span>Board pattern<b class="gen-note">${BOARD_MARKS} marks &middot; 1 h 15 m &middot; whole unit</b></span></label>
+            <span>Board paper<b class="gen-note">${BOARD_MARKS} marks &middot; ${BOARD.time} &middot; Q1 to Q9</b></span></label>
           <label><input type="radio" name="kind" value="practice">
-            <span>Practice paper<b class="gen-note">you choose the scope and the length</b></span></label>
+            <span>Practice paper<b class="gen-note">any length, any scope</b></span></label>
         </div>
       </div>
       <div class="field">
-        <span class="lbl" id="lab-scope">Draw questions from</span>
-        <p class="hint">Tick one exercise to revise just that, or several to mix them.
-           Untick anything and the paper type moves to practice, because a board paper
-           covers the whole unit.</p>
+        <span class="lbl" id="lab-scope">Draw from</span>
         <div class="choice checks" role="group" aria-labelledby="lab-scope">${boxes}</div>
         <div class="gen-row">
           <button class="btn btn-ghost btn-sm" type="button" id="gen-all">Select all</button>
@@ -14474,30 +14604,14 @@
       </div>
       <div class="field">
         <span class="lbl" id="lab-diff">Difficulty</span>
-        <p class="hint">Sets the mix the paper aims for. It is a mix, not a filter, so a
-           gentle paper still ends on something worth thinking about.</p>
         <div class="choice" role="radiogroup" aria-labelledby="lab-diff">
           <label><input type="radio" name="diff" value="gentle"><span>Gentle</span></label>
           <label><input type="radio" name="diff" value="mixed" checked><span>Mixed</span></label>
           <label><input type="radio" name="diff" value="challenging"><span>Challenging</span></label>
         </div>
       </div>
-      <div class="field">
-        <span class="lbl" id="lab-space">Writing space</span>
-        <p class="hint">Ruled lines under every written question, as many as the marks
-           are worth. An objective question gets none, because it is answered by
-           circling an option.</p>
-        <div class="choice" role="radiogroup" aria-labelledby="lab-space">
-          <label><input type="radio" name="space" value="yes" checked>
-            <span>Leave room to write<b class="gen-note">the sheet runs to more pages</b></span></label>
-          <label><input type="radio" name="space" value="no">
-            <span>Questions only<b class="gen-note">for a class writing on a separate answer book</b></span></label>
-        </div>
-      </div>
       <div class="field" id="lengths" hidden>
         <span class="lbl">How many questions</span>
-        <p class="hint">A long question always carries two parts, (a) and (b), so it is
-           worth ${BOARD.long.parts} &times; ${BOARD.long.marks} = ${BOARD.long.parts * BOARD.long.marks} marks.</p>
         <div class="mix">
           <label><span>Multiple choice <b>1 mark</b></span><input type="number" id="n-mcq" value="9" min="0" max="30"></label>
           <label><span>Short questions <b>2 marks</b></span><input type="number" id="n-short" value="9" min="0" max="30"></label>
@@ -14507,8 +14621,6 @@
       <div class="gen-plan" id="gen-plan" role="status" aria-live="polite"></div>
       <div class="paper-tools">
         <button class="btn btn-primary" type="button" id="gen-go">Generate paper</button>
-        <button class="btn btn-ghost" type="button" id="gen-key" disabled aria-pressed="false">Show marking key</button>
-        <button class="btn btn-ghost" type="button" id="gen-print" disabled>Print</button>
         <span class="gen-recall">
           <label for="gen-code">or redraw a paper by its code</label>
           <input type="text" id="gen-code" class="gen-code" maxlength="8" autocomplete="off"
@@ -14538,8 +14650,6 @@
         );
         const lengths = document.getElementById("lengths");
         const codeIn = document.getElementById("gen-code");
-        const keyBtn = document.getElementById("gen-key");
-        const printBtn = document.getElementById("gen-print");
         const nums = {
           mcq: document.getElementById("n-mcq"),
           short: document.getElementById("n-short"),
@@ -14550,8 +14660,6 @@
 
         const sources = () =>
           boxes.filter((b) => b.checked).map((b) => b.value);
-        const wantsSpace = () =>
-          document.querySelector('input[name="space"]:checked').value === "yes";
         const asked = () => ({
           mcq: Math.max(0, Number(nums.mcq.value) || 0),
           short: Math.max(0, Number(nums.short.value) || 0),
@@ -14582,39 +14690,29 @@
             plan.innerHTML = `<b>No paper.</b> Tick at least one exercise above.`;
             return;
           }
-          const P = board.checked ? BOARD : null;
+          /* The board paper is a fixed shape, so its plan is a description of that
+       shape. A practice paper is whatever was asked for, so its plan is
+       arithmetic on the boxes. */
+          if (board.checked) {
+            plan.innerHTML =
+              `<b>${BOARD_MARKS} marks</b> &middot; ${BOARD.time}` +
+              ` &middot; Q1 fifteen multiple choice` +
+              ` &middot; Q2 to Q4 any six of nine short` +
+              ` &middot; Q5 to Q9 long questions in parts (a) and (b)`;
+            return;
+          }
           const a = asked();
-          const mcq = P ? P.mcq.ask : a.mcq;
-          const short = P ? P.short.ask : a.short;
-          const long = P ? P.long.ask : a.long;
-          const shortDo = P ? P.short.attempt : short;
-          const longDo = P ? P.long.attempt : long;
-          const parts = BOARD.long.parts,
-            longMark = parts * BOARD.long.marks;
-          const marks = mcq * 1 + shortDo * 2 + longDo * longMark;
+          const longMark = LONG_PARTS * LONG_PART_MARKS;
+          const marks = a.mcq * 1 + a.short * 2 + a.long * longMark;
           if (!marks) {
             plan.innerHTML = `<b>No paper.</b> Ask for at least one question.`;
             return;
           }
           const bits = [];
-          if (mcq) bits.push(`${mcq} multiple choice`);
-          if (short)
-            bits.push(
-              shortDo < short
-                ? `any ${shortDo} of ${short} short`
-                : `${short} short`,
-            );
-          if (long)
-            bits.push(
-              longDo < long ? `any ${longDo} of ${long} long` : `${long} long`,
-            );
-          plan.innerHTML =
-            `<b>${marks} marks</b> &middot; ${P ? BOARD.time : timeFor(marks)}` +
-            ` &middot; ${bits.join(", ")}` +
-            (long
-              ? ` &middot; every long question in two parts, ${parts} × ${BOARD.long.marks} = ${longMark}`
-              : "") +
-            ` &middot; ${wantsSpace() ? "ruled space to write in" : "questions only"}`;
+          if (a.mcq) bits.push(`${a.mcq} multiple choice`);
+          if (a.short) bits.push(`${a.short} short`);
+          if (a.long) bits.push(`${a.long} long in parts (a) and (b)`);
+          plan.innerHTML = `<b>${marks} marks</b> &middot; ${timeFor(marks)} &middot; ${bits.join(", ")}`;
         }
 
         boxes.forEach((b) =>
@@ -14624,7 +14722,7 @@
           }),
         );
         document
-          .querySelectorAll('input[name="kind"], input[name="space"]')
+          .querySelectorAll('input[name="kind"]')
           .forEach((r) => r.addEventListener("change", sync));
         Object.values(nums).forEach((el) => el.addEventListener("input", sync));
         document.getElementById("gen-all").addEventListener("click", () => {
@@ -14657,15 +14755,89 @@
             : "";
         }
 
+        /* The controls that act on a paper live under the paper, in the order the
+     reader meets them: read the sheet, then decide to see the key or print it.
+     They are built with the paper rather than sitting disabled in the form
+     above it, so a control is only ever on the page when it can do something. */
         function render() {
           out.innerHTML =
             `<div class="paper-wrap" id="paper-wrap">${paperHTML(paper)}</div>` +
+            `<div class="paper-tools paper-after">` +
+            `<button class="btn btn-ghost" type="button" id="gen-key" aria-pressed="false">Show marking key</button>` +
+            `<button class="btn btn-ghost" type="button" id="gen-print">Print</button>` +
+            `<p class="tools-hint">The sheet prints its own heading, date and page numbers. ` +
+            `Turn off <b>Headers and footers</b> in the print dialogue to drop the browser's.</p>` +
+            `</div>` +
             `<div class="paper-wrap" id="key-wrap" hidden>${keyHTML(paper)}</div>`;
           typeset(out);
-          keyBtn.disabled = false;
-          printBtn.disabled = false;
-          keyBtn.textContent = "Show marking key";
-          keyBtn.setAttribute("aria-pressed", "false");
+          document
+            .getElementById("gen-key")
+            .addEventListener("click", toggleKey);
+          document
+            .getElementById("gen-print")
+            .addEventListener("click", printPaper);
+        }
+
+        function toggleKey() {
+          const wrap = document.getElementById("key-wrap");
+          const btn = document.getElementById("gen-key");
+          if (!wrap) return;
+          wrap.hidden = !wrap.hidden;
+          btn.textContent = wrap.hidden
+            ? "Show marking key"
+            : "Hide marking key";
+          btn.setAttribute("aria-pressed", wrap.hidden ? "false" : "true");
+          if (!wrap.hidden)
+            wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        /* A running header and footer for the sheet: what this paper is, when it was
+     printed, and where you are in it.
+
+     @page margin boxes are the only way to repeat something on every printed
+     page, and their content has to be literal text, so the rule is written when
+     the paper is printed and taken away afterwards. It is scoped to nothing:
+     @page is document wide, which is exactly why it must not outlive the print.
+
+     The browser's own header and footer, the ones carrying the file path and
+     the page URL, are a setting in the print dialogue and no stylesheet can
+     switch them off. The hint under the buttons says so, because a sheet that
+     comes out with a file path across the top looks like a mistake and the
+     reader needs to know where the fix lives. */
+        function runningStyle(paper) {
+          const q = (t) =>
+            '"' + String(t).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+          const when = new Date().toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+          const el = document.createElement("style");
+          el.id = "paper-running";
+          el.textContent =
+            `@page{` +
+            `@top-left{content:${q(paper.title)};font-size:8.5pt;color:#444}` +
+            `@top-right{content:${q(paper.subtitle + "  ·  " + paper.code)};font-size:8.5pt;color:#444}` +
+            `@bottom-left{content:${q("Printed " + when)};font-size:8.5pt;color:#444}` +
+            `@bottom-right{content:"Page " counter(page) " of " counter(pages);font-size:8.5pt;color:#444}` +
+            `}`;
+          return el;
+        }
+
+        /* What is on the screen is what comes out of the printer. If the key is
+     showing it prints, on its own page, after the paper. */
+        function printPaper() {
+          const style = runningStyle(paper);
+          document.head.appendChild(style);
+          document.body.classList.add("printing-paper");
+          const done = () => {
+            document.body.classList.remove("printing-paper");
+            const s = document.getElementById("paper-running");
+            if (s) s.remove();
+          };
+          addEventListener("afterprint", done, { once: true });
+          window.print();
+          setTimeout(done, 0);
         }
 
         go.addEventListener("click", () => {
@@ -14673,8 +14845,6 @@
           if (!picked.length) {
             st.textContent = "Pick at least one exercise to draw from.";
             out.innerHTML = "";
-            keyBtn.disabled = true;
-            printBtn.disabled = true;
             return;
           }
           if (!items.length) {
@@ -14693,15 +14863,13 @@
             kind === "board"
               ? {
                   mcq: BOARD.mcq.ask,
-                  short: BOARD.short.ask,
+                  short: BOARD.short.sets * BOARD.short.ask,
                   long: BOARD.long.ask,
                 }
               : asked();
           if (!want.mcq && !want.short && !want.long) {
             st.textContent = "Ask for at least one question.";
             out.innerHTML = "";
-            keyBtn.disabled = true;
-            printBtn.disabled = true;
             return;
           }
 
@@ -14715,20 +14883,20 @@
           }
           if (seed === null) seed = Math.floor(Math.random() * 33554432);
 
+          /* Two parts on a long question, always. The board paper bifurcates every
+       long question into (a) and (b), and a practice paper that set a single
+       part would be teaching a shape the real paper never uses. */
           const pattern =
             kind === "board"
               ? BOARD
               : {
-                  mcq: { ask: want.mcq, attempt: want.mcq, marks: 1 },
+                  mcq: { ask: want.mcq, marks: 1 },
                   short: { ask: want.short, attempt: want.short, marks: 2 },
-                  /* Two parts, always. A board long question is bifurcated into (a) and
-         (b), and a practice paper that set a single part would be teaching a
-         shape the real paper never uses. */
                   long: {
                     ask: want.long,
                     attempt: want.long,
-                    marks: 4,
-                    parts: 2,
+                    parts: LONG_PARTS,
+                    marks: LONG_PART_MARKS,
                   },
                 };
 
@@ -14738,7 +14906,6 @@
             mix: document.querySelector('input[name="diff"]:checked').value,
             kind,
             pattern,
-            space: wantsSpace(),
           });
           render();
 
@@ -14752,28 +14919,6 @@
           document
             .getElementById("paper-wrap")
             .scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-
-        keyBtn.addEventListener("click", () => {
-          const wrap = document.getElementById("key-wrap");
-          if (!wrap) return;
-          wrap.hidden = !wrap.hidden;
-          keyBtn.textContent = wrap.hidden
-            ? "Show marking key"
-            : "Hide marking key";
-          keyBtn.setAttribute("aria-pressed", wrap.hidden ? "false" : "true");
-          if (!wrap.hidden)
-            wrap.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-
-        /* What is on the screen is what comes out of the printer. If the key is
-     showing it prints, on its own page, after the paper. */
-        printBtn.addEventListener("click", () => {
-          document.body.classList.add("printing-paper");
-          const done = () => document.body.classList.remove("printing-paper");
-          addEventListener("afterprint", done, { once: true });
-          window.print();
-          setTimeout(done, 0);
         });
       }
 
@@ -14794,7 +14939,7 @@
           last = u.exercises[u.exercises.length - 1];
         document.getElementById("q-help").textContent =
           `Searches Concepts, Exercise ${first} to ${last} and their solutions. ` +
-          `Generated papers are not searched.`;
+          `Practice papers are not searched.`;
         document.getElementById("q").value = "";
         document.getElementById("q-count").textContent = "";
         document.getElementById("q-clear").hidden = true;
@@ -14808,7 +14953,7 @@
           }))
           .concat([
             { id: "review", label: "Review Exercise" },
-            { id: "generator", label: "Generator" },
+            { id: "generator", label: "Practice" },
           ]);
 
         const tl = document.getElementById("tablist");
