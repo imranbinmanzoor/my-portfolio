@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="book-release" content="r7.4" />
+    <meta name="book-release" content="r8" />
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1,viewport-fit=cover"
@@ -4654,8 +4654,8 @@
         }
         .practice-heading {
           gap: 12px;
-          align-items: center;
-          flex-wrap: wrap;
+          align-items: flex-start;
+          flex-direction: column;
           margin-bottom: 18px;
         }
         .practice-heading .eyebrow {
@@ -7386,6 +7386,11 @@
         .exam-header h3 {
           font-size: var(--size-300);
         }
+        .exam-paper .q-marks {
+          width: 100%;
+          margin-left: 0;
+          padding-left: 2.5rem;
+        }
         .exam-paper .q-note {
           flex-basis: calc(100% - 3rem);
           font-size: 0.9375rem;
@@ -8111,102 +8116,107 @@
         }
       }
 
-      /* R7.4: inline-end marks on small screens; use native line layout instead of
- * guessing instruction widths or moving the entire marks row to the left. */
-      .exam-paper .q-instruction {
-        display: flex;
+      /* ==========================================================================
+   R8 FINAL-CANDIDATE RESPONSIVE REFINEMENTS
+   ========================================================================== */
+      /* Q instructions and their mark arithmetic are one reading unit. The mark
+   expression is encountered after the instruction: if it fits on the last
+   line it sits at the far right; otherwise it drops to its own right-aligned
+   line. This avoids a left-floating orphan on narrow phones. */
+      .exam-paper .q-head {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
         align-items: baseline;
-        flex: 1 1 12rem;
-        gap: 12px;
+        column-gap: 12px;
+        row-gap: 0;
+      }
+      .exam-paper .q-note {
+        display: flow-root;
         min-width: 0;
         margin: 0;
+        flex: none;
       }
-      .exam-paper .q-instruction .q-note {
-        flex: 1 1 auto;
-        min-width: 0;
-      }
-      .exam-paper .q-instruction .q-marks {
-        flex: 0 0 auto;
-        margin-left: auto;
+      .exam-paper .q-marks {
+        float: inline-end;
+        width: auto;
+        margin: 0 0 0 14px;
+        padding: 0;
+        text-align: right;
         white-space: nowrap;
+        color: var(--primary);
       }
-      .practice .practice-heading {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px 12px;
-      }
-      .practice .practice-heading > div {
-        flex: 0 0 auto;
-      }
-      .practice .practice-heading > #open-recall {
-        flex: 0 0 auto;
-        margin: 0 0 0 auto;
-        align-self: center;
-        min-height: 44px;
-        padding: 0 4px;
-        font-size: var(--size-200);
-      }
-      @media screen and (max-width: 700px) {
-        .exam-paper .q-head {
-          display: grid;
-          grid-template-columns: max-content minmax(0, 1fr);
-          align-items: baseline;
-          column-gap: 12px;
+
+      /* The Practice title and saved-paper action remain a single header on phones.
+   The action is deliberately compact instead of becoming a centered second
+   heading. */
+      @media (max-width: 700px) {
+        .practice .practice-heading {
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
         }
-        .exam-paper .q-instruction {
-          display: flow-root;
-          font-size: var(--size-200);
-          line-height: 1.55;
+        .practice .practice-heading > div {
+          min-width: 0;
         }
-        .exam-paper .q-instruction .q-note {
-          display: inline;
-          font-size: inherit;
-          line-height: inherit;
+        .practice .practice-heading > .quiet-button {
+          flex: 0 0 auto;
+          align-self: center;
+          margin: 0 0 0 auto;
+          padding: 4px 2px;
+          white-space: nowrap;
+          font-size: clamp(0.75rem, 2.8vw, 0.8125rem);
         }
-        .exam-paper .q-instruction .q-marks {
-          float: right;
-          float: inline-end;
-          width: auto;
-          max-width: 100%;
-          margin: 0 0 0 12px;
-          padding: 0;
-          text-align: right;
-          font-size: var(--size-100);
-          line-height: calc(var(--size-200) * 1.55);
-        }
-        .exam-paper .q-instruction .q-marks .math-inline {
-          vertical-align: baseline;
-        }
-      }
-      @media screen and (max-width: 520px) {
-        .practice .practice-heading > #open-recall {
-          font-size: var(--size-100);
-          gap: 6px;
-        }
-        .practice .practice-heading > #open-recall svg {
+        .practice .practice-heading > .quiet-button .ui-icon {
           width: 18px;
           height: 18px;
         }
       }
-      @media print {
-        body.printing-paper .exam-paper .q-instruction {
+
+      /* Three counters share a common control baseline even when “Short questions”
+   needs two lines on a phone. */
+      @media (max-width: 520px) {
+        .practice .count-field {
           display: flex;
-          align-items: baseline;
-          gap: 8pt;
+          flex-direction: column;
+          min-width: 0;
         }
-        body.printing-paper .exam-paper .q-instruction .q-note {
-          font-size: 10pt;
-          line-height: 1.4;
+        .practice .count-field > label {
+          min-height: 4.25rem;
+          margin-bottom: 8px;
         }
-        body.printing-paper .exam-paper .q-instruction .q-marks {
-          float: none;
-          font-size: 9pt;
-          line-height: 1.4;
-          margin: 0 0 0 auto;
-          padding: 0;
-          white-space: nowrap;
+        .practice .count-field > .stepper {
+          margin-top: 0;
         }
+      }
+      @media (max-width: 340px) {
+        .practice .count-field > label {
+          min-height: 4.5rem;
+          font-size: 0.875rem;
+        }
+        .practice .count-field > label small {
+          font-size: 0.6875rem;
+        }
+      }
+
+      /* The later mobile rule from r7 intentionally made marks full-width, but the
+   new flow-root/float behavior above supersedes it. */
+      @media (max-width: 520px) {
+        .exam-paper .q-marks {
+          width: auto;
+          margin-left: 14px;
+          padding-left: 0;
+        }
+        .exam-paper .q-note {
+          flex-basis: auto;
+        }
+      }
+
+      /* Consistent tap rhythm for the two small heading actions. */
+      .practice .practice-heading > .quiet-button,
+      .practice .source-shortcuts > .text-button {
+        line-height: 1.35;
       }
     </style>
   </head>
@@ -8552,7 +8562,7 @@
                   "Now change one sign. Look at $x^{2}+1=0$. Take $1$ from both sides and you get $x^{2}=-1$.",
                   "Which real number works? A positive number times itself is positive, like $3\\times 3=9$. A negative number times itself is also positive, like $(-3)\\times(-3)=9$, because minus times minus gives plus. And $0\\times 0=0$. So the square of a real number is never negative. No real number works.",
                   "You can also see this on a graph. The curve $f(x)=x^{2}-1$ cuts the $x$-axis at $(-1,0)$ and $(1,0)$, so that equation has two real answers. The curve $f(x)=x^{2}+1$ never touches the $x$-axis, so that equation has no real answer.",
-                  "Mathematicians introduced $i$ with the defining relation $i^{2}=-1$. Together with the usual algebraic laws, this relation lets us calculate with complex numbers. We will also define conjugates and modulus and connect them to the complex plane."
+                  "So mathematicians made a new number for this job. They called it $i$, and gave it one rule: $i^{2}=-1$. That is the only new fact in this unit. Everything else comes from it by algebra you already know."
                 ]
               },
               {
@@ -8980,7 +8990,7 @@
                     "difficulty": "medium",
                     "steps": [
                       {
-                        "why": "The $27$ is a real number multiplying the rest, so leave it outside and work only on $i^{-26}$. A negative power means turn it upside down.",
+                        "why": "The $27$ is an real number multiplying the rest, so leave it outside and work only on $i^{-26}$. A negative power means turn it upside down.",
                         "math": "27i^{-26} = 27\\cdot\\frac{1}{i^{26}}"
                       },
                       {
@@ -9006,14 +9016,14 @@
                     ],
                     "written": [
                       {
-                        "say": "The $27$ is a real number and stays outside. Only $i^{-26}$ needs work."
+                        "say": "The $27$ is an real number and stays outside. Only $i^{-26}$ needs work."
                       },
                       {
                         "math": "\\begin{aligned}27i^{-26} &= \\frac{27}{i^{26}} && \\textcolor{#40516D}{\\small a^{-n}=\\frac{1}{a^{n}}} \\\\ &= \\frac{27}{\\left(i^{2}\\right)^{13}} && \\textcolor{#40516D}{\\small a^{mn}=\\left(a^{m}\\right)^{n}} \\\\ &= \\frac{27}{(-1)^{13}} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{27}{-1} && \\textcolor{#40516D}{\\small (-1)^{k}=-1 \\text{ for odd } k} \\\\ &= -27\\end{aligned}"
                       }
                     ],
                     "notes": {
-                      "watchOut": "The answer is a real number with no $i$ in it. An expression made from $i$ does not have to stay imaginary."
+                      "watchOut": "The answer is an real number with no $i$ in it. An expression made from $i$ does not have to stay imaginary."
                     }
                   },
                   {
@@ -9818,7 +9828,7 @@
                 "term": "Adding and subtracting complex numbers",
                 "statement": "Let $z_{1}=x_{1}+iy_{1}$ and $z_{2}=x_{2}+iy_{2}$, with real coordinates. Addition and subtraction act on corresponding parts: $$\\begin{aligned}z_{1}+z_{2}&=(x_{1}+x_{2})+i(y_{1}+y_{2}), \\\\ z_{1}-z_{2}&=(x_{1}-x_{2})+i(y_{1}-y_{2})\\end{aligned}$$",
                 "notes": [
-                  "For addition, add corresponding real and imaginary parts. For subtraction, subtract corresponding parts. Combine the real terms separately from the terms containing $i$.",
+                  "In words: add the real parts together, and add the imaginary parts together. Real parts and imaginary parts never mix.",
                   "This is the same as collecting like terms in algebra. The numbers without $i$ are one kind of term, and the numbers with $i$ are another."
                 ],
                 "examples": [
@@ -9917,7 +9927,7 @@
                 "body": [
                   "Multiply two brackets the way you always have. Each term in the first multiplies each term in the second, giving four products.",
                   "Take $z_{1}=x_{1}+iy_{1}$ and $z_{2}=x_{2}+iy_{2}$.$$\\begin{aligned}z_{1}z_{2} &= (x_{1}+iy_{1})(x_{2}+iy_{2}) \\\\ &= x_{1}x_{2}+ix_{1}y_{2}+iy_{1}x_{2}+i^{2}y_{1}y_{2}\\end{aligned}$$",
-                  "Only the last term is new. It carries $i^{2}$, and $i^{2}=-1$, so that term becomes $-y_{1}y_{2}$, a real number with no $i$ on it.",
+                  "Only the last term is new. It carries $i^{2}$, and $i^{2}=-1$, so that term becomes $-y_{1}y_{2}$, an real number with no $i$ on it.",
                   "Now collect. The terms without $i$ are $x_{1}x_{2}$ and $-y_{1}y_{2}$. The terms with $i$ are $ix_{1}y_{2}$ and $iy_{1}x_{2}$.$$\\begin{aligned}z_{1}z_{2} &= (x_{1}x_{2}-y_{1}y_{2})+i(x_{1}y_{2}+y_{1}x_{2})\\end{aligned}$$",
                   "That is the whole formula. There is nothing to memorize if you can multiply brackets and remember $i^{2}=-1$."
                 ]
@@ -9941,7 +9951,7 @@
                   "Students mix these up, so hold them apart.",
                   "The additive inverse undoes addition. You add it to $z$ and land on $0$, the additive identity. For $z=x+iy$ it is $-x-iy$. Both signs change, and no division is needed.",
                   "The multiplicative inverse undoes multiplication. You multiply $z$ by it and land on $1$, the multiplicative identity. It is $\\frac{1}{z}$, so a division is needed, which means the conjugate method.",
-                  "The multiplicative inverse undoes multiplication. You multiply $z$ by it and get $1$, the multiplicative identity. It is $1/z$ for $z\\neq0$. When the denominator is not real, use its conjugate to rewrite the reciprocal in rectangular form.",
+                  "A quick check for the multiplicative inverse: multiply your answer by $z$ and see whether you get $1$.$$\\begin{aligned}(4-3i)\\left(\\frac{4}{25}+\\frac{3}{25}i\\right) &= \\frac{(4-3i)(4+3i)}{25} \\\\ &= \\frac{16+9}{25} \\\\ &= 1 \\quad \\checkmark\\end{aligned}$$",
                   "Every complex number has an additive inverse. Every complex number except $0$ has a multiplicative inverse, because you cannot divide by $0$."
                 ]
               }
@@ -10202,7 +10212,7 @@
                         "math": "5^{2} = 25 \\quad\\text{and}\\quad (7i)^{2} = 49i^{2} = 49(-1) = -49"
                       },
                       {
-                        "why": "Subtract. Taking away $-49$ is the same as adding $49$, so the denominator is a real number with no $i$ in it.",
+                        "why": "Subtract. Taking away $-49$ is the same as adding $49$, so the denominator is an real number with no $i$ in it.",
                         "math": "(5-7i)(5+7i) = 25-(-49) = 74"
                       },
                       {
@@ -10435,7 +10445,7 @@
                     ],
                     "written": [
                       {
-                        "say": "The multiplicative inverse is $\\frac{1}{z}$, , which we now write in rectangular form."
+                        "say": "The multiplicative inverse is $\\frac{1}{z}$, which we now write in rectangular form."
                       },
                       {
                         "math": "\\begin{aligned}z^{-1} &= \\frac{1}{4-3i} \\\\ &= \\frac{1}{4-3i}\\times\\frac{4+3i}{4+3i} && \\textcolor{#40516D}{\\small \\text{multiply by }\\frac{4+3i}{4+3i}=1} \\\\ &= \\frac{4+3i}{4^{2}-(3i)^{2}} && \\textcolor{#40516D}{\\small (a-b)(a+b)=a^{2}-b^{2}} \\\\ &= \\frac{4+3i}{16-9i^{2}} \\\\ &= \\frac{4+3i}{16-9(-1)} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{4+3i}{25} \\\\ &= \\frac{4}{25}+\\frac{3}{25}i\\end{aligned}"
@@ -11172,7 +11182,7 @@
                     ],
                     "written": [
                       {
-                        "say": "The multiplicative inverse is $\\frac{1}{z}$, , which we now write in rectangular form."
+                        "say": "The multiplicative inverse is $\\frac{1}{z}$, which we now write in rectangular form."
                       },
                       {
                         "math": "\\begin{aligned}z^{-1} &= \\frac{1}{4+5i} \\\\ &= \\frac{1}{4+5i}\\times\\frac{4-5i}{4-5i} && \\textcolor{#40516D}{\\small \\text{multiply by }\\frac{4-5i}{4-5i}=1} \\\\ &= \\frac{4-5i}{4^{2}-\\left(5i\\right)^{2}} && \\textcolor{#40516D}{\\small (a+b)(a-b)=a^{2}-b^{2}} \\\\ &= \\frac{4-5i}{16-25i^{2}} \\\\ &= \\frac{4-5i}{16+25} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{4-5i}{41} \\\\ &= \\frac{4}{41}-\\frac{5}{41}i\\end{aligned}"
@@ -11213,7 +11223,7 @@
                     ],
                     "written": [
                       {
-                        "say": "The multiplicative inverse is $\\frac{1}{z}$, , which we now write in rectangular form."
+                        "say": "The multiplicative inverse is $\\frac{1}{z}$, which we now write in rectangular form."
                       },
                       {
                         "math": "\\begin{aligned}z^{-1} &= \\frac{1}{6+2i} \\\\ &= \\frac{1}{6+2i}\\times\\frac{6-2i}{6-2i} && \\textcolor{#40516D}{\\small \\text{multiply by }\\frac{6-2i}{6-2i}=1} \\\\ &= \\frac{6-2i}{6^{2}-\\left(2i\\right)^{2}} && \\textcolor{#40516D}{\\small (a+b)(a-b)=a^{2}-b^{2}} \\\\ &= \\frac{6-2i}{36-4i^{2}} \\\\ &= \\frac{6-2i}{36+4} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{6-2i}{40} \\\\ &= \\frac{6}{40}-\\frac{2}{40}i = \\frac{3}{20}-\\frac{1}{20}i\\end{aligned}"
@@ -11257,7 +11267,7 @@
                     ],
                     "written": [
                       {
-                        "say": "The multiplicative inverse is $\\frac{1}{z}$, , which we now write in rectangular form."
+                        "say": "The multiplicative inverse is $\\frac{1}{z}$, which we now write in rectangular form."
                       },
                       {
                         "math": "\\begin{aligned}z^{-1} &= \\frac{1}{7-3i} \\\\ &= \\frac{1}{7-3i}\\times\\frac{7+3i}{7+3i} && \\textcolor{#40516D}{\\small \\text{multiply by }\\frac{7+3i}{7+3i}=1} \\\\ &= \\frac{7+3i}{7^{2}-\\left(-3i\\right)^{2}} && \\textcolor{#40516D}{\\small (a+b)(a-b)=a^{2}-b^{2}} \\\\ &= \\frac{7+3i}{49-9i^{2}} \\\\ &= \\frac{7+3i}{49+9} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{7+3i}{58} \\\\ &= \\frac{7}{58}+\\frac{3}{58}i\\end{aligned}"
@@ -11685,7 +11695,7 @@
                       }
                     ],
                     "notes": {
-                      "watchOut": "Do not drop the middle term when squaring this sum. The identity $(a+b)^{2}=a^{2}+2ab+b^{2}$ gives a middle term $2i$ in $(1+i)^{2}$. Without it, the calculation is incorrect."
+                      "watchOut": "Do not write $(1+i)^{2}=1^{2}+i^{2}$. Squaring a bracket is never done term by term. The middle term $2ab$ is what makes this question work out to $2i$."
                     }
                   }
                 ]
@@ -11811,7 +11821,7 @@
                         "math": "bi(3i) = 3bi^{2}"
                       },
                       {
-                        "why": "Replace $i^{2}$ by $-1$, so this term becomes $-3b$, a real number with no $i$ on it.",
+                        "why": "Replace $i^{2}$ by $-1$, so this term becomes $-3b$, an real number with no $i$ on it.",
                         "math": "3bi^{2} = -3b"
                       },
                       {
@@ -13317,7 +13327,7 @@
                 "notes": [
                   "The $i$ is never part of the imaginary part. For $z=55-48i$, $\\operatorname{Im}(z)=-48$, not $-48i$.",
                   "For a nonzero base and a positive integer $n$, $(x+iy)^{-n}=1/(x+iy)^{n}$. A negative exponent means a reciprocal, not a minus sign in front of the answer.",
-                  "For $n=-1$, the imaginary part is $-y/(x^{2}+y^{2})$. It is not necessarily negative: its sign is opposite to the sign of $y$, unless $y=0$."
+                  "For $n=-1$ the imaginary part carries a minus sign, because the conjugate on top is $x-iy$."
                 ],
                 "examples": [
                   "For $z=(2+i)^{1}$: $\\ \\operatorname{Re}(z)=2$ and $\\operatorname{Im}(z)=1$.",
@@ -13384,6 +13394,7 @@
                 "title": "Why $(x+iy)^{-1}$ has the parts it does",
                 "body": [
                   "Assume $x,y$ are real and $x+iy\\neq0$. Start from the meaning of a negative exponent: $$\\begin{aligned}z&=(x+iy)^{-1}=\\frac{1}{x+iy}\\end{aligned}$$",
+                  "Start from the meaning of the negative power.$$\\begin{aligned}z &= (x+iy)^{-1} = \\frac{1}{x+iy}\\end{aligned}$$",
                   "There is an $i$ in the denominator, so this is not the form $x+iy$. Multiply the top and the bottom by the conjugate $x-iy$. You may do this because $\\frac{x-iy}{x-iy}=1$, and multiplying by $1$ changes how a number looks but not its value.$$\\begin{aligned}z &= \\frac{1}{x+iy}\\times\\frac{x-iy}{x-iy}\\end{aligned}$$",
                   "The denominator is of the form $(x+iy)(x-iy)$, which is $x^{2}-(iy)^{2}=x^{2}+y^{2}$, an ordinary real number with no $i$ in it.$$\\begin{aligned}z &= \\frac{x-iy}{x^{2}+y^{2}}\\end{aligned}$$",
                   "Split the one fraction into two, one for each part.$$\\begin{aligned}z &= \\frac{x}{x^{2}+y^{2}} - \\frac{y}{x^{2}+y^{2}}\\,i\\end{aligned}$$",
@@ -13828,7 +13839,7 @@
                         "why": "Substitute the stated pair into both original equations. Each left side gives its own right side, so the pair satisfies the entire system."
                       }
                     },
-                    "givens": "\\begin{aligned}5z-(3+i)w&=7-i,\\qquad\\cdots(1) \\\\ (2-i)z+2iw&=4\\qquad\\cdots(2)\\end{aligned}",
+                    "givens": "\\begin{aligned}5z-(3+i)w&=7-i,\\qquad\\cdots(1) \\\\ (2-i)z+2iw&=4.\\qquad\\cdots(2)\\end{aligned}",
                     "id": "u1-example-21-part-1"
                   }
                 ]
@@ -14395,7 +14406,7 @@
                         "why": "Substitute the stated pair into both original equations. Each left side gives its own right side, so the pair satisfies the entire system."
                       }
                     },
-                    "givens": "\\begin{aligned}3z+(2+i)w&=11-i,\\qquad\\cdots(1) \\\\ (2-i)z-w&=-1+i\\qquad\\cdots(2)\\end{aligned}"
+                    "givens": "\\begin{aligned}3z+(2+i)w&=11-i,\\qquad\\cdots(1) \\\\ (2-i)z-w&=-1+i.\\qquad\\cdots(2)\\end{aligned}"
                   },
                   {
                     "id": "ex14-q2-ii",
@@ -14519,7 +14530,7 @@
                         "why": "Substitute the stated pair into both original equations. Each left side gives its own right side, so the pair satisfies the entire system."
                       }
                     },
-                    "givens": "\\begin{aligned}2z+(3+i)w&=9-i,\\qquad\\cdots(1) \\\\ -iz-iw&=-1+i\\qquad\\cdots(2)\\end{aligned}"
+                    "givens": "\\begin{aligned}2z+(3+i)w&=9-i,\\qquad\\cdots(1) \\\\ -iz-iw&=-1+i.\\qquad\\cdots(2)\\end{aligned}"
                   },
                   {
                     "id": "ex14-q2-iii",
@@ -14593,7 +14604,7 @@
                         "why": "Substitute the stated pair into both original equations. Each left side gives its own right side, so the pair satisfies the entire system."
                       }
                     },
-                    "givens": "\\begin{aligned}z-4w&=3i,\\qquad\\cdots(1) \\\\ 2z+3w&=11-5i\\qquad\\cdots(2)\\end{aligned}"
+                    "givens": "\\begin{aligned}z-4w&=3i,\\qquad\\cdots(1) \\\\ 2z+3w&=11-5i.\\qquad\\cdots(2)\\end{aligned}"
                   },
                   {
                     "id": "ex14-q2-iv",
@@ -14663,7 +14674,7 @@
                         "why": "Substitute the stated pair into both original equations. Each left side gives its own right side, so the pair satisfies the entire system."
                       }
                     },
-                    "givens": "\\begin{aligned}z+w&=3i,\\qquad\\cdots(1) \\\\ 2z+3w&=2\\qquad\\cdots(2)\\end{aligned}"
+                    "givens": "\\begin{aligned}z+w&=3i,\\qquad\\cdots(1) \\\\ 2z+3w&=2.\\qquad\\cdots(2)\\end{aligned}"
                   },
                   {
                     "id": "ex14-q2-v",
@@ -14775,7 +14786,7 @@
                         "why": "Substitute the stated pair into both original equations. Each left side gives its own right side, so the pair satisfies the entire system."
                       }
                     },
-                    "givens": "\\begin{aligned}2z+(3+i)w&=1,\\qquad\\cdots(1) \\\\ -z-(1-i)w&=2\\qquad\\cdots(2)\\end{aligned}"
+                    "givens": "\\begin{aligned}2z+(3+i)w&=1,\\qquad\\cdots(1) \\\\ -z-(1-i)w&=2.\\qquad\\cdots(2)\\end{aligned}"
                   }
                 ]
               }
@@ -15018,7 +15029,7 @@
                     "answer": "$\\dfrac{1}{2}-\\dfrac{1}{2}i$",
                     "written": [
                       {
-                        "say": "The multiplicative inverse is $\\frac{1}{z}$, , which we now write in rectangular form."
+                        "say": "The multiplicative inverse is $\\frac{1}{z}$, which we now write in rectangular form."
                       },
                       {
                         "math": "\\begin{aligned}z^{-1} &= \\frac{1}{1+i} \\\\ &= \\frac{1}{1+i}\\cdot\\frac{1-i}{1-i} && \\textcolor{#40516D}{\\small \\text{multiply by }\\frac{1-i}{1-i}=1} \\\\ &= \\frac{1-i}{(1+i)(1-i)} \\\\ &= \\frac{1-i}{1^{2}-i^{2}} && \\textcolor{#40516D}{\\small (a+b)(a-b)=a^{2}-b^{2}} \\\\ &= \\frac{1-i}{1-(-1)} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{1-i}{2} \\\\ &= \\frac{1}{2}-\\frac{1}{2}i\\end{aligned}"
@@ -15384,7 +15395,7 @@
                         "math": "(-i)^{-9} = \\frac{1}{-i}"
                       },
                       {
-                        "why": "There is still $i$ at the bottom, so this is not final. Multiply top and bottom by $i$, then use $i^{2}=-1$. A minus in front of a minus gives a plus.",
+                        "why": "Next write the reciprocal in rectangular form. Multiply top and bottom by $i$, then use $i^{2}=-1$. A minus in front of a minus gives a plus.",
                         "math": "\\begin{aligned}(-i)^{-9} &= \\frac{1}{-i}\\cdot\\frac{i}{i} \\\\ &= \\frac{i}{-i^{2}} \\\\ &= \\frac{i}{-(-1)} \\\\ &= i\\end{aligned}"
                       }
                     ],
@@ -15396,7 +15407,7 @@
                         "math": "\\begin{aligned}(-i)^{-9} &= \\frac{1}{(-i)^{9}} && \\textcolor{#40516D}{\\small a^{-n}=\\frac{1}{a^{n}}} \\\\ &= \\frac{1}{(-1)^{9}\\,i^{9}} && \\textcolor{#40516D}{\\small (ab)^{n}=a^{n}b^{n}} \\\\ &= \\frac{1}{(-1)\\,i^{9}} && \\textcolor{#40516D}{\\small \\text{$9$ is odd, so one minus is left over}} \\\\ &= \\frac{1}{(-1)\\left(i^{2}\\right)^{4} i} && \\textcolor{#40516D}{\\small a^{mn}=\\left(a^{m}\\right)^{n}} \\\\ &= \\frac{1}{(-1)(-1)^{4}\\,i} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{1}{(-1)(1)\\,i} && \\textcolor{#40516D}{\\small \\text{$4$ is even, so the minus signs cancel in pairs}} \\\\ &= \\frac{1}{-i}\\end{aligned}"
                       },
                       {
-                        "say": "To express the reciprocal in rectangular form, multiply the numerator and denominator by $i$."
+                        "say": "Next write the reciprocal in rectangular form. Multiply top and bottom by $i$."
                       },
                       {
                         "math": "\\begin{aligned}(-i)^{-9} &= \\frac{1}{-i}\\cdot\\frac{i}{i} \\\\ &= \\frac{i}{-i^{2}} \\\\ &= \\frac{i}{-(-1)} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= i\\end{aligned}"
@@ -15550,7 +15561,7 @@
                         "math": "\\begin{aligned}-z &= -(8+9i) \\\\ &= -8-9i && \\textcolor{#40516D}{\\small \\text{distribute the factor }-1}\\end{aligned}"
                       },
                       {
-                        "say": "The multiplicative inverse is $\\frac{1}{z}$, , which we now write in rectangular form."
+                        "say": "The multiplicative inverse is $\\frac{1}{z}$, which we now write in rectangular form."
                       },
                       {
                         "math": "\\begin{aligned}z^{-1} &= \\frac{1}{8+9i} \\\\ &= \\frac{1}{8+9i}\\times\\frac{8-9i}{8-9i} && \\textcolor{#40516D}{\\small \\text{multiply by }\\frac{8-9i}{8-9i}=1} \\\\ &= \\frac{8-9i}{8^{2}-(9i)^{2}} && \\textcolor{#40516D}{\\small (a+b)(a-b)=a^{2}-b^{2}} \\\\ &= \\frac{8-9i}{64-81i^{2}} \\\\ &= \\frac{8-9i}{64-81(-1)} && \\textcolor{#40516D}{\\small i^{2}=-1} \\\\ &= \\frac{8-9i}{145} \\\\ &= \\frac{8}{145}-\\frac{9}{145}i\\end{aligned}"
@@ -16295,7 +16306,7 @@
                       },
                       "shortcut": "Subtracting is quicker than substituting here, because the $z$ terms are already identical. Look for that before rearranging anything."
                     },
-                    "givens": "\\begin{aligned}\\ iz+(2-i)w&=4+i,\\qquad\\cdots(1) \\\\ iz+(3+i)w&=3+3i\\qquad\\cdots(2)\\end{aligned}"
+                    "givens": "\\begin{aligned}\\ iz+(2-i)w&=4+i,\\qquad\\cdots(1) \\\\ iz+(3+i)w&=3+3i.\\qquad\\cdots(2)\\end{aligned}"
                   }
                 ]
               },
@@ -29505,10 +29516,8 @@
           for (const shell of pending) {
             if (!shell.isConnected) {
               known.delete(shell);
-              const scroller = shell.firstElementChild;
-              if (scroller) observer?.unobserve(scroller);
-              if (scroller?.firstElementChild)
-                observer?.unobserve(scroller.firstElementChild);
+              observer?.unobserve(shell.firstElementChild);
+              observer?.unobserve(shell.firstElementChild.firstElementChild);
               continue;
             }
             const scroller = shell.firstElementChild;
@@ -30051,96 +30060,42 @@
         return out + text.slice(from);
       }
 
-      /* Display-only punctuation policy. Inline prose, coordinates, decimal points,
-       * spacing commands, factorials and invisible \right. delimiters are preserved. */
-      function stripDisplayPunctuation(raw) {
-        let t = String(raw),
-          closing = "";
-        const end = t.match(
-          /(\s*\\end\{(?:aligned|alignedat|gathered|array|split)\}\s*)$/,
-        );
-        if (end) {
-          closing = end[0];
-          t = t.slice(0, end.index);
-        }
-        let depth = 0,
-          env = 0,
-          row = 0,
-          hint = -1;
-        for (let i = 0; i < t.length; i++) {
-          if (t[i] === "\\") {
-            const e = t.slice(i).match(/^\\(begin|end)\{([^{}]+)\}/);
-            if (e) {
-              env += e[1] === "begin" ? 1 : -1;
-              i += e[0].length - 1;
-              continue;
-            }
-            if (
-              t.slice(i, i + 2) === "\\\\" &&
-              depth === 0 &&
-              env <= (closing ? 1 : 0)
-            ) {
-              row = i + 2;
-              hint = -1;
-            }
-            i++;
-            continue;
-          }
-          if (t[i] === "{") depth++;
-          else if (t[i] === "}") depth--;
-          else if (
-            t.slice(i, i + 2) === "&&" &&
-            depth === 0 &&
-            env <= (closing ? 1 : 0) &&
-            hint < row
-          )
-            hint = i;
-        }
-        const cut = hint >= row ? hint : t.length,
-          reason = t.slice(cut);
-        let main = t.slice(0, cut),
-          tag = "";
-        const number = main.match(/(\s*\\q?quad\s*\\cdots\s*\([^)]*\)\s*)$/);
-        if (number) {
-          tag = number[0];
-          main = main.slice(0, number.index);
-        }
-        main = main.trimEnd();
-        while (/[.,;]$/.test(main)) {
-          if (
-            /\\[.,;]$|\\(?:left|right|big|Big|bigg|Bigg)[lr]?\.$|\.\.$/.test(
-              main,
-            )
-          )
-            break;
-          main = main.slice(0, -1).trimEnd();
-        }
-        return main + tag + (reason ? " " + reason : "") + closing;
-      }
-      function displayMathText(text) {
-        return String(text)
-          .replace(
-            /\$\$([\s\S]*?)\$\$/g,
-            (_, t) => "$$" + stripDisplayPunctuation(t) + "$$",
-          )
-          .replace(
-            /\\\[([\s\S]*?)\\\]/g,
-            (_, t) => "\\[" + stripDisplayPunctuation(t) + "\\]",
-          );
-      }
+      /* Sentence punctuation for worked bank displays is a presentation operation.
+       * The original ordered bank and its saved-paper fingerprint are deliberately untouched. */
       function practiceWorkingHTML(html) {
-        return displayMathText(
-          String(html).replace(/\$\$([\s\S]*?)\$\$/g, (_, raw) => {
-            const math = raw
+        return String(html)
+          .replace(/\$\$([\s\S]*?)\$\$/g, (_, raw) => {
+            let math = raw
               .replace(/\\mathrm\{(Re|Im)\}/g, "\\operatorname{$1}")
               .replace(/\\left\((\d+)\\right\)\^/g, "$1^")
               .replace(/(^|[^\w}])\((\d+)\)\^/g, "$1$2^");
+            const closing = math.trimEnd().endsWith("\\end{aligned}")
+              ? "\\end{aligned}"
+              : "";
+            if (closing) math = math.trimEnd().slice(0, -closing.length);
+            const index = math.lastIndexOf("\\\\") + 2;
+            const start = index === 1 ? 0 : index,
+              row = math.slice(start),
+              pos = row.indexOf("&&");
+            const left = (pos < 0 ? row : row.slice(0, pos)).trimEnd(),
+              reason = pos < 0 ? "" : row.slice(pos);
+            const tag = left.match(/\s*\\q?quad\s*\\cdots\([^)]*\)\s*$/);
+            const formula = (tag ? left.slice(0, tag.index) : left)
+              .trimEnd()
+              .replace(/[.,;]+$/, "");
+            math =
+              math.slice(0, start) +
+              formula +
+              "." +
+              (tag ? tag[0] : "") +
+              (reason ? " " + reason : "") +
+              closing;
             return "$$" + math + "$$";
-          }),
-        ).replace(
-          /Here \$([^$]+)\$ is (even|odd)\./g,
-          "The exponent of $(-1)$ is $2.",
-        );
+          })
+          .replace(
+            /Here \$([^$]+)\$ is (even|odd)\./g,
+            "The exponent of $(-1)$ is $2.",
+          );
       }
 
       /* ======================================================================
@@ -30615,8 +30570,7 @@
         return (
           `<div class="pq-q"><div class="q-head">` +
           `<span class="q-no">${q.qno}</span>` +
-          `<div class="q-instruction"><span class="q-note">${q.note}</span> ` +
-          `<span class="q-marks">${inlineQuantity(q.arith)}</span></div></div>` +
+          `<p class="q-note">${q.note}<span class="q-marks">${inlineQuantity(q.arith)}</span></p></div>` +
           q.items
             .map(
               (it, i) =>
@@ -31861,7 +31815,7 @@
               ? sizes
                   .map(
                     (size, i) =>
-                      `<div class="attempt-field"><label for="short-attempt-${i}">Q${(c.mcq ? 2 : 1) + i}: attempt</label><input id="short-attempt-${i}" type="number" min="1" max="${size}" step="1" inputmode="numeric" value="${prior.length === sizes.length && prior[i] && /^\d+$/.test(prior[i]) ? Math.min(Number(prior[i]), size) : Math.min(6, Math.max(1, size - 1))}"><span>of ${size} questions</span></div>`,
+                      `<div class="attempt-field"><label for="short-attempt-${i}">Q${(c.mcq ? 2 : 1) + i}: attempt</label><input id="short-attempt-${i}" type="number" min="1" max="${size}" step="1" inputmode="numeric" value="${prior.length === sizes.length && prior[i] && /^\d+$/.test(prior[i]) ? Math.min(Number(prior[i]), size) : Math.min(6, Math.max(1, size - 1))}"><span>of ${size} parts</span></div>`,
                   )
                   .join("")
               : "";
@@ -32830,7 +32784,7 @@
           )
             nodes.push(walker.currentNode);
         nodes.forEach((node) => {
-          node.nodeValue = themeMath(displayMathText(node.nodeValue));
+          node.nodeValue = themeMath(node.nodeValue);
           const span = document.createElement("span");
           span.className = "math-fragment";
           node.replaceWith(span);
