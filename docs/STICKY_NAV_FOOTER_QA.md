@@ -66,3 +66,13 @@ One scroll-settling probe timed out during Class 9 panel switching; the selected
 visible Practice controls and subsequent Home navigation were verified directly.
 
 Build and publication verification is recorded in PROJECT_STATE.md and DEPLOYMENT.md.
+
+Final local validation: 45 checks passed, zero failed. Two builds produced 70 identical
+output files. Source digest: 651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc.
+
+Published source: d9327149fe298a128a7f4208979cd53d6e2089d3. Pages run 35450748595 succeeded. All 69 public files
+matched the checked build; four source/private exclusions returned 404. Live Browser
+confirmed both mobile exercise strips, Class 10 compact-link focus below the complete
+sticky stack, and the Class 9 footer's 16px separation. Console warning/error log was empty.
+The initial live Class 9 navigation call timed out; the actual destination subsequently
+reported complete and was successfully inspected. Rollback: 3c2a48bffdb773902b3c2d2d2e3f6207e17ff3b6.

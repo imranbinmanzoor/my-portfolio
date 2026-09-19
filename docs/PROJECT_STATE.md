@@ -5,13 +5,14 @@ Updated: 2026-09-19. Phase: original-design foundation published and verified fo
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `3c2a48bffdb773902b3c2d2d2e3f6207e17ff3b6`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35449793101).
-- Source digest: `833f1349c9ddfadf580e1d537264c16e5329c58283f180e82d5d9f2a7c08fcc0`.
+- Published source: `d9327149fe298a128a7f4208979cd53d6e2089d3`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35450748595).
+- Source digest: `651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc`.
 - 45 local checks passed; two builds produced 70 identical output files. All 69 public files matched byte for byte; four excluded source/private paths returned 404.
-- Four project cases now share genuine device previews, enlargement, stories and parent navigation. Live Browser checked preview selection, enlargement and the phone footer. Evidence: docs/PROJECT_CASE_REVIEW.md.
+- Mobile/tablet exercise navigation is sticky, controls are compact, and footer panels are consistently separated. Redundant editorial heading badges are removed. Live Browser verified both books' sticky geometry, a compact-solution link and the Class 9 footer. Console warning/error log was empty. Evidence: docs/STICKY_NAV_FOOTER_QA.md.
+- The preceding project-case redesign remains included: genuine device views, enlargement, concise stories and breadcrumbs. Evidence: docs/PROJECT_CASE_REVIEW.md.
 - Pages publishes checked dist/ output. Custom domain, HTTPS and the main-only environment are unchanged.
-- Immediate rollback: `ce4eaa016b0db82a50945dcfaeb8cff0810e606f`, digest `8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d`.
+- Immediate rollback: `3c2a48bffdb773902b3c2d2d2e3f6207e17ff3b6`, digest `833f1349c9ddfadf580e1d537264c16e5329c58283f180e82d5d9f2a7c08fcc0`.
 - Pre-pilot recovery: `7a2d89409c81312b0439727e18dd93724357968e`; use DEPLOYMENT.md.
 
 ## Accepted baseline and authority
@@ -149,11 +150,11 @@ Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible outpu
 
 ## Next checkpoint
 
-The project detail redesign is published and verified. The next checked refinement
-restores sticky mobile/tablet exercises, compacts their controls, consistently separates
-all footers and removes redundant editorial heading badges. Evidence:
-docs/STICKY_NAV_FOOTER_QA.md. Publication verification is pending for this refinement;
-3c2a48b remains its rollback point.
+The project detail redesign and the subsequent navigation/footer refinement are
+published and verified. Both books retain mobile/tablet exercises and question context,
+with compact controls; all footer panels are separated consistently. Evidence:
+docs/PROJECT_CASE_REVIEW.md and docs/STICKY_NAV_FOOTER_QA.md. Continue from the
+verified release above; live review is not final aesthetic acceptance.
 
 The hierarchy revision is published; the explorer follows the library catalogue and its
 assets are absent from the homepage. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md.
