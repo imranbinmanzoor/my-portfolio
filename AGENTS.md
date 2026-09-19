@@ -39,6 +39,10 @@ unavailable memory or infer employment from a public profile's organization fiel
 
 ## Quality
 
+- The owner rejected the published blue redesign and selected their unfinished original
+  portfolio archive as the new visual foundation. Read `docs/ORIGINAL_DESIGN_REVIEW.md`
+  before design work. Preserve its character while rebuilding fragile interactions;
+  do not mistake old placeholder copy or the old portrait for new publication approval.
 - Mathematical correctness is separate from rendering and frontend correctness.
   Follow `docs/MATH_AUTHORING.md`; never shorten reasoning to make a solution compact.
 - Follow `docs/DESIGN_SYSTEM.md` and preserve the established Practice behavior.

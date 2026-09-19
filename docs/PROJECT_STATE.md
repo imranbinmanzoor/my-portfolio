@@ -1,6 +1,7 @@
 # Project state
 
-Updated: 2026-09-19. Phase: broader redesign published and verified; live visual review.
+Updated: 2026-09-19. Phase: published direction rejected by owner; detailed inspection
+of the owner's original design completed; new foundation selected.
 
 ## Current production release
 
@@ -24,7 +25,8 @@ Updated: 2026-09-19. Phase: broader redesign published and verified; live visual
 
 - Pre-pilot production/recovery commit: `7a2d89409c81312b0439727e18dd93724357968e`.
 - Repository: `imranbinmanzoor/my-portfolio`; domain: `imranbinmanzoor.com`.
-- Working branch: `codex/site-wide-redesign`, branched from `c028641`.
+- Working branch: `codex/original-design-foundation`, branched from documentation
+  milestone `4963915` after the broader redesign release.
 - Pre-existing untracked file: `PORTFOLIO_MATH_CODEX_BRIEF.md`; preserve without staging.
 - User authorizes routine engineering and local commits. On 2026-09-19 the owner requested
   publication of the broader redesign and gave standing approval: "whatever new update,
@@ -99,7 +101,7 @@ rollout will consolidate the reusable book/practice interface across books incre
   that informational byte to RFC 1952's unknown value. The decompressed bank is identical;
   all served files now match across the two build platforms.
 
-## Broader redesign — current work
+## Broader redesign — published history
 
 The owner requested a real redesign instead of a consistency-patching pass.
 The published implementation now includes:
@@ -120,10 +122,34 @@ Evidence: docs/REDESIGN_QA.md. Direction: docs/REDESIGN.md and docs/DESIGN_SYSTE
 The deployed rollback point remains 1478f06bfc0a8aa679564497bb2c94f2a31b8034.
 Published through the checked Pages workflow on 2026-09-19 for the owner's live review.
 
+## Original design foundation — current work
+
+The owner found the published design too typical and supplied their own older, unfinished
+portfolio. They explicitly requested minute visual, responsive and JavaScript inspection,
+including mobile scroll behavior. Its character is the new visual foundation; the earlier
+blue direction is no longer the aesthetic target.
+
+The archive was extracted without modification under ignored `.local/` and previewed on
+loopback port 4180. Inspection covered all nine pages, 137 page/viewport observations,
+145 default/hover control pairs, keyboard/navigation behavior, galleries, card disclosures,
+all four JavaScript files and locally simulated contact-form states. Exact evidence,
+working behaviors, reproducible defects, design decisions and limitations are recorded in
+`docs/ORIGINAL_DESIGN_REVIEW.md`. Raw records are in ignored `test-results/`; screenshots
+and a local visual atlas are outside public output. Native physical touch remains untested.
+
+No production sources or archive contents changed during this inspection. Production
+remains `055b4c078c82c935818541dbce21b44e604c7135`; use this as the immediate recoverable
+source for the next design implementation. The earlier rollback remains documented above.
+
 ## Next checkpoint
 
-Continue the owner's visual review and agreed refinements, publishing completed, checked
-updates under the standing approval. Publication does not mean final aesthetic acceptance.
+Build the representative home/library/lesson/Practice implementation from the original's
+neutral panels, compact personal navigation, colored discipline details and deliberate
+interactions. Retain the maintained static build and recovered book/runtime boundaries.
+Use verified current biography, keep Layyah, and do not restore the old portrait without
+a new owner instruction. Give the mathematical artifact a deliberate place in the new
+composition. Validate the new pilot and publish checked website updates for live review
+under the standing approval. Publication does not mean final aesthetic acceptance.
 The separate mathematics work still includes independent editorial/correctness review,
 Class 9 authoring-source recovery and further shared Practice/renderer consolidation.
 A visual redesign does not complete those tasks.

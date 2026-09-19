@@ -7,8 +7,13 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 - Muhammad Imran is from **Layyah, Pakistan**, not Multan. This correction overrides
   the old site's location, including metadata and mobile menus.
 - The root is a multidisciplinary personal portfolio, with mathematics books inside it.
-- The published pilot used a portrait-free mathematical visual. The broader
-  redesign retains it; the new composition is awaiting visual review.
+- The owner prefers a portrait-free direction. The published mathematical visual is
+  available for reuse, but its placement must serve the new composition.
+- The owner rejected the published design as too typical and selected their own older
+  self-built portfolio as the foundation. It was unfinished because they were learning.
+  Preserve its character while completing it professionally; see ORIGINAL_DESIGN_REVIEW.md.
+  The supplied archive's portrait, placeholders and historical claims are design evidence,
+  not approval to republish those assets or assertions.
 - He values complete mathematical reasoning, careful typesetting, professional visual
   design, reproducible work, and practical teaching tools. Compact must not mean incomplete.
 - Visual precision is an explicit priority: spacing, lines, placement, consistency,

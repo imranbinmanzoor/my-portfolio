@@ -1,4 +1,20 @@
-# Broader redesign — working direction
+# Redesign direction and history
+
+## Current direction: the owner's original portfolio
+
+The owner rejected the broader redesign after live review and selected their own older,
+unfinished design as the base. The new source branch is `codex/original-design-foundation`.
+Read `ORIGINAL_DESIGN_REVIEW.md`: it records the archive identity, detailed page/element/
+state inspection, JavaScript and scroll findings, and the decisions for the next pilot.
+
+Preserve the compact personal sidebar, neutral canvas and white panels, discipline
+colors, project-specific imagery and careful animated details. Rebuild the incomplete
+interaction machinery with shared semantic components. Bring the mathematics library,
+reading and Practice into that language without changing reasoning or paper behavior.
+Current live source `055b4c0` remains the recovery point. The reference archive remains
+local and unmodified; it is not a release candidate.
+
+## Previous direction — published, then rejected visually
 
 The owner rejected a consistency-only pass on 2026-09-19 and asked for a real redesign.
 The published pilot at `1478f06` is a recovery point, not the visual acceptance standard.

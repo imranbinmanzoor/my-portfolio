@@ -1,8 +1,23 @@
 # Design system
 
-Status: broader redesign published for owner review. The published pilot is a recovery
-point; the owner requested a fresh design rather than a consistency-only pass.
-Direction and research: `REDESIGN.md`. Current evidence: `REDESIGN_QA.md`.
+Status: the owner rejected the published composition and chose their own unfinished
+original portfolio as the new foundation. Read `ORIGINAL_DESIGN_REVIEW.md` for measured
+design/interaction evidence and the current direction. `REDESIGN_QA.md` records the
+published release's checks, not aesthetic acceptance.
+
+The tokens and compositions below describe the current implementation, which remains
+live while its replacement is developed. They are not the visual target for the next
+pilot. Preserve source roles, accessibility, mathematical typography and print behavior;
+replace the visual tokens deliberately rather than layering competing overrides.
+
+## Next visual foundation
+
+The reference uses a `#f0f1f5` canvas, white compact panels, 12px outer radii, black pill
+actions, persistent personal navigation and green/cyan/purple discipline accents. Its
+small image/arrow transitions and personal density should survive professionalization.
+Use darker accent text for contrast, natural-height disclosures, accessible galleries
+and a dependable mobile menu. Exact next-generation tokens remain to be implemented
+and verified together. The old portrait and placeholder biography are not approved copy.
 
 ## Source roles
 
