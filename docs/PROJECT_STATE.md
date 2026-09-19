@@ -5,14 +5,14 @@ Updated: 2026-09-19. Phase: original-design foundation published and verified fo
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `ce4eaa016b0db82a50945dcfaeb8cff0810e606f`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35448713033).
-- Source digest: `8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d`.
-- 44 checks passed locally; two builds produced 65 identical output files. GitHub's build/check and deployment jobs succeeded. All 64 publicly served files match local output byte for byte; .nojekyll is upload metadata.
-- The explorer now follows the library catalogue in a collapsed disclosure. Local Browser checks covered four widths and its controls; actual live checks confirmed the mobile homepage and library link/disclosure focus. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md. Earlier unchanged book/Practice/print evidence remains in docs/FOUNDATION_QA.md.
-- Pages continues to publish checked dist/ output. The custom domain, HTTPS and main-only deployment environment are unchanged. Excluded source/document/private helper paths return 404.
-- Immediate rollback source: `771d13cca7188c4e8762d48c6626da3fde33ec46`; digest `2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7`.
-- Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`. Use DEPLOYMENT.md; that old source has no current build pipeline.
+- Published source: `3c2a48bffdb773902b3c2d2d2e3f6207e17ff3b6`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35449793101).
+- Source digest: `833f1349c9ddfadf580e1d537264c16e5329c58283f180e82d5d9f2a7c08fcc0`.
+- 45 local checks passed; two builds produced 70 identical output files. All 69 public files matched byte for byte; four excluded source/private paths returned 404.
+- Four project cases now share genuine device previews, enlargement, stories and parent navigation. Live Browser checked preview selection, enlargement and the phone footer. Evidence: docs/PROJECT_CASE_REVIEW.md.
+- Pages publishes checked dist/ output. Custom domain, HTTPS and the main-only environment are unchanged.
+- Immediate rollback: `ce4eaa016b0db82a50945dcfaeb8cff0810e606f`, digest `8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d`.
+- Pre-pilot recovery: `7a2d89409c81312b0439727e18dd93724357968e`; use DEPLOYMENT.md.
 
 ## Accepted baseline and authority
 
@@ -149,12 +149,11 @@ Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible outpu
 
 ## Next checkpoint
 
-Owner-directed project detail redesign is locally implemented: four shared case pages,
-original device-view switches, current portfolio captures, image enlargement, concise
-project stories, sentence-case labels and shared parent breadcrumbs. The footer spacing
-pass covers portfolio, projects, tutoring, library and books. Cross-page evidence and
-research: docs/PROJECT_CASE_REVIEW.md. Publication verification is pending for this next
-milestone; the current verified release above remains the rollback point.
+The project detail redesign is published and verified. The next checked refinement
+restores sticky mobile/tablet exercises, compacts their controls, consistently separates
+all footers and removes redundant editorial heading badges. Evidence:
+docs/STICKY_NAV_FOOTER_QA.md. Publication verification is pending for this refinement;
+3c2a48b remains its rollback point.
 
 The hierarchy revision is published; the explorer follows the library catalogue and its
 assets are absent from the homepage. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md.

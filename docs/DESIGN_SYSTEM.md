@@ -16,7 +16,11 @@ Preserve intentional brand marks, code, URLs and mathematical notation.
 
 The shared footer uses 20px internal vertical padding, a 16px preceding gap, compact
 desktop identity/navigation columns and a two-column mobile link grid. Its gutter follows
-the surrounding site or book frame. Do not add page-specific footer spacing patches.
+the surrounding site or book frame. Every footer is its own rounded surface, separated
+from the content by the page background. The scrolling workspace must not be painted
+in the surface colour, which makes the footer appear attached. Reading containers own
+one 32px bottom inset; avoid accumulating panel padding and trailing section margins.
+Do not add page-specific footer spacing patches.
 
 ## Source roles
 
@@ -51,9 +55,9 @@ Inter owns prose and controls, including genuine italic faces. Synthetic slant i
 
 At 800px and wider, the personal navigation and right workspace share a 16px top/bottom inset. The right workspace scrolls internally; navigation remains aligned with its frame. The rail is 80px at 800–1199px and 248px from 1200px. At narrower widths, the document scrolls normally with a compact personal header and accessible menu. SiteScroll handles the owner change; book code must not assume window.scrollY is always the page position.
 
-Shared content maximum is 1280px; book gutters are 24px, reducing to 18px on phones. Exercise navigation, section headings and reading wrappers share their appropriate content edge. At 1000px, a 140px unit rail sits beside the reading area with a 20px gap. Smaller screens use a horizontal exercise strip.
+Shared content maximum is 1280px; book gutters are 24px, reducing to 18px on phones. Exercise navigation, section headings and reading wrappers share their appropriate content edge. At 1000px, a 128px unit rail sits beside the reading area with a 16px gap. Smaller screens use a horizontal exercise strip.
 
-Book breadcrumbs use one 45px sticky row at the top of the reading frame, with a 44px link height and a subtle glass surface after scrolling. The horizontal exercise strip scrolls away; Concepts / Examples / Exercise remains below the breadcrumb. The current question/example label occupies a compact 36px sticky row below the local jump controls, constrained to its own question block. Deep part/compact links include that height in their scroll margin. Parent links remain present at all widths; the home icon has a text alternative, and the shortened unit name remains available to assistive technology. Overview and unit breadcrumbs share the same vertical rhythm. In generated paper view only Back to paper settings is sticky.
+Book breadcrumbs use one 45px sticky row at the top of the reading frame, with a 44px link height and a subtle glass surface after scrolling. Below 1000px, the horizontal exercise strip stays sticky beneath it; Concepts / Examples / Exercise follows the measured strip height. The current question/example label occupies a compact 36px sticky row below the local jump controls, constrained to its own question block. Deep part/compact links include every sticky layer in their scroll margin. At 1000px and above the exercise rail sits beside the content, contributing no vertical sticky height. Parent links remain present at all widths; the home icon has a text alternative, and the shortened unit name remains available to assistive technology. Overview and unit breadcrumbs share the same vertical rhythm. In the Class 10 generated-paper workspace only Back to paper settings is sticky.
 
 Book introductions place a modest cover beside the text instead of at the far end of a large empty row. Covers disappear on small screens. The useful contents follow promptly. Public book links are explicit high-contrast Open book controls; planned books accurately indicate their status.
 
@@ -80,6 +84,12 @@ Print uses normal document flow, independent of the fixed desktop workspace. Wor
 Shared interface text is 13px; metadata is 11–12px, portfolio body 14–15px, and book reading prose 16px. Catalogue, project, tutoring and book overview intros share the same measured typography: 11px/1.5 eyebrow, 34px/1.15 title, and 15px/1.8 lead; phones use 30px titles and 14px leads. Eyebrow-to-title spacing is 12px and title-to-lead spacing is 20px. Page composition may differ: a book cover sits beside its text, while the catalogue has one text column. Unit/home headings are 32px on desktop and section headings normally 24px. KaTeX keeps its mathematical metrics. Library and project catalogue introductions share a divider and bottom spacing.
 
 Functional icons use a common line family. Generic action labels stay stationary; primary pills are never underlined. Text links retain an underline at rest and on hover, with consistent colour and focus treatment. Decorative arrows and the earlier arriving-arrow motion are removed with the owner's permission. Directional icons remain where direction conveys meaning, such as Back, Next and breadcrumb separators. Do not reintroduce label shifts or duplicate arrows.
+
+Editorial card headings use text alone. Do not add isolated corner badges just to fill
+space: the homepage library and tutoring header badges were removed. Icons remain in
+navigation, controls, the connected-work map and coherent discipline/subject groups;
+tool logos identify the named technology. Consistency follows the role of an element,
+not a requirement to put an icon on every rectangle.
 
 The single homepage introduction identifies the person and their work; there is no competing promotional headline beside it. The owner rejected the explorer's prominence on the homepage because it distracted from professional roles. Keep interactive learning optional within the library. This is an owner-directed hierarchy decision, not a claim of usability-study validation.
 

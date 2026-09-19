@@ -94,6 +94,9 @@ Final local run: 45 checks passed, zero failed. Two builds produced 70 byte-iden
 output files. Source digest: 833f1349c9ddfadf580e1d537264c16e5329c58283f180e82d5d9f2a7c08fcc0.
 The long diagnostic window was truncated; a fresh bounded reload window was complete
 with no runtime exceptions or failed requests. Console warning/error log was empty.
-Production verification pending. Immediate checked rollback:
+Published source: 3c2a48bffdb773902b3c2d2d2e3f6207e17ff3b6. Pages run 35449793101
+succeeded. All 69 public files matched the checked build byte for byte; four excluded
+source/private paths returned 404. Live Browser exercised the Mobile preview, enlargement,
+close control and phone footer. Immediate checked rollback for this release:
 ce4eaa016b0db82a50945dcfaeb8cff0810e606f, digest
 8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d.

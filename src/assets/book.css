@@ -49,7 +49,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] :is(.tab,[role=tab]){border-radius:6px;font:500 14px/1.5 var(--ds-font);color:var(--ds-muted);min-height:44px}
   body[data-book] :is(.tab,[role=tab])[aria-selected=true]{color:var(--ds-primary);background:var(--ds-tint);border-color:var(--ds-line-strong);box-shadow:none}
   body[data-book] .local-jump{box-shadow:none;border-bottom:1px solid var(--ds-line);padding-block:8px;background:var(--ds-page)}
-  body[data-book] .local-jump a{border-radius:4px;font:500 13px/1.5 var(--ds-font);color:var(--ds-muted);padding:8px 12px;min-height:36px;border:0;background:none}
+  body[data-book] .local-jump a{border-radius:4px;font:500 13px/1.5 var(--ds-font);color:var(--ds-muted);padding:8px;min-height:36px;border:0;background:none}
   body[data-book] .local-jump a:is(.active,.is-active,[aria-current]){color:var(--ds-primary);background:var(--ds-surface);box-shadow:none}
   body[data-book] .local-jump a:not([aria-current="true"]){background:transparent;box-shadow:none}
   body[data-book] .local-jump .seg{background:none;border:0;box-shadow:none;padding:0;gap:4px}
@@ -71,7 +71,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .katex [style*="color: rgb(79, 111, 174)"]{color:var(--ds-hint)!important}
 }
 @media screen and (min-width:1000px){
-  body[data-book] :is(#view-unit:not([hidden]),.unit-doc:not([hidden])){display:grid;grid-template-columns:140px minmax(0,1fr);column-gap:20px;align-items:start;max-width:var(--ds-width);margin-inline:auto;padding:0 var(--ds-gutter) 32px}
+  body[data-book] :is(#view-unit:not([hidden]),.unit-doc:not([hidden])){display:grid;grid-template-columns:128px minmax(0,1fr);column-gap:16px;align-items:start;max-width:var(--ds-width);margin-inline:auto;padding:0 var(--ds-gutter) 32px}
   body[data-book]{--sticky-tabs:0px}
   body[data-book] .masthead{grid-column:1/-1;grid-row:2;padding-block:16px 24px}
   body[data-book] .masthead>.wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;column-gap:40px;align-items:center;padding:0;max-width:none}
@@ -86,7 +86,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] :is(.tabs,#tablist){display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:0;overflow:visible;scroll-snap-type:none}
   body[data-book] :is(.tabs-shell,.tabs-track){overflow:visible;padding:0}
   body[data-book] .tabs-shell::before,body[data-book] .tabs-shell::after{display:none}
-  body[data-book] :is(.tab,[role=tab]){display:flex;justify-content:flex-start;text-align:left;min-width:0;padding:10px 12px;width:100%;white-space:normal;margin:0}
+  body[data-book] :is(.tab,[role=tab]){display:flex;justify-content:flex-start;text-align:left;min-width:0;padding:10px 8px;width:100%;white-space:normal;margin:0}
   body[data-book] :is(#main,.chapter-view){grid-column:2;grid-row:3;min-width:0;max-width:100%;padding:0!important;margin:0;width:100%}
   body[data-book] #view-unit>#results{grid-column:2;grid-row:3;width:100%;max-width:none;padding:0;margin:0}
   body[data-book] #view-unit:has(>#results:not([hidden]))>#main{display:none}
@@ -132,6 +132,9 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
 /* Books share the personal workspace frame; mathematics retains its own reading measure. */
 @media screen {
   body[data-book] :is(#view-book,#view-contents,#view-unit,.unit-doc){max-width:var(--ds-width);margin-inline:auto;background:var(--ds-surface);border:1px solid var(--ds-edge);border-radius:12px;box-shadow:var(--ds-shadow)}
+  body[data-book] :is(#view-unit,.unit-doc){padding-bottom:32px}
+  body[data-book] [role=tabpanel]{padding-bottom:0}
+  body[data-book] .flow-section:last-child,body[data-book] .flow-section>.qblock:last-child{margin-bottom:0}
   body[data-book] .masthead{background:transparent;border-radius:12px 12px 0 0}
   body[data-book] .masthead h1{font-size:30px}
   body[data-book] .grp{background:var(--ds-surface)}
@@ -159,7 +162,6 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .practice .paper-return #gen-edit{border:1px solid var(--ds-line);border-radius:8px;background:var(--ds-page);min-height:48px;padding:12px 16px}
   body[data-book] .practice .paper-return #gen-edit:hover{background:var(--ds-tint);border-color:var(--ds-line-strong)}
 }
-@media screen and (width < 1000px){body[data-book] :is(#main,.chapter-view>.panel>.wrap){padding-bottom:24px}}
 @media screen and (max-width:599px){
   body[data-book]{--ds-gutter:18px}
   body[data-book] .library-top{font-size:11px;gap:12px;padding-top:20px}
@@ -212,19 +214,27 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] #book-masthead .library-top{position:static;background:transparent}
   body[data-book].has-scrolled-content :is(.crumb--unit,.library-top,#book-masthead){background:color-mix(in srgb,var(--ds-surface) 92%,transparent);backdrop-filter:blur(12px);border-bottom-color:var(--ds-line)}
   body[data-book].has-scrolled-content #book-masthead .library-top{background:transparent;backdrop-filter:none}
-  body[data-book] .local-jump{top:var(--breadcrumb-height)}
+  body[data-book] .local-jump{top:calc(var(--breadcrumb-height) + var(--sticky-tabs))}
   /* Keep the current question in view, bounded by its own question block. */
   body[data-book]{--question-heading-height:36px}
-  body[data-book] .grp{position:sticky;top:calc(var(--breadcrumb-height) + var(--sticky-jump,0px));z-index:20;min-height:var(--question-heading-height);padding:4px 0;background:var(--ds-surface);box-shadow:none}
+  body[data-book] .grp{position:sticky;top:calc(var(--breadcrumb-height) + var(--sticky-tabs) + var(--sticky-jump,0px));z-index:20;min-height:var(--question-heading-height);padding:4px 0;background:var(--ds-surface);box-shadow:none}
   body[data-book] .grp.is-stuck{box-shadow:0 1px 0 var(--ds-line)}
   body[data-book] .grp .qn{min-height:28px;margin:0;padding:4px 12px;font-size:13px;line-height:18px;box-sizing:border-box}
   body[data-book="9"]{--sticky-jump:var(--sticky-sections,0px)}
-  body[data-book] :is(.flow-section,.qblock,.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-jump,0px) + 16px)}
-  body[data-book] .qblock :is(.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-jump,0px) + var(--question-heading-height) + 16px)}
+  body[data-book] :is(.flow-section,.qblock,.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-tabs) + var(--sticky-jump,0px) + 16px)}
+  body[data-book] .qblock :is(.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-tabs) + var(--sticky-jump,0px) + var(--question-heading-height) + 16px)}
   body[data-book]:has(#practice-workspace:not([hidden])) .crumb--unit{position:static;backdrop-filter:none}
 }
 @media screen and (min-width:1000px){body[data-book] .crumb--unit{padding-inline:0}}
-@media screen and (width < 1000px){body[data-book] .tabs-wrap{position:static}body[data-book] .masthead{padding-top:8px}}
+@media screen and (width < 1000px){
+  /* Use the renderer's measured row height; the desktop rail occupies no
+     vertical sticky space. Generated papers retain their return bar alone. */
+  body[data-book]{--sticky-tabs:inherit}
+  body[data-book] .tabs-wrap{position:sticky;top:var(--breadcrumb-height);z-index:40}
+  body[data-book] :is(.tabs,#tablist){padding-block:6px}
+  body[data-book] :is(.tab,[role=tab]){padding-inline:8px;min-width:0}
+  body[data-book] .masthead{padding-top:8px}
+}
 
 
 @media screen{

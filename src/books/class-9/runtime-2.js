@@ -88,7 +88,11 @@
   /* ---------------------------------------------------------- tabs */
   function showPanel(id, push) {
     $$('.panel').forEach(function (p) { p.hidden = p.dataset.panel !== id; });
-    $$('.tab').forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.panel === id)); });
+    $$('.tab').forEach(function (t) {
+      var selected = t.dataset.panel === id;
+      t.setAttribute('aria-selected', String(selected));
+      t.tabIndex = selected ? 0 : -1;
+    });
     if (typeof syncStickyOffsets === 'function') syncStickyOffsets();
     if (push !== false && location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
     var active = $('.tab[aria-selected="true"]');
@@ -97,6 +101,16 @@
   }
   $$('.tab').forEach(function (t) {
     t.addEventListener('click', function () { showPanel(t.dataset.panel); SiteScroll.to({ top: 0 }); });
+    t.addEventListener('keydown', function (e) {
+      if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(e.key) < 0) return;
+      var tabs = $$('.tab'), index = tabs.indexOf(t);
+      if (e.key === 'Home') index = 0;
+      else if (e.key === 'End') index = tabs.length - 1;
+      else index = (index + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+      e.preventDefault();
+      tabs[index].focus();
+      tabs[index].click();
+    });
   });
 
   /* ---------------------------------------------------------- search */
@@ -438,8 +452,8 @@ function hilite(s, ts) {
   /** Flag equations that overflow their column so the fade cue is never a lie. */
 /** Wrap the tab strip so its overflow can be signalled, and keep the selected
     tab visible when it sits off-screen. */
-/** The tab strip wraps to two rows on a phone, so its height is not a constant.
-    Measure the sticky layers and let the CSS place the ones below them. */
+/** Measure the responsive tab row and section links so lower sticky layers
+    and anchor targets remain clear at every viewport size. */
 /** A sticky bar should only cast a shadow once it is actually pinned; a
     shadow on a bar sitting in normal flow is a lie about the layout. */
 function trackStuck() {
@@ -465,11 +479,11 @@ function syncStickyOffsets() {
   /* A panel without a jump bar (Review, Unit Test, Generator) must not inherit
      another panel's bar height, or its question chips pin into empty space. */
   if (!jump) root.style.setProperty('--sticky-sections', '0px');
-  if (tabs) root.style.setProperty('--sticky-tabs', Math.round(tabs.getBoundingClientRect().height) + 'px');
+  if (tabs) root.style.setProperty('--sticky-tabs', Math.ceil(tabs.getBoundingClientRect().height) + 'px');
   if (jump) {
     var was = jump.style.position;
     jump.style.position = 'static';
-    root.style.setProperty('--sticky-sections', Math.round(jump.getBoundingClientRect().height) + 'px');
+    root.style.setProperty('--sticky-sections', Math.ceil(jump.getBoundingClientRect().height) + 'px');
     jump.style.position = was;
   }
 }
