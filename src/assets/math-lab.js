@@ -90,4 +90,16 @@
   input.addEventListener('input',()=>{values[scene]=Number(input.value);if(scene==='chance'){heads=Math.min(heads,values.chance);$('#lab-heads').max=values.chance;$('#lab-heads').value=heads;}render();});
   tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>select(tab.dataset.labScene));tab.addEventListener('keydown',e=>{let index;if(e.key==='ArrowRight')index=(i+1)%tabs.length;else if(e.key==='ArrowLeft')index=(i+tabs.length-1)%tabs.length;else if(e.key==='Home')index=0;else if(e.key==='End')index=tabs.length-1;else return;e.preventDefault();tabs[index].focus();select(tabs[index].dataset.labScene);});});
   select(scene);$('.math-lab__tabs').hidden=false;$('.math-lab__controls').hidden=false;
+  // A direct link to the optional library section opens it and preserves orientation.
+  const disclosure=lab.closest('.library-explorer');
+  function revealLinkedExplorer(){
+    if(!disclosure||location.hash!=='#'+disclosure.id)return;
+    disclosure.open=true;
+    requestAnimationFrame(()=>document.fonts.ready.then(()=>{
+      disclosure.querySelector('summary').focus({preventScroll:true});
+      disclosure.scrollIntoView({block:'start',behavior:'auto'});
+    }));
+  }
+  addEventListener('hashchange',revealLinkedExplorer);
+  revealLinkedExplorer();
 })();

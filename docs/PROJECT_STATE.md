@@ -143,12 +143,19 @@ gutters; one search border and correctly hidden clear control; compact persisten
 and a compact question marker; prominent book entry and contact success; connected discipline
 details without duplicate headings; stationary action labels; tighter book/tutoring introductions and consistent footer spacing.
 Authored book content and banks remain unchanged. Worked-key print fragmentation is fixed.
-The homepage now opens with an explorer of odd-number patterns, tangent slopes and coin probabilities instead of a complex-number-only artifact. Its mathematical models have independent checks; deeper explanations are compact. Shared introduction typography is measured across catalogue, project, tutoring and book pages.
+The initial foundation release opened with an explorer of odd-number patterns, tangent slopes and coin probabilities instead of a complex-number-only artifact. Its mathematical models have independent checks; deeper explanations are compact. Shared introduction typography is measured across catalogue, project, tutoring and book pages.
 
 Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible output files,
 40 representative route/viewport observations, final changed-state checks and inspected A4 proofs. This foundation is now published; the release identity and live verification are recorded above.
 
 ## Next checkpoint
+
+Owner-directed hierarchy revision: lead the homepage with the person and their research,
+development and teaching roles. Move the explorer after the library catalogue in a native
+closed disclosure, with a small homepage link that opens it. Remove its assets from the
+homepage. This revision is locally implemented and checked; release verification is pending.
+Evidence: docs/HOMEPAGE_HIERARCHY_QA.md. Do not restore an attention-dominating mathematics
+question above professional work.
 
 Continue visual refinement from owner feedback while retaining the verified release and its rollback point. Keep the static build and recovered content/runtime boundaries.
 Use verified current biography, keep Layyah, and do not restore the old portrait without

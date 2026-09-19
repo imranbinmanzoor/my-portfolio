@@ -51,19 +51,22 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 
 ## Editorial direction
 
-Use first-person, specific, calm writing. Lead with mathematics and reasoning, then show
-how they connect to AI evaluation, building interfaces and teaching. Make the identity
-personal through the name, Layyah, interests, explanations and real work.
+Use first-person, specific, calm writing. Lead with the person and their professional
+roles: research and AI evaluation, web development, and teaching. Show mathematical
+care as a thread across this work. Make the identity personal through the name,
+Layyah, interests, explanations and real work.
 
 Prefer concrete descriptions of work over “pixel-perfect”, prestige claims, promises
 about model quality, unsupported current employment, or invented work schedules.
 Client-specific implementations and internal framework versions are unnecessary homepage
 copy. Keep public case studies accurate about learning projects versus client commissions.
 
-The hero visual is a new, original interactive study of multiplication by the imaginary
-unit, linked to the existing Complex Numbers book. It demonstrates frontend craft and
-teaching together. It is not represented as a client research result. No private source
-materials or generated stock portraits are used. Original photographs remain preserved.
+The owner rejected a prominent homepage mathematics explorer because it distracted from
+their more important professional roles. The homepage now introduces those roles first.
+Original interactive studies of patterns, curves and chance are optional learning material
+after the mathematics library's book catalogue. They are not presented as client research.
+No private source materials or generated stock portraits are used. Original photographs
+remain preserved.
 
 ## Before publication
 

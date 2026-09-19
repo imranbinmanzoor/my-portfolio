@@ -10,7 +10,7 @@ Current implementation: the owner's original portfolio foundation, rebuilt in th
 - site.css: portfolio, library, project and tutoring compositions.
 - book.css and book-layout.js: shared book overview, reading workspace and screen controls.
 - src/books/overview.mjs: one metadata-driven overview renderer for published books.
-- math-lab.css / math-lab.js and math-models.js: opening mathematical explorer and independently checked models. Existing book sources retain mathematical rendering and Practice behavior.
+- math-lab.css / math-lab.js and math-models.js: optional library explorer and independently checked models. Existing book sources retain mathematical rendering and Practice behavior.
 
 ## Foundation and density
 
@@ -29,7 +29,7 @@ Dark mode uses explicit semantic counterparts. Prefer shared tokens to literal s
 
 Use compact, purposeful spacing: enough separation to distinguish groups without empty columns, tall introductions, or gratuitous blank panels. Typical panel gaps are 20px desktop and 12–16px mobile; content padding is normally 24–28px desktop, 18–20px mobile. Mathematical derivations retain the space their structure needs. Do not compress reasoning to achieve visual density.
 
-Inter owns prose and controls, including genuine italic faces. Synthetic slant is disabled. KaTeX owns Class 10 mathematics and the homepage explorer; Class 9 mathematical SVGs remain preserved. Named operators are upright; mathematical variables use math italics. Standard operators replace bare Re/Im in rendered Class 10 expressions without changing authored data or paper identities.
+Inter owns prose and controls, including genuine italic faces. Synthetic slant is disabled. KaTeX owns Class 10 mathematics and the library explorer; Class 9 mathematical SVGs remain preserved. Named operators are upright; mathematical variables use math italics. Standard operators replace bare Re/Im in rendered Class 10 expressions without changing authored data or paper identities.
 
 ## Page frame and scrolling
 
@@ -55,7 +55,9 @@ Contact success replaces the form with a prominent Message sent panel, animated 
 
 Use visible focus, semantic controls, measured contrast, reduced-motion behavior, mobile-menu focus containment and Escape return. Keep long mathematics in its own accessible horizontal scroller. Empty search fields must not show a clear button; the clear control appears immediately when text is entered. The search wrapper owns the border and focus ring.
 
-The homepage explorer sits immediately after the compact personal introduction and before the discipline cards. It offers three independent views: odd-number square layers, a parabola and its tangent, and exact fair-coin probabilities. Native sliders, keyboard tabs and a magnification checkbox update the visual and mathematical account together. A compact disclosure gives the reasoning and assumptions. There is no autoplay, experimental simulation, or claim of research provenance. Math labels use KaTeX; model functions are separate from rendering.
+The homepage leads with the compact personal introduction, followed immediately by research, development and teaching. The mathematical explorer lives after the library book catalogue inside a native, initially closed "Interactive mathematics" disclosure. A secondary "Interactive ideas" link in the homepage library panel targets /solutions/#interactive-ideas; this opens the disclosure and focuses its summary. Closing it removes its controls from keyboard navigation. The homepage does not load explorer or KaTeX assets.
+
+The explorer offers three independent views: odd-number square layers, a parabola and its tangent, and exact fair-coin probabilities. Native sliders, keyboard tabs and a magnification checkbox update the visual and mathematical account together. A compact disclosure gives the reasoning and assumptions. Diagram and explanation align at their top edges so opening a proof does not push its diagram down. There is no autoplay, experimental simulation, or claim of research provenance. Math labels use KaTeX; model functions are separate from rendering.
 
 Print uses normal document flow, independent of the fixed desktop workspace. Worked keys use block fragmentation instead of the answer stack's screen grid; short explanatory stages stay with their derivations. Preserve A4 section starts, measured MCQ options, split timing, lowercase key letters and existing paper serialization. Mathematical correctness remains a separate review obligation.
 
@@ -63,7 +65,7 @@ Shared interface text is 13px; metadata is 11–12px, portfolio body 14–15px, 
 
 Functional icons use a common line family. Generic action labels stay stationary; primary pills are never underlined. Text links retain an underline at rest and on hover, with consistent colour and focus treatment. Decorative arrows and the earlier arriving-arrow motion are removed with the owner's permission. Directional icons remain where direction conveys meaning, such as Back, Next and breadcrumb separators. Do not reintroduce label shifts or duplicate arrows.
 
-The single homepage introduction identifies the person and their work; there is no competing promotional headline beside it. The explorer adds a concrete invitation to interact. This follows visual-hierarchy and homepage-purpose guidance, not a claim of usability-study validation.
+The single homepage introduction identifies the person and their work; there is no competing promotional headline beside it. The owner rejected the explorer's prominence on the homepage because it distracted from professional roles. Keep interactive learning optional within the library. This is an owner-directed hierarchy decision, not a claim of usability-study validation.
 
 Research consulted: [NN/g visual hierarchy](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), [homepage guidelines](https://www.nngroup.com/articles/top-ten-guidelines-for-homepage-usability/), [Carbon button usage](https://carbondesignsystem.com/components/button/usage/), [USWDS links](https://designsystem.digital.gov/components/link/) and [W3C consistent identification](https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification), 2026-09-19.
 
