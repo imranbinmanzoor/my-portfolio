@@ -46,6 +46,9 @@ unavailable memory or infer employment from a public profile's organization fiel
 - Mathematical correctness is separate from rendering and frontend correctness.
   Follow `docs/MATH_AUTHORING.md`; never shorten reasoning to make a solution compact.
 - Follow `docs/DESIGN_SYSTEM.md` and preserve the established Practice behavior.
+- The owner prefers compact, engaging layouts without unnecessary blank regions.
+  Measure shared edges, control spacing and responsive states; do not sacrifice reading
+  clarity or mathematical completeness to make layouts smaller.
 - Browser claims require actual browser interaction. Check desktop, tablet, narrow and
   wider mobile; inspect screenshots. Print changes require A4 PDF inspection.
 - Report only checks run on the current build, with limitations and evidence.

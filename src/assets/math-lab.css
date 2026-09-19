@@ -1,0 +1,37 @@
+/* A compact opening workbench: one visual, one question, direct manipulation. */
+.math-lab{--lab-accent:var(--ds-green);--lab-soft:var(--ds-green-soft);min-width:0}
+.math-lab[data-scene=curve]{--lab-accent:var(--ds-cyan);--lab-soft:var(--ds-cyan-soft)}
+.math-lab[data-scene=chance]{--lab-accent:var(--ds-purple);--lab-soft:var(--ds-purple-soft)}
+.math-lab__top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.math-lab__tabs{display:flex;gap:4px;background:var(--ds-page);padding:4px;border-radius:8px}
+.math-lab__tabs button{font:500 12px/1.5 var(--ds-font);min-height:36px;padding:8px 14px;color:var(--ds-muted);background:transparent;border:1px solid transparent;border-radius:5px;cursor:pointer}
+.math-lab__tabs button[aria-selected=true]{background:var(--ds-surface);color:var(--lab-accent);border-color:var(--ds-line)}
+.math-lab__tabs button:hover{color:var(--ds-ink)}
+.math-lab__panel{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px;align-items:center;min-width:0}
+.math-lab__figure{min-width:0;background:var(--lab-soft);border-radius:8px;padding:8px 12px 12px;overflow:hidden}
+.math-lab__figure svg{display:block;width:100%;max-height:272px;overflow:visible}
+.math-lab__figure figcaption{text-align:center;font-size:11px;line-height:1.5;color:var(--ds-body);padding-inline:8px}
+.math-lab__work{min-width:0}
+[data-site] .math-lab__work h2{font-size:24px;line-height:1.2;letter-spacing:-.035em;text-wrap:balance}
+[data-site] .math-lab__prompt{font-size:13px;line-height:1.65;margin-top:8px}
+.math-lab__formula{display:flex;align-items:center;min-height:44px;font-size:20px;color:var(--lab-accent);line-height:1.5;margin-block:10px;overflow-x:auto;overflow-y:hidden;padding-block:8px}
+.math-lab__formula .katex{font-size:1em}
+.math-lab__controls label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;font-weight:500;color:var(--ds-ink)}
+.math-lab__controls output{color:var(--lab-accent)}
+.math-lab__controls input[type=range]{display:block;width:100%;height:36px;margin:0;accent-color:var(--lab-accent);cursor:pointer}
+.math-lab__controls .math-lab__zoom{justify-content:flex-start;gap:8px;min-height:36px;font-weight:400;cursor:pointer}
+.math-lab__zoom input{accent-color:var(--lab-accent);width:16px;height:16px;margin:0}
+[data-site] .math-lab__feedback{font-size:13px;line-height:1.6;margin:6px 0 8px;min-height:3.2em}
+.math-lab__proof{border-top:1px solid var(--ds-line);font-size:14px;line-height:1.65}
+.math-lab__proof summary{min-height:40px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ds-ink);font-weight:500;cursor:pointer;list-style:none}
+.math-lab__proof summary::-webkit-details-marker{display:none}.math-lab__proof summary::after{content:'+';font-size:20px;font-weight:400}.math-lab__proof[open] summary::after{content:'−'}
+.math-lab__proof p+p{margin-top:8px!important}.math-lab__proof .lab-equation{display:flex;align-items:center;min-height:38px;overflow-x:auto;overflow-y:hidden;padding-block:8px;font-size:14px}
+.lab-math-label{font-size:16px;line-height:1.3;color:var(--ds-body)}.lab-math-label .katex{font-size:1em}
+.lab-tile{fill:var(--lab-accent);stroke:var(--ds-surface);stroke-width:1.5}.lab-tile--old{fill-opacity:.18;stroke:var(--lab-accent);stroke-opacity:.25;stroke-width:.7}
+.lab-grid{fill:none;stroke:var(--ds-line-strong);stroke-width:.65;stroke-dasharray:2 5}.lab-axis{fill:none;stroke:var(--ds-muted);stroke-width:1}
+.lab-curve{fill:none;stroke:var(--lab-accent);stroke-width:2.8;stroke-linecap:round}.lab-tangent{fill:none;stroke:var(--ds-purple);stroke-width:2;stroke-dasharray:6 4}.lab-point{fill:var(--ds-surface);stroke:var(--lab-accent);stroke-width:2.5}
+.lab-bar{fill:var(--lab-accent);fill-opacity:.2}.lab-bar--selected{fill-opacity:1}
+@media(max-width:999px){.math-lab__panel{gap:24px}.math-lab__top>.eyebrow{max-width:24ch}.math-lab__formula{font-size:18px}}
+@media(max-width:599px){.math-lab__top{align-items:stretch;flex-direction:column;gap:8px;margin-bottom:12px}.math-lab__top>.eyebrow{max-width:none;font-size:10px}.math-lab__tabs{display:grid;grid-template-columns:repeat(3,1fr)}.math-lab__tabs button{min-height:40px;padding-inline:8px}.math-lab__panel{grid-template-columns:1fr;gap:16px}.math-lab__figure{padding:4px 6px 10px}.math-lab__figure svg{max-height:200px}.math-lab__figure figcaption{font-size:10px}[data-site] .math-lab__work h2{font-size:22px}.math-lab__formula{font-size:19px;margin-block:10px}.math-lab__feedback{min-height:0!important}}
+@media(forced-colors:active){.lab-tile,.lab-bar{fill:LinkText}.lab-tile--old,.lab-bar:not(.lab-bar--selected){fill:Canvas;stroke:CanvasText}.lab-curve,.lab-point{stroke:LinkText}.lab-tangent{stroke:CanvasText}.math-lab__figure{border:1px solid CanvasText}}
+@media(max-width:599px){.lab-math-label{font-size:20px}}

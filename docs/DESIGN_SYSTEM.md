@@ -1,102 +1,70 @@
 # Design system
 
-Status: the owner rejected the published composition and chose their own unfinished
-original portfolio as the new foundation. Read `ORIGINAL_DESIGN_REVIEW.md` for measured
-design/interaction evidence and the current direction. `REDESIGN_QA.md` records the
-published release's checks, not aesthetic acceptance.
-
-The tokens and compositions below describe the current implementation, which remains
-live while its replacement is developed. They are not the visual target for the next
-pilot. Preserve source roles, accessibility, mathematical typography and print behavior;
-replace the visual tokens deliberately rather than layering competing overrides.
-
-## Next visual foundation
-
-The reference uses a `#f0f1f5` canvas, white compact panels, 12px outer radii, black pill
-actions, persistent personal navigation and green/cyan/purple discipline accents. Its
-small image/arrow transitions and personal density should survive professionalization.
-Use darker accent text for contrast, natural-height disclosures, accessible galleries
-and a dependable mobile menu. Exact next-generation tokens remain to be implemented
-and verified together. The old portrait and placeholder biography are not approved copy.
+Current implementation: the owner's original portfolio foundation, rebuilt in the maintained static source system. This is a checked visual pilot for live review, not final aesthetic acceptance. Reference evidence: ORIGINAL_DESIGN_REVIEW.md. Current checks: FOUNDATION_QA.md.
 
 ## Source roles
 
-- `src/assets/tokens.css`: colour, spacing, typography, page-frame and appearance roles.
-- `chrome.css`: shared header, mobile menu, footer and focus behaviour.
-- `site.css`: portfolio, catalog, project and tutoring compositions.
-- `book.css`: common book overview, reading workspace and screen controls.
-- `complex-study.css`: the original interactive mathematical figure.
-- `src/books/overview.mjs`: one overview renderer, fed by book metadata.
-- Existing book CSS/runtime owns authored reading layout and printing. Consolidation
-  remains incremental; do not change mathematics while moving presentation code.
+- src/assets/tokens.css: semantic colour, typography, spacing, frame and appearance roles.
+- chrome.css: shared personal navigation, mobile dialog, footer and focus rules.
+- scroll-frame.js: SiteScroll API; one scrolling owner on each viewport.
+- site.css: portfolio, library, project and tutoring compositions.
+- book.css and book-layout.js: shared book overview, reading workspace and screen controls.
+- src/books/overview.mjs: one metadata-driven overview renderer for published books.
+- math-lab.css / math-lab.js and math-models.js: opening mathematical explorer and independently checked models. Existing book sources retain mathematical rendering and Practice behavior.
 
-Obsolete `styles.css`, `pilot.css`, `book-pilot.css` and book-return fragment were removed
-once their consumers migrated. Historical root assets remain recoverable.
-
-## Foundation
+## Foundation and density
 
 | Role | Light value |
 |---|---|
-| Page | `#f7f9fc` |
-| Surface | `#ffffff` |
-| Heading | `#162640` |
-| Body | `#34455e` |
-| Muted text | `#596a82` |
-| Primary action | `#2855d9` |
-| Border / input border | `#dbe3ef` / `#b7c7dd` |
-| Mathematical hint | `#47668b` |
+| Canvas | #f0f1f5 |
+| Panel | #ffffff |
+| Heading / body | #202329 / #4b5059 |
+| Muted | #646a75 |
+| Primary action | #24272d |
+| Border / field border | #e1e4eb / #bec5d0 |
+| Research / development / teaching | #28775c / #27697e / #8050a2 |
+| Mathematical study / hint | #456da4 / #47668b |
 
-Dark appearance has explicit counterparts. Consume semantic roles, including in
-preserved book components. Literal white screen surfaces must not override dark mode.
-Spacing scale: 4, 8, 12, 16, 24, 32, 48 and 64px. Section spacing ranges from 64 to 112px.
-Borders are normally 1px, radii 6–10px, without heavy shadows.
+Dark mode uses explicit semantic counterparts. Prefer shared tokens to literal screen colours. Panels use 12px radii and a very light shadow; primary actions are dark pills. Inputs and compact controls use 6–8px radii. Accent colour identifies a discipline, not every action.
 
-Inter is the prose/interface family, with genuine italic faces and system fallbacks.
-Synthetic italic/slanted type is disabled. KaTeX owns Class 10 mathematics; Class 9's
-mathematical SVGs remain preserved. Operators are upright; variables use math italics.
-`Re(...)` and `Im(...)` inside Class 10 math delimiters are presented as named operators
-without changing bank data, paper IDs, prose, or existing TeX commands.
+Use compact, purposeful spacing: enough separation to distinguish groups without empty columns, tall introductions, or gratuitous blank panels. Typical panel gaps are 20px desktop and 12–16px mobile; content padding is normally 24–28px desktop, 18–20px mobile. Mathematical derivations retain the space their structure needs. Do not compress reasoning to achieve visual density.
 
-## Composition
+Inter owns prose and controls, including genuine italic faces. Synthetic slant is disabled. KaTeX owns Class 10 mathematics and the homepage explorer; Class 9 mathematical SVGs remain preserved. Named operators are upright; mathematical variables use math italics. Standard operators replace bare Re/Im in rendered Class 10 expressions without changing authored data or paper identities.
 
-Shared outer frame: 1180px including two desktop 40px gutters (1100px content). Gutters
-scale to a minimum of 20px. A shared frame does not imply identical layouts.
+## Page frame and scrolling
 
-- Home: personal introduction and mathematical study; asymmetric selected projects;
-  research ledger; teaching subjects; concise background; contact.
-- Library: book covers, explicit availability, source board, coverage and entry links.
-- Books: common overview, unit search and distinct available/planned entries. At 1100px
-  and above, a 192px section rail and 40px gap sit beside a flexible reading region.
-  Smaller screens use horizontal navigation. Wide mathematics scrolls locally.
-- Practice: settings and summary; paper and key retain task-specific layouts. Only the
-  return control is sticky in Class 10 paper view. Preserve measured MCQ fitting and A4.
-- Tutoring: learning approach, subject-led sections and a direct enquiry path.
-- Projects: visual index, factual introduction, project evidence and focused prose.
+At 800px and wider, the personal navigation and right workspace share a 16px top/bottom inset. The right workspace scrolls internally; navigation remains aligned with its frame. The rail is 80px at 800–1199px and 248px from 1200px. At narrower widths, the document scrolls normally with a compact personal header and accessible menu. SiteScroll handles the owner change; book code must not assume window.scrollY is always the page position.
 
-The portrait-free complex-plane study demonstrates teaching and frontend work together.
-It uses actual multiplication by the imaginary unit, KaTeX labels, invariant modulus,
-keyboard controls and reduced motion. It is not represented as client research.
+Shared content maximum is 1280px; book gutters are 24px, reducing to 18px on phones. Exercise navigation, section headings and reading wrappers share their appropriate content edge. At 1000px, a 140px unit rail sits beside the reading area with a 20px gap. Smaller screens use a horizontal exercise strip.
 
-## Controls and accessibility
+Book breadcrumbs use one 45px sticky row at the top of the reading frame, with a 44px link height and a subtle glass surface after scrolling. The horizontal exercise strip scrolls away; Concepts / Examples / Exercise remains below the breadcrumb. The current question/example label occupies a compact 36px sticky row below the local jump controls, constrained to its own question block. Deep part/compact links include that height in their scroll margin. Parent links remain present at all widths; the home icon has a text alternative, and the shortened unit name remains available to assistive technology. Overview and unit breadcrumbs share the same vertical rhythm. In generated paper view only Back to paper settings is sticky.
 
-Header: 76px desktop, 68px phone; mobile menu below 960px. Site pages keep the header
-sticky; books let it scroll away so reading navigation has priority. Menu traps focus,
-makes the background inert, closes on Escape and restores its trigger. Theme remains
-available in the narrow menu. Unit tabs expose vertical/horizontal orientation and
-support Up/Down on desktop as well as their existing navigation keys.
+Book introductions place a modest cover beside the text instead of at the far end of a large empty row. Covers disappear on small screens. The useful contents follow promptly. Public book links are explicit high-contrast Open book controls; planned books accurately indicate their status.
 
-Contact fields are 52px high with 16px padding and a 16px chevron inset. Name/email share
-a desktop row; message type and message follow. Native select behaviour remains intact;
-forced-colour mode restores the native arrow. Same-page navigation moves focus and
-clears the header. Focus states must remain visible.
+## Interaction and grouping
 
-Compact hints remain muted blue, thin-bordered and unfilled. Theme-aware ink changes
-presentation only. Complete reasoning takes precedence over compactness.
+The three discipline controls are disclosures, with native buttons, aria-expanded and aria-controls. One can be open at a time. On desktop, the detail spans the row and forms a continuous boundary with its selected card; its accessible name comes from the selected button without a duplicate visible title. On mobile it follows its card. Connector geometry is measured from actual border boxes, including fractional browser scaling, rather than inferred from nominal grid widths. Enter and Space operate the button; opening a panel does not move focus unexpectedly.
 
-## Verification
+This applies NN/g's common-region guidance (https://www.nngroup.com/articles/common-region/) and the W3C disclosure pattern (https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), consulted 2026-09-19. It is a design judgment, not a claim of user-study validation.
 
-Inspect sections beyond the first viewport, both appearances, controls and expanded
-states. Measure edges, field heights, insets, overflow and font loading. Test 1440, 768,
-430 and 320 CSS pixels. After resizing, take a fresh state before capture. Full-page
-stitching can duplicate segments in this environment; viewport captures are the reliable
-evidence. Never describe uninspected states as pixel-perfect.
+Project tiles are single links with a View project hover/focus cue and no decorative arrows. Tutoring uses concise subject introductions and three grouped learning cards instead of a tall asymmetric text split. Footer links have 44px targets, coherent padding and a separate copyright row.
+
+Contact success replaces the form with a prominent Message sent panel, animated checkmark, focused status and Send another message control. Reduced motion disables the animation. Failure preserves entered fields. Never send real test messages just to verify presentation.
+
+## Accessibility, mathematics and print
+
+Use visible focus, semantic controls, measured contrast, reduced-motion behavior, mobile-menu focus containment and Escape return. Keep long mathematics in its own accessible horizontal scroller. Empty search fields must not show a clear button; the clear control appears immediately when text is entered. The search wrapper owns the border and focus ring.
+
+The homepage explorer sits immediately after the compact personal introduction and before the discipline cards. It offers three independent views: odd-number square layers, a parabola and its tangent, and exact fair-coin probabilities. Native sliders, keyboard tabs and a magnification checkbox update the visual and mathematical account together. A compact disclosure gives the reasoning and assumptions. There is no autoplay, experimental simulation, or claim of research provenance. Math labels use KaTeX; model functions are separate from rendering.
+
+Print uses normal document flow, independent of the fixed desktop workspace. Worked keys use block fragmentation instead of the answer stack's screen grid; short explanatory stages stay with their derivations. Preserve A4 section starts, measured MCQ options, split timing, lowercase key letters and existing paper serialization. Mathematical correctness remains a separate review obligation.
+
+Shared interface text is 13px; metadata is 11–12px, portfolio body 14–15px, and book reading prose 16px. Catalogue, project, tutoring and book overview intros share the same measured typography: 11px/1.5 eyebrow, 34px/1.15 title, and 15px/1.8 lead; phones use 30px titles and 14px leads. Eyebrow-to-title spacing is 12px and title-to-lead spacing is 20px. Page composition may differ: a book cover sits beside its text, while the catalogue has one text column. Unit/home headings are 32px on desktop and section headings normally 24px. KaTeX keeps its mathematical metrics. Library and project catalogue introductions share a divider and bottom spacing.
+
+Functional icons use a common line family. Generic action labels stay stationary; primary pills are never underlined. Text links retain an underline at rest and on hover, with consistent colour and focus treatment. Decorative arrows and the earlier arriving-arrow motion are removed with the owner's permission. Directional icons remain where direction conveys meaning, such as Back, Next and breadcrumb separators. Do not reintroduce label shifts or duplicate arrows.
+
+The single homepage introduction identifies the person and their work; there is no competing promotional headline beside it. The explorer adds a concrete invitation to interact. This follows visual-hierarchy and homepage-purpose guidance, not a claim of usability-study validation.
+
+Research consulted: [NN/g visual hierarchy](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), [homepage guidelines](https://www.nngroup.com/articles/top-ten-guidelines-for-homepage-usability/), [Carbon button usage](https://carbondesignsystem.com/components/button/usage/), [USWDS links](https://designsystem.digital.gov/components/link/) and [W3C consistent identification](https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification), 2026-09-19.
+
+Mathematical references checked: [OpenStax derivatives](https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative), [OpenStax binomial distribution](https://openstax.org/books/contemporary-mathematics/pages/7-10-the-binomial-distribution), and [University of Hawaii odd-number reasoning notes](https://crdg.hawaii.edu/developing-teacher-expertise-mathematics/modules/facilitator-resources/facilitator-reasoning-and-explanations-resources/Session5/resources/s05_p3_mathnotes_sum-consecutive-odd-problem.pdf). Diagrams, copy and controls are implemented locally; the references are not copied designs.

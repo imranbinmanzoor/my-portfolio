@@ -1,6 +1,14 @@
 (()=>{
   if(!document.body.hasAttribute('data-book'))return;
-  const wide=matchMedia('(min-width:1100px)');
+  const wide=matchMedia('(min-width:1000px)');
+  const trail=document.querySelector('.crumb--unit');
+  if(trail){
+    const label=trail.querySelector('[aria-current=page]');
+    const shorten=()=>{if(label&&!label.querySelector('span')&&label.textContent.includes('·')){const [unit,...name]=label.textContent.split('·');label.textContent=unit.trim();const title=document.createElement('span');title.className='crumb-unit-name';title.textContent=' · '+name.join('·').trim();label.append(title);}};
+    new MutationObserver(shorten).observe(label,{childList:true});shorten();
+  }
+  const syncGlass=()=>document.body.classList.toggle('has-scrolled-content',SiteScroll.y>24);
+  SiteScroll.on(syncGlass);syncGlass();
   function orient(){document.querySelectorAll('[role=tablist]').forEach(el=>el.setAttribute('aria-orientation',wide.matches?'vertical':'horizontal'));}
   orient();wide.addEventListener('change',orient);
   new MutationObserver(orient).observe(document.getElementById('tablist')||document.querySelector('.tabs'),{childList:true});

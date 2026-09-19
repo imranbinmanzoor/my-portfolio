@@ -1,7 +1,7 @@
 # Project state
 
-Updated: 2026-09-19. Phase: published direction rejected by owner; detailed inspection
-of the owner's original design completed; new foundation selected.
+Updated: 2026-09-19. Phase: original-design foundation implemented and checked; preparing
+its live visual-review release under standing publication authorization.
 
 ## Current production release
 
@@ -141,11 +141,26 @@ No production sources or archive contents changed during this inspection. Produc
 remains `055b4c078c82c935818541dbce21b44e604c7135`; use this as the immediate recoverable
 source for the next design implementation. The earlier rollback remains documented above.
 
+## Foundation implementation — checked release candidate
+
+The original-inspired personal sidebar, neutral panel system, compact homepage, shared
+library/book overviews, reading/Practice surfaces, project cards and tutoring are implemented.
+Follow-up owner feedback is incorporated: aligned desktop scrolling frames; shared reading
+gutters; one search border and correctly hidden clear control; compact persistent breadcrumbs
+and a compact question marker; prominent book entry and contact success; connected discipline
+details without duplicate headings; stationary action labels; tighter book/tutoring introductions and consistent footer spacing.
+Authored book content and banks remain unchanged. Worked-key print fragmentation is fixed.
+The homepage now opens with an explorer of odd-number patterns, tangent slopes and coin probabilities instead of a complex-number-only artifact. Its mathematical models have independent checks; deeper explanations are compact. Shared introduction typography is measured across catalogue, project, tutoring and book pages.
+
+Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible output files,
+40 final route/viewport observations and inspected A4 proofs. Publication remains pending
+at this commit; record the actual release identity and verification after deployment.
+
 ## Next checkpoint
 
-Build the representative home/library/lesson/Practice implementation from the original's
-neutral panels, compact personal navigation, colored discipline details and deliberate
-interactions. Retain the maintained static build and recovered book/runtime boundaries.
+Publish the checked foundation, verify actual HTTPS output and record release/rollback
+identities. Continue visual refinement from owner feedback while retaining the static build
+and recovered content/runtime boundaries.
 Use verified current biography, keep Layyah, and do not restore the old portrait without
 a new owner instruction. Give the mathematical artifact a deliberate place in the new
 composition. Validate the new pilot and publish checked website updates for live review

@@ -1,20 +1,20 @@
 /* Book discovery and reading workspace. Authored mathematical layout stays in each renderer. */
-body[data-book]{--font-ui:var(--ds-font);--measure:68ch;--size-100:.8125rem;--size-200:.875rem;--size-300:1rem;--size-400:1.125rem;--size-500:1.375rem;--size-600:1.75rem;--size-700:2.25rem;--leading-body:1.65;margin:0;background:var(--ds-page);color:var(--ds-body);font-family:var(--ds-font)}
+body[data-book]{--breadcrumb-height:45px;--sticky-tabs:0px;--font-ui:var(--ds-font);--measure:68ch;--size-100:.8125rem;--size-200:.875rem;--size-300:1rem;--size-400:1.125rem;--size-500:1.375rem;--size-600:1.75rem;--size-700:2.25rem;--leading-body:1.65;margin:0;background:var(--ds-page);color:var(--ds-body);font-family:var(--ds-font)}
 body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
 @media screen {
   body[data-book="9"][data-view="contents"] .unit-doc{display:none!important}
   body[data-book]:has(#practice-workspace:not([hidden])){--sticky-tabs:0px}
   body[data-book]:has(#practice-workspace:not([hidden])) .tabs-wrap{position:static}
   body[data-book] :is(#book-main,.view-contents>.wrap-wide,.library-masthead>.wrap){max-width:var(--ds-width);padding-inline:var(--ds-gutter);margin-inline:auto}
-  body[data-book] #book-main{padding-bottom:80px}
-  body[data-book] .view-contents>.wrap-wide{padding-bottom:80px}
+  body[data-book] #book-main{padding-bottom:32px}
+  body[data-book] .view-contents>.wrap-wide{padding-bottom:32px}
   body[data-book] .library-top{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-block:28px 0;border:0;font:400 13px/1.5 var(--ds-font);color:var(--ds-muted);background:none}
   body[data-book] .library-top a{color:inherit;text-decoration:none}.library-top a:hover{text-decoration:underline}
-  body[data-book] .library-masthead{border:0}
+  body[data-book] .library-masthead{border:0;background:transparent;border-radius:12px 12px 0 0}
   body[data-book] .library-masthead>.library-top.wrap{padding-block:28px 0}
-  .book-overview-hero{display:grid;grid-template-columns:1fr 220px;align-items:center;gap:64px;padding:56px 0 64px}
+  .book-overview-hero{display:grid;grid-template-columns:1fr 220px;align-items:center;gap:40px;padding:32px 0 36px}
   .book-kicker{margin:0 0 16px;font:500 12px/1.6 var(--ds-font);text-transform:uppercase;letter-spacing:.08em;color:var(--ds-muted)}
-  .book-overview-hero h1{font:500 clamp(40px,4vw,56px)/1.08 var(--ds-font);letter-spacing:-.05em;color:var(--ds-ink);margin:0}
+  .book-overview-hero h1{font:600 34px/1.15 var(--ds-font);letter-spacing:-.035em;color:var(--ds-ink);margin:0}
   .book-overview-hero h1 span{color:var(--ds-primary)}
   .book-overview-lede{font-size:18px;line-height:1.75;margin:24px 0 0;color:var(--ds-body)}
   .book-coverage{font-size:13px;color:var(--ds-muted);margin:24px 0 0}
@@ -33,7 +33,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   .feature-content h3{font:600 27px/1.2 var(--ds-font);letter-spacing:-.025em;margin:0 0 12px;color:var(--ds-ink)}
   .feature-content>p:not(.unit-availability){font-size:14px;color:var(--ds-muted);margin:0}
   .feature-links{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:24px}
-  .book-button{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:48px;padding:12px 20px;border:1px solid var(--ds-primary);border-radius:6px;background:var(--ds-primary);color:var(--ds-on-primary);font:500 14px/1.5 var(--ds-font);text-decoration:none}
+  .book-button{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:48px;padding:12px 20px;border:1px solid var(--ds-primary);border-radius:999px;background:var(--ds-primary);color:var(--ds-on-primary);font:500 14px/1.5 var(--ds-font);text-decoration:none}
   .book-button:hover{background:var(--ds-primary-hover)}
   .feature-practice{font:500 14px/1.5 var(--ds-font);color:var(--ds-primary);text-decoration:none}
   body[data-book] .unit-row{display:grid;grid-template-columns:32px minmax(0,1fr);gap:16px;padding:22px 0;border:0;border-bottom:1px solid var(--ds-line);background:none;border-radius:0;align-items:start}
@@ -70,25 +70,25 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   /* reasonStyle emits this exact TeX ink; connect it to the active screen theme. */
   body[data-book] .katex [style*="color: rgb(79, 111, 174)"]{color:var(--ds-hint)!important}
 }
-@media screen and (min-width:1100px){
-  body[data-book] :is(#view-unit:not([hidden]),.unit-doc:not([hidden])){display:grid;grid-template-columns:192px minmax(0,1fr);column-gap:40px;align-items:start;max-width:var(--ds-width);margin-inline:auto;padding:0 var(--ds-gutter) 80px}
+@media screen and (min-width:1000px){
+  body[data-book] :is(#view-unit:not([hidden]),.unit-doc:not([hidden])){display:grid;grid-template-columns:140px minmax(0,1fr);column-gap:20px;align-items:start;max-width:var(--ds-width);margin-inline:auto;padding:0 var(--ds-gutter) 32px}
   body[data-book]{--sticky-tabs:0px}
-  body[data-book] .masthead{grid-column:1/-1;padding-block:40px 32px}
+  body[data-book] .masthead{grid-column:1/-1;grid-row:2;padding-block:16px 24px}
   body[data-book] .masthead>.wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;column-gap:40px;align-items:center;padding:0;max-width:none}
   body[data-book] .masthead .crumb{grid-column:1/-1}
-  body[data-book] .masthead h1{grid-column:1;grid-row:2;margin-block:8px}
-  body[data-book] .masthead :is(.search,.searchbar){grid-column:2;grid-row:2;margin:0}
-  body[data-book] .masthead :is(.search-help,.search-scope,.search-count){grid-column:2;margin-block:8px 0}
+  body[data-book] .masthead h1{grid-column:1;grid-row:1;margin-block:8px}
+  body[data-book] .masthead :is(.search,.searchbar){grid-column:2;grid-row:1;margin:0}
+  body[data-book] .masthead :is(.search-help,.search-scope,.search-count){grid-column:2;grid-row:2;margin-block:8px 0}
   body[data-book] .masthead .results{grid-column:1/-1}
-  body[data-book] .tabs-wrap{grid-column:1;grid-row:2;position:sticky;top:24px;z-index:10;background:none;border:0;box-shadow:none;padding:0}
+  body[data-book] .tabs-wrap{grid-column:1;grid-row:3;position:sticky;top:calc(var(--breadcrumb-height) + 16px);z-index:10;background:none;border:0;box-shadow:none;padding:0}
   body[data-book] .tabs-wrap>.wrap{max-width:none;padding:0!important}
   body[data-book] .tabs-wrap::before{content:'IN THIS UNIT';display:block;font:500 11px/1.5 var(--ds-font);letter-spacing:.09em;color:var(--ds-muted);margin:12px 0 16px}
   body[data-book] :is(.tabs,#tablist){display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:0;overflow:visible;scroll-snap-type:none}
   body[data-book] :is(.tabs-shell,.tabs-track){overflow:visible;padding:0}
   body[data-book] .tabs-shell::before,body[data-book] .tabs-shell::after{display:none}
-  body[data-book] :is(.tab,[role=tab]){display:flex;justify-content:flex-start;text-align:left;min-width:0;padding:12px 14px;width:100%;white-space:normal;margin:0}
-  body[data-book] :is(#main,.chapter-view){grid-column:2;grid-row:2;min-width:0;max-width:100%;padding:0!important;margin:0;width:100%}
-  body[data-book] #view-unit>#results{grid-column:2;grid-row:2;width:100%;max-width:none;padding:0;margin:0}
+  body[data-book] :is(.tab,[role=tab]){display:flex;justify-content:flex-start;text-align:left;min-width:0;padding:10px 12px;width:100%;white-space:normal;margin:0}
+  body[data-book] :is(#main,.chapter-view){grid-column:2;grid-row:3;min-width:0;max-width:100%;padding:0!important;margin:0;width:100%}
+  body[data-book] #view-unit>#results{grid-column:2;grid-row:3;width:100%;max-width:none;padding:0;margin:0}
   body[data-book] #view-unit:has(>#results:not([hidden]))>#main{display:none}
   body[data-book] .chapter-view>.panel>.wrap{max-width:none;padding:0}
   body[data-book] .practice #practice-workspace{max-width:800px;margin-inline:auto}
@@ -96,9 +96,9 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .practice .builder-summary{padding:24px 20px}
   body[data-book]:has(#practice-workspace:not([hidden])) .tabs-wrap{position:static}
 }
-@media screen and (max-width:1099px){
+@media screen and (width < 1000px){
   body[data-book] .tabs-wrap>.wrap{max-width:var(--ds-width);padding-inline:var(--ds-gutter)}
-  body[data-book] :is(#main,.chapter-view>.panel>.wrap){padding-inline:var(--ds-gutter);max-width:850px}
+  body[data-book] :is(#main,.chapter-view>.panel>.wrap){padding-inline:var(--ds-gutter);max-width:var(--ds-width);width:100%}
 }
 @media screen and (max-width:767px){
   body[data-book]{--size-400:1.0625rem}
@@ -128,3 +128,131 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book="9"] .num .avail{display:block;margin-top:8px;font-size:12px;color:var(--ds-muted)}
 }
 @media screen and (max-width:800px){body[data-book="9"] .nums{grid-template-columns:1fr 1fr}}
+
+/* Books share the personal workspace frame; mathematics retains its own reading measure. */
+@media screen {
+  body[data-book] :is(#view-book,#view-contents,#view-unit,.unit-doc){max-width:var(--ds-width);margin-inline:auto;background:var(--ds-surface);border:1px solid var(--ds-edge);border-radius:12px;box-shadow:var(--ds-shadow)}
+  body[data-book] .masthead{background:transparent;border-radius:12px 12px 0 0}
+  body[data-book] .masthead h1{font-size:30px}
+  body[data-book] .grp{background:var(--ds-surface)}
+  body[data-book] .tabs-wrap{background:var(--ds-surface)}
+  body[data-book] .local-jump{background:var(--ds-surface)}
+  body[data-book] .local-jump a:is(.active,.is-active,[aria-current=true]){background:var(--ds-page)}
+  .book-overview-lede{font-size:16px;margin-top:20px}
+  .book-overview-hero{grid-template-columns:128px minmax(0,1fr);gap:28px;padding-block:24px 28px}
+  .book-overview-hero>div:first-child{grid-column:2;grid-row:1}
+  .overview-cover{grid-column:1;grid-row:1;width:120px;padding:16px;border-left:5px solid var(--ds-study);border-radius:2px 6px 6px 2px;background:var(--ds-page);box-shadow:4px 5px 0 color-mix(in srgb,var(--ds-study) 8%,transparent)}
+  .overview-cover>span{font-size:7px}.overview-cover strong{font-size:52px;line-height:1.4;color:var(--ds-study)}.overview-cover small{font-size:8px}
+  .book-overview-hero h1{font-size:34px}.book-overview-hero h1 br{display:none}.book-overview-hero .book-kicker{font-size:11px;line-height:1.5;letter-spacing:.06em;margin-bottom:12px}
+  .book-overview-hero .book-overview-lede{font-size:15px;line-height:1.8;margin-top:20px}.book-overview-hero .book-coverage{font-size:12px;margin-top:16px}
+  .book-overview-hero h1 span{color:var(--ds-body)}
+  body[data-book] .unit-feature{background:var(--ds-page);border:1px solid var(--ds-line);border-left:3px solid var(--ds-study);border-radius:10px}
+  .feature-index{color:var(--ds-study)}.unit-availability{color:var(--ds-green)}
+  body[data-book] .practice .builder-summary{background:var(--ds-page);border-radius:10px}
+  body[data-book] .practice .builder-main{border-radius:10px}
+  body[data-book] .practice :is(.btn,.btn-primary,.paper-return){border-radius:999px}
+  body[data-book] .book-button{border-radius:999px}
+  body[data-book] .masthead :is(.search,.searchbar){background:var(--ds-page);border-color:var(--ds-line);border-radius:8px}
+  body[data-book] .masthead :is(.search,.searchbar) input{border:0;border-radius:inherit;background:transparent;box-shadow:none;outline:none}
+  body[data-book] .masthead :is(.search,.searchbar):focus-within{outline:2px solid var(--ds-focus);outline-offset:2px}
+  body[data-book] .practice #gen-out>.paper-return{background:var(--ds-surface);border:0;border-radius:0;padding:8px 0;box-shadow:none}
+  body[data-book] .practice .paper-return #gen-edit{border:1px solid var(--ds-line);border-radius:8px;background:var(--ds-page);min-height:48px;padding:12px 16px}
+  body[data-book] .practice .paper-return #gen-edit:hover{background:var(--ds-tint);border-color:var(--ds-line-strong)}
+}
+@media screen and (width < 1000px){body[data-book] :is(#main,.chapter-view>.panel>.wrap){padding-bottom:24px}}
+@media screen and (max-width:599px){
+  body[data-book]{--ds-gutter:18px}
+  body[data-book] .library-top{font-size:11px;gap:12px;padding-top:20px}
+  .book-overview-hero{grid-template-columns:1fr;padding-block:28px;gap:0}
+  .book-overview-hero>div:first-child{grid-column:1}
+  .overview-cover{display:none}.book-overview-hero h1{font-size:30px}.book-overview-hero .book-overview-lede{font-size:14px;max-width:35ch}.book-coverage{font-size:11px;margin-top:16px}
+  body[data-book] .contents-heading h2{font-size:23px}.book-directory{padding-top:24px}
+  body[data-book] .unit-feature{padding:20px 16px;grid-template-columns:28px minmax(0,1fr);gap:12px}
+  .feature-index{font-size:24px}.feature-content h3{font-size:21px}.feature-content>p:not(.unit-availability){font-size:12px}
+  .feature-links{gap:16px;margin-top:20px}.book-button{padding-inline:12px;font-size:12px;gap:12px}.feature-practice{font-size:12px}
+  .book-edition-note{font-size:11px}.unit-row h3{font-size:14px}.unit-row p{font-size:11px}
+  body[data-book] .masthead h1{font-size:26px}
+  body[data-book] .practice-heading{flex-wrap:wrap;gap:12px}
+}
+@media screen and (max-width:399px){
+  body[data-book] .practice :is(.source-options,.practice-modes){grid-template-columns:1fr}
+}
+@media screen and (width < 800px){
+  /* The site header scrolls away; the reading and paper controls own sticky space. */
+  body[data-book]>.nav{position:absolute;transform:none!important}
+}
+@media print{
+  body.printing-paper .answer-item::details-content{display:contents}
+  /* Keep each short explanatory stage with its aligned derivation. */
+  body.printing-paper .working-stage{break-inside:avoid;page-break-inside:avoid}
+}
+@media screen{
+  body[data-book] .crumb ol{display:flex;align-items:center;flex-wrap:wrap;gap:4px;list-style:none;margin:0;padding:0;font:400 12px/1.5 var(--ds-font)}
+  body[data-book] .crumb li{display:flex;align-items:center;min-width:0;gap:4px}
+  body[data-book] .crumb li+li::before{content:'';width:6px;height:6px;flex:none;border-top:1px solid var(--ds-muted);border-right:1px solid var(--ds-muted);transform:rotate(45deg);margin:0 7px 0 3px}
+  body[data-book] .crumb a{display:inline-flex;align-items:center;min-height:40px;padding:8px;border-radius:6px;color:var(--ds-muted);font-weight:400;text-decoration:none;white-space:nowrap}
+  body[data-book] .crumb a:hover{background:var(--ds-page);color:var(--ds-ink)}
+  body[data-book] .crumb li[aria-current=page]{font-weight:500;color:var(--ds-ink);min-height:40px;padding-right:8px}
+  body[data-book] .crumb li:first-child a{margin-left:-8px}
+  body[data-book] .library-top{padding-top:16px}
+  body[data-book] .library-masthead>.library-top.wrap{padding-top:16px}
+}
+@media screen and (max-width:599px){
+  body[data-book] .crumb ol{font-size:11px;gap:2px}
+  body[data-book] .crumb a{min-height:44px;padding-inline:6px}
+  body[data-book] .crumb li:first-child a{margin-left:-6px}
+  body[data-book] .crumb-unit-name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  body[data-book] .crumb--unit li:nth-child(2)::before{display:block}
+  body[data-book] .crumb--unit li:nth-child(2) a{margin-left:0}
+  body[data-book] .crumb--unit li[aria-current=page]{min-height:44px;padding-right:0}
+}
+@media screen{
+  body[data-book] .crumb--unit{position:sticky;top:0;z-index:55;grid-column:1/-1;grid-row:1;padding:0 var(--ds-gutter);background:var(--ds-surface);border-bottom:1px solid transparent;border-radius:12px 12px 0 0}
+  body[data-book] :is(.library-top,#book-masthead){position:sticky;top:0;z-index:55;background:var(--ds-surface)}
+  body[data-book] #book-masthead .library-top{position:static;background:transparent}
+  body[data-book].has-scrolled-content :is(.crumb--unit,.library-top,#book-masthead){background:color-mix(in srgb,var(--ds-surface) 92%,transparent);backdrop-filter:blur(12px);border-bottom-color:var(--ds-line)}
+  body[data-book].has-scrolled-content #book-masthead .library-top{background:transparent;backdrop-filter:none}
+  body[data-book] .local-jump{top:var(--breadcrumb-height)}
+  /* Keep the current question in view, bounded by its own question block. */
+  body[data-book]{--question-heading-height:36px}
+  body[data-book] .grp{position:sticky;top:calc(var(--breadcrumb-height) + var(--sticky-jump,0px));z-index:20;min-height:var(--question-heading-height);padding:4px 0;background:var(--ds-surface);box-shadow:none}
+  body[data-book] .grp.is-stuck{box-shadow:0 1px 0 var(--ds-line)}
+  body[data-book] .grp .qn{min-height:28px;margin:0;padding:4px 12px;font-size:13px;line-height:18px;box-sizing:border-box}
+  body[data-book="9"]{--sticky-jump:var(--sticky-sections,0px)}
+  body[data-book] :is(.flow-section,.qblock,.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-jump,0px) + 16px)}
+  body[data-book] .qblock :is(.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-jump,0px) + var(--question-heading-height) + 16px)}
+  body[data-book]:has(#practice-workspace:not([hidden])) .crumb--unit{position:static;backdrop-filter:none}
+}
+@media screen and (min-width:1000px){body[data-book] .crumb--unit{padding-inline:0}}
+@media screen and (width < 1000px){body[data-book] .tabs-wrap{position:static}body[data-book] .masthead{padding-top:8px}}
+
+
+@media screen{
+  body[data-book] .crumb ol{height:44px;flex-wrap:nowrap;gap:2px}
+  body[data-book] .crumb a,body[data-book] .crumb li[aria-current=page]{height:44px;min-height:44px}
+  body[data-book] .crumb li[aria-current=page]{overflow:hidden;white-space:nowrap}
+  body[data-book] .crumb li[aria-current=page] .crumb-unit-name{overflow:hidden;text-overflow:ellipsis}
+  body[data-book] .crumb li:not([aria-current=page]){flex:none}
+  body[data-book] .crumb--unit{height:45px}
+  body[data-book] .library-top,body[data-book] .library-masthead>.library-top.wrap{padding-block:0;height:45px;border-bottom:1px solid transparent}
+  body[data-book] .crumb-home-icon{width:16px;height:16px;display:none;font-size:0;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='m3 10 9-7 9 7v11h-6v-7H9v7H3Z'/%3E%3C/svg%3E") center/contain no-repeat}
+  body[data-book]:has(#practice-workspace:not([hidden])){--breadcrumb-height:0px}
+}
+@media screen and (max-width:599px){
+  body[data-book] .crumb ol{font-size:11px}
+  body[data-book] .crumb li{gap:0}
+  body[data-book] .crumb li+li::before{margin:0 4px 0 0;width:5px;height:5px}
+  body[data-book] .crumb a{padding-inline:4px}
+  body[data-book] .crumb-home-icon{display:block}
+  body[data-book] .crumb-home-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+}
+@media print{body.printing-paper[data-print-mode="worked"] .answer-stack{display:block}}
+
+/* Shared interface scale; mathematics retains a readable, explicit prose size. */
+@media screen{
+ body[data-book]{--size-400:1rem;--size-500:1.25rem;--size-600:1.5rem;font-size:16px}
+ body[data-book] .masthead h1{font-size:32px}
+ body[data-book] :is(.tab,[role=tab]),.book-button{font-size:13px}
+ body[data-book] :is(.flow-section h2,.flow-head h3,.contents-heading h2){font-size:24px;line-height:1.3;font-weight:600}
+}
+@media screen and (max-width:599px){body[data-book] .masthead h1{font-size:28px}body[data-book] :is(.flow-section h2,.flow-head h3,.contents-heading h2){font-size:23px}}

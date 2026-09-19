@@ -110,6 +110,37 @@ check('Math typography: upright operators preserve prose and existing TeX',()=>{
   const authored='Prose Re(z); $\\mathrm{Re}(z)+\\operatorname{Im}(z)$';
   assert.equal(format(authored),authored);
 });
+
+const modelContext=vm.createContext({window:{}});
+vm.runInContext(read('src/assets/math-models.js'),modelContext);
+const models=modelContext.window.MathModels;
+const close=(actual,expected)=>assert(Math.abs(actual-expected)<1e-9,actual+' differs from '+expected);
+check('Math explorer: odd layers count the cells of every displayed square',()=>{
+  for(let n=1;n<=10;n++){
+    const layers=models.squareLayers(n);assert.equal(layers.reduce((a,b)=>a+b,0),n*n);
+    assert.equal(layers.at(-1),n*n-(n-1)*(n-1));
+  }
+  for(const n of [0,11,1.5,NaN])assert.throws(()=>models.squareLayers(n));
+});
+check('Math explorer: tangent contact and derivative at every slider position',()=>{
+  for(let a=-2;a<=2;a+=.25){const t=models.tangent(a);close(t.at(a),a*a);
+    const h=.001;close(t.slope,((a+h)**2-(a-h)**2)/(2*h));
+    for(const x of [-3,-.5,0,1,3])close(x*x-t.at(x),(x-a)**2);
+  }
+  assert.throws(()=>models.tangent(Infinity));
+});
+check('Math explorer: exact coin probabilities agree with exhaustive outcomes',()=>{
+  for(let n=2;n<=12;n++){
+    const counts=Array(n+1).fill(0);
+    for(let mask=0;mask<2**n;mask++)counts[mask.toString(2).replaceAll('0','').length]++;
+    const distribution=models.fairCoins(n);
+    distribution.forEach((d,k)=>{assert.equal(d.ways,counts[k]);close(d.probability,counts[k]/2**n)});
+    close(distribution.reduce((a,d)=>a+d.probability,0),1);
+    close(distribution.reduce((a,d)=>a+d.heads*d.probability,0),n/2);
+  }
+  for(const n of [1,13,2.5,NaN])assert.throws(()=>models.fairCoins(n));
+});
+
 fs.mkdirSync('test-results',{recursive:true});
 fs.writeFileSync('test-results/check.json',JSON.stringify({build:JSON.parse(read('dist/build-info.json')),checks,failed:results.filter(x=>x.status==='fail').length,results,limitations:['Content preservation is not mathematical verification.','Browser and A4 evidence are recorded separately.']},null,2));
 console.log(`${checks} checks passed; ${results.length-checks} failed. Details: test-results/check.json`);

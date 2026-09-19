@@ -11,7 +11,9 @@ Preserve the compact personal sidebar, neutral canvas and white panels, discipli
 colors, project-specific imagery and careful animated details. Rebuild the incomplete
 interaction machinery with shared semantic components. Bring the mathematics library,
 reading and Practice into that language without changing reasoning or paper behavior.
-Current live source `055b4c0` remains the recovery point. The reference archive remains
+The foundation is implemented; current checks are in FOUNDATION_QA.md and the active
+visual contract is DESIGN_SYSTEM.md. Previous live source `055b4c0` is the immediate
+recovery point for this release. The reference archive remains
 local and unmodified; it is not a release candidate.
 
 ## Previous direction — published, then rejected visually
@@ -21,7 +23,7 @@ The published pilot at `1478f06` is a recovery point, not the visual acceptance 
 Work is on `codex/site-wide-redesign`. The owner requested publication for live review
 and gave standing approval to publish completed, checked updates on 2026-09-19.
 
-## Product direction
+## Previous product direction (historical)
 
 A personal portfolio led by work and clear explanations. It should feel like a thoughtful
 mathematician's working space, not an agency landing page with repeated service cards.

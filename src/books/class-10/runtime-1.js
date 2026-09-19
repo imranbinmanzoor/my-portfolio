@@ -397,6 +397,7 @@
           if (p.matches("details")) p.open = true;
         typeset(el.closest(".flow-section") || el);
         requestAnimationFrame(() => {
+          measureSticky();
           el.tabIndex = -1;
           el.focus({ preventScroll: true });
           el.scrollIntoView({ block: "start", behavior: motion() });
@@ -1074,11 +1075,11 @@
       function watchStuck() {
         observers.forEach((o) => o.disconnect());
         observers = [];
-        const cs = getComputedStyle(document.documentElement);
+        const cs = getComputedStyle(document.body);
         const tabsH = parseInt(cs.getPropertyValue("--sticky-tabs")) || 0;
         const jumpH = parseInt(cs.getPropertyValue("--sticky-jump")) || 0;
         document.querySelectorAll(".local-jump, .grp").forEach((el) => {
-          const offset = tabsH + (el.classList.contains("grp") ? jumpH : 0);
+          const offset = SiteScroll.top + (parseFloat(cs.getPropertyValue("--breadcrumb-height")) || 0) + tabsH + (el.classList.contains("grp") ? jumpH : 0);
           const io = new IntersectionObserver(
             ([e]) => {
               /* intersectionRatio < 1 alone also fires for anything still below the
@@ -1113,7 +1114,7 @@
 
       let spyHandler = null;
       function wireScrollSpy() {
-        if (spyHandler) removeEventListener("scroll", spyHandler);
+        if (spyHandler) SiteScroll.off(spyHandler);
         const panel = document.querySelector('[role="tabpanel"]:not([hidden])');
         if (!panel) return;
         const links = [...panel.querySelectorAll(".local-jump a")];
@@ -1122,12 +1123,12 @@
           .filter(Boolean);
         if (!sections.length) return;
         spyHandler = () => {
-          const cs = getComputedStyle(document.documentElement);
+          const cs = getComputedStyle(document.body);
           /* The line must match where an anchored section actually lands, which is
        the sticky height plus its own scroll-margin-top. */
           const margin =
             parseInt(getComputedStyle(sections[0]).scrollMarginTop) || 0;
-          const line = Math.max(
+          const line = SiteScroll.top + Math.max(
             (parseInt(cs.getPropertyValue("--sticky-tabs")) || 0) +
               (parseInt(cs.getPropertyValue("--sticky-jump")) || 0) +
               8,
@@ -1137,8 +1138,8 @@
           for (const s of sections)
             if (s.getBoundingClientRect().top <= line) current = s;
           if (
-            window.innerHeight + window.scrollY >=
-            document.body.scrollHeight - 4
+            SiteScroll.height + SiteScroll.y >=
+            SiteScroll.extent - 4
           )
             current = sections[sections.length - 1];
           links.forEach((a) =>
@@ -1148,7 +1149,7 @@
             ),
           );
         };
-        addEventListener("scroll", spyHandler, { passive: true });
+        SiteScroll.on(spyHandler);
         spyHandler();
       }
 
@@ -1239,7 +1240,7 @@
         const panels = document.getElementById("panels");
         const term = input.value.trim().toLowerCase();
 
-        clear.hidden = !term;
+        clear.hidden = !input.value;
         if (term.length < 2) {
           box.hidden = true;
           box.innerHTML = "";
@@ -1313,6 +1314,7 @@
         const clear = document.getElementById("q-clear");
         let t;
         input.addEventListener("input", () => {
+          clear.hidden = !input.value;
           clearTimeout(t);
           t = setTimeout(runSearch, 140);
         });
@@ -1348,14 +1350,15 @@
       function landOnPanel(panel, wasAtTop) {
         if (wasAtTop || !panel) return;
         markWideCompacts();
-        const cs = getComputedStyle(document.documentElement);
+        const cs = getComputedStyle(document.body);
         const stuck =
+          (parseFloat(cs.getPropertyValue("--breadcrumb-height")) || 0) +
           (parseFloat(cs.getPropertyValue("--sticky-tabs")) || 0) +
           (parseFloat(cs.getPropertyValue("--sticky-jump")) || 0);
         const first = panel.querySelector(".flow-section") || panel;
         const y =
-          window.scrollY + first.getBoundingClientRect().top - stuck - 8;
-        window.scrollTo({ top: Math.max(0, y), behavior: "auto" });
+          SiteScroll.y + first.getBoundingClientRect().top - SiteScroll.top - stuck - 8;
+        SiteScroll.to({ top: Math.max(0, y), behavior: "auto" });
       }
 
       function keepSelectedTabVisible() {
@@ -1458,13 +1461,13 @@
             "--back-top-left",
             Math.round(x) + "px",
           );
-          b.classList.toggle("on", scrollY > 600);
+          b.classList.toggle("on", SiteScroll.y > 600);
         };
         const schedule = () => {
           if (!frame) frame = requestAnimationFrame(place);
         };
         addEventListener("resize", schedule, { passive: true });
-        addEventListener("scroll", schedule, { passive: true });
+        SiteScroll.on(schedule);
         addEventListener("hashchange", schedule);
         document.fonts?.ready.then(schedule);
         place();
@@ -1474,7 +1477,7 @@
             ? document.getElementById("book-main")
             : document.querySelector('[role="tab"][aria-selected="true"]');
           t?.focus({ preventScroll: true });
-          window.scrollTo({ top: 0, behavior: motion() });
+          SiteScroll.to({ top: 0, behavior: motion() });
         });
       }
 
@@ -1606,7 +1609,7 @@
           stopVideos();
           showView("book");
           document.title = "Class 10 Mathematics : PECTAA solutions";
-          window.scrollTo({ top: 0, behavior: "auto" });
+          SiteScroll.to({ top: 0, behavior: "auto" });
           return;
         }
         const n = Number(m[1]);
@@ -1627,7 +1630,7 @@
         selectTab(wanted, { keepScroll: true, writeHistory: false });
         if (rebuilt) wireGenerator(n, BANKS[n]);
         if (m[3]) focusTarget(safeDecode(m[3]));
-        else window.scrollTo({ top: 0, behavior: "auto" });
+        else SiteScroll.to({ top: 0, behavior: "auto" });
         if (m[4]) {
           document.getElementById("gen-code").value = safeDecode(m[4]);
           document.getElementById("gen-restore").click();

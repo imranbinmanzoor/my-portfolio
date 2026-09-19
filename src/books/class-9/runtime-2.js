@@ -96,7 +96,7 @@
     scheduleAlign($('.panel[data-panel="' + id + '"]') || document);
   }
   $$('.tab').forEach(function (t) {
-    t.addEventListener('click', function () { showPanel(t.dataset.panel); window.scrollTo({ top: 0 }); });
+    t.addEventListener('click', function () { showPanel(t.dataset.panel); SiteScroll.to({ top: 0 }); });
   });
 
   /* ---------------------------------------------------------- search */
@@ -232,6 +232,7 @@ function hilite(s, ts) {
   }
   function runSearch(q) {
     var box = $('.results'), clear = $('.s-clear');
+    clear.hidden = !q;
     if (!q || q.trim().length < 2) { box.innerHTML = ''; clear.removeAttribute('data-on'); return; }
     clear.setAttribute('data-on', '1');
     lastTerms = terms(q); shownNow = SHOWN;
@@ -251,8 +252,9 @@ function hilite(s, ts) {
   }
   var si = $('.s-input');
   if (si) {
+    $('.s-clear').hidden = !si.value;
     var tmo;
-    si.addEventListener('input', function () { clearTimeout(tmo); tmo = setTimeout(function () { runSearch(si.value); }, 110); });
+    si.addEventListener('input', function () { $('.s-clear').hidden = !si.value; clearTimeout(tmo); tmo = setTimeout(function () { runSearch(si.value); }, 110); });
     $('.s-clear').addEventListener('click', function () { si.value = ''; runSearch(''); si.focus(); });
     si.addEventListener('keydown', function (e) { if (e.key === 'Escape') { si.value = ''; runSearch(''); } });
   }
@@ -444,11 +446,11 @@ function trackStuck() {
   var watch = function () {
     $$('.local-jump, .grp').forEach(function (el) {
       if (getComputedStyle(el).position !== 'sticky') { el.classList.remove('is-stuck'); return; }
-      var want = parseFloat(getComputedStyle(el).top) || 0;
+      var want = (parseFloat(getComputedStyle(el).top) || 0) + SiteScroll.top;
       el.classList.toggle('is-stuck', Math.abs(el.getBoundingClientRect().top - want) < 1.5);
     });
   };
-  window.addEventListener('scroll', watch, { passive: true });
+  SiteScroll.on(watch);
   window.addEventListener('resize', debounce(watch, 100));
   document.addEventListener('toggle', function (e) {
     if (e.target.tagName === 'DETAILS') watch();
@@ -507,15 +509,15 @@ function markSection() {
       markWideEquations();
       var go = function () {
         var bar = $('.local-jump').getBoundingClientRect().bottom;
-        var y = window.scrollY + target.getBoundingClientRect().top - bar - 6;
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        var y = SiteScroll.y + target.getBoundingClientRect().top - bar - 6;
+        SiteScroll.to({ top: Math.max(0, y), behavior: 'smooth' });
       };
       go();
       links.forEach(function (x) { x.setAttribute('aria-current', String(x === a)); });
       setTimeout(function () { go(); links.forEach(function (x) { x.setAttribute('aria-current', String(x === a)); }); }, 450);
     });
   });
-  window.addEventListener('scroll', update, { passive: true });
+  SiteScroll.on(update);
   window.addEventListener('resize', debounce(update, 120));
   document.addEventListener('toggle', function (e) {
     if (e.target.tagName === 'DETAILS') update();
@@ -547,7 +549,7 @@ function bindBookRouter() {
     var chapter = /^unit-\d+$/.test(h) || $('.tab[data-panel="' + h + '"]');
     var was = document.body.dataset.view;
     document.body.dataset.view = chapter ? 'chapter' : 'contents';
-    window.scrollTo({ top: 0 });
+    SiteScroll.to({ top: 0 });
     /* Everything that measures layout ran while this view was hidden, where
        every element reports zero size. Ask them all to measure again. */
     if (was !== document.body.dataset.view) {

@@ -53,3 +53,20 @@ Do not claim PDF success until a real file and page content have been checked.
 
 Pilot evidence remains in `docs/PILOT_QA.md`; redesign evidence is in `docs/REDESIGN_QA.md`. Run the final build first,
 then checks on those exact bytes. Keep successful test history separate from current results.
+
+## Current foundation checks
+
+Current evidence: FOUNDATION_QA.md. Verify the 800px scrolling-owner boundary and 1200px
+personal-rail boundary; book unit navigation changes at 1000px. Check SiteScroll consumers,
+anchor offsets, breadcrumbs, independent math overflow and resize transitions. Breadcrumbs
+occupy one 45px row; the current question label adds 36px below the local section navigation. Verify handover at question boundaries and part/compact anchors clearing all three layers.
+In generated Class 10 paper view only Back to paper settings stays sticky.
+
+For discipline disclosures check open/switch/close at all four viewports, keyboard focus,
+selected-title association, and measured connector joins at fractional browser scaling.
+Contact success must be tested with an exact-endpoint mock restored afterwards, not a real
+message. Check success focus, reduced motion, repeat-entry and failure retention.
+
+Verify stationary button labels and consistent link underlines with pointer and keyboard. Compare the measured eyebrow/title/lead roles across catalogue, projects, tutoring and book overview; identical role values do not require identical page compositions.
+
+The homepage explorer must be visible before the discipline cards. Check all three tabs, keyboard arrows/Home/End, slider endpoints, preserved per-view values, curve magnification, coin-count clamping, and closed/open explanations at all four viewport widths. Inspect light/dark diagrams and formula overflow. The pure-model checks independently count square cells, compare tangent properties, and exhaustively enumerate coin outcomes for every supported toss count. These checks do not certify the separate authored books.
