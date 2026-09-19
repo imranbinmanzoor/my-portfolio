@@ -11,12 +11,19 @@ fs.mkdirSync(out);
 const read=p=>fs.readFileSync(p,'utf8');
 const write=(p,value)=>{fs.mkdirSync(path.dirname(path.join(out,p)),{recursive:true});fs.writeFileSync(path.join(out,p),value);};
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name)).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);
+function portableGzip(value) {
+  const bytes=gzipSync(value,{level:9});
+  // RFC 1952: the header's OS byte is informational; 255 means unknown.
+  // Normalizing it keeps Windows and Linux artifacts byte-identical.
+  bytes[9]=255;
+  return bytes.toString('base64');
+}
 export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP)\(([^)]+)\)@@/g,(_,kind,file)=>{
   if(!/^(src|content)\//.test(file)||file.includes('..'))throw new Error('Invalid source include');
   const value=read(file);
   if(kind==='SOURCE')return expand(value);
   const json=JSON.stringify(JSON.parse(value)).replace(/</g,'\\u003c');
-  return kind==='GZIP'?gzipSync(json,{level:9}).toString('base64'):json;
+  return kind==='GZIP'?portableGzip(json):json;
 });
 for(const p of walk('public'))write(p.slice(7),fs.readFileSync(p));
 for(const p of walk('src/assets'))write(p.slice(4),fs.readFileSync(p));
