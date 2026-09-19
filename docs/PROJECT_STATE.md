@@ -5,14 +5,15 @@ Updated: 2026-09-19. Phase: original-design foundation published and verified fo
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `d9327149fe298a128a7f4208979cd53d6e2089d3`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35450748595).
-- Source digest: `651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc`.
+- Published source: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35451753344).
+- Source digest: `f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
 - 45 local checks passed; two builds produced 70 identical output files. All 69 public files matched byte for byte; four excluded source/private paths returned 404.
-- Mobile/tablet exercise navigation is sticky, controls are compact, and footer panels are consistently separated. Redundant editorial heading badges are removed. Live Browser verified both books' sticky geometry, a compact-solution link and the Class 9 footer. Console warning/error log was empty. Evidence: docs/STICKY_NAV_FOOTER_QA.md.
+- Exercise boxes are 36px high and Concepts / Examples / Exercise boxes 32px across all screen sizes, with unchanged 13px labels. The owner clarified that excessive "width" meant height. Both books passed 22 viewport checks; live Browser confirmed desktop and mobile dimensions. Switching back from a generated paper restores sticky lesson navigation. Evidence: docs/NAVIGATION_DENSITY_QA.md.
+- The preceding sticky-navigation, separate footer panels and editorial-icon cleanup remain included. Historical evidence: docs/STICKY_NAV_FOOTER_QA.md.
 - The preceding project-case redesign remains included: genuine device views, enlargement, concise stories and breadcrumbs. Evidence: docs/PROJECT_CASE_REVIEW.md.
 - Pages publishes checked dist/ output. Custom domain, HTTPS and the main-only environment are unchanged.
-- Immediate rollback: `3c2a48bffdb773902b3c2d2d2e3f6207e17ff3b6`, digest `833f1349c9ddfadf580e1d537264c16e5329c58283f180e82d5d9f2a7c08fcc0`.
+- Immediate rollback: `d9327149fe298a128a7f4208979cd53d6e2089d3`, digest `651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc`.
 - Pre-pilot recovery: `7a2d89409c81312b0439727e18dd93724357968e`; use DEPLOYMENT.md.
 
 ## Accepted baseline and authority

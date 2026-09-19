@@ -50,6 +50,16 @@ certification. No new mathematical audit or print-layout change is claimed.
 
 ## Publication
 
-Pending deployment verification. Immediate rollback is source
+Published source `7f73d9310503795d9cc1115ddd20a1cfc8be1f38` through successful
+[Pages run 35451753344](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35451753344).
+All 69 public files matched the checked output byte for byte. Four excluded
+source/private paths returned 404. Live Browser confirmed 36px exercise and 32px
+section controls in Class 10 at 1440 and 430px, and Class 9 at 430px. Class 10
+desktop navigation remained sticky. The bounded warning/error log was empty.
+A Class 9 navigation call timed out, then a fresh DOM snapshot confirmed the
+correct fully loaded page; measurements succeeded. The viewport override was reset
+and the temporary QA tab closed; the existing live Class 10 tab was refreshed.
+
+Immediate rollback is source
 `d9327149fe298a128a7f4208979cd53d6e2089d3`, digest
 `651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc`.
