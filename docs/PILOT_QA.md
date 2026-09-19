@@ -2,7 +2,7 @@
 
 Date: 2026-09-19. Branch: `codex/portfolio-math-pilot`. Local preview only.
 Production rollback identity: `7a2d89409c81312b0439727e18dd93724357968e`.
-Final source digest: `d2dc578fc4d969952318e816df9053a02f95c29d22f3d2256f303f0038dd7c5b`.
+Final source digest: `6c05e36f200c6eb310706133aaf2316bca1fcda88abf4a364f9639afe95453d4`.
 
 ## Automated validation actually run
 
@@ -29,6 +29,9 @@ Actual built-in Chromium browser interaction, not source-only inspection. Viewpo
 320 × 800, 430 × 932, 768 × 1024, and 1440 × 1000. All four representative screens
 had document scroll width equal to client width, and zero visible KaTeX error nodes
 in those sampled states. Screenshots were captured after viewport repaint and inspected.
+After the desktop-width refinement, the final matrix additionally includes Class 9
+contents and a lesson: **24 sampled states**, with no page overflow or KaTeX error nodes.
+Class 9 mathematics is preserved SVG, so a KaTeX-node count does not validate that content.
 
 - Homepage: portrait-free introduction, Layyah location, original live complex-plane
   study, shared palette, light/dark states, 200% root text at 430px without page overflow.
@@ -52,6 +55,17 @@ in those sampled states. Screenshots were captured after viewport repaint and in
 - Genuine italic faces were observed loaded: Inter 400/500 and KaTeX_Math 400.
   Computed `font-synthesis-style` is `none`. Font requests include real italic variants;
   the owner prohibits oblique or artificially skewed text.
+- Desktop width refinement: at 1440px, the portfolio/library, both book contents,
+  chapter headers/tabs and Class 10 Practice settings share a 1180px outer frame with
+  40px gutters (1100px usable width). Measured left frame edge is 122.33px and content
+  edge 162.33px. The Class 10 lesson retains its 831.39px wrapper and 799.39px inner
+  reading area. Generated papers/keys use 800px. A separate 1024px Practice screenshot
+  confirms that the title and 400px search field fit without overlap. These desktop
+  rules apply above 960px; existing phone/tablet reading layouts are preserved.
+- Following that change, generated another paper and opened all ten working disclosures:
+  zero KaTeX error nodes and no page overflow. Its five MCQ rows measured 712px and used
+  four columns, with scroll width equal to client width. The paper workspace measured
+  exactly 800px. No selection, timing, scoring or mathematical data changed.
 - Library: honest one-unit availability for Classes 9/10 and planned status for 11/12.
   Book return links, the Class 9 visible contents heading, and legacy Class 10 unit hash work.
 - Class 10: exercise and compact disclosure routes, Review MCQ feedback, search rendering,
@@ -69,8 +83,10 @@ in those sampled states. Screenshots were captured after viewport repaint and in
   final sampled narrow paper had five `is-c2` option groups, each 201px wide with no
   option-container overflow. Key option letters are lowercase. Long mathematics and
   worked keys were visually inspected on desktop, phone and tablet during the session.
-- The final scoped CDP event window returned no runtime exceptions or network failures,
-  with `truncated: false`. This is a scoped observation, not a claim about every page load.
+- Scoped CDP event windows returned no runtime exceptions or network failures, with
+  `truncated: false`. A later request spanning the whole width-refinement pass returned
+  no retained failures but reported older events evicted. No full-session clean-log claim
+  is made; browser observations and the measured matrix have their stated scope.
 
 ## Screenshots
 
@@ -97,6 +113,8 @@ headless to render local A4 PDFs. Normal browser print state was restored afterw
   and current built CSS. Every rendered page is pixel-identical to the visually inspected
   earlier proofs at 1.25x scale (pypdfium2/Pillow comparison). Earlier truncated test
   exports in `.local/` are discarded evidence and must not be cited as successful proofs.
+  The subsequent desktop-frame refinement is inside `@media screen`; it does not
+  change the print cascade or authored paper DOM.
 
 ## Remaining work and limits
 

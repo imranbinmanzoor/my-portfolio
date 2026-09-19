@@ -23,9 +23,21 @@ transforms on text, or synthetic slant. Inter requests include the true italic a
 and shared foundations set `font-synthesis-style: none`. Keep mathematical variables
 in KaTeX's actual italic fonts and named operators upright. Existing Fraunces requests
 already include real italic faces. Verify loaded faces in Browser, not only CSS declarations.
-Portfolio width is 1180px; book reading measure remains approximately 68ch.
+Desktop page frames use `--ds-width: 1180px`, including two 40px gutters: the
+visible content area is 1100px. Portfolio/library, book contents, chapter headers,
+chapter tabs, and Class 10 Practice settings share these edges above 960px.
+Worked lessons retain their approximately 68ch reading measure (Class 9: 66ch),
+and the generated Class 10 paper workspace is capped at 800px. A common page frame
+does not imply full-width paragraphs. The desktop chapter search sits beside the title;
+the existing stacked arrangement remains below the desktop breakpoint.
 Phone gutters are at least 20px on the portfolio/library, and the existing book
 layout preserves its local mathematics scroll regions.
+
+This distinction follows [USWDS typography guidance](https://designsystem.digital.gov/components/typography/)
+on controlling text measure independently of macro layout (66 characters is its long-text
+target). [WCAG 1.4.8](https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html)
+also discusses limiting line width; it is a Level AAA criterion, not a claim that this
+site is certified. These references inform the decision, not a universal fixed page width.
 
 Use restrained borders and 6–10px corner radii. Do not introduce warm highlights.
 The portfolio retains personal identity, research, projects, teaching,
@@ -55,7 +67,8 @@ the native arrow in forced-colour mode. Repeated desktop three-column grids use 
 Compact side hints: readable muted blue, thin border, no background fill. Keep each
 hint adjacent to the transition it explains. Preserve complete reasoning.
 
-Scope: homepage, library, Class 10 lesson/Practice chrome, book return navigation,
+Scope: homepage, library, Class 10 lesson/Practice chrome, shared desktop book frames,
+book return navigation,
 and small missing-route/status pages. Existing case-study/tutoring layouts are
 preserved pending approval; they are not evidence of completed site-wide rollout.
 

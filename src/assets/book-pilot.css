@@ -9,3 +9,24 @@ body[data-book-pilot]{--surface-page:var(--ds-page);--surface-raised:var(--ds-su
 [data-book-pilot] .library-top{border-bottom:1px solid var(--ds-line)}
 @media(max-width:430px){.site-return{font-size:12px}.site-return__brand span{display:none}}
 @media print{.site-return{display:none!important}}
+
+/* Align the desktop page frame; preserve the narrower lesson and paper measures. */
+@media screen and (min-width:961px){
+  body[data-book-frame] :is(.masthead>.wrap,.tabs-wrap>.wrap,#book-main,.library-masthead>.library-top.wrap,.view-contents>.wrap-wide),
+  body[data-book-frame].practice-mode #main{
+    max-width:var(--ds-width);
+    padding-inline:var(--ds-gutter);
+  }
+  body[data-book-frame] .masthead>.wrap{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(280px,400px);
+    column-gap:40px;
+    align-items:center;
+  }
+  body[data-book-frame] .masthead .crumb{grid-column:1/-1}
+  body[data-book-frame] .masthead h1{grid-column:1;grid-row:2;margin-block:8px}
+  body[data-book-frame] .masthead :is(.search,.searchbar){grid-column:2;grid-row:2;margin:0}
+  body[data-book-frame] .masthead :is(.search-help,.search-scope,.search-count){grid-column:2;margin-block:8px 0}
+  body[data-book-frame] .masthead .results{grid-column:1/-1}
+  body[data-book-frame] .practice #practice-workspace{max-width:800px;margin-inline:auto}
+}

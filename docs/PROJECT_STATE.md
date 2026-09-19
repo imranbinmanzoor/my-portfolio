@@ -63,6 +63,10 @@ rollout will consolidate the reusable book/practice interface across books incre
 - Follow-up precision pass standardized card gaps, aligned proof footers and field heights,
   inset the dropdown arrow, corrected root-relative anchor focus/offset, and verified
   genuine italic fonts with synthetic slant disabled.
+- Local milestone `cf82aef` saved the recovered sources and tested pilot. The owner's
+  subsequent width feedback led to shared 1180px desktop frames (1100px inside gutters)
+  for book contents/navigation and Practice settings; lesson and paper reading widths
+  remain narrower intentionally. This refinement remains part of the visual pilot.
 - Final automated checks: 35 passed, zero failed. Two builds: 52 byte-identical files.
   Four screens at four viewport widths, keyboard/search/paper/key checks, and A4 proofs
   inspected. Exact evidence, build identity and limitations: `docs/PILOT_QA.md`.
