@@ -1,5 +1,26 @@
 # Navigation density release
 
+## Follow-up: exercise width only
+
+The owner subsequently requested wider exercise navigation elements only. Scoped
+inline padding is now 12px per side, adding 12px to each exercise button's total
+width. The 36px height is unchanged. Concepts / Examples / Exercise retains its
+6px padding, original widths and 32px height.
+
+Source digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
+45 checks passed; 70 output files were identical across two builds. Actual Browser
+measurements covered both books at 320, 430, 768 and 1440px (eight combinations).
+All exercise controls retained 36px height with 12px inline padding; all local links
+retained 32px height and 6px padding. Exercise 1.1 measured 95.03px wide and Concepts
+71.70px. No page overflow or clipped button labels was found. Mobile and desktop
+screenshots were inspected; Class 9 Home/End selection worked. The bounded
+warning/error log was empty. Evidence: `exercise-width-followup.json` in the local
+evidence folder below. No new print or mathematical review is claimed.
+
+Publication pending verification. Rollback: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
+
+## Initial height release
+
 Checked 2026-09-19. The owner clarified that "wide" meant the top-to-bottom size
 of active exercise and Concepts / Examples / Exercise boxes, on every screen size.
 
