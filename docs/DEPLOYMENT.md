@@ -1,12 +1,12 @@
 # Deployment and rollback
 
-Current published source: `771d13cca7188c4e8762d48c6626da3fde33ec46`.
-[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35447330408).
-Live digest: `2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7`.
+Current published source: `ce4eaa016b0db82a50945dcfaeb8cff0810e606f`.
+[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35448713033).
+Live digest: `8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d`.
 Published and verified 2026-09-19. Immediate checked rollback source:
-`e14dc18dc9752407e0240411164af993ef3883a5`, digest
-`7a35ed57df7194af9b0a0f1801f97ffbf4b3587d7448be125c6c0c5728ce1cab`.
-All 62 publicly served files match the checked local output; source/private paths tested return 404.
+`771d13cca7188c4e8762d48c6626da3fde33ec46`, digest
+`2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7`.
+All 64 publicly served files match the checked local output; source/private paths tested return 404.
 
 ## Authority and verified configuration
 

@@ -5,13 +5,13 @@ Updated: 2026-09-19. Phase: original-design foundation published and verified fo
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `771d13cca7188c4e8762d48c6626da3fde33ec46`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35447330408).
-- Source digest: `2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7`.
-- 43 checks passed locally; two builds produced 63 identical output files. GitHub's build/check and deployment jobs succeeded. All 62 publicly served files match local output byte for byte; .nojekyll is upload metadata.
+- Published source: `ce4eaa016b0db82a50945dcfaeb8cff0810e606f`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35448713033).
+- Source digest: `8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d`.
+- 44 checks passed locally; two builds produced 65 identical output files. GitHub's build/check and deployment jobs succeeded. All 64 publicly served files match local output byte for byte; .nojekyll is upload metadata.
 - The explorer now follows the library catalogue in a collapsed disclosure. Local Browser checks covered four widths and its controls; actual live checks confirmed the mobile homepage and library link/disclosure focus. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md. Earlier unchanged book/Practice/print evidence remains in docs/FOUNDATION_QA.md.
 - Pages continues to publish checked dist/ output. The custom domain, HTTPS and main-only deployment environment are unchanged. Excluded source/document/private helper paths return 404.
-- Immediate rollback source: `e14dc18dc9752407e0240411164af993ef3883a5`; digest `7a35ed57df7194af9b0a0f1801f97ffbf4b3587d7448be125c6c0c5728ce1cab`.
+- Immediate rollback source: `771d13cca7188c4e8762d48c6626da3fde33ec46`; digest `2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7`.
 - Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`. Use DEPLOYMENT.md; that old source has no current build pipeline.
 
 ## Accepted baseline and authority
@@ -157,7 +157,7 @@ and About section. The candidate now has AI & research, Code, Mathematics and Te
 tabs beside the compact desktop introduction, after the role cards on phones. Measured
 connectors avoid labels; contact controls align with the map's bottom. About is personal
 and shares aligned typography with the factual contributions panel. Local visual and
-keyboard evidence: docs/HOME_WORK_MAP_QA.md. Final release verification is pending.
+keyboard evidence: docs/HOME_WORK_MAP_QA.md. The revision is published and verified: all 64 public files match, source/private exclusions return 404, and live Browser confirmed desktop/mobile map selection and responsive ordering.
 Do not restore an attention-dominating mathematics question above professional work.
 
 Continue visual refinement from owner feedback while retaining the verified release and its rollback point. Keep the static build and recovered content/runtime boundaries.

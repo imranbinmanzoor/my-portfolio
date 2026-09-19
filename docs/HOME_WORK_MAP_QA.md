@@ -44,6 +44,6 @@ are present; no autoplay is used. Abandoned local artifact experiments are not r
 
 Final local run: 44 checks passed, zero failed; two builds produced 65 byte-identical
 output files. Source digest: 8b1f48222474bae4e6ef7982607f5f388ef50da73bd13a390323057c951f1d0d.
-Production verification pending. Immediate checked rollback:
+Published source: ce4eaa016b0db82a50945dcfaeb8cff0810e606f. [Successful Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35448713033). All 64 served files match the checked output; four source/private paths return 404. Actual live Browser confirmed desktop and mobile tab selection, content, responsive ordering and no mobile overflow. The final local breakpoint check also confirmed retained focus stays visible. Immediate checked rollback:
 771d13cca7188c4e8762d48c6626da3fde33ec46, digest
 2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7.
