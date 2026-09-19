@@ -2,9 +2,10 @@
 body[data-book]{--breadcrumb-height:45px;--sticky-tabs:0px;--font-ui:var(--ds-font);--measure:68ch;--size-100:.8125rem;--size-200:.875rem;--size-300:1rem;--size-400:1.125rem;--size-500:1.375rem;--size-600:1.75rem;--size-700:2.25rem;--leading-body:1.65;margin:0;background:var(--ds-page);color:var(--ds-body);font-family:var(--ds-font)}
 body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
 @media screen {
+  body[data-book]{--book-control-inset:6px;--book-nav-gap:4px}
   body[data-book="9"][data-view="contents"] .unit-doc{display:none!important}
-  body[data-book]:has(#practice-workspace:not([hidden])){--sticky-tabs:0px}
-  body[data-book]:has(#practice-workspace:not([hidden])) .tabs-wrap{position:static}
+  body[data-book]:has(#panel-generator:not([hidden]) #practice-workspace:not([hidden])){--sticky-tabs:0px}
+  body[data-book]:has(#panel-generator:not([hidden]) #practice-workspace:not([hidden])) .tabs-wrap{position:static}
   body[data-book] :is(#book-main,.view-contents>.wrap-wide,.library-masthead>.wrap){max-width:var(--ds-width);padding-inline:var(--ds-gutter);margin-inline:auto}
   body[data-book] #book-main{padding-bottom:32px}
   body[data-book] .view-contents>.wrap-wide{padding-bottom:32px}
@@ -46,13 +47,13 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .crumb{font-size:13px}.crumb a{color:var(--ds-muted)}
   body[data-book] .masthead :is(.search,.searchbar){background:var(--ds-surface);border:1px solid var(--ds-line-strong);border-radius:6px;min-height:48px;box-shadow:none}
   body[data-book] .masthead :is(.search-help,.search-scope,.search-count){font-size:12px;line-height:1.65;color:var(--ds-muted)}
-  body[data-book] :is(.tab,[role=tab]){border-radius:6px;font:500 14px/1.5 var(--ds-font);color:var(--ds-muted);min-height:44px}
+  body[data-book] :is(.tab,[role=tab]){width:max-content;min-width:0;max-width:100%;padding:4px var(--book-control-inset);border-radius:6px;font:500 14px/1.5 var(--ds-font);color:var(--ds-muted);min-height:36px}
   body[data-book] :is(.tab,[role=tab])[aria-selected=true]{color:var(--ds-primary);background:var(--ds-tint);border-color:var(--ds-line-strong);box-shadow:none}
-  body[data-book] .local-jump{box-shadow:none;border-bottom:1px solid var(--ds-line);padding-block:8px;background:var(--ds-page)}
-  body[data-book] .local-jump a{border-radius:4px;font:500 13px/1.5 var(--ds-font);color:var(--ds-muted);padding:8px;min-height:36px;border:0;background:none}
+  body[data-book] .local-jump{box-shadow:none;border-bottom:1px solid var(--ds-line);padding-block:4px;gap:var(--book-nav-gap);background:var(--ds-page)}
+  body[data-book] .local-jump a{width:max-content;flex:none;border-radius:4px;font:500 13px/1.5 var(--ds-font);color:var(--ds-muted);padding:6px var(--book-control-inset);min-height:32px;border:0;background:none}
   body[data-book] .local-jump a:is(.active,.is-active,[aria-current]){color:var(--ds-primary);background:var(--ds-surface);box-shadow:none}
   body[data-book] .local-jump a:not([aria-current="true"]){background:transparent;box-shadow:none}
-  body[data-book] .local-jump .seg{background:none;border:0;box-shadow:none;padding:0;gap:4px}
+  body[data-book] .local-jump .seg{background:none;border:0;box-shadow:none;padding:0;gap:var(--book-nav-gap)}
   body[data-book] .grp{box-shadow:none;border:0;background:var(--ds-page)}
   body[data-book] .qn{border-radius:4px;color:var(--ds-primary);background:var(--ds-tint);border:1px solid var(--ds-line);font-size:13px;font-weight:600}
   body[data-book] :is(.qblock,.part,.card,.concept-card,.written,.defn){border-color:var(--ds-line);box-shadow:none}
@@ -71,7 +72,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .katex [style*="color: rgb(79, 111, 174)"]{color:var(--ds-hint)!important}
 }
 @media screen and (min-width:1000px){
-  body[data-book] :is(#view-unit:not([hidden]),.unit-doc:not([hidden])){display:grid;grid-template-columns:128px minmax(0,1fr);column-gap:16px;align-items:start;max-width:var(--ds-width);margin-inline:auto;padding:0 var(--ds-gutter) 32px}
+  body[data-book] :is(#view-unit:not([hidden]),.unit-doc:not([hidden])){display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:16px;align-items:start;max-width:var(--ds-width);margin-inline:auto;padding:0 var(--ds-gutter) 32px}
   body[data-book]{--sticky-tabs:0px}
   body[data-book] .masthead{grid-column:1/-1;grid-row:2;padding-block:16px 24px}
   body[data-book] .masthead>.wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;column-gap:40px;align-items:center;padding:0;max-width:none}
@@ -82,11 +83,11 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .masthead .results{grid-column:1/-1}
   body[data-book] .tabs-wrap{grid-column:1;grid-row:3;position:sticky;top:calc(var(--breadcrumb-height) + 16px);z-index:10;background:none;border:0;box-shadow:none;padding:0}
   body[data-book] .tabs-wrap>.wrap{max-width:none;padding:0!important}
-  body[data-book] .tabs-wrap::before{content:'IN THIS UNIT';display:block;font:500 11px/1.5 var(--ds-font);letter-spacing:.09em;color:var(--ds-muted);margin:12px 0 16px}
-  body[data-book] :is(.tabs,#tablist){display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:0;overflow:visible;scroll-snap-type:none}
+  body[data-book] .tabs-wrap::before{content:'IN THIS UNIT';display:block;font:500 11px/1.5 var(--ds-font);letter-spacing:.09em;color:var(--ds-muted);margin:8px 0}
+  body[data-book] :is(.tabs,#tablist){display:flex;flex-direction:column;align-items:flex-start;gap:var(--book-nav-gap);padding:0;overflow:visible;scroll-snap-type:none}
   body[data-book] :is(.tabs-shell,.tabs-track){overflow:visible;padding:0}
   body[data-book] .tabs-shell::before,body[data-book] .tabs-shell::after{display:none}
-  body[data-book] :is(.tab,[role=tab]){display:flex;justify-content:flex-start;text-align:left;min-width:0;padding:10px 8px;width:100%;white-space:normal;margin:0}
+  body[data-book] :is(.tab,[role=tab]){display:flex;justify-content:flex-start;text-align:left;white-space:nowrap;margin:0}
   body[data-book] :is(#main,.chapter-view){grid-column:2;grid-row:3;min-width:0;max-width:100%;padding:0!important;margin:0;width:100%}
   body[data-book] #view-unit>#results{grid-column:2;grid-row:3;width:100%;max-width:none;padding:0;margin:0}
   body[data-book] #view-unit:has(>#results:not([hidden]))>#main{display:none}
@@ -94,7 +95,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .practice #practice-workspace{max-width:800px;margin-inline:auto}
   body[data-book] .practice .builder-grid{grid-template-columns:minmax(0,1fr) 230px;gap:24px}
   body[data-book] .practice .builder-summary{padding:24px 20px}
-  body[data-book]:has(#practice-workspace:not([hidden])) .tabs-wrap{position:static}
+  body[data-book]:has(#panel-generator:not([hidden]) #practice-workspace:not([hidden])) .tabs-wrap{position:static}
 }
 @media screen and (width < 1000px){
   body[data-book] .tabs-wrap>.wrap{max-width:var(--ds-width);padding-inline:var(--ds-gutter)}
@@ -223,7 +224,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book="9"]{--sticky-jump:var(--sticky-sections,0px)}
   body[data-book] :is(.flow-section,.qblock,.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-tabs) + var(--sticky-jump,0px) + 16px)}
   body[data-book] .qblock :is(.part,[id$="-compact"]){scroll-margin-top:calc(var(--breadcrumb-height) + var(--sticky-tabs) + var(--sticky-jump,0px) + var(--question-heading-height) + 16px)}
-  body[data-book]:has(#practice-workspace:not([hidden])) .crumb--unit{position:static;backdrop-filter:none}
+  body[data-book]:has(#panel-generator:not([hidden]) #practice-workspace:not([hidden])) .crumb--unit{position:static;backdrop-filter:none}
 }
 @media screen and (min-width:1000px){body[data-book] .crumb--unit{padding-inline:0}}
 @media screen and (width < 1000px){
@@ -231,8 +232,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
      vertical sticky space. Generated papers retain their return bar alone. */
   body[data-book]{--sticky-tabs:inherit}
   body[data-book] .tabs-wrap{position:sticky;top:var(--breadcrumb-height);z-index:40}
-  body[data-book] :is(.tabs,#tablist){padding-block:6px}
-  body[data-book] :is(.tab,[role=tab]){padding-inline:8px;min-width:0}
+  body[data-book] :is(.tabs,#tablist){padding-block:2px;gap:var(--book-nav-gap)}
   body[data-book] .masthead{padding-top:8px}
 }
 
@@ -246,7 +246,7 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
   body[data-book] .crumb--unit{height:45px}
   body[data-book] .library-top,body[data-book] .library-masthead>.library-top.wrap{padding-block:0;height:45px;border-bottom:1px solid transparent}
   body[data-book] .crumb-home-icon{width:16px;height:16px;display:none;font-size:0;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='m3 10 9-7 9 7v11h-6v-7H9v7H3Z'/%3E%3C/svg%3E") center/contain no-repeat}
-  body[data-book]:has(#practice-workspace:not([hidden])){--breadcrumb-height:0px}
+  body[data-book]:has(#panel-generator:not([hidden]) #practice-workspace:not([hidden])){--breadcrumb-height:0px}
 }
 @media screen and (max-width:599px){
   body[data-book] .crumb ol{font-size:11px}
