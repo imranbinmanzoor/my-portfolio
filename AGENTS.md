@@ -12,12 +12,15 @@ unavailable memory or infer employment from a public profile's organization fiel
 - Lead routine engineering autonomously: investigate, implement reversible changes,
   build, browser-test, document, and make coherent local commits.
 - Preserve all pre-existing work. Inspect Git status first; stage explicit paths.
-- Ask before production publication, history rewriting, substantial user-work deletion,
+- Ask before history rewriting, substantial user-work deletion,
   DNS/domain changes, paid services, irreversible architecture migrations, or a major
   product/visual decision with materially different reasonable directions.
-- The owner approved and published the first pilot, then requested a real broader redesign.
-  Implement that redesign locally; obtain visual review and new approval before publication.
-- Never push a production branch without release approval. Never force-push.
+- On 2026-09-19 the owner requested publication of the broader redesign and gave standing
+  approval: "whatever new update, push it live to visualize". Publish completed, checked
+  website updates without asking again; verify the actual live site and record a rollback
+  commit. This supersedes the earlier per-release publication approval requirement.
+  Publication for visual review does not imply final acceptance of a design direction.
+- Keep unfinished work on its source branch. Never force-push.
 - No private PDFs, credentials, caches, student data, or unrelated files in public output.
 - Keep work project-local. The supplied brief is user-owned; do not silently overwrite it.
 

@@ -7,9 +7,11 @@ Published and verified 2026-09-19. This is the checked recovery point for subseq
 
 ## Authority and verified configuration
 
-On 2026-09-19 the owner approved the visual pilot and explicitly requested publication
-before further rollout. This authorizes the pilot release. Subsequent production releases
-still require approval; never force-push.
+On 2026-09-19 the owner explicitly requested publication of the broader redesign and
+gave standing approval to publish future updates so they can be reviewed live. Publish
+completed, checked website updates without another approval question; verify deployment
+and retain a known rollback commit. This supersedes the earlier pilot-only approval.
+Other safety boundaries in AGENTS.md still apply. Never force-push.
 
 Repository: `imranbinmanzoor/my-portfolio`. Domain: `imranbinmanzoor.com`.
 Before release, both authenticated API and signed-in Browser confirmed:
@@ -55,7 +57,7 @@ byte for byte; `.nojekyll` is metadata, intentionally not served by Pages.
 9. Record the release commit, workflow run, live digest, and verification in project state.
 
 Every push to `main` runs this workflow. Keep ongoing work on its source branch until the
-next approved release. A documentation-only follow-up can remain on that branch; it does
+next completed, checked release. A documentation-only follow-up can remain on that branch; it does
 not need an immediate production redeployment.
 
 ## Rollback without rewriting history

@@ -7,7 +7,7 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 - Muhammad Imran is from **Layyah, Pakistan**, not Multan. This correction overrides
   the old site's location, including metadata and mobile menus.
 - The root is a multidisciplinary personal portfolio, with mathematics books inside it.
-- The published pilot used a portrait-free mathematical visual. The broader local
+- The published pilot used a portrait-free mathematical visual. The broader
   redesign retains it; the new composition is awaiting visual review.
 - He values complete mathematical reasoning, careful typesetting, professional visual
   design, reproducible work, and practical teaching tools. Compact must not mean incomplete.
@@ -17,7 +17,8 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 - Typography: real italics only when intended; never slanted/oblique or browser-synthesized
   italics. Mathematical operators stay upright and variables use proper italic math fonts.
 - Codex leads engineering, product design, content writing/organization, QA and release
-  preparation. Preserve the two approval checkpoints in AGENTS.md.
+  preparation. Follow the current authority in AGENTS.md, including standing approval
+  to publish completed, checked updates for live visual review.
 - After the website is complete, the owner wants a comprehensive LinkedIn revision:
   headline, About, experience, skills and Featured work, using the site's accepted
   positioning and verified facts. This is the next project, not part of the current pilot.

@@ -1,6 +1,6 @@
 # Project state
 
-Updated: 2026-09-19. Phase: broader redesign implemented locally; owner review pending.
+Updated: 2026-09-19. Phase: broader redesign checked; publication requested for live review.
 
 ## Current production release
 
@@ -24,11 +24,11 @@ Updated: 2026-09-19. Phase: broader redesign implemented locally; owner review p
 - Repository: `imranbinmanzoor/my-portfolio`; domain: `imranbinmanzoor.com`.
 - Working branch: `codex/site-wide-redesign`, branched from `c028641`.
 - Pre-existing untracked file: `PORTFOLIO_MATH_CODEX_BRIEF.md`; preserve without staging.
-- User authorizes routine engineering and local commits. Visual approval precedes full
-  rollout; separate explicit approval precedes production publication.
-- The owner approved the pilot and explicitly requested publication before further rollout:
-  "I approve. But before you proceed, I want this to be pushed so I can see live".
-  That approval covered the published pilot only. The owner subsequently requested a real broader redesign. New publication approval is required.
+- User authorizes routine engineering and local commits. On 2026-09-19 the owner requested
+  publication of the broader redesign and gave standing approval: "whatever new update,
+  push it live to visualize". Publish completed, checked website updates and verify live
+  without another publication question. This supersedes the earlier per-release approval
+  requirement. Live visual review does not imply final acceptance of the direction.
 - The read-only audit task **Full website audit before redesign** completed before any
   implementation. Audit task ID: `01a0b80d-e741-7533-b84d-854aac1f80da`.
   Its final report is the baseline evidence, not a fresh audit by this task.
@@ -120,8 +120,8 @@ No new production publication has been performed.
 
 ## Next checkpoint
 
-Present the coherent local redesign for visual review. After acceptance, finish agreed
-refinements and release review, then obtain explicit publication approval.
+Publish the checked redesign for live visual review, then continue agreed refinements
+under the owner's standing publication approval.
 The separate mathematics work still includes independent editorial/correctness review,
 Class 9 authoring-source recovery and further shared Practice/renderer consolidation.
 A visual redesign does not complete those tasks.

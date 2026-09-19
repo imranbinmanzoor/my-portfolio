@@ -2,7 +2,8 @@
 
 The owner rejected a consistency-only pass on 2026-09-19 and asked for a real redesign.
 The published pilot at `1478f06` is a recovery point, not the visual acceptance standard.
-Work is local on `codex/site-wide-redesign`; publication needs a new approval.
+Work is on `codex/site-wide-redesign`. The owner requested publication for live review
+and gave standing approval to publish completed, checked updates on 2026-09-19.
 
 ## Product direction
 
@@ -41,4 +42,5 @@ These inform content and interaction decisions, not a copied visual design.
   measurements. Verify navigation, dark/light, keyboard, search, disclosures and Practice.
 - Preserve book content hashes, question IDs, old URLs and generated-paper behaviour.
 - Inspect A4 output if shared styles affect printing. Record actual checks and limits.
-- Present the coherent local direction; do not silently publish it.
+- Publish the checked direction for live review under the owner's standing approval;
+  verify the deployment and report its rollback point.
