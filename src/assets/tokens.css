@@ -1,17 +1,47 @@
-/* Shared portfolio + mathematics foundation. Pilot adoption is explicit. */
+/* The site's visual vocabulary. Component and book styles consume these roles. */
 :root {
-  font-synthesis-style: none;
-  --ds-page: #f8fafd;
-  --ds-surface: #ffffff;
-  --ds-ink: #18243d;
-  --ds-body: #33445f;
-  --ds-muted: #52627b;
-  --ds-line: #dce4f0;
-  --ds-primary: #2855d9;
-  --ds-tint: #eef3ff;
-  --ds-hint: #47668b;
-  --ds-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --ds-radius: 8px;
-  --ds-gutter: clamp(20px, 4vw, 40px);
-  --ds-width: 1180px;
+  color-scheme:light;
+  font-synthesis-style:none;
+  --ds-page:#f7f9fc; --ds-surface:#fff; --ds-ink:#162640; --ds-body:#34455e;
+  --ds-muted:#596a82; --ds-line:#dbe3ef; --ds-line-strong:#b7c7dd;
+  --ds-primary:#2855d9; --ds-primary-hover:#2046b7; --ds-on-primary:#fff;
+  --ds-tint:#edf2ff; --ds-hint:#47668b;
+  --ds-font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ds-mono:ui-monospace,'Cascadia Code',Consolas,monospace;
+  --ds-radius:8px; --ds-gutter:clamp(20px,4vw,40px); --ds-width:1180px;
+  --ds-space-1:4px; --ds-space-2:8px; --ds-space-3:12px; --ds-space-4:16px;
+  --ds-space-5:24px; --ds-space-6:32px; --ds-space-7:48px; --ds-space-8:64px;
+  --ds-section:clamp(64px,8vw,112px); --ds-header:76px;
+  /* Compatibility roles keep preserved mathematical rendering independent. */
+  --paper:var(--ds-page); --sheet:var(--ds-surface); --ink:var(--ds-ink);
+  --ink-soft:var(--ds-body); --muted:var(--ds-muted); --muted-soft:var(--ds-muted);
+  --line:var(--ds-line); --line-soft:var(--ds-line);
+  --research:var(--ds-primary); --frontend:var(--ds-primary); --tutoring:var(--ds-primary);
+  --research-soft:var(--ds-tint); --frontend-soft:var(--ds-tint); --tutoring-soft:var(--ds-tint);
+  --research-tint:var(--ds-line-strong); --frontend-tint:var(--ds-line-strong); --tutoring-tint:var(--ds-line-strong);
+  --pillar:var(--ds-primary); --pillar-soft:var(--ds-tint); --pillar-tint:var(--ds-line-strong);
+  --sans:var(--ds-font); --serif:var(--ds-font); --mono:var(--ds-mono);
+  --surface-page:var(--ds-page); --surface-raised:var(--ds-surface); --surface-sunken:var(--ds-page);
+  --text-strong:var(--ds-ink); --text-body:var(--ds-body); --text-muted:var(--ds-muted);
+  --text-faint:var(--ds-muted); --text-secondary:var(--ds-body); --text-chrome:var(--ds-muted);
+  --text-on-primary:var(--ds-on-primary); --font-ui:var(--ds-font);
+  --border:var(--ds-line); --border-strong:var(--ds-line-strong);
+  --primary:var(--ds-primary); --primary-hover:var(--ds-primary-hover); --primary-strong:var(--ds-primary);
+  --primary-tint:var(--ds-tint); --primary-line:var(--ds-line-strong);
+  --accent:var(--ds-primary); --accent-strong:var(--ds-primary); --accent-tint:var(--ds-tint); --accent-line:var(--ds-line-strong);
+  --blue:var(--ds-primary); --blue-deep:var(--ds-primary); --blue-tint:var(--ds-tint); --blue-line:var(--ds-line-strong); --mist:var(--ds-page);
+  --violet:var(--ds-primary); --violet-tint:var(--ds-tint); --violet-line:var(--ds-line-strong);
+  --sand-50:var(--ds-surface); --sand-100:var(--ds-page); --sand-200:var(--ds-page); --sand-300:var(--ds-line); --sand-400:var(--ds-line-strong);
+  --brown-600:var(--ds-muted); --brown-700:var(--ds-body); --brown-800:var(--ds-body); --brown-900:var(--ds-ink);
+  --green-50:var(--ds-tint); --green-100:var(--ds-line-strong); --green-600:var(--ds-primary); --green-700:var(--ds-primary); --green-800:var(--ds-primary-hover);
+  --clay-50:var(--ds-tint); --clay-100:var(--ds-line-strong); --clay-600:var(--ds-primary); --clay-700:var(--ds-primary-hover);
+  --radius-sm:6px; --radius-md:8px; --radius-lg:12px;
 }
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --ds-page:#111b2c; --ds-surface:#18253a; --ds-ink:#edf3ff; --ds-body:#d1dced;
+  --ds-muted:#a8b9d2; --ds-line:#34445e; --ds-line-strong:#536b8f;
+  --ds-primary:#9bb8ff; --ds-primary-hover:#b7cbff; --ds-on-primary:#142445;
+  --ds-tint:#233657; --ds-hint:#a4bce0;
+}
+@media print { :root {color-scheme:light; --ds-page:#fff; --ds-surface:#fff; --ds-ink:#000; --ds-body:#000; --ds-primary:#000; --ds-muted:#333;} }

@@ -429,32 +429,7 @@
         };
         return `<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${paths[name] || paths.arrow}</svg>`;
       }
-      function homeHTML({ staticMode = false } = {}) {
-        const live = BOOK.units.filter(
-          (u) => CONTENT[u.n] && Object.keys(CONTENT[u.n]).length,
-        );
-        const unitHref = (u, tab) =>
-          staticMode
-            ? tab === "generator"
-              ? `interactive.html#/unit-${u.n}/generator`
-              : `${u.slug}/exercise-${u.exercises[0].replaceAll(".", "-")}/`
-            : pathFor(u.n, tab || "ex" + u.exercises[0].replace(".", ""));
-        return `<header class="library-top"><a class="library-brand" href="${staticMode ? "./" : "#/"}">${uiIcon("book")}<span>Mathematics<span class="brand-by">by Imran</span></span></a><span class="library-edition">Textbook solutions</span></header>
-    <div class="library-hero"><div><p class="eyebrow">PECTAA · Punjab · Class ${BOOK.class}</p><h1>Class ${BOOK.class}<br><span>Mathematics</span></h1><p class="library-intro">Concepts, worked examples, and practice.</p></div><div class="book-cover" aria-label="Class 10 Mathematics"><span class="cover-top">Mathematics</span><span class="cover-grade">10</span><span class="cover-foot">Class 10 <span>PECTAA</span></span></div></div>
-    <section class="library-contents" aria-labelledby="contents-title"><div class="contents-heading"><div><h2 id="contents-title">Contents</h2><p>${BOOK.units.length} units · ${live.length} available</p></div>${staticMode ? "" : `<label class="unit-search">${uiIcon("search")}<span class="sr-only">Find a unit by name or number</span><input id="unit-filter" type="search" placeholder="Find a unit" autocomplete="off"><button type="button" id="unit-filter-clear" aria-label="Clear unit search" hidden>${uiIcon("close")}</button></label>`}</div>
-    <div class="unit-directory" id="units">${BOOK.units
-      .map((u) => {
-        const available = live.includes(u),
-          key = escapeHTML("Unit " + u.n + " " + u.title);
-        if (available)
-          return `<article class="unit-feature" data-unit-search="${key}"><div class="feature-index" aria-hidden="true">${String(u.n).padStart(2, "0")}</div><div class="feature-content"><h3>${escapeHTML(u.title)}</h3><p>${u.exercises.length} exercises · Review exercise · Practice papers</p><div class="feature-links"><a class="btn btn-primary" href="${unitHref(u)}">Open unit ${uiIcon("arrow")}</a><a class="feature-practice" href="${unitHref(u, "generator")}">Practice this unit ${uiIcon("arrow")}</a></div></div><div class="feature-symbol" aria-hidden="true"><span>$z=x+iy$</span></div></article>`;
-        return `<article class="unit-row" data-unit-search="${key}"><span class="unit-index">${String(u.n).padStart(2, "0")}</span><div><h3>${escapeHTML(u.title)}</h3><p>Not published yet</p></div></article>`;
-      })
-      .join(
-        "",
-      )}</div><p class="unit-empty" id="unit-empty" hidden>No unit matches your search. Try a unit number or a shorter name.</p>${staticMode ? "" : '<p class="sr-only" id="unit-filter-status" role="status" aria-live="polite"></p>'}</section>
-    <footer class="library-foot"><span>Written by Muhammad Imran</span></footer>`;
-      }
+      function homeHTML() { return document.getElementById("book-overview").innerHTML; }
       function renderBook() {
         document.getElementById("book-main").innerHTML = homeHTML();
         const main = document.getElementById("book-main"),
@@ -504,7 +479,9 @@
           "#f8f1e4": "#F2F5FA",
         };
         return reasonStyle(
-          String(text).replace(
+          String(text).replace(/(\$\$?)([\s\S]*?)\1/g, (match, delimiter, tex) =>
+            delimiter + tex.replace(/\b(Re|Im)(?=\s*\()/g, "\\operatorname{$1}") + delimiter,
+          ).replace(
             /#[0-9a-fA-F]{6}\b/g,
             (c) => colors[c.toLowerCase()] || c,
           ),

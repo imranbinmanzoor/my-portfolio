@@ -9,69 +9,18 @@
 <link rel="canonical" href="https://imranbinmanzoor.com/projects/portfolio/"/>
 <meta content="The site you're reading — a multi-page portfolio hand-written in HTML, CSS, and JavaScript." name="description"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Geist:wght@300;400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<link href="/assets/styles.css" rel="stylesheet"/>
+@@SOURCE(src/components/site-foundation.html)@@
+<link rel="stylesheet" href="/assets/site.css">
 </head>
-<body data-pillar="frontend">
+<body data-site>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="nav" data-nav-sticky="">
-<div class="nav__inner">
-<a class="brand" href="/"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
-<nav aria-label="Primary" class="nav__links">
-<a href="/#research">Research</a>
-<a class="is-active" data-accent="frontend" href="/#work">Work</a>
-<a href="/#tutoring">Tutoring</a>
-<a href="/#about">About</a>
-<a href="/#contact">Contact</a>
-</nav>
-<div class="nav__right">
-<button aria-label="Toggle theme" class="theme-toggle" data-theme-toggle="" type="button">
-<svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-<svg class="sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
-</button>
-<a class="btn btn--ghost" href="/#contact"><span class="btn__inner"><span class="btn__text">Get in touch</span><span class="btn__arrow">→</span></span></a>
-<button aria-label="Open menu" class="nav__mobile-toggle" data-menu-open="" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7" viewbox="0 0 24 24"><line x1="4" x2="20" y1="8" y2="8"></line><line x1="4" x2="20" y1="16" y2="16"></line></svg></button>
-</div>
-</div>
-</header>
-<div aria-hidden="true" aria-modal="true" class="mobile-menu" id="mobile-menu" role="dialog">
-<div class="mobile-menu__header">
-<a class="brand" href="/"><span class="brand__mark">MI</span><span class="brand__name">Muhammad Imran</span></a>
-<button aria-label="Close menu" class="mobile-menu__close" data-menu-close="" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7" viewbox="0 0 24 24"><line x1="6" x2="18" y1="6" y2="18"></line><line x1="6" x2="18" y1="18" y2="6"></line></svg></button>
-</div>
-<div class="mobile-menu__body">
-<nav class="mobile-menu__links">
-<a href="/#research"><span class="num">01</span><span>Research</span></a>
-<a href="/#work"><span class="num">02</span><span>Work</span></a>
-<a href="/#tutoring"><span class="num">03</span><span>Tutoring</span></a>
-<a href="/#about"><span class="num">04</span><span>About</span></a>
-<a href="/#contact"><span class="num">05</span><span>Contact</span></a>
-</nav>
-</div>
-<div class="mobile-menu__footer">
-<span class="mobile-menu__footer-left">Layyah, Pakistan</span>
-<button aria-label="Toggle theme" class="theme-toggle" data-theme-toggle="" type="button">
-<svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-<svg class="sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
-</button>
-</div>
-</div>
+@@SOURCE(src/components/site-header.html)@@
 <main id="main">
 <section class="page-hero wrap">
-<a class="back-link reveal" href="/#work"><span class="arrow">←</span> back to work</a>
-<div class="page-hero__eyebrow reveal">
-<span class="eyebrow">personal · 2026</span>
-<span class="divider">·</span>
-<span class="eyebrow" style="color: var(--frontend);">● frontend</span>
-</div>
-<h1 class="page-hero__title reveal">
-        This portfolio — a multi-page <em>single-CSS-file</em> site.
-      </h1>
-<p class="lede page-hero__lede reveal">
-        The site you're currently reading. Built as an exercise in restraint — one shared stylesheet, one shared script, zero frameworks, and the typographic system that holds everything together.
-      </p>
+<a class="back-link reveal" href="/projects/"><span class="arrow">←</span> back to work</a>
+<p class="eyebrow page-hero__eyebrow">Personal project · In development</p>
+<h1 class="page-hero__title">Portfolio & mathematics library</h1>
+<p class="lede page-hero__lede">A personal site and a growing mathematics library, brought together through shared design foundations. Built to make my work useful, discoverable, and maintainable.</p>
 </section>
 <div class="wrap">
 <div class="meta-grid">
@@ -79,33 +28,12 @@
 <div class="meta-grid__item"><span class="meta-grid__label">type</span><span class="meta-grid__value">Personal site</span></div>
 <div class="meta-grid__item"><span class="meta-grid__label">stack</span><span class="meta-grid__value">HTML · CSS · JS</span></div>
 <div class="meta-grid__item"><span class="meta-grid__label">status</span><span class="meta-grid__value">Live</span></div>
-</div><div class="project-proof-row reveal"><span>Shared design system</span><span>Multi-page architecture</span><span>Dark/light themes</span><span>Accessible navigation</span></div>
+</div>
 </div>
 <section>
 <div class="wrap">
-<div class="project-screenshot"><img alt="Portfolio homepage — desktop view" decoding="async" loading="eager" src="/IMAGES/my-portfolio.webp"/></div>
-<div class="content-prose">
-<h2>The brief (to myself)</h2>
-<p>Build a portfolio that honestly reflects three parallel roles — <em>AI research contributor, frontend developer, tutor</em> — without mixing them into a single pile. Each role needs its own accent colour, its own section, its own hierarchy, but all three need to feel like parts of the same person.</p>
-<p>No frameworks. No component libraries. No AI-slop design tropes (Inter on glassmorphism, purple-blue gradients, hero-with-stats-strip, etc.). Editorial type, warm paper, ink contrast.</p>
-<h2>The architecture</h2>
-<h3>One shared stylesheet, one shared script</h3>
-<p>All pages — the homepage, four project pages, solutions hub, tutoring detail, math chapter — load the same <code>styles.css</code> and <code>scripts.js</code>. Every component I build on one page is automatically available to the others.</p>
-<h3>Three accent colours, one per pillar</h3>
-<p>Research gets a deep ink-navy. Frontend gets a forest sage. Tutoring gets an amber gold. Each section's <code>data-pillar</code> attribute switches a <code>--pillar</code> CSS custom property, which cascades to every child — borders, buttons, tags, focus rings.</p>
-<h3>Mobile menu as a separate element</h3>
-<p>An earlier version of this site had the mobile menu nested inside the sticky nav. That created a subtle stacking-context bug where the overlay didn't fully cover on some devices. In this version the mobile menu is a top-level element with its own <code>position: fixed</code> and <code>z-index</code> — bulletproof.</p>
-<h3>Timeline without the chain</h3>
-<p>An earlier version used a vertical-line-with-rings design for the About timeline. It looked fine, but it didn't <em>mean</em> anything — the rings weren't really connected to each other. The current design drops the chain entirely and uses clean sectional groups with strong typographic hierarchy.</p>
-<h2>What I wanted it to feel like</h2>
-<ul>
-<li><em>Aesthetic</em> without being precious — it's a CV, not a coffee-table book.</li>
-<li><em>Accurate</em> — every link resolves, every page loads, nothing is a placeholder.</li>
-<li><em>Clean</em> — warm paper, deep ink, generous spacing, serif display type.</li>
-<li><em>Pixel-perfect</em> on mobile and desktop, with motion that respects <code>prefers-reduced-motion</code>.</li>
-</ul>
-<blockquote>A portfolio is a credibility artefact. It has to be the best thing on the page, because it's the only argument the reader has to trust you with the next one.</blockquote>
-</div>
+<div class="portfolio-artifact" aria-label="Mathematics library books"><div><p class="section-label">A growing learning library</p><h2>Follow the idea.<br>Work through the steps.</h2><a class="text-link" href="/solutions/">Explore the books ↗</a></div><div class="book-artifact" aria-hidden="true"><div class="mini-book"><span>MATHEMATICS</span><strong>09</strong><small>Real Numbers</small></div><div class="mini-book"><span>MATHEMATICS</span><strong>10</strong><small>Complex Numbers</small></div></div></div>
+<div class="content-prose"><h2>A personal site with a learning library</h2><p>This site brings my research contributions, frontend projects, and teaching together. The mathematics library belongs inside that wider portfolio, with focused reading and Practice views for students.</p><h2>One system, several kinds of page</h2><p>Shared typography, colour, navigation, spacing, and controls connect the pages. Project pages give work room to breathe; lessons use a narrower reading measure; generated papers have their own printable layout.</p><h2>Built to be maintained</h2><p>Authored pages, mathematical content, question banks, and shared components are kept separately. A static build generates the public site, and checks run before GitHub Pages publishes it.</p><h3>Mathematics has its own quality standard</h3><p>A rendered equation is not proof of correctness. Content review must check assumptions, transformations, notation, and complete reasoning separately from frontend and print testing.</p><h3>A working mathematical illustration</h3><p>The homepage complex-plane study connects the subject I teach with the interfaces I build. Multiplication by the imaginary unit rotates a point through a quarter turn while preserving its modulus. Its labels use the same mathematical renderer as the Class 10 book.</p><h2>Still growing</h2><p>One unit is currently published in each of Classes 9 and 10. Classes 11 and 12 are planned. Class 9’s original authoring source is missing; its existing mathematical SVGs are preserved while a maintainable authoring path is developed.</p></div>
 </div>
 </section>
 <section>
@@ -123,12 +51,7 @@
 </div>
 </section>
 </main>
-<footer class="site-footer">
-<div class="wrap site-footer__inner">
-<span>© <span data-year="">2026</span> Muhammad Imran · Designed and shipped by hand.</span>
-<span class="site-footer__mark">set in fraunces &amp; geist</span>
-</div>
-</footer>
+@@SOURCE(src/components/site-footer.html)@@
 <script src="/assets/scripts.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Project state
 
-Updated: 2026-09-19. Phase: approved visual pilot published and verified live.
+Updated: 2026-09-19. Phase: broader redesign implemented locally; owner review pending.
 
 ## Current production release
 
@@ -22,13 +22,13 @@ Updated: 2026-09-19. Phase: approved visual pilot published and verified live.
 
 - Pre-pilot production/recovery commit: `7a2d89409c81312b0439727e18dd93724357968e`.
 - Repository: `imranbinmanzoor/my-portfolio`; domain: `imranbinmanzoor.com`.
-- Working branch: `codex/portfolio-math-pilot`.
+- Working branch: `codex/site-wide-redesign`, branched from `c028641`.
 - Pre-existing untracked file: `PORTFOLIO_MATH_CODEX_BRIEF.md`; preserve without staging.
 - User authorizes routine engineering and local commits. Visual approval precedes full
   rollout; separate explicit approval precedes production publication.
 - The owner approved the pilot and explicitly requested publication before further rollout:
   "I approve. But before you proceed, I want this to be pushed so I can see live".
-  This authorizes the pilot release; another publication confirmation is not needed.
+  That approval covered the published pilot only. The owner subsequently requested a real broader redesign. New publication approval is required.
 - The read-only audit task **Full website audit before redesign** completed before any
   implementation. Audit task ID: `01a0b80d-e741-7533-b84d-854aac1f80da`.
   Its final report is the baseline evidence, not a fresh audit by this task.
@@ -62,7 +62,7 @@ Class 9 SVG preservation does not reconstruct its missing LaTeX or certify its m
 Class 10 uses an extracted compatibility runtime during the pilot. The subsequent approved
 rollout will consolidate the reusable book/practice interface across books incrementally.
 
-## Current work
+## Completed pilot history
 
 - Repository instructions and audit handoff read; production baseline observed in Browser.
 - Dedicated branch created; pushed to GitHub and fast-forwarded into `main` after approval.
@@ -97,13 +97,34 @@ rollout will consolidate the reusable book/practice interface across books incre
   that informational byte to RFC 1952's unknown value. The decompressed bank is identical;
   all served files now match across the two build platforms.
 
+## Broader redesign — current work
+
+The owner requested a real redesign instead of a consistency-patching pass.
+The local implementation now includes:
+
+- A fresh work-led homepage: original mathematical study, selected projects, research
+  ledger, teaching, background and contact; repeated overview grids removed.
+- Shared typography, colour, appearance, header and footer; distinct layouts for the
+  library, project index/case studies and tutoring.
+- A common book-overview renderer and Class 9 catalog metadata. Reading SVGs, authored
+  Class 10 JSON and both banks remain preserved.
+- Desktop section rails for both books, horizontal navigation on smaller screens,
+  search placement, and Practice theme/control integration.
+- Upright named operators in rendered Class 10 math; underlying content identity and
+  paper serialization remain unchanged.
+- Obsolete pilot styles removed. Historical root files and the owner's brief untouched.
+
+Evidence: docs/REDESIGN_QA.md. Direction: docs/REDESIGN.md and docs/DESIGN_SYSTEM.md.
+The deployed rollback point remains 1478f06bfc0a8aa679564497bb2c94f2a31b8034.
+No new production publication has been performed.
+
 ## Next checkpoint
 
-The requested early publication is complete; the live homepage is open for owner review.
-Next: roll out the approved design, consolidate reusable book rendering
-across Classes 9–12, review mathematics/editorial content independently, recover missing
-authoring material where possible, and complete full-site QA. Subsequent releases still
-require approval; this authorization covers the current pilot.
+Present the coherent local redesign for visual review. After acceptance, finish agreed
+refinements and release review, then obtain explicit publication approval.
+The separate mathematics work still includes independent editorial/correctness review,
+Class 9 authoring-source recovery and further shared Practice/renderer consolidation.
+A visual redesign does not complete those tasks.
 
-After the website is complete, revise the owner's entire LinkedIn profile using accepted
-positioning and verified facts. This follow-on request is recorded; no profile edits yet.
+After the website is complete, revise the owner's LinkedIn profile using accepted
+positioning and verified facts. No LinkedIn profile edits have been made.

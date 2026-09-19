@@ -132,6 +132,10 @@
     catch (e) { return null; }
   }
   var navLinks = document.querySelectorAll('[data-nav-link]');
+  document.querySelectorAll('.nav__links a').forEach(function(link){
+    const path=new URL(link.href,location.href).pathname;
+    if(path!=='/'&&location.pathname.startsWith(path))link.setAttribute('aria-current','page');
+  });
   var observedIds = [];
   navLinks.forEach(function (link) {
     var target = localAnchor(link);
@@ -240,6 +244,7 @@
 
   /* ---------- 8. Smooth-scroll offset for sticky nav ---------- */
   document.querySelectorAll('a[href*="#"]').forEach(function (a) {
+    if(body.hasAttribute('data-book')&&!a.closest('.nav,.mobile-menu,.site-footer'))return;
     a.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.hasAttribute('download') || (a.target && a.target !== '_self')) return;
       var target = localAnchor(a);

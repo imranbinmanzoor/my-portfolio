@@ -3,24 +3,25 @@
 | Input | Purpose | Output |
 |---|---|---|
 | `src/pages/` | Portfolio, case studies, tutoring, library, redirects | Matching HTML paths in `dist/` |
-| `src/components/` | Shared pilot header and book return navigation | Included by templates |
-| `src/assets/` | Site behavior, original site CSS, shared tokens and pilot styling | `dist/assets/` |
+| `src/components/` | Shared foundation, header, footer, project collection and mathematical study | Included by templates |
+| `src/assets/` | Shared tokens, chrome, site/book layouts and behavior | `dist/assets/` |
+| `src/books/overview.mjs` | Common book overview renderer | Both book overviews |
 | `src/books/class-9/` | Preserved SVG reading shell, extracted CSS/runtime | Class 9 HTML plus external assets |
 | `src/books/class-10/` | Book shell and compatibility renderer | Class 10 HTML plus external assets |
 | `src/scripts/practice-engine.js` | Shared paper model, selection, codes and rendering | Included in book runtime |
 | `src/scripts/practice-ui.js` | Shared Practice controls, recall and printing | Included in book runtime |
 | `content/books/` | Book metadata, authored Class 10 content, both banks | Embedded data blocks with preserved IDs |
-| `content/library.json` | Class availability and edition metadata | Library cards and homepage counts |
+| `content/library.json` | Class availability and edition metadata | Library cards and book availability |
 | `public/` | Explicit static-asset allowlist, CNAME, robots | Copied to output |
 | `scripts/` | Recovery, build, validation and local preview | Never copied to output |
 | `tests/baseline.json` | Immutable baseline data/file/SVG hashes | Never copied to output |
 
 The build uses Node built-ins only. `@@SOURCE(...)@@` includes source fragments;
-JSON tokens safely embed data; the Class 9 bank is deterministically compressed.
+`@@BOOK(class)@@` renders catalog metadata; JSON tokens safely embed data; the Class 9 bank is deterministically compressed.
 CSS and runtime are emitted as external assets in their original execution order.
 Build info identifies input bytes, not a date or misleading release label.
 
-Root HTML/assets remain the tracked production snapshot during this pilot. Do not
+Root HTML/assets remain the historical pre-build production snapshot. Do not
 edit them or serve the repository root to judge the pilot. Preview serves `dist/` only.
 
 ## Existing and added routes

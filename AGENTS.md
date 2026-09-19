@@ -15,7 +15,8 @@ unavailable memory or infer employment from a public profile's organization fiel
 - Ask before production publication, history rewriting, substantial user-work deletion,
   DNS/domain changes, paid services, irreversible architecture migrations, or a major
   product/visual decision with materially different reasonable directions.
-- The representative pilot needs visual approval before a site-wide redesign.
+- The owner approved and published the first pilot, then requested a real broader redesign.
+  Implement that redesign locally; obtain visual review and new approval before publication.
 - Never push a production branch without release approval. Never force-push.
 - No private PDFs, credentials, caches, student data, or unrelated files in public output.
 - Keep work project-local. The supplied brief is user-owned; do not silently overwrite it.

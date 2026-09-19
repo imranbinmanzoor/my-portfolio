@@ -14,12 +14,6 @@
     />
     <meta name="theme-color" content="#2855D9" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400;1,14..32,500;1,14..32,600;1,14..32,700&display=swap"
-    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"
@@ -35,12 +29,12 @@
     <style>@@SOURCE(src/books/class-10/style-1.css)@@</style>
   <link rel="canonical" href="https://imranbinmanzoor.com/solutions/class-10/">
 <link rel="icon" href="/favicon.svg">
-<link rel="stylesheet" href="/assets/tokens.css">
-<link rel="stylesheet" href="/assets/book-pilot.css">
 <meta property="og:type" content="website"><meta property="og:title" content="Class 10 Mathematics — Muhammad Imran"><meta property="og:description" content="Independent mathematics solutions: Complex Numbers, worked exercises and practice tools."><meta property="og:url" content="https://imranbinmanzoor.com/solutions/class-10/">
+@@SOURCE(src/components/site-foundation.html)@@
+<link rel="stylesheet" href="/assets/book.css">
 </head>
-  <body data-book-pilot data-book-frame>
-@@SOURCE(src/components/book-return.html)@@
+  <body data-book-pilot data-book-frame data-book="10">
+@@SOURCE(src/components/site-header.html)@@
     <a class="skip" href="#main">Skip to content</a>
 
     <!-- ===================== BOOK VIEW ===================== -->
@@ -154,9 +148,13 @@
       </svg>
     </button>
 
+    <template id="book-overview">@@BOOK(10)@@</template>
     <script id="book-data" type="application/json">@@JSON(content/books/class-10/book-data.json)@@</script>
     <script id="content-data" type="application/json">@@JSON(content/books/class-10/content-data.json)@@</script>
     <script id="banks-data" type="application/json">@@JSON(content/books/class-10/banks-data.json)@@</script>
     <script>@@SOURCE(src/books/class-10/runtime-1.js)@@</script>
-  </body>
+  @@SOURCE(src/components/site-footer.html)@@
+<script src="/assets/scripts.js"></script>
+<script src="/assets/book-layout.js"></script>
+</body>
 </html>

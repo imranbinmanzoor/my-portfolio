@@ -3220,14 +3220,14 @@
       }
       .btn-primary {
         background: var(--blue);
-        color: white;
+        color: var(--text-on-primary);
         box-shadow: none;
       }
       .btn-primary:hover {
         background: var(--blue-deep);
       }
       .btn-ghost {
-        background: white;
+        background: var(--surface-raised);
         color: var(--text-strong);
         border-color: var(--border-strong);
       }
@@ -3432,7 +3432,7 @@
         min-height: 240px;
         justify-self: center;
         background: #213c85;
-        color: white;
+        color: var(--text-on-primary);
         border-radius: 3px 12px 12px 3px;
         border-left: 9px solid #172f70;
         box-shadow: 10px 12px 0 #e0e7f5;
@@ -3491,7 +3491,7 @@
         padding: 0 12px;
         border: 1px solid var(--border-strong);
         border-radius: 8px;
-        background: white;
+        background: var(--surface-raised);
         color: var(--text-chrome);
         width: 260px;
         min-width: 0;
@@ -3537,7 +3537,7 @@
         align-items: flex-start;
         gap: 24px;
         padding: 30px;
-        background: white;
+        background: var(--surface-raised);
         border: 1px solid var(--blue-line);
         border-top: 3px solid var(--blue);
         border-radius: 12px;
@@ -3749,7 +3749,7 @@
         gap: 12px;
         min-height: 82px;
         padding: 18px;
-        background: white;
+        background: var(--surface-raised);
         border: 1px solid var(--border-strong);
         border-radius: 10px;
         cursor: pointer;
@@ -3797,7 +3797,7 @@
       }
       .builder-fields {
         min-width: 0;
-        background: white;
+        background: var(--surface-raised);
         border: 1px solid var(--border);
         border-radius: 12px;
         padding: 28px 30px;
@@ -3878,7 +3878,7 @@
         min-height: 44px;
         border: 1px solid var(--border-strong);
         border-radius: 7px;
-        background: white;
+        background: var(--surface-raised);
         font-size: 0.8125rem;
         color: var(--text-secondary);
       }
@@ -3924,7 +3924,7 @@
         display: flex;
         border: 1px solid var(--border-strong);
         border-radius: 8px;
-        background: white;
+        background: var(--surface-raised);
         overflow: hidden;
         min-width: 0;
       }
@@ -4382,7 +4382,7 @@
         padding: 26px;
         border: 1px solid var(--border);
         border-radius: 14px;
-        background: white;
+        background: var(--surface-raised);
         color: var(--text-body);
         box-shadow: 0 24px 100px rgb(24 36 61 / 18%);
         overflow: auto;

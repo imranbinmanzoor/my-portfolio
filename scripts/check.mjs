@@ -99,6 +99,17 @@ check('Practice: unit-test pattern has 75 marks and correct attempts',()=>{
   const p=api.buildPaper(1,bank,{...options,kind:'board',seed:5});assert.equal(p.marks,75);
   assert.deepEqual(json(p.settings.pattern.short.attempts),[6,6,6]);assert.equal(p.settings.pattern.long.attempt,3);
 });
+check('Math typography: upright operators preserve prose and existing TeX',()=>{
+  const runtime=read('src/books/class-10/runtime-1.js');
+  const start=runtime.indexOf('function themeMath(text)');
+  const end=runtime.indexOf('/* R7: a single TeX',start);
+  assert(start>=0&&end>start);
+  const format=vm.runInNewContext(runtime.slice(start,end)+';themeMath',{reasonStyle:text=>text});
+  assert.equal(format('$Re(z)+Im(z)$'),'$\\operatorname{Re}(z)+\\operatorname{Im}(z)$');
+  assert.equal(format('$$Re(z) = 3$$'),'$$\\operatorname{Re}(z) = 3$$');
+  const authored='Prose Re(z); $\\mathrm{Re}(z)+\\operatorname{Im}(z)$';
+  assert.equal(format(authored),authored);
+});
 fs.mkdirSync('test-results',{recursive:true});
 fs.writeFileSync('test-results/check.json',JSON.stringify({build:JSON.parse(read('dist/build-info.json')),checks,failed:results.filter(x=>x.status==='fail').length,results,limitations:['Content preservation is not mathematical verification.','Browser and A4 evidence are recorded separately.']},null,2));
 console.log(`${checks} checks passed; ${results.length-checks} failed. Details: test-results/check.json`);

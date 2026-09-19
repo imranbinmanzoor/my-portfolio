@@ -8,18 +8,13 @@
 <meta name="description" content="Free interactive mathematics solution books for Punjab Class 9 and Class 10, with worked exercises, review material, unit tests, and study tools.">
 <link rel="canonical" href="https://imranbinmanzoor.com/solutions/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
-<link href="/assets/styles.css" rel="stylesheet">
-
-<link href="/assets/tokens.css" rel="stylesheet"/>
-<link href="/assets/pilot.css" rel="stylesheet"/>
+@@SOURCE(src/components/site-foundation.html)@@
+<link rel="stylesheet" href="/assets/site.css">
 </head>
-<body data-pillar="tutoring" data-pilot>
+<body data-site>
 <a class="skip-link" href="#main">Skip to content</a>
 @@SOURCE(src/components/site-header.html)@@
-<main id="main"><section class="page-hero wrap"><a class="back-link" href="/">← Muhammad Imran</a><div class="page-hero__eyebrow"><span class="eyebrow">The mathematics library</span></div><h1 class="page-hero__title">Understand the method.<br><em>Build the confidence.</em></h1><p class="lede page-hero__lede">Worked mathematics, with room to understand why. Study a solution, explore another explanation, then put the method into practice.</p></section><section class="wrap" aria-labelledby="choose-book"><div class="library-intro"><h2 id="choose-book">Choose your class</h2><p>Free to read · No account required</p></div><div class="library-grid">@@LIBRARY_CARDS@@</div><p class="library-note"><strong>A growing independent library.</strong> One unit is currently available in each of Classes 9 and 10. Remaining units and Classes 11 and 12 are in preparation. These are independent learning resources; edition details are shown with each book.</p></section></main>
-<footer class="site-footer"><div class="wrap site-footer__inner"><span>© <span data-year="">2026</span> Muhammad Imran · Designed and shipped by hand.</span><span class="site-footer__mark">mathematics · free solutions</span></div></footer><script src="/assets/scripts.js"></script>
+<main id="main"><div class="wrap"><section class="page-hero"><a class="back-link" href="/">← Muhammad Imran</a><p class="eyebrow page-hero__eyebrow">The mathematics library</p><h1 class="page-hero__title">Mathematics,<br><span>worked through.</span></h1><p class="lede page-hero__lede">Follow the reasoning, study a worked example, and test your understanding. Free learning resources for Classes 9–12, growing one unit at a time.</p></section><section aria-labelledby="choose-book"><div class="catalog-heading"><h2 id="choose-book">Choose your book</h2><p>Free to read · No account required</p></div><div class="library-grid">@@LIBRARY_CARDS@@</div><p class="library-note">One unit is currently available in each of Classes 9 and 10. Other units and Classes 11 and 12 are in preparation. These are independent learning resources; book editions and current coverage are stated inside.</p></section></div></main>
+@@SOURCE(src/components/site-footer.html)@@<script src="/assets/scripts.js"></script>
 </body>
 </html>

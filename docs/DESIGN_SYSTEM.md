@@ -1,84 +1,87 @@
-# Design system — representative pilot
+# Design system
 
-Status: representative pilot approved by the owner on 2026-09-19; broad rollout pending.
+Status: broader local redesign, awaiting owner review. The published pilot is a recovery
+point; the owner requested a fresh design rather than a consistency-only pass.
+Direction and research: `REDESIGN.md`. Current evidence: `REDESIGN_QA.md`.
 
-`src/assets/tokens.css` is the shared foundation. `pilot.css` adapts portfolio/library
-layouts; `book-pilot.css` adapts book chrome without changing mathematical layout.
+## Source roles
 
-| Token | Value | Purpose |
-|---|---|---|
-| Page | `#F8FAFD` | Cool background |
-| Surface | `#FFFFFF` | Reading and controls |
-| Ink | `#18243D` | Headings |
-| Body | `#33445F` | Prose |
-| Muted | `#52627B` | Metadata |
-| Primary | `#2855D9` | Actions and selected states |
-| Border | `#DCE4F0` | Quiet separation |
-| Hint | `#47668B` | Mathematical explanations |
+- `src/assets/tokens.css`: colour, spacing, typography, page-frame and appearance roles.
+- `chrome.css`: shared header, mobile menu, footer and focus behaviour.
+- `site.css`: portfolio, catalog, project and tutoring compositions.
+- `book.css`: common book overview, reading workspace and screen controls.
+- `complex-study.css`: the original interactive mathematical figure.
+- `src/books/overview.mjs`: one overview renderer, fed by book metadata.
+- Existing book CSS/runtime owns authored reading layout and printing. Consolidation
+  remains incremental; do not change mathematics while moving presentation code.
 
-Inter is the shared interface/prose family with system fallbacks. Keep mathematical
-fonts controlled by KaTeX (Class 10) or preserved source SVGs (Class 9).
-Use genuine italic faces when italics are intended; never oblique styling, skew
-transforms on text, or synthetic slant. Inter requests include the true italic axis,
-and shared foundations set `font-synthesis-style: none`. Keep mathematical variables
-in KaTeX's actual italic fonts and named operators upright. Existing Fraunces requests
-already include real italic faces. Verify loaded faces in Browser, not only CSS declarations.
-Desktop page frames use `--ds-width: 1180px`, including two 40px gutters: the
-visible content area is 1100px. Portfolio/library, book contents, chapter headers,
-chapter tabs, and Class 10 Practice settings share these edges above 960px.
-Worked lessons retain their approximately 68ch reading measure (Class 9: 66ch),
-and the generated Class 10 paper workspace is capped at 800px. A common page frame
-does not imply full-width paragraphs. The desktop chapter search sits beside the title;
-the existing stacked arrangement remains below the desktop breakpoint.
-Phone gutters are at least 20px on the portfolio/library, and the existing book
-layout preserves its local mathematics scroll regions.
+Obsolete `styles.css`, `pilot.css`, `book-pilot.css` and book-return fragment were removed
+once their consumers migrated. Historical root assets remain recoverable.
 
-This distinction follows [USWDS typography guidance](https://designsystem.digital.gov/components/typography/)
-on controlling text measure independently of macro layout (66 characters is its long-text
-target). [WCAG 1.4.8](https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html)
-also discusses limiting line width; it is a Level AAA criterion, not a claim that this
-site is certified. These references inform the decision, not a universal fixed page width.
+## Foundation
 
-Use restrained borders and 6–10px corner radii. Do not introduce warm highlights.
-The portfolio retains personal identity, research, projects, teaching,
-about, and contact. The library is a catalog with explicit availability and edition
-status. Lessons and Practice retain their task-specific layouts.
+| Role | Light value |
+|---|---|
+| Page | `#f7f9fc` |
+| Surface | `#ffffff` |
+| Heading | `#162640` |
+| Body | `#34455e` |
+| Muted text | `#596a82` |
+| Primary action | `#2855d9` |
+| Border / input border | `#dbe3ef` / `#b7c7dd` |
+| Mathematical hint | `#47668b` |
 
-The owner requested a portrait-free alternative. The homepage now uses an original
-interactive complex-plane study, on the page's light surface with blue line work. Integer
-coordinates rotate under multiplication by the imaginary unit; the mathematics is real,
-not a decorative stock pattern. SVG supplies the diagram; the existing pinned KaTeX
-renderer supplies all equations and axis labels in LaTeX fonts with accessible MathML.
-Upright real/imaginary labels follow the author's typography requirements. Reduced motion
-removes rotation animation. The owner rejected the initial separate dark panel and mixed
-math fonts; do not reintroduce that treatment.
-The monogram replaces the photo favicon. Source photographs remain preserved for future
-choices. See `PROFILE_AND_VOICE.md` for the personal and editorial evidence.
+Dark appearance has explicit counterparts. Consume semantic roles, including in
+preserved book components. Literal white screen surfaces must not override dark mode.
+Spacing scale: 4, 8, 12, 16, 24, 32, 48 and 64px. Section spacing ranges from 64 to 112px.
+Borders are normally 1px, radii 6–10px, without heavy shadows.
 
-Navigation: shared site header for pilot pages; compact home/library return strip
-for books. Current book internals retain their routes. Mobile menu contains focus,
-makes the background inert, closes on Escape, and returns focus to its trigger.
-Theme remains available in the mobile menu when the narrow header hides its toggle.
-Same-page links use the shared 82px scroll margin and move focus to their destination.
-Contact inputs/selects are 56px tall. Native selects retain browser keyboard behaviour;
-their decorative chevron sits 16px inside the field edge to match its padding. Restore
-the native arrow in forced-colour mode. Repeated desktop three-column grids use 24px gaps.
+Inter is the prose/interface family, with genuine italic faces and system fallbacks.
+Synthetic italic/slanted type is disabled. KaTeX owns Class 10 mathematics; Class 9's
+mathematical SVGs remain preserved. Operators are upright; variables use math italics.
+`Re(...)` and `Im(...)` inside Class 10 math delimiters are presented as named operators
+without changing bank data, paper IDs, prose, or existing TeX commands.
 
-Compact side hints: readable muted blue, thin border, no background fill. Keep each
-hint adjacent to the transition it explains. Preserve complete reasoning.
+## Composition
 
-Scope: homepage, library, Class 10 lesson/Practice chrome, shared desktop book frames,
-book return navigation,
-and small missing-route/status pages. Existing case-study/tutoring layouts are
-preserved pending rollout; they are not evidence of completed site-wide rollout.
+Shared outer frame: 1180px including two desktop 40px gutters (1100px content). Gutters
+scale to a minimum of 20px. A shared frame does not imply identical layouts.
 
-## Visual acceptance
+- Home: personal introduction and mathematical study; asymmetric selected projects;
+  research ledger; teaching subjects; concise background; contact.
+- Library: book covers, explicit availability, source board, coverage and entry links.
+- Books: common overview, unit search and distinct available/planned entries. At 1100px
+  and above, a 192px section rail and 40px gap sit beside a flexible reading region.
+  Smaller screens use horizontal navigation. Wide mathematics scrolls locally.
+- Practice: settings and summary; paper and key retain task-specific layouts. Only the
+  return control is sticky in Class 10 paper view. Preserve measured MCQ fitting and A4.
+- Tutoring: learning approach, subject-led sections and a direct enquiry path.
+- Projects: visual index, factual introduction, project evidence and focused prose.
 
-The owner expects exacting visual QA. Inspect full page sections as well as the initial
-viewport. Measure shared container edges, repeated card widths, row/column gaps, control
-heights, heading/body sizes, line heights and borders through computed layout. Check light,
-dark, focus, hover, selected, expanded and invalid states where applicable. Use the same
-tokens for repeated roles; intentional lesson/portfolio layout differences remain valid.
-Record defects and the exact scope checked. Never call uninspected states pixel-perfect.
-After a viewport change, wait for browser repaint before saving a screenshot; immediate
-captures can contain a stale resized surface even when DOM dimensions are correct.
+The portrait-free complex-plane study demonstrates teaching and frontend work together.
+It uses actual multiplication by the imaginary unit, KaTeX labels, invariant modulus,
+keyboard controls and reduced motion. It is not represented as client research.
+
+## Controls and accessibility
+
+Header: 76px desktop, 68px phone; mobile menu below 960px. Site pages keep the header
+sticky; books let it scroll away so reading navigation has priority. Menu traps focus,
+makes the background inert, closes on Escape and restores its trigger. Theme remains
+available in the narrow menu. Unit tabs expose vertical/horizontal orientation and
+support Up/Down on desktop as well as their existing navigation keys.
+
+Contact fields are 52px high with 16px padding and a 16px chevron inset. Name/email share
+a desktop row; message type and message follow. Native select behaviour remains intact;
+forced-colour mode restores the native arrow. Same-page navigation moves focus and
+clears the header. Focus states must remain visible.
+
+Compact hints remain muted blue, thin-bordered and unfilled. Theme-aware ink changes
+presentation only. Complete reasoning takes precedence over compactness.
+
+## Verification
+
+Inspect sections beyond the first viewport, both appearances, controls and expanded
+states. Measure edges, field heights, insets, overflow and font loading. Test 1440, 768,
+430 and 320 CSS pixels. After resizing, take a fresh state before capture. Full-page
+stitching can duplicate segments in this environment; viewport captures are the reliable
+evidence. Never describe uninspected states as pixel-perfect.

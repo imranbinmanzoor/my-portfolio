@@ -51,5 +51,5 @@ retains its CSS and ancestor structure, and renders the local snapshot with inst
 Edge headless. Proofs remain in ignored `.local/`; inspect with Poppler and pypdf.
 Do not claim PDF success until a real file and page content have been checked.
 
-Final evidence and limitations belong in `docs/PILOT_QA.md`. Run the final build first,
+Pilot evidence remains in `docs/PILOT_QA.md`; redesign evidence is in `docs/REDESIGN_QA.md`. Run the final build first,
 then checks on those exact bytes. Keep successful test history separate from current results.

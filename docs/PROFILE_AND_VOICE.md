@@ -7,8 +7,8 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 - Muhammad Imran is from **Layyah, Pakistan**, not Multan. This correction overrides
   the old site's location, including metadata and mobile menus.
 - The root is a multidisciplinary personal portfolio, with mathematics books inside it.
-- He is considering a portrait-free presentation. The current local alternative is a
-  working mathematical visual; this is a proposal awaiting visual approval.
+- The published pilot used a portrait-free mathematical visual. The broader local
+  redesign retains it; the new composition is awaiting visual review.
 - He values complete mathematical reasoning, careful typesetting, professional visual
   design, reproducible work, and practical teaching tools. Compact must not mean incomplete.
 - Visual precision is an explicit priority: spacing, lines, placement, consistency,
@@ -43,7 +43,7 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
   contents as remembered. Available task context supports a preference for reproducible
   technical work; private task materials are not portfolio assets or publication evidence.
 
-## Editorial direction for the pilot
+## Editorial direction
 
 Use first-person, specific, calm writing. Lead with mathematics and reasoning, then show
 how they connect to AI evaluation, building interfaces and teaching. Make the identity

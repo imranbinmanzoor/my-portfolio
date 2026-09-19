@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
+import {renderOverview} from '../src/books/overview.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 process.chdir(root);
 const out=path.join(root,'dist');
@@ -18,7 +19,13 @@ function portableGzip(value) {
   bytes[9]=255;
   return bytes.toString('base64');
 }
-export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP)\(([^)]+)\)@@/g,(_,kind,file)=>{
+export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP|BOOK)\(([^)]+)\)@@/g,(_,kind,file)=>{
+  if(kind==='BOOK') {
+    const cls=Number(file);if(![9,10].includes(cls))throw new Error('Unknown book');
+    const meta=JSON.parse(read('content/library.json')).books.find(b=>b.class===cls);
+    const units=cls===9?JSON.parse(read('content/books/class-9/catalog.json')):JSON.parse(read('content/books/class-10/book-data.json')).units.map(u=>({n:u.n,title:u.title,available:meta.units.some(m=>m.id==='unit-'+u.n),exercises:u.exercises.length,href:'#/unit-'+u.n+'/ex'+u.exercises[0].replace('.',''),practice:'#/unit-'+u.n+'/generator'}));
+    return renderOverview({class:cls,board:meta.board,edition:meta.edition,units});
+  }
   if(!/^(src|content)\//.test(file)||file.includes('..'))throw new Error('Invalid source include');
   const value=read(file);
   if(kind==='SOURCE')return expand(value);
@@ -29,11 +36,7 @@ for(const p of walk('public'))write(p.slice(7),fs.readFileSync(p));
 for(const p of walk('src/assets'))write(p.slice(4),fs.readFileSync(p));
 const library=JSON.parse(read('content/library.json'));
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function cards(){return library.books.map(b=>`<article class="library-card ${b.status==='planned'?'is-planned':''}">
-<div class="library-card__top"><span class="book-level">${b.class}</span><span class="publication-state">${b.units.length?`${b.units.length} unit available`:'In preparation'}</span></div>
-<h2>Class ${b.class} <span>Mathematics</span></h2><p class="edition">${escape(b.board||'FSc Mathematics')} · ${escape(b.edition)}</p>
-<p class="book-description">${b.units.length?`Start with <strong>${escape(b.units[0].title)}</strong>. Explore ${b.units[0].exercises} worked exercises, review questions, and practice papers.`:'A future addition to the library. Worked solutions are not published yet.'}</p>
-<div class="library-card__foot"><span>${b.units.length?`${b.inventory} units in contents`:'Publication planned'}</span><a href="/solutions/class-${b.class}/">${b.units.length?'Open book':'View status'} <span aria-hidden="true">↗</span><span class="sr-only"> — Class ${b.class}</span></a></div></article>`).join('\n');}
+function cards(){return library.books.map(b=>`<article class="library-card ${b.status==='planned'?'is-planned':''}"><div class="library-cover" aria-hidden="true"><small>MATHEMATICS</small><strong>${String(b.class).padStart(2,'0')}</strong></div><span class="publication-state">${b.units.length?'Available to study':'In preparation'}</span><h2>Class ${b.class}<span>Mathematics</span></h2><p class="edition">${escape(b.board||'FSc Mathematics')}</p><p class="book-description">${b.units.length?'Begin with '+escape(b.units[0].title)+'. Worked exercises, review questions, and practice papers.':'A future addition to the library. Solutions are not published yet.'}</p><div class="library-card__foot"><span>${b.units.length?b.units.length+' of '+b.inventory+' units available':'Publication planned'}</span><a href="/solutions/class-${b.class}/">${b.units.length?'Explore book':'View status'} <span aria-hidden="true">↗</span><span class="sr-only"> — Class ${b.class}</span></a></div></article>`).join('\n');}
 for(const p of walk('src/pages')) {
   let html=expand(read(p)).replace('@@LIBRARY_CARDS@@',cards());
   for(const b of library.books) html=html.replaceAll(`@@CLASS_${b.class}_COUNT@@`,String(b.units.length));
