@@ -3,6 +3,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {renderOverview} from '../src/books/overview.mjs';
+import {renderProject} from '../src/projects/render.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 process.chdir(root);
 const out=path.join(root,'dist');
@@ -19,7 +20,13 @@ function portableGzip(value) {
   bytes[9]=255;
   return bytes.toString('base64');
 }
-export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP|BOOK)\(([^)]+)\)@@/g,(_,kind,file)=>{
+export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP|BOOK|PROJECT)\(([^)]+)\)@@/g,(_,kind,file)=>{
+  if(kind==='PROJECT') {
+    const projects=JSON.parse(read('content/projects.json'));
+    const project=projects.find(p=>p.slug===file);
+    if(!project)throw new Error('Unknown project');
+    return renderProject(project,projects);
+  }
   if(kind==='BOOK') {
     const cls=Number(file);if(![9,10].includes(cls))throw new Error('Unknown book');
     const meta=JSON.parse(read('content/library.json')).books.find(b=>b.class===cls);

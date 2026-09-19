@@ -1,0 +1,248 @@
+[
+  {
+    "slug": "portfolio",
+    "title": "Portfolio & mathematics library",
+    "shortTitle": "Portfolio & library",
+    "category": "Personal project · In development",
+    "intro": "A personal workspace for my research, development and teaching, with a growing mathematics library at its heart.",
+    "demo": "/solutions/",
+    "demoLabel": "Explore the library",
+    "facts": [
+      [
+        "Role",
+        "Design, development & authoring"
+      ],
+      [
+        "Stack",
+        "HTML · CSS · JavaScript"
+      ],
+      [
+        "Format",
+        "Static site · GitHub Pages"
+      ],
+      [
+        "Status",
+        "Live · Growing"
+      ]
+    ],
+    "views": [
+      {
+        "label": "Desktop",
+        "src": "/IMAGES/portfolio-current-desktop.jpg",
+        "alt": "Current portfolio homepage at desktop width",
+        "caption": "Desktop view of the current homepage. Captured September 2026; the site continues to evolve."
+      },
+      {
+        "label": "Tablet",
+        "src": "/IMAGES/portfolio-current-tablet.jpg",
+        "alt": "Current portfolio homepage at tablet width",
+        "caption": "Tablet view of the current homepage. Captured September 2026; the site continues to evolve."
+      },
+      {
+        "label": "Mobile",
+        "src": "/IMAGES/portfolio-current-mobile.jpg",
+        "alt": "Current portfolio homepage at mobile width",
+        "caption": "Mobile view of the current homepage. Captured September 2026; the site continues to evolve."
+      }
+    ],
+    "brief": "Bring different kinds of work together without making every page look or behave the same. The portfolio introduces the person; the library gives students a focused place to read, understand and practise.",
+    "context": "An ongoing personal project. One unit is available in each of Classes 9 and 10; Classes 11 and 12 are planned.",
+    "decisions": [
+      {
+        "title": "A shared visual language",
+        "text": "Typography, colour, navigation and controls carry across the portfolio and books. Reading views keep their own measure, while Practice papers have a separate printable layout."
+      },
+      {
+        "title": "Content with a source of truth",
+        "text": "Authored pages, mathematical content and question banks are separate from shared components. The static build generates the public site, and checks run before publication."
+      }
+    ],
+    "reflectionTitle": "What I am refining",
+    "reflection": "An attractive page is only part of the job. The work also involves complete mathematical explanations, dependable navigation, responsive controls and repeatable publication.",
+    "nextTitle": "The next chapter",
+    "next": "Expand the books with independent mathematical review, recover a maintainable authoring path for Class 9, and continue consolidating the shared reading and Practice tools.",
+    "previous": "pig-game",
+    "nextProject": "omnifood"
+  },
+  {
+    "slug": "omnifood",
+    "title": "Omnifood",
+    "category": "Frontend learning project",
+    "intro": "A responsive landing page for a fictional food subscription service. A study in visual hierarchy, page rhythm and adapting content to different screens.",
+    "demo": "https://imranbinmanzoor.github.io/omnifood/",
+    "demoLabel": "Open the demo",
+    "facts": [
+      [
+        "Role",
+        "Frontend implementation"
+      ],
+      [
+        "Stack",
+        "HTML · CSS · JavaScript"
+      ],
+      [
+        "Context",
+        "Course-based project"
+      ],
+      [
+        "Year",
+        "2024"
+      ]
+    ],
+    "views": [
+      {
+        "label": "Desktop",
+        "src": "/IMAGES/omnifood.webp",
+        "alt": "Omnifood — desktop presentation",
+        "caption": "Desktop presentation: the introduction leads into the service, meals and pricing."
+      },
+      {
+        "label": "Tablet",
+        "src": "/IMAGES/omnifood-tablet.webp",
+        "alt": "Omnifood — tablet presentation",
+        "caption": "Tablet presentation: the same page adapts to a narrower reading space."
+      },
+      {
+        "label": "Mobile",
+        "src": "/IMAGES/omnifood-mobile.webp",
+        "alt": "Omnifood — mobile presentation",
+        "caption": "Mobile presentation: a single-column view of the original learning project."
+      }
+    ],
+    "brief": "Give a visitor a clear route from understanding the service to exploring meals, plans and the sign-up form. Photography and section hierarchy need to work together across a long page.",
+    "context": "Built through Jonas Schmedtmann’s HTML and CSS course. Omnifood is a fictional brand, not a client commission.",
+    "decisions": [
+      {
+        "title": "An order for the information",
+        "text": "The introduction establishes the service before the page moves into meal examples, social proof and pricing. Each section answers a different question rather than repeating the same sales message."
+      },
+      {
+        "title": "Layouts that rearrange",
+        "text": "Columns, images, navigation and the form adapt to the available width. The device views make these layout changes visible without requiring the visitor to resize their own browser."
+      }
+    ],
+    "reflectionTitle": "What I learned",
+    "reflection": "A responsive page depends on more than smaller type. Image proportions, line lengths, navigation and the order of information all affect whether the page remains clear.",
+    "nextTitle": "Where I would take it next",
+    "next": "Revisit the original implementation with keyboard and assistive-technology testing, tighter asset delivery and real content. Any claims about usability or conversion would need evidence from actual users.",
+    "previous": "portfolio",
+    "nextProject": "modern-page"
+  },
+  {
+    "slug": "modern-page",
+    "title": "Animated sign-in interface",
+    "shortTitle": "Sign-in interface",
+    "category": "Interface experiment",
+    "intro": "Two forms, one shared composition. An exploration of how layout and coordinated motion can connect sign-in and registration.",
+    "demo": "https://imranbinmanzoor.github.io/animated-sign-in-sign-up/",
+    "demoLabel": "Try the interface",
+    "facts": [
+      [
+        "Role",
+        "Frontend implementation"
+      ],
+      [
+        "Stack",
+        "HTML · CSS · JavaScript"
+      ],
+      [
+        "Focus",
+        "Forms & interaction states"
+      ],
+      [
+        "Status",
+        "Visual prototype"
+      ]
+    ],
+    "views": [
+      {
+        "label": "Desktop",
+        "src": "/IMAGES/modern-page.webp",
+        "alt": "Animated sign-in interface — desktop presentation",
+        "caption": "Desktop presentation: forms and the coloured panel share one composition."
+      },
+      {
+        "label": "Tablet",
+        "src": "/IMAGES/modern-page-tablet.webp",
+        "alt": "Animated sign-in interface — tablet presentation",
+        "caption": "Tablet presentation: registration within the same visual system."
+      },
+      {
+        "label": "Mobile",
+        "src": "/IMAGES/modern-page-mobile.webp",
+        "alt": "Animated sign-in interface — mobile presentation",
+        "caption": "Mobile presentation: the original compact arrangement of the form and panel."
+      }
+    ],
+    "brief": "Make switching between sign-in and registration feel like a change of state within one interface. Keep the form hierarchy clear while the surrounding panel changes position.",
+    "context": "A frontend learning prototype. The public demo shows interface behaviour; it does not provide a working authentication service.",
+    "decisions": [
+      {
+        "title": "One state, coordinated motion",
+        "text": "A class on the main container controls the visual state. CSS positions the forms and coloured panel, while JavaScript switches that state in response to the controls."
+      },
+      {
+        "title": "Keep the task recognisable",
+        "text": "Fields, the main action and the option to switch forms retain a clear grouping. The saved device views show how the composition was arranged for different screen sizes."
+      }
+    ],
+    "reflectionTitle": "What I learned",
+    "reflection": "Small interfaces make timing and hierarchy very noticeable. Several moving elements need a common state, and motion must never make the form harder to understand or use.",
+    "nextTitle": "Before real authentication",
+    "next": "A production version needs secure server-side authentication, proper field labels and errors, password-manager support, keyboard testing and a reduced-motion option. Those are separate from the visual prototype.",
+    "previous": "omnifood",
+    "nextProject": "pig-game"
+  },
+  {
+    "slug": "pig-game",
+    "title": "The Pig Game",
+    "category": "JavaScript learning project",
+    "intro": "A two-player dice game about when to keep rolling and when to hold. A compact exercise in connecting rules, state and visual feedback.",
+    "demo": "https://imranbinmanzoor.github.io/pig-game/",
+    "demoLabel": "Play the demo",
+    "facts": [
+      [
+        "Role",
+        "JavaScript implementation"
+      ],
+      [
+        "Stack",
+        "HTML · CSS · JavaScript"
+      ],
+      [
+        "Focus",
+        "Rules & application state"
+      ],
+      [
+        "Year",
+        "2024"
+      ]
+    ],
+    "views": [
+      {
+        "label": "Gameplay",
+        "src": "/IMAGES/pig-game.webp",
+        "alt": "The Pig Game showing the two player panels and game controls",
+        "caption": "Original gameplay view. Try the demo to explore rolling, holding and restarting."
+      }
+    ],
+    "brief": "Translate a turn-based game into a dependable interface. The current player, temporary score and accumulated scores must stay in agreement with every roll, hold and restart.",
+    "context": "A JavaScript learning project. The gallery preserves the original gameplay image; additional device captures are not available.",
+    "decisions": [
+      {
+        "title": "Explicit state changes",
+        "text": "Rolling changes the turn score, holding banks it, and restarting returns the game to its initial state. Keeping those operations distinct makes the rules easier to follow in the code."
+      },
+      {
+        "title": "Make the turn visible",
+        "text": "The active-player treatment, die image and score displays give immediate feedback. A player can see both what changed and whose decision comes next."
+      }
+    ],
+    "reflectionTitle": "What I learned",
+    "reflection": "A small game is a useful test of event handling and conditional logic. The screen must reflect the current state after every action, including the end of a game and a fresh start.",
+    "nextTitle": "A useful next iteration",
+    "next": "Add explicit tests for turn changes, score resets and winning states, then revisit keyboard access and small-screen play. The original demo remains available as a record of the learning project.",
+    "previous": "modern-page",
+    "nextProject": "portfolio"
+  }
+]

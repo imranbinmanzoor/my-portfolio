@@ -149,6 +149,13 @@ Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible outpu
 
 ## Next checkpoint
 
+Owner-directed project detail redesign is locally implemented: four shared case pages,
+original device-view switches, current portfolio captures, image enlargement, concise
+project stories, sentence-case labels and shared parent breadcrumbs. The footer spacing
+pass covers portfolio, projects, tutoring, library and books. Cross-page evidence and
+research: docs/PROJECT_CASE_REVIEW.md. Publication verification is pending for this next
+milestone; the current verified release above remains the rollback point.
+
 The hierarchy revision is published; the explorer follows the library catalogue and its
 assets are absent from the homepage. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md.
 

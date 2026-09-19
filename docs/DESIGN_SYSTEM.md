@@ -2,6 +2,22 @@
 
 Current implementation: the owner's original portfolio foundation, rebuilt in the maintained static source system. This is a checked visual pilot for live review, not final aesthetic acceptance. Reference evidence: ORIGINAL_DESIGN_REVIEW.md. Current checks: FOUNDATION_QA.md.
 
+Project detail pages use the shared case renderer and authored `content/projects.json`.
+Lead with context and inspectable work: genuine device captures, stable keyboard tabs,
+an enlarged-image dialog, then brief decisions and learning. Preserve learning-project
+attribution and distinguish a visual prototype from a production service. Keep image
+boxes contained in their stage; never crop device previews accidentally. Current review:
+PROJECT_CASE_REVIEW.md.
+
+General pages share a compact 44px breadcrumb row at the top of the panel. Desktop trails
+stay visible; mobile trails flow with the page to avoid competing with the mobile header.
+Use sentence case in the actual interface text, including labels and previous/next links.
+Preserve intentional brand marks, code, URLs and mathematical notation.
+
+The shared footer uses 20px internal vertical padding, a 16px preceding gap, compact
+desktop identity/navigation columns and a two-column mobile link grid. Its gutter follows
+the surrounding site or book frame. Do not add page-specific footer spacing patches.
+
 ## Source roles
 
 - src/assets/tokens.css: semantic colour, typography, spacing, frame and appearance roles.

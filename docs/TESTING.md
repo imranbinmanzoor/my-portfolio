@@ -56,6 +56,14 @@ then checks on those exact bytes. Keep successful test history separate from cur
 
 ## Current foundation checks
 
+For project cases, exercise every available device tab, verify captions/alt text and
+constant gallery height, inspect actual image/frame bounds, enlarge and dismiss with
+the close button and Escape, and check focus restoration. Follow breadcrumb, story and
+previous/next links with navigation waits. Inspect all four cases and shared footers at
+1440, 768, 430 and 320px. Confirm short-page footer placement and no horizontal overflow.
+Current evidence: PROJECT_CASE_REVIEW.md. Repeat book/Practice smoke checks when shared
+chrome changes; mathematical correctness and print testing remain separate requirements.
+
 For the homepage work map, inspect all four fields at 1440, 768, 430 and 320px. Check
 connector clearance against button bounds at 1440, 1043, 768, 700, 699, 430 and 320px,
 including focused controls. Verify constant panel height between fields, no horizontal

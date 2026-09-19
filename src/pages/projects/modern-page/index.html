@@ -5,53 +5,20 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="light dark" name="color-scheme"/>
-<title>Modern animated login / signup — Muhammad Imran</title>
+<title>Animated sign-in interface — Muhammad Imran</title>
 <link rel="canonical" href="https://imranbinmanzoor.com/projects/modern-page/"/>
-<meta content="A smooth animated authentication flow — case study by Muhammad Imran." name="description"/>
+<meta content="Two forms, one shared composition. An exploration of how layout and coordinated motion can connect sign-in and registration." name="description"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 @@SOURCE(src/components/site-foundation.html)@@
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/project-case.css">
 </head>
 <body data-site>
 <a class="skip-link" href="#main">Skip to content</a>
 @@SOURCE(src/components/site-header.html)@@
-<main id="main">
-<section class="page-hero wrap">
-<a class="back-link reveal" href="/projects/"><span class="arrow"><span class="action-icon action-icon--back" aria-hidden="true"></span></span> back to work</a>
-<p class="eyebrow page-hero__eyebrow">Frontend learning project</p>
-<h1 class="page-hero__title">Animated sign-in interface</h1>
-<p class="lede page-hero__lede">A learning project exploring the transition between sign-in and registration. The focus is on form layout, interaction states, and coordinated motion.</p>
-</section>
-<div class="wrap">
-<div class="meta-grid">
-<div class="meta-grid__item"><span class="meta-grid__label">year</span><span class="meta-grid__value">2024</span></div>
-<div class="meta-grid__item"><span class="meta-grid__label">type</span><span class="meta-grid__value">UI experiment</span></div>
-<div class="meta-grid__item"><span class="meta-grid__label">stack</span><span class="meta-grid__value">HTML · CSS · JS</span></div>
-<div class="meta-grid__item"><span class="meta-grid__label">status</span><span class="meta-grid__value">Prototype</span></div>
-</div>
-</div>
-<section>
-<div class="wrap">
-<div class="project-screenshot"><img alt="Modern animated login / signup — desktop view" decoding="async" loading="eager" src="/IMAGES/modern-page.webp"/></div>
-<div class="content-prose"><h2>Two forms, one interface</h2><p>This project explores switching between sign-in and registration within a shared composition. It is an interface study, rather than a deployed authentication service.</p><h2>What the project explores</h2><h3>Motion with a purpose</h3><p>The transition between forms is the central visual idea. It gives the visitor a sense of moving between related states while keeping the overall interface recognisable.</p><h3>Form hierarchy</h3><p>Labels, fields, supporting actions, and the main button need a clear order. Working on a small interface makes those relationships easier to examine closely.</p><h2>What matters in a production version</h2><p>Real authentication also requires secure server-side handling, accessible error feedback, password-manager support, keyboard testing, and reduced-motion behaviour. A visual demo alone does not establish those guarantees.</p></div>
-</div>
-</section>
-<section>
-<div class="wrap">
-<nav aria-label="Project navigation" class="page-footer-nav">
-<a class="align-right" href="/projects/omnifood/">
-<span class="page-footer-nav__label"><span class="action-icon action-icon--back" aria-hidden="true"></span> previous</span>
-<span class="page-footer-nav__title">Omnifood</span>
-</a>
-<a href="/projects/pig-game/">
-<span class="page-footer-nav__label">next <span class="action-icon action-icon--forward" aria-hidden="true"></span></span>
-<span class="page-footer-nav__title">The Pig Game</span>
-</a>
-</nav>
-</div>
-</section>
-</main>
+<main id="main">@@PROJECT(modern-page)@@</main>
 @@SOURCE(src/components/site-footer.html)@@
 <script src="/assets/scripts.js"></script>
+<script defer src="/assets/project-case.js"></script>
 </body>
 </html>
