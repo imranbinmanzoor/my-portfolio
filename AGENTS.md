@@ -23,7 +23,8 @@ unavailable memory or infer employment from a public profile's organization fiel
 ## Source and workflow
 
 - `src/`, `content/`, and `public/` are the local build inputs. `dist/` is generated.
-  Root HTML/assets are the preserved production snapshot during the pilot.
+  Root HTML/assets are a historical snapshot. GitHub Pages publishes only checked `dist/`
+  output through `.github/workflows/pages.yml`; never switch it to publish this source root.
 - Run `npm run build`, then `npm run check`; `npm run preview` serves only `dist/`.
 - Do not edit generated output as the only implementation of a change.
 - Preserve all working routes, content IDs, question banks, and saved-paper compatibility.

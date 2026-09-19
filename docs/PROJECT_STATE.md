@@ -1,10 +1,26 @@
 # Project state
 
-Updated: 2026-09-19. Phase: visual pilot approved; preparing its requested early publication.
+Updated: 2026-09-19. Phase: approved visual pilot published and verified live.
+
+## Current production release
+
+- Live site: https://imranbinmanzoor.com/
+- Published source: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35427841753).
+- Source digest: `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
+- All 35 checks passed locally and in GitHub's Linux build. All 51 publicly served files
+  match the local output byte for byte. `.nojekyll` is upload metadata and is not served.
+- Pages now publishes a checked `dist/` artifact. Custom domain and enforced HTTPS remain
+  unchanged; the `github-pages` environment still permits only `main`.
+- Actual live Browser checks covered home/library, Class 10 compact/search/Practice,
+  paper generation/randomization/keys, Class 9 lesson/generation, mobile navigation and
+  legacy links. Evidence and precise limits: `docs/PILOT_QA.md`.
+- Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`.
+  Use the documented recovery procedure; the old source has no new build pipeline.
 
 ## Accepted baseline and authority
 
-- Production/recovery commit: `7a2d89409c81312b0439727e18dd93724357968e`.
+- Pre-pilot production/recovery commit: `7a2d89409c81312b0439727e18dd93724357968e`.
 - Repository: `imranbinmanzoor/my-portfolio`; domain: `imranbinmanzoor.com`.
 - Working branch: `codex/portfolio-math-pilot`.
 - Pre-existing untracked file: `PORTFOLIO_MATH_CODEX_BRIEF.md`; preserve without staging.
@@ -38,9 +54,9 @@ remain recoverable in Git; restoration requires content comparison and mathemati
 
 Recover separated sources into `src/`, book data into `content/books/`, static assets
 into `public/`, and build an allowlisted `dist/` locally. Preserve the tracked production
-snapshot at root. The approved release will use a Pages workflow that builds and publishes
+snapshot at root. The approved release uses a Pages workflow that builds and publishes
 only `dist/`; root publishing would otherwise serve the old snapshot and expose source files.
-Verify and update the Pages publishing mechanism before advancing `main`.
+Do not restore repository-root publishing while `main` contains these source files.
 
 Class 9 SVG preservation does not reconstruct its missing LaTeX or certify its mathematics.
 Class 10 uses an extracted compatibility runtime during the pilot. The subsequent approved
@@ -49,7 +65,7 @@ rollout will consolidate the reusable book/practice interface across books incre
 ## Current work
 
 - Repository instructions and audit handoff read; production baseline observed in Browser.
-- Dedicated local branch created; no changes to production or external settings.
+- Dedicated branch created; pushed to GitHub and fast-forwarded into `main` after approval.
 - Recovered the intact homepage and separated page sources, book data, styles, runtimes,
   static assets, and generated output. Build has 20 HTML routes and 52 output files.
 - Extracted shared Practice selection/serialization and UI modules without changing
@@ -75,17 +91,16 @@ rollout will consolidate the reusable book/practice interface across books incre
   Four screens at four viewport widths, keyboard/search/paper/key checks, and A4 proofs
   inspected. Exact evidence, build identity and limitations: `docs/PILOT_QA.md`.
 - Existing authored book data and Class 9 reading SVGs remain unchanged. Their preservation
-  does not certify mathematical correctness. No production publication or push occurred.
+  does not certify mathematical correctness. The approved pilot is now published.
+- Initial release `54e7efe` deployed successfully. Live byte comparison found that zlib's
+  gzip header recorded Windows versus Linux in its OS byte. Release `1478f06` normalizes
+  that informational byte to RFC 1952's unknown value. The decompressed bank is identical;
+  all served files now match across the two build platforms.
 
 ## Next checkpoint
 
-Publish the approved pilot first, as requested. Verify actual Pages configuration, retain
-the original commit as a recovery point, enable the checked `dist/` workflow, push without
-rewriting history, and verify the actual live site and build digest. GitHub device sign-in
-is complete. Pages currently uses `main` / root; the existing environment permits `main`
-only. Custom domain, HTTPS and that environment policy must remain intact.
-
-After this release: roll out the approved design, consolidate reusable book rendering
+The requested early publication is complete; the live homepage is open for owner review.
+Next: roll out the approved design, consolidate reusable book rendering
 across Classes 9–12, review mathematics/editorial content independently, recover missing
 authoring material where possible, and complete full-site QA. Subsequent releases still
 require approval; this authorization covers the current pilot.

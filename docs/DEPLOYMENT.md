@@ -1,5 +1,10 @@
 # Deployment and rollback
 
+Current published source: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
+[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35427841753).
+Live digest: `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
+Published and verified 2026-09-19. This is the checked recovery point for subsequent releases.
+
 ## Authority and verified configuration
 
 On 2026-09-19 the owner approved the visual pilot and explicitly requested publication
@@ -18,7 +23,7 @@ Before release, both authenticated API and signed-in Browser confirmed:
   Its tree is `f109301aa29443bb964cab46b0dba209f1fdc4e7`.
   [Previous successful deployment](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/34738119789).
 
-The release changes Pages to `build_type: workflow`. It does not change DNS, the custom
+The release changed Pages to `build_type: workflow`. It did not change DNS, the custom
 domain, HTTPS, repository visibility, or deployment protection. Root files are historical
 output; publishing the repository root would serve the old homepage and expose source/docs.
 Only the allowlisted `dist/` is uploaded by the new workflow.
@@ -28,7 +33,9 @@ Only the allowlisted `dist/` is uploaded by the new workflow.
 `.github/workflows/pages.yml` uses pinned official actions, Node 24.20.0, and separate
 build/deploy permissions. Build and Check precede artifact upload and deployment. No
 package install, server, paid service, or new domain is required. `.gitattributes` enforces
-LF text checkout so Windows and Linux build inputs match.
+LF text checkout so Windows and Linux build inputs match. Build also normalizes gzip's
+informational OS byte. Final Windows output and all 51 served Linux-built files match
+byte for byte; `.nojekyll` is metadata, intentionally not served by Pages.
 
 1. Inspect Git status and preserve user work. Develop on a `codex/` branch.
 2. Run `npm run build` and `npm run check`; review required browser/print evidence.

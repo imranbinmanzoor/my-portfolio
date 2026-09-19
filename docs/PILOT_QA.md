@@ -12,8 +12,48 @@ The owner approved the visual pilot and requested early publication before furth
 change. Release digest: `a510818d1835a7f84afef86082c6af5e8807c7c3b0657b5f8036944abaaec7c2`.
 Build and Check were rerun on these bytes: 35 checks passed, zero failed. Two consecutive
 release builds produced 52 byte-identical files; see `test-results/reproducibility-release.json`.
-The detailed browser matrix below retains its original build identity. Live release
-verification and CI results will be recorded after publication; they are not yet claimed.
+The detailed browser matrix below retains its original build identity.
+
+## Published release verification
+
+Published source: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
+[Successful GitHub Actions run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35427841753).
+Final live digest: `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
+
+- Build and all **35 checks passed** locally and in the Linux CI runner; the CI build log
+  was inspected, not inferred from a green workflow badge.
+- Initial deployment revealed one platform-dependent byte in the gzip header of the
+  embedded Class 9 bank (OS 10 on Windows, 3 on Linux). Decompressed JSON was identical.
+  Build now uses RFC 1952's OS value 255 (unknown). No authored content, rendering, or
+  print styles changed. The final live comparison found **51 of 51 served files byte-identical**
+  to local output, including build identity and Class 9. The 52nd uploaded file is
+  `.nojekyll`, deployment metadata that Pages intentionally does not serve.
+- `/AGENTS.md`, `/content/library.json`, `/docs/PROJECT_STATE.md`, and the local deployment
+  helper path all returned 404. The allowlisted artifact, not the source root, is public.
+- Actual HTTPS Browser checks: desktop home, library, compact lesson and Practice;
+  genuine loaded Inter/KaTeX italics; complex rotation from `(3,4)` to `(-4,3)` and reset;
+  search for `frac` returned 65 results; compact deep link displayed and focused its content.
+- Generated a live 19-mark Class 10 paper (5 MCQs, 3 short questions, 1 long question;
+  10/35-minute Objective/Subjective timing). Objective-only randomization preserved the
+  Subjective text exactly. Answer key used lowercase option letters; all ten working
+  disclosures opened at 430px, with zero KaTeX error nodes and no document overflow.
+- At 320px, all five MCQ groups used two columns; each measured 201px client and scroll
+  width. Document client/scroll widths matched at 305px. The live 430px homepage and key
+  measured 415px/415px. Mobile menu opened, Escape closed it, and focus returned to Open menu.
+- Class 9 lesson SVGs were inspected at 768px; its live generator successfully decompressed
+  the updated bank and generated a paper. Document width matched scroll width at 753px.
+  The `/math-9/` redirect and Class 10 legacy `#unit-1` bookmark resolved correctly.
+- Three scoped CDP windows across these interactions returned no runtime exceptions or
+  failed network requests, all with `truncated: false`. This is a sampled release check,
+  not a full accessibility or cross-browser certification. No contact message was sent.
+- Live screenshots were saved and inspected in the evidence directory below:
+  `live-home-1440.jpg`, `live-home-430.jpg`, `live-library-1440.jpg`,
+  `live-compact-1440.jpg`, `live-practice-1440.jpg`, `live-key-430.jpg`,
+  `live-paper-320.jpg`, and `live-class9-768.jpg`.
+
+Machine-readable public-file comparison: ignored `test-results/live-release.json`.
+The original A4 and responsive pilot evidence below remains applicable to unchanged
+rendered content/styles; a second physical print run was not claimed for the metadata fix.
 
 ## Automated validation actually run
 
@@ -147,4 +187,4 @@ need factual publication review. No private client materials were repurposed.
 Pages settings were inspected in the signed-in built-in browser: branch deployment from
 `main` / `(root)`, custom domain `imranbinmanzoor.com`, successful DNS check, and Enforce
 HTTPS enabled. The release will publish only the checked `dist/` artifact. Deployment
-completion and live verification remain pending.
+completed successfully; verified live results are recorded above.
