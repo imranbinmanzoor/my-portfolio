@@ -1,12 +1,14 @@
 # Deployment and rollback
 
-Current published source: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
-[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35451753344).
-Live digest: `f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
+Current published source: `6128616b94f7d1366d818e1fe6b74d8c2d144407`.
+[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009).
+Live digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
 Published and verified 2026-09-19. Immediate checked rollback source:
-`d9327149fe298a128a7f4208979cd53d6e2089d3`, digest
-`651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc`.
-All 69 publicly served files match the checked local output; four source/private paths tested return 404.
+`7f73d9310503795d9cc1115ddd20a1cfc8be1f38`, digest
+`f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
+Live Browser confirmed the new exercise widths after refreshing cached styles.
+After transient connection timeouts, all 69 public files matched the checked output
+byte for byte and four excluded source/private paths returned 404.
 
 ## Authority and verified configuration
 

@@ -5,15 +5,15 @@ Updated: 2026-09-19. Phase: original-design foundation published and verified fo
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35451753344).
-- Source digest: `f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
-- 45 local checks passed; two builds produced 70 identical output files. All 69 public files matched byte for byte; four excluded source/private paths returned 404.
-- Exercise boxes are 36px high and Concepts / Examples / Exercise boxes 32px across all screen sizes, with unchanged 13px labels. The owner clarified that excessive "width" meant height. Both books passed 22 viewport checks; live Browser confirmed desktop and mobile dimensions. Switching back from a generated paper restores sticky lesson navigation. Evidence: docs/NAVIGATION_DENSITY_QA.md.
+- Published source: `6128616b94f7d1366d818e1fe6b74d8c2d144407`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009).
+- Source digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
+- 45 local checks passed; two builds produced 70 identical output files. Live Browser confirmed the requested exercise padding after a fresh stylesheet load. After transient connection failures, all 69 public files matched byte for byte and four excluded source/private paths returned 404.
+- Exercise buttons now have 12px inline padding, adding horizontal space at every viewport. Their 36px height and the Concepts / Examples / Exercise controls (6px padding, 32px height) are unchanged. Eight responsive book/viewport checks passed. The preceding height and sticky-navigation fixes remain included. Evidence: docs/NAVIGATION_DENSITY_QA.md.
 - The preceding sticky-navigation, separate footer panels and editorial-icon cleanup remain included. Historical evidence: docs/STICKY_NAV_FOOTER_QA.md.
 - The preceding project-case redesign remains included: genuine device views, enlargement, concise stories and breadcrumbs. Evidence: docs/PROJECT_CASE_REVIEW.md.
 - Pages publishes checked dist/ output. Custom domain, HTTPS and the main-only environment are unchanged.
-- Immediate rollback: `d9327149fe298a128a7f4208979cd53d6e2089d3`, digest `651cd426e205ce39478cf2a50ed44ebefc29c10a168500076f95088d1540fcbc`.
+- Immediate rollback: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`, digest `f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
 - Pre-pilot recovery: `7a2d89409c81312b0439727e18dd93724357968e`; use DEPLOYMENT.md.
 
 ## Accepted baseline and authority

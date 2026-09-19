@@ -17,7 +17,15 @@ screenshots were inspected; Class 9 Home/End selection worked. The bounded
 warning/error log was empty. Evidence: `exercise-width-followup.json` in the local
 evidence folder below. No new print or mathematical review is claimed.
 
-Publication pending verification. Rollback: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
+Published source `6128616b94f7d1366d818e1fe6b74d8c2d144407` through successful
+[Pages run 35452139009](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009).
+Live Browser initially retained the preceding stylesheet. After a fresh load, the
+active Exercise 1.2 control measured 36px high with `4px 12px` padding; all three
+local section controls remained 32px high with 6px padding. The bounded console
+log was empty. Temporary viewport and cache overrides were restored. Full file
+comparison initially encountered connection timeouts; the final retry matched all
+69 public files byte for byte and confirmed four excluded paths return 404. Rollback:
+`7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
 
 ## Initial height release
 
