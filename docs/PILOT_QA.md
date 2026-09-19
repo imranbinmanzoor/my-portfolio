@@ -1,8 +1,19 @@
 # Representative pilot — evidence and limits
 
-Date: 2026-09-19. Branch: `codex/portfolio-math-pilot`. Local preview only.
+Date: 2026-09-19. Branch: `codex/portfolio-math-pilot`. Pilot approved for publication.
 Production rollback identity: `7a2d89409c81312b0439727e18dd93724357968e`.
-Final source digest: `6c05e36f200c6eb310706133aaf2316bca1fcda88abf4a364f9639afe95453d4`.
+Browser-reviewed pilot source digest: `6c05e36f200c6eb310706133aaf2316bca1fcda88abf4a364f9639afe95453d4`.
+
+## Release preparation
+
+The owner approved the visual pilot and requested early publication before further rollout.
+`.gitattributes` now fixes text files to LF for reproducible Windows/Linux builds. Only
+`src/assets/complex-study.css` required a local CRLF-to-LF change; there is no semantic CSS
+change. Release digest: `a510818d1835a7f84afef86082c6af5e8807c7c3b0657b5f8036944abaaec7c2`.
+Build and Check were rerun on these bytes: 35 checks passed, zero failed. Two consecutive
+release builds produced 52 byte-identical files; see `test-results/reproducibility-release.json`.
+The detailed browser matrix below retains its original build identity. Live release
+verification and CI results will be recorded after publication; they are not yet claimed.
 
 ## Automated validation actually run
 
@@ -118,7 +129,7 @@ headless to render local A4 PDFs. Normal browser print state was restored afterw
 
 ## Remaining work and limits
 
-This is a representative pilot, not the completed full-site redesign or release.
+This is a representative pilot, not the completed full-site redesign.
 Viewport emulation does not certify physical devices, Firefox/WebKit, or screen-reader
 behaviour. No broad automated accessibility score is claimed. Portable paper-file import
 was not exercised in Browser; local recall and underlying serialization were exercised.
@@ -133,5 +144,7 @@ Public GitHub context was read; LinkedIn was behind authentication, and two earl
 ChatGPT conversation reads timed out. Remaining historical organization names and dates
 need factual publication review. No private client materials were repurposed.
 
-Exact Pages settings and the final publication/rollback commands must be verified during
-release preparation. Production still serves the original baseline; nothing was pushed.
+Pages settings were inspected in the signed-in built-in browser: branch deployment from
+`main` / `(root)`, custom domain `imranbinmanzoor.com`, successful DNS check, and Enforce
+HTTPS enabled. The release will publish only the checked `dist/` artifact. Deployment
+completion and live verification remain pending.

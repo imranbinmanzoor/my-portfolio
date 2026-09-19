@@ -1,6 +1,6 @@
 # Design system — representative pilot
 
-Status: proposed locally; awaiting visual approval before broad rollout.
+Status: representative pilot approved by the owner on 2026-09-19; broad rollout pending.
 
 `src/assets/tokens.css` is the shared foundation. `pilot.css` adapts portfolio/library
 layouts; `book-pilot.css` adapts book chrome without changing mathematical layout.
@@ -70,7 +70,7 @@ hint adjacent to the transition it explains. Preserve complete reasoning.
 Scope: homepage, library, Class 10 lesson/Practice chrome, shared desktop book frames,
 book return navigation,
 and small missing-route/status pages. Existing case-study/tutoring layouts are
-preserved pending approval; they are not evidence of completed site-wide rollout.
+preserved pending rollout; they are not evidence of completed site-wide rollout.
 
 ## Visual acceptance
 

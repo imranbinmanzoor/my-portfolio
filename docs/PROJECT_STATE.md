@@ -1,6 +1,6 @@
 # Project state
 
-Updated: 2026-09-19. Phase: verified local visual pilot, awaiting owner review.
+Updated: 2026-09-19. Phase: visual pilot approved; preparing its requested early publication.
 
 ## Accepted baseline and authority
 
@@ -10,6 +10,9 @@ Updated: 2026-09-19. Phase: verified local visual pilot, awaiting owner review.
 - Pre-existing untracked file: `PORTFOLIO_MATH_CODEX_BRIEF.md`; preserve without staging.
 - User authorizes routine engineering and local commits. Visual approval precedes full
   rollout; separate explicit approval precedes production publication.
+- The owner approved the pilot and explicitly requested publication before further rollout:
+  "I approve. But before you proceed, I want this to be pushed so I can see live".
+  This authorizes the pilot release; another publication confirmation is not needed.
 - The read-only audit task **Full website audit before redesign** completed before any
   implementation. Audit task ID: `01a0b80d-e741-7533-b84d-854aac1f80da`.
   Its final report is the baseline evidence, not a fresh audit by this task.
@@ -35,8 +38,9 @@ remain recoverable in Git; restoration requires content comparison and mathemati
 
 Recover separated sources into `src/`, book data into `content/books/`, static assets
 into `public/`, and build an allowlisted `dist/` locally. Preserve the tracked production
-snapshot at root until release planning. This is a reversible pilot, not an approved
-Pages publishing migration. Do not push this source branch to the publishing branch.
+snapshot at root. The approved release will use a Pages workflow that builds and publishes
+only `dist/`; root publishing would otherwise serve the old snapshot and expose source files.
+Verify and update the Pages publishing mechanism before advancing `main`.
 
 Class 9 SVG preservation does not reconstruct its missing LaTeX or certify its mathematics.
 Class 10 uses an extracted compatibility runtime during the pilot. The subsequent approved
@@ -75,14 +79,16 @@ rollout will consolidate the reusable book/practice interface across books incre
 
 ## Next checkpoint
 
-Present the tested pilot and source structure for visual approval. Recommended direction:
-personal portfolio led by real work, cool shared foundations, working mathematical visuals,
-and task-specific lesson/Practice layouts. Preserve the owner's standard typography rules.
+Publish the approved pilot first, as requested. Verify actual Pages configuration, retain
+the original commit as a recovery point, enable the checked `dist/` workflow, push without
+rewriting history, and verify the actual live site and build digest. GitHub device sign-in
+is complete. Pages currently uses `main` / root; the existing environment permits `main`
+only. Custom domain, HTTPS and that environment policy must remain intact.
 
-After approval: roll out the design, consolidate reusable book rendering across Classes
-9–12, review mathematics/editorial content independently, recover missing authoring material
-where possible, complete full-site QA and verify actual Pages settings. Prepare the concrete
-release/rollback procedure and request separate approval before production publication.
+After this release: roll out the approved design, consolidate reusable book rendering
+across Classes 9–12, review mathematics/editorial content independently, recover missing
+authoring material where possible, and complete full-site QA. Subsequent releases still
+require approval; this authorization covers the current pilot.
 
 After the website is complete, revise the owner's entire LinkedIn profile using accepted
 positioning and verified facts. This follow-on request is recorded; no profile edits yet.

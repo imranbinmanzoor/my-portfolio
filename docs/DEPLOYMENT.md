@@ -1,54 +1,87 @@
 # Deployment and rollback
 
-## Verified production baseline
+## Authority and verified configuration
 
-Domain: `imranbinmanzoor.com`. Repository: `imranbinmanzoor/my-portfolio`.
-The completed audit verified all 36 tracked baseline files against production
-(homepage after line-ending normalization). Baseline commit:
-`7a2d89409c81312b0439727e18dd93724357968e`.
-[Successful Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/34738119789).
-Exact current Pages publishing settings have not been verified through the settings API.
+On 2026-09-19 the owner approved the visual pilot and explicitly requested publication
+before further rollout. This authorizes the pilot release. Subsequent production releases
+still require approval; never force-push.
 
-## Current local phase
+Repository: `imranbinmanzoor/my-portfolio`. Domain: `imranbinmanzoor.com`.
+Before release, both authenticated API and signed-in Browser confirmed:
 
-`codex/portfolio-math-pilot` is local only. Build emits an allowlisted `dist/`.
-The tracked root still holds the old production snapshot. Do not push this source
-branch to a publishing branch: root publishing would include source/docs and still
-serve the old homepage. Preview is not production.
+- Pages source: `build_type: legacy`, branch `main`, path `/`.
+- Custom domain: `imranbinmanzoor.com`; HTTPS enforced; certificate approved for the
+  apex and `www` names. Browser reports successful DNS validation.
+- `github-pages` environment permits the `main` branch only, with no reviewer/wait rules.
+- `main` is unprotected; the repository has no rulesets. Preserve the environment policy.
+- Production/recovery commit: `7a2d89409c81312b0439727e18dd93724357968e`.
+  Its tree is `f109301aa29443bb964cab46b0dba209f1fdc4e7`.
+  [Previous successful deployment](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/34738119789).
 
-The recommended release approach is a Pages workflow that uploads **only `dist/`**.
-This is a proposed publishing-source change, not configured or approved. Retain CNAME,
-domain and URLs. The actual publishing mechanism must be confirmed before a final,
-reviewable workflow and rollback command can be called verified.
+The release changes Pages to `build_type: workflow`. It does not change DNS, the custom
+domain, HTTPS, repository visibility, or deployment protection. Root files are historical
+output; publishing the repository root would serve the old homepage and expose source/docs.
+Only the allowlisted `dist/` is uploaded by the new workflow.
 
-## Release gate
+## Build and publication
 
-1. Obtain visual approval, then finish the approved rollout and full-site QA.
-2. Read actual Pages settings and branch/environment protections. Prepare the exact
-   workflow/diff without enabling or publishing it. No new hosting is required.
-3. Run final Build and Check; inspect browser and A4 evidence. Review staged files for
-   unintended sources, private documents, caches or credentials.
-4. Record the release source commit, artifact digest, production baseline and the
-   current publishing configuration. Show the user a concrete release/rollback summary.
-5. Ask once for publication approval (including any publishing-source change).
-6. After approval, publish through the verified mechanism, wait for Pages success,
-   inspect live homepage/library/lesson/Practice and legacy redirects, and compare
-   deployed build identity. Report the release and rollback commits.
+`.github/workflows/pages.yml` uses pinned official actions, Node 24.20.0, and separate
+build/deploy permissions. Build and Check precede artifact upload and deployment. No
+package install, server, paid service, or new domain is required. `.gitattributes` enforces
+LF text checkout so Windows and Linux build inputs match.
 
-## Rollback
+1. Inspect Git status and preserve user work. Develop on a `codex/` branch.
+2. Run `npm run build` and `npm run check`; review required browser/print evidence.
+3. Stage explicit paths, inspect the staged diff, and commit. Do not stage the user brief,
+   `dist/`, `.local/`, credentials, caches, or test evidence.
+4. Push the reviewed source branch. Read Pages settings and record the current live digest.
+5. For the initial pilot only, set Pages Source to **GitHub Actions** (API equivalent:
+   `PUT /repos/imranbinmanzoor/my-portfolio/pages` with `{"build_type":"workflow"}`).
+   Verify CNAME and HTTPS remain unchanged before advancing `main`.
+6. Fetch/recheck `origin/main`; inspect unexpected changes. Once authorized, publish with
+   a normal fast-forward `git push origin HEAD:main`. No force flag.
+7. Wait for **Build, check and publish Pages** to succeed. Inspect failure logs if needed.
+   A successful Git push alone is not a completed release.
+8. Compare live `/build-info.json` to the local digest. Use Browser on the actual HTTPS site
+   to inspect homepage, library, lesson, Practice, Class 9 and legacy routes. Check fonts,
+   runtime/network failures, and representative responsive states.
+9. Record the release commit, workflow run, live digest, and verification in project state.
 
-No rollback action is needed while the pilot remains local. Production is unchanged.
-For an eventual artifact-based release, rebuild and redeploy the last known-good source
-commit/artifact through that workflow. If returning to the original root-based baseline,
-use a reviewed revert/recovery commit and restore the recorded Pages publishing source
-with approval; never force-push or reset shared history. Do not blindly deploy the
-original baseline through the new build: the old commit has no build script.
+Every push to `main` runs this workflow. Keep ongoing work on its source branch until the
+next approved release. A documentation-only follow-up can remain on that branch; it does
+not need an immediate production redeployment.
 
-The exact production rollback command remains pending verification of Pages settings.
-This uncertainty must stay explicit rather than presenting an invented procedure.
+## Rollback without rewriting history
 
-## Official reference checked 2026-09-19
+For an earlier release with this build system, open Actions → **Build, check and publish
+Pages** → Run workflow. Choose branch `main` and enter the earlier verified source commit
+in `source_ref`. This checks out that content while retaining the current workflow and the
+environment's `main` deployment policy. Wait for success and compare the live build digest.
+This option is implemented but has not yet been exercised as a production rollback.
 
-[GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
-supports uploading a dedicated site artifact and publishing it through Pages. It requires
-the repository's publishing source to be configured accordingly. No configuration was changed.
+The original pre-pilot commit has no build script. Do **not** pass it as `source_ref`.
+To recover that exact original site after approval, create a new commit on top of remote
+main using the recorded original tree:
+
+```powershell
+git fetch origin
+$recoveryTree = git rev-parse '7a2d89409c81312b0439727e18dd93724357968e^{tree}'
+$recoveryParent = git rev-parse origin/main
+$recoveryCommit = git commit-tree $recoveryTree -p $recoveryParent -m 'Restore pre-pilot production snapshot'
+git diff --stat $recoveryParent $recoveryCommit
+git push origin "${recoveryCommit}:refs/heads/main"
+```
+
+This preserves all intervening commits and does not alter the working directory. Review
+the recovery tree before the push. Then restore Pages to **Deploy from a branch**, `main`,
+`/ (root)` (API: `{"build_type":"legacy","source":{"branch":"main","path":"/"}}`).
+Keep the custom domain and HTTPS settings. Wait for Pages success and inspect the site.
+The baseline tree and API configuration are verified; a production rollback has not been
+run. Recovery restores the original site's known defects as well as its content. Prefer
+an earlier checked pilot release once available.
+
+## References
+
+[Official Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+and [Pages API](https://docs.github.com/en/rest/pages/pages?apiVersion=2022-11-28)
+were checked on 2026-09-19. Exact settings above came from this repository.
