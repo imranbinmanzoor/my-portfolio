@@ -7,6 +7,9 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 - Muhammad Imran is from **Layyah, Pakistan**, not Multan. This correction overrides
   the old site's location, including metadata and mobile menus.
 - The root is a multidisciplinary personal portfolio, with mathematics books inside it.
+- The owner describes himself as primarily a tech person. Lead with AI evaluation,
+  scientific computing and web development; show mathematics and teaching as connected
+  areas of real work. Avoid elementary lesson demos or simulated AI performance in the hero.
 - The owner prefers a portrait-free direction. The published mathematical visual is
   available for reuse, but its placement must serve the new composition.
 - The owner rejected the published design as too typical and selected their own older

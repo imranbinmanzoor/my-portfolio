@@ -5,14 +5,13 @@ Updated: 2026-09-19. Phase: original-design foundation published and verified fo
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `e14dc18dc9752407e0240411164af993ef3883a5`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35445626091).
-- Source digest: `7a35ed57df7194af9b0a0f1801f97ffbf4b3587d7448be125c6c0c5728ce1cab`.
+- Published source: `771d13cca7188c4e8762d48c6626da3fde33ec46`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35447330408).
+- Source digest: `2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7`.
 - 43 checks passed locally; two builds produced 63 identical output files. GitHub's build/check and deployment jobs succeeded. All 62 publicly served files match local output byte for byte; .nojekyll is upload metadata.
-- Actual live Browser checks covered the new homepage explorer, library, Class 10 compact deep link, Class 9 overview and Practice generation/answer key across representative 1440/768/430/320px widths. The 36px current-question marker clears deep-linked mathematics. Generated papers keep only their return control sticky. Evidence: docs/FOUNDATION_QA.md.
-- The first production diagnostic capture was truncated at the origin switch and was repeated; final bounded route diagnostic windows are complete and show no errors or failed requests.
+- The explorer now follows the library catalogue in a collapsed disclosure. Local Browser checks covered four widths and its controls; actual live checks confirmed the mobile homepage and library link/disclosure focus. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md. Earlier unchanged book/Practice/print evidence remains in docs/FOUNDATION_QA.md.
 - Pages continues to publish checked dist/ output. The custom domain, HTTPS and main-only deployment environment are unchanged. Excluded source/document/private helper paths return 404.
-- Immediate rollback source: `055b4c078c82c935818541dbce21b44e604c7135`; digest `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
+- Immediate rollback source: `e14dc18dc9752407e0240411164af993ef3883a5`; digest `7a35ed57df7194af9b0a0f1801f97ffbf4b3587d7448be125c6c0c5728ce1cab`.
 - Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`. Use DEPLOYMENT.md; that old source has no current build pipeline.
 
 ## Accepted baseline and authority
@@ -150,12 +149,16 @@ Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible outpu
 
 ## Next checkpoint
 
-Owner-directed hierarchy revision: lead the homepage with the person and their research,
-development and teaching roles. Move the explorer after the library catalogue in a native
-closed disclosure, with a small homepage link that opens it. Remove its assets from the
-homepage. This revision is locally implemented and checked; release verification is pending.
-Evidence: docs/HOMEPAGE_HIERARCHY_QA.md. Do not restore an attention-dominating mathematics
-question above professional work.
+The hierarchy revision is published; the explorer follows the library catalogue and its
+assets are absent from the homepage. Evidence: docs/HOMEPAGE_HIERARCHY_QA.md.
+
+The owner clarified a tech-first identity and requested a better connected-work artifact
+and About section. The candidate now has AI & research, Code, Mathematics and Teaching
+tabs beside the compact desktop introduction, after the role cards on phones. Measured
+connectors avoid labels; contact controls align with the map's bottom. About is personal
+and shares aligned typography with the factual contributions panel. Local visual and
+keyboard evidence: docs/HOME_WORK_MAP_QA.md. Final release verification is pending.
+Do not restore an attention-dominating mathematics question above professional work.
 
 Continue visual refinement from owner feedback while retaining the verified release and its rollback point. Keep the static build and recovered content/runtime boundaries.
 Use verified current biography, keep Layyah, and do not restore the old portrait without

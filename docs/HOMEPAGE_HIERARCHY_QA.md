@@ -41,5 +41,10 @@ touch devices and screen-reader speech were not tested.
 
 The final local run passed 43 checks, with zero failures. Two builds produced 63 byte-identical
 output files. Source digest: 2e21955491283fed7fd94502b29b24982e154953eae79b5c748d784fef433ec7.
-Live verification is pending. The pre-revision rollback source is
+Published source: 771d13cca7188c4e8762d48c6626da3fde33ec46.
+[Pages succeeded](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35447330408).
+All 62 served files matched local output; four excluded source/private paths returned 404.
+Live Browser inspection confirmed the mobile homepage and library disclosure link, focus
+and rendered mathematics. The first library visit used cached older HTML; an explicit
+reload then showed the correct released disclosure. The pre-revision rollback source is
 e14dc18dc9752407e0240411164af993ef3883a5.

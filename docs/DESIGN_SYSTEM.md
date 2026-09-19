@@ -67,6 +67,21 @@ Functional icons use a common line family. Generic action labels stay stationary
 
 The single homepage introduction identifies the person and their work; there is no competing promotional headline beside it. The owner rejected the explorer's prominence on the homepage because it distracted from professional roles. Keep interactive learning optional within the library. This is an owner-directed hierarchy decision, not a claim of usability-study validation.
 
+The homepage work map connects AI & research, Code, Mathematics and Teaching to actual
+work destinations. At 700px and above it shares the compact introduction; below that it
+follows the professional role cards in both DOM and visual order. The contact row aligns
+with the map's lower edge on desktop. Use the shared colours and SVG line-icon family,
+one selected-field description and no repeated heading. About is a personal account
+beside the factual contributions panel, with aligned section typography.
+
+Connectors use measured border attachment points, redrawn after resize and font loading.
+Keep paths outside control bounds and underneath opaque controls and focus indicators.
+Preserve roving keyboard tabs and focus when responsive placement changes. Implementation:
+work-specimen.html, work-specimen.css and work-specimen.js; no graph framework dependency.
+Research: [React Flow handles](https://reactflow.dev/learn/customization/handles),
+[W3C tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and
+[focus visibility](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html).
+
 Research consulted: [NN/g visual hierarchy](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), [homepage guidelines](https://www.nngroup.com/articles/top-ten-guidelines-for-homepage-usability/), [Carbon button usage](https://carbondesignsystem.com/components/button/usage/), [USWDS links](https://designsystem.digital.gov/components/link/) and [W3C consistent identification](https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification), 2026-09-19.
 
 Mathematical references checked: [OpenStax derivatives](https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative), [OpenStax binomial distribution](https://openstax.org/books/contemporary-mathematics/pages/7-10-the-binomial-distribution), and [University of Hawaii odd-number reasoning notes](https://crdg.hawaii.edu/developing-teacher-expertise-mathematics/modules/facilitator-resources/facilitator-reasoning-and-explanations-resources/Session5/resources/s05_p3_mathnotes_sum-consecutive-odd-problem.pdf). Diagrams, copy and controls are implemented locally; the references are not copied designs.

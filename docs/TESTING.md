@@ -56,6 +56,13 @@ then checks on those exact bytes. Keep successful test history separate from cur
 
 ## Current foundation checks
 
+For the homepage work map, inspect all four fields at 1440, 768, 430 and 320px. Check
+connector clearance against button bounds at 1440, 1043, 768, 700, 699, 430 and 320px,
+including focused controls. Verify constant panel height between fields, no horizontal
+overflow, desktop contact-row alignment, and DOM/focus order when crossing 700px.
+Exercise Left/Right, Home/End and Tab; follow all four destinations and test back navigation.
+Inspect light/dark appearance and the final screenshots. Evidence: HOME_WORK_MAP_QA.md.
+
 Current evidence: FOUNDATION_QA.md. Verify the 800px scrolling-owner boundary and 1200px
 personal-rail boundary; book unit navigation changes at 1000px. Check SiteScroll consumers,
 anchor offsets, breadcrumbs, independent math overflow and resize transitions. Breadcrumbs
