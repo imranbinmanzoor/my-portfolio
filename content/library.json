@@ -1,0 +1,8 @@
+{
+  "books": [
+    {"class":9,"board":"Punjab Textbook Board","edition":"Source edition not recorded","status":"available","inventory":13,"units":[{"id":"unit-1","title":"Real Numbers","exercises":3,"route":"#unit-1"}]},
+    {"class":10,"board":"PECTAA","edition":"Experimental edition · assessment session unverified","status":"available","inventory":12,"units":[{"id":"unit-1","title":"Complex Numbers","exercises":4,"route":"#/unit-1/ex11"}]},
+    {"class":11,"board":null,"edition":"Edition to be confirmed","status":"planned","units":[]},
+    {"class":12,"board":null,"edition":"Edition to be confirmed","status":"planned","units":[]}
+  ]
+}

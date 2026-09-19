@@ -1,0 +1,260 @@
+{
+  "schema": "pectaa-book/1.0",
+  "class": 10,
+  "subject": "Mathematics",
+  "board": "PECTAA",
+  "session": "2026",
+  "site": "imranbinmanzoor.com",
+  "sourceNote": "Unit start pages and back matter checked against PDF page 2 of the supplied experimental edition on 2026-09-05. Units 7 to 12 exercise inventories remain provisional. This is not a certification of a current board examination syllabus.",
+  "panels": [
+    "exercises",
+    "review",
+    "generator"
+  ],
+  "units": [
+    {
+      "n": 1,
+      "title": "Complex Numbers",
+      "slug": "complex-numbers",
+      "pages": [
+        1,
+        21
+      ],
+      "exercises": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4"
+      ],
+      "verified": true,
+      "status": "in-progress",
+      "done": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4"
+      ],
+      "outcomes": "Identify complex numbers, conjugate and modulus. Apply algebraic operations and their properties. Use the geometric interpretation. Find real and imaginary parts of powers and quotients. Solve simultaneous linear equations with complex coefficients."
+    },
+    {
+      "n": 2,
+      "title": "Quadratic Equations and Inequalities",
+      "slug": "quadratic-equations",
+      "pages": [
+        22,
+        46
+      ],
+      "exercises": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "2.5",
+        "2.6",
+        "2.7"
+      ],
+      "verified": true,
+      "status": "not-started",
+      "done": []
+    },
+    {
+      "n": 3,
+      "title": "Matrices and Determinants",
+      "slug": "matrices-determinants",
+      "pages": [
+        47,
+        80
+      ],
+      "exercises": [
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4",
+        "3.5",
+        "3.6"
+      ],
+      "verified": true,
+      "status": "not-started",
+      "done": []
+    },
+    {
+      "n": 4,
+      "title": "Functions and Graphs",
+      "slug": "functions-graphs",
+      "pages": [
+        81,
+        96
+      ],
+      "exercises": [
+        "4.1",
+        "4.2",
+        "4.3"
+      ],
+      "verified": true,
+      "status": "not-started",
+      "done": []
+    },
+    {
+      "n": 5,
+      "title": "Algebraic Fractions",
+      "slug": "algebraic-fractions",
+      "pages": [
+        97,
+        110
+      ],
+      "exercises": [
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.5"
+      ],
+      "verified": true,
+      "status": "not-started",
+      "done": []
+    },
+    {
+      "n": 6,
+      "title": "Vectors in Plane",
+      "slug": "vectors-in-plane",
+      "pages": [
+        111,
+        124
+      ],
+      "exercises": [
+        "6.1",
+        "6.2",
+        "6.3"
+      ],
+      "verified": true,
+      "status": "not-started",
+      "done": []
+    },
+    {
+      "n": 7,
+      "title": "Trigonometry",
+      "slug": "trigonometry",
+      "pages": [
+        125,
+        142
+      ],
+      "exercises": [
+        "7.1",
+        "7.2"
+      ],
+      "verified": false,
+      "status": "not-surveyed",
+      "done": []
+    },
+    {
+      "n": 8,
+      "title": "Chords and Arcs of a Circle",
+      "slug": "chords-and-arcs",
+      "pages": [
+        143,
+        154
+      ],
+      "exercises": [
+        "8.1",
+        "8.2"
+      ],
+      "verified": false,
+      "status": "not-surveyed",
+      "done": []
+    },
+    {
+      "n": 9,
+      "title": "Tangent and Angles of a Circle",
+      "slug": "tangent-and-angles",
+      "pages": [
+        155,
+        167
+      ],
+      "exercises": [
+        "9.1",
+        "9.2"
+      ],
+      "verified": false,
+      "status": "not-surveyed",
+      "done": []
+    },
+    {
+      "n": 10,
+      "title": "Practical Geometry of Circles",
+      "slug": "practical-geometry",
+      "pages": [
+        168,
+        175
+      ],
+      "exercises": [
+        "10.1",
+        "10.2"
+      ],
+      "verified": false,
+      "status": "not-surveyed",
+      "done": []
+    },
+    {
+      "n": 11,
+      "title": "Information Handling",
+      "slug": "information-handling",
+      "pages": [
+        176,
+        195
+      ],
+      "exercises": [
+        "11.1"
+      ],
+      "verified": false,
+      "status": "not-surveyed",
+      "done": []
+    },
+    {
+      "n": 12,
+      "title": "Probability",
+      "slug": "probability",
+      "pages": [
+        196,
+        211
+      ],
+      "exercises": [
+        "12.1",
+        "12.2"
+      ],
+      "verified": false,
+      "status": "not-surveyed",
+      "done": []
+    }
+  ],
+  "backMatter": [
+    {
+      "title": "Answers",
+      "page": 212
+    },
+    {
+      "title": "Glossary",
+      "page": 237
+    },
+    {
+      "title": "Symbols",
+      "page": 241
+    },
+    {
+      "title": "Pairing Scheme & Model Paper",
+      "page": 242
+    }
+  ],
+  "sourceEdition": "Supplied experimental edition, based on National Curriculum of Pakistan 2023",
+  "publisher": "PECTAA",
+  "examBoard": null,
+  "curriculum": "National Curriculum of Pakistan 2023, as labeled in the supplied experimental edition",
+  "assessmentSessionVerified": false,
+  "bankVersions": {
+    "1": "2DC98BE8"
+  },
+  "bankVersionAliases": {
+    "1": [
+      "D5B237B7"
+    ]
+  }
+}

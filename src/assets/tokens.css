@@ -1,0 +1,17 @@
+/* Shared portfolio + mathematics foundation. Pilot adoption is explicit. */
+:root {
+  font-synthesis-style: none;
+  --ds-page: #f8fafd;
+  --ds-surface: #ffffff;
+  --ds-ink: #18243d;
+  --ds-body: #33445f;
+  --ds-muted: #52627b;
+  --ds-line: #dce4f0;
+  --ds-primary: #2855d9;
+  --ds-tint: #eef3ff;
+  --ds-hint: #47668b;
+  --ds-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ds-radius: 8px;
+  --ds-gutter: clamp(20px, 4vw, 40px);
+  --ds-width: 1180px;
+}

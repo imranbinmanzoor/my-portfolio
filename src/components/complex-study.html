@@ -1,0 +1,53 @@
+<figure class="complex-study" aria-labelledby="study-title">
+  <div class="complex-study__heading">
+    <span class="complex-study__eyebrow">Mathematics, made visible</span>
+    <span class="complex-study__index" aria-hidden="true">Study / 01</span>
+  </div>
+  <h2 id="study-title">A change of perspective.</h2>
+  <div class="complex-study__plot">
+    <svg viewBox="0 0 480 440" role="img" aria-labelledby="complex-diagram-title complex-diagram-desc">
+      <title id="complex-diagram-title">A point in the complex plane</title>
+      <desc id="complex-diagram-desc">The point 3 + 4i lies on a circle of radius 5 centred at the origin. Multiplying by i rotates it 90 degrees counterclockwise without changing its distance from the origin.</desc>
+      <defs>
+        <pattern id="complex-grid" width="32" height="32" patternUnits="userSpaceOnUse" x="16" y="12"><path d="M 32 0 H 0 V 32" fill="none" stroke="var(--study-grid)" stroke-width="1"/></pattern>
+      </defs>
+      <path d="M 32 12 H 448 V 428 H 32 Z" fill="url(#complex-grid)"/>
+      <g stroke="var(--study-axis)" stroke-width="1" fill="none">
+        <path d="M 32 220 H 448 M 240 12 V 428" stroke-opacity=".65"/>
+        <path d="m 443 216 5 4 -5 4 M 236 17 l 4 -5 4 5"/>
+      </g>
+      <foreignObject x="427" y="227" width="45" height="30"><div xmlns="http://www.w3.org/1999/xhtml" class="complex-study__axis-label" data-study-tex="\mathrm{Re}">Re</div></foreignObject>
+      <foreignObject x="250" y="10" width="45" height="30"><div xmlns="http://www.w3.org/1999/xhtml" class="complex-study__axis-label" data-study-tex="\mathrm{Im}">Im</div></foreignObject>
+      <foreignObject x="223" y="227" width="25" height="30"><div xmlns="http://www.w3.org/1999/xhtml" class="complex-study__axis-label" data-study-tex="0">0</div></foreignObject>
+      <foreignObject x="395" y="227" width="25" height="30"><div xmlns="http://www.w3.org/1999/xhtml" class="complex-study__axis-label" data-study-tex="5">5</div></foreignObject>
+      <foreignObject x="65" y="227" width="35" height="30"><div xmlns="http://www.w3.org/1999/xhtml" class="complex-study__axis-label" data-study-tex="-5">−5</div></foreignObject>
+      <circle cx="240" cy="220" r="160" fill="none" stroke="var(--study-circle)" stroke-width="1"/>
+      <path data-study-guides d="M 336 220 V 92 H 240" stroke="var(--study-axis)" stroke-opacity=".55" stroke-dasharray="3 6" fill="none"/>
+      <g fill="var(--study-circle)"><circle cx="112" cy="124" r="3"/><circle cx="144" cy="348" r="3"/><circle cx="368" cy="316" r="3"/></g>
+      <g class="complex-study__vector" data-study-orbit>
+        <path d="M 360 60 A 200 200 0 0 0 80 100" stroke="var(--research)" stroke-opacity=".7" stroke-width="1.5" fill="none"/>
+        <path d="m 78 89 2 11 11 -2" stroke="var(--research)" stroke-opacity=".7" stroke-width="1.5" fill="none"/>
+      </g>
+      <g class="complex-study__vector" data-study-vector>
+        <path d="M 240 220 L 336 92" stroke="var(--research)" stroke-width="2.5"/>
+        <circle cx="336" cy="92" r="17" fill="var(--research)" fill-opacity=".07"/>
+        <circle cx="336" cy="92" r="8" fill="var(--paper)" stroke="var(--research)" stroke-width="1.5"/>
+        <circle cx="336" cy="92" r="3" fill="var(--research)"/>
+      </g>
+      <circle cx="240" cy="220" r="3" fill="var(--ink-soft)"/>
+    </svg>
+    <span class="complex-study__operation"><span data-study-tex="\times i">× i</span><span class="complex-study__operation-note">quarter turn</span></span>
+  </div>
+  <figcaption>
+    <div class="complex-study__readout">
+      <div class="complex-study__value" aria-live="polite" aria-atomic="true" data-study-value data-study-tex="z=3+4i">z = 3 + 4i</div>
+      <span class="complex-study__invariant"><span data-study-tex="|z|=5">|z| = 5</span><span class="complex-study__invariant-note">length preserved</span></span>
+    </div>
+    <div class="complex-study__controls" data-study-controls hidden>
+      <button type="button" class="complex-study__rotate" data-study-rotate aria-label="Multiply by i: rotate 90 degrees counterclockwise"><span aria-hidden="true">↶</span> Multiply by <span data-study-tex="i" aria-hidden="true">i</span></button>
+      <button type="button" class="complex-study__reset" data-study-reset disabled>Reset</button>
+    </div>
+    <p class="complex-study__note">A quarter turn, counterclockwise. Same distance from the origin.</p>
+    <a class="complex-study__link" href="/solutions/class-10/#/unit-1">Explore complex numbers <span aria-hidden="true">↗</span></a>
+  </figcaption>
+</figure>

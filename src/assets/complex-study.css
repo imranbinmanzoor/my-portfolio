@@ -1,0 +1,40 @@
+/* An integrated mathematical figure using the site's typography and colour tokens. */
+[data-pilot] .hero__grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px}
+[data-pilot] .hero__headline{font-size:clamp(2.5rem,4.15vw,3.7rem)}
+.complex-study{--study-grid:#e3eaf5;--study-axis:#7185a2;--study-circle:#7a8fab;margin:0;min-width:0;padding:22px 0 0;color:var(--ink);border-top:1px solid var(--line);align-self:center}
+.complex-study__heading{display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--muted);font-size:.67rem;line-height:1.5;letter-spacing:.08em;text-transform:uppercase}
+.complex-study__index{white-space:nowrap}
+[data-pilot] .complex-study h2{font-size:1.3rem;font-weight:500;letter-spacing:-.02em;line-height:1.3;margin:12px 0 0;color:var(--ink)}
+.complex-study__plot{position:relative;max-width:390px;width:100%;margin:8px auto 0}
+.complex-study__plot>svg{display:block;width:100%;height:auto;overflow:visible}
+.complex-study__axis-label{color:var(--muted);font-size:19px;line-height:1.4}
+.complex-study__axis-label .katex{font-size:1em}
+.complex-study__vector{transform-origin:240px 220px;transition:transform 600ms cubic-bezier(.22,.7,.25,1)}
+.complex-study__operation{position:absolute;right:1%;top:44%;display:flex;align-items:center;gap:8px;color:var(--research);font-size:1rem;background:var(--paper);padding:4px 7px}
+.complex-study__operation-note{font-size:.62rem;letter-spacing:.03em}
+.complex-study figcaption{border-top:1px solid var(--line);padding-top:19px}
+.complex-study__readout{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.complex-study__value{font-size:1.35rem;line-height:1.3;color:var(--ink)}
+.complex-study__invariant{display:flex;flex-direction:column;gap:5px;align-items:flex-end;color:var(--muted);font-size:.9rem}
+.complex-study__invariant-note{font-size:.61rem;letter-spacing:.04em;text-transform:uppercase}
+.complex-study__controls{display:flex;gap:12px;align-items:center;margin:18px 0 12px;flex-wrap:wrap}
+.complex-study__controls[hidden]{display:none}
+.complex-study__rotate,.complex-study__reset{font:500 .8rem/1.4 var(--sans);border-radius:6px;cursor:pointer;min-height:44px;padding:10px 13px}
+.complex-study__rotate{background:var(--sheet);color:var(--research);border:1px solid var(--line);display:inline-flex;align-items:center;gap:7px}
+.complex-study__rotate>span:first-child{font-size:1.2rem;line-height:1}
+.complex-study__rotate:hover{background:var(--research-soft);border-color:var(--research)}
+.complex-study__reset{background:transparent;color:var(--ink-soft);border:1px solid transparent}
+.complex-study__reset:hover:enabled{border-color:var(--line)}
+.complex-study__reset:disabled{color:var(--muted);opacity:.7;cursor:default}
+.complex-study :is(button,a):focus-visible{outline:2px solid var(--research);outline-offset:4px}
+.complex-study__note{font-size:.73rem;line-height:1.6;color:var(--muted);margin:12px 0 16px;max-width:48ch}
+.complex-study__link{display:flex;justify-content:space-between;gap:10px;font-size:.78rem;color:var(--research);padding:15px 0;border-top:1px solid var(--line);text-decoration:none}
+.complex-study__link:hover{text-decoration:underline;text-underline-offset:4px}
+[data-theme="dark"] .complex-study{--study-grid:#21314b;--study-axis:#7188aa;--study-circle:#526f98}
+[data-pilot] .about-identity{display:flex;flex-direction:column;gap:5px;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.about-identity strong{font-size:1.15rem;font-weight:600}
+.about-identity span{font-size:.8rem;color:var(--muted)}
+@media(max-width:1100px){[data-pilot] .hero__grid{gap:36px;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}.complex-study__index{display:none}}
+@media(max-width:800px){[data-pilot] .hero__grid{grid-template-columns:1fr;gap:36px}[data-pilot] .hero__headline{max-width:18ch}.complex-study{width:100%;max-width:480px;justify-self:start}.complex-study__index{display:inline}}
+@media(max-width:380px){.complex-study__index{display:none}.complex-study__invariant{font-size:.85rem}.complex-study__invariant-note{font-size:.55rem}.complex-study__value{font-size:1.2rem}.complex-study__operation-note{display:none}}
+@media(prefers-reduced-motion:reduce){.complex-study__vector{transition:none}}

@@ -1,0 +1,793 @@
+/* ============================================================================
+   DESIGN TOKENS  —  the single source of truth for every visual value.
+   ============================================================================
+
+   RULE OF THE SYSTEM
+   Nothing in chapter.css may contain a raw colour, a raw pixel spacing value,
+   or a raw font size. Every value references a token below. If a value is
+   needed twice, or would change under a theme, it becomes a token here. If it
+   is a genuine one-off tightly coupled to one component, it stays local and is
+   commented as such.
+
+   Three tiers, in order:
+     1. PRIMITIVE   raw values, named by what they are     (--sand-100)
+     2. SEMANTIC    named by the job they do               (--surface-page)
+     3. COMPONENT   only where a component genuinely needs its own knob
+
+   SOURCES FOR THE NUMBERS
+   - Spacing: 4/8 grid (Material 3 4dp grid; Carbon multiples of 2/4/8)
+   - Type: Major Third 1.25 modular scale, six steps
+   - Body size 18px desktop / 17px mobile. Deliberately larger than the
+     Material (16) and GOV.UK (19 desktop / 16 mobile) defaults because the
+     audience is Class 9 students with weak foundations reading on phones.
+     The British Dyslexia Association range GOV.UK cites is 16-19px.
+   - Line height 1.5 body, 1.25 headings; measure 66ch (45-75 range, 66 optimal)
+   - Colour: 60-30-10. One primary, one accent, a neutral ramp, plus status.
+   - Borders over shadows. Shadow is reserved for a single case: a sticky bar
+     that is genuinely overlapping content it must be read in front of.
+   ========================================================================== */
+
+:root{
+
+  /* ---------------------------------------------------------------- 1. PRIMITIVE */
+
+  /* warm sand neutral ramp; paired with a deep brown ink rather than black,
+     which is what separates a warm neutral from a generic grey cream */
+  --sand-50:#fffdf8;  --sand-100:#fdf8ef;  --sand-200:#f8f1e4;
+  --sand-300:#eee3d1;  --sand-400:#ddcdb3;  --sand-500:#b8a487;
+  --brown-600:#7c6a55;  --brown-700:#5a4a38;  --brown-800:#3a2e22;  --brown-900:#2a2018;
+
+  --green-50:#e8f2ed;  --green-100:#cfe4da;  --green-600:#186b53;
+  --green-700:#115442;  --green-800:#0c3f31;
+
+  --clay-50:#fbeade;  --clay-100:#f2d4bd;  --clay-600:#a8501c;
+  --clay-700:#8a3f14;
+
+  --red-600:#9b3e39;
+
+  /* type ---------------------------------------------------------------- */
+  --font-ui:"Inter","Segoe UI",Roboto,Arial,system-ui,sans-serif;
+  --font-math:"New Computer Modern",serif;   /* rendered as SVG paths, not loaded */
+
+  /* Major Third, 1.25. Six steps is the whole vocabulary. */
+  --size-100:0.75rem;    /* 12px  caption, marks, eyebrow            */
+  --size-200:0.875rem;   /* 14px  secondary UI, note titles          */
+  --size-300:1rem;       /* 16px  small body, controls               */
+  --size-400:1.125rem;   /* 18px  BODY  (the reading size)           */
+  --size-500:1.40625rem; /* 22.5px  question / card heading          */
+  --size-600:1.75rem;    /* 28px  section heading                    */
+  --size-700:2.1875rem;  /* 35px  page title                         */
+
+  --leading-tight:1.25;  /* headings                                  */
+  --leading-body:1.55;   /* prose. 1.5-1.6 for long-form reading      */
+  --leading-flat:1;      /* labels, chips                             */
+
+  --weight-normal:400;  --weight-medium:500;
+  --weight-semibold:600;  --weight-bold:700;
+
+  --measure:66ch;        /* 45-75 characters, 66 optimal              */
+
+  /* space — 4/8 grid, one scale, no exceptions ------------------------- */
+  --space-1:4px;   --space-2:8px;   --space-3:12px;  --space-4:16px;
+  --space-5:24px;  --space-6:32px;  --space-7:48px;  --space-8:64px;
+
+  /* radius — a small fixed set, as Material's 7-stop shape scale ------- */
+  --radius-sm:6px;  --radius-md:10px;  --radius-lg:14px;  --radius-pill:999px;
+
+  /* one shadow only, for a sticky bar overlapping content -------------- */
+  --shadow-sticky:0 1px 0 var(--border-strong);
+
+  /* motion -------------------------------------------------------------- */
+  --ease:cubic-bezier(.2,0,0,1);
+  --dur-fast:120ms;
+
+  /* ---------------------------------------------------------------- 2. SEMANTIC */
+
+  /* surfaces — 60% of the screen is these two */
+  --surface-page:var(--sand-200);      /* the paper the chapter sits on   */
+  --surface-raised:var(--sand-50);     /* a container lifted off the page */
+  --surface-sunken:var(--sand-100);    /* a strip inside a container      */
+
+  /* text */
+  --text-strong:var(--brown-900);      /* headings                        */
+  --text-body:var(--brown-800);        /* prose. never grey.              */
+  --text-muted:var(--brown-700);       /* supporting prose                */
+  --text-faint:var(--brown-600);       /* counters, marks, metadata only  */
+  --text-on-primary:#fff;
+
+  /* borders carry the structure; shadows do not */
+  --border:var(--sand-300);
+  --border-strong:var(--sand-400);
+
+  /* primary — chapter navigation, links, primary action (the 10%) */
+  --primary:var(--green-600);
+  --primary-hover:var(--green-700);
+  --primary-strong:var(--green-800);
+  --primary-tint:var(--green-50);
+  --primary-line:var(--green-100);
+
+  /* accent — the second-level section nav and worked examples (the 30%) */
+  --accent:var(--clay-600);
+  --accent-strong:var(--clay-700);
+  --accent-tint:var(--clay-50);
+  --accent-line:var(--clay-100);
+
+  --danger:var(--red-600);
+
+  /* control heights: 32 small, 40 medium, 44 large (large = mobile primary) */
+  --control-sm:32px;  --control-md:40px;  --control-lg:44px;
+  --tap-min:44px;     /* minimum tap ROW height, even if the visual is smaller */
+
+  /* ---------------------------------------------------------------- 3. COMPONENT */
+  --rail-width:232px;         /* desktop question index                   */
+  /* Gaps inside a question versus between questions. The block gap is one
+     step larger so the grouping reads without shouting. */
+  --gap-part:var(--space-4);                     /* 16px between parts       */
+  --gap-block:calc(var(--space-4) + 12px);       /* 28px between questions   */
+  --sticky-tabs:0px;          /* measured at runtime by app.js            */
+  --sticky-sections:0px;      /* measured at runtime by app.js            */
+}
+
+@media (max-width:47.9375rem){          /* below 767px */
+  :root{
+    --size-400:1.0625rem;               /* 17px body on a phone            */
+    --size-500:1.25rem;
+    --size-600:1.4375rem;
+    --size-700:1.6875rem;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  :root{ --dur-fast:0ms; }
+}
+
+/* ============================================================================
+   CHAPTER STYLESHEET
+   Every value here references a token from tokens.css. No raw colours, no raw
+   spacing, no raw font sizes.
+
+   THE READING SURFACE IS A LIST, NOT A DECK OF CARDS.
+   The research is explicit: cards favour discovery, lists favour efficiency,
+   and a card around every question adds chrome without adding meaning. So a
+   question block is one container, and its parts are rows divided by hairlines.
+   Cards are reserved for things you browse (a concept you may or may not open).
+   ========================================================================== */
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--surface-page);
+  color:var(--text-body);
+  font-family:var(--font-ui);
+  font-size:var(--size-400);
+  line-height:var(--leading-body);
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,h4{
+  color:var(--text-strong);
+  line-height:var(--leading-tight);
+  font-weight:var(--weight-bold);
+  margin:0;
+  text-wrap:balance;
+}
+p{margin:0 0 var(--space-3)}
+p:last-child{margin-bottom:0}
+a{color:var(--primary-strong)}
+
+::selection{background:var(--primary-tint)}
+:where(a,button,summary,input,[tabindex]):focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+  border-radius:var(--radius-sm);
+}
+
+/* the reading column is capped at 66ch; UI chrome may use the full width */
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 var(--space-4)}
+.wrap-wide{max-width:calc(var(--measure) + var(--rail-width) + var(--space-7));
+  margin:0 auto;padding:0 var(--space-4)}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------------------------------------------------------------- masthead */
+.masthead{padding:var(--space-5) 0 var(--space-3)}
+.masthead h1{font-size:var(--size-700);letter-spacing:-.02em}
+.masthead h1 .u{color:var(--primary)}
+
+.searchbar{position:relative;margin:var(--space-4) 0 var(--space-2)}
+.searchbar svg{position:absolute;left:var(--space-3);top:50%;transform:translateY(-50%);
+  width:18px;height:18px;color:var(--text-faint);pointer-events:none}
+.searchbar input{
+  width:100%;min-height:var(--control-lg);
+  padding:var(--space-2) var(--space-4) var(--space-2) var(--space-7);
+  font:inherit;font-size:var(--size-300);color:var(--text-body);
+  background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-md);
+}
+.searchbar input::placeholder{color:var(--text-faint);opacity:1}
+.searchbar input:focus{border-color:var(--primary);outline:none;
+  box-shadow:0 0 0 3px var(--primary-tint)}
+.search-scope{font-size:var(--size-200);color:var(--text-muted);margin:0}
+.searchbar .clear{position:absolute;right:var(--space-2);top:50%;
+  transform:translateY(-50%);
+  width:var(--control-sm);height:var(--control-sm);
+  display:inline-flex;align-items:center;justify-content:center;
+  font:inherit;font-size:var(--size-400);line-height:1;
+  color:var(--text-faint);background:none;border:0;border-radius:var(--radius-sm);
+  cursor:pointer}
+.searchbar .clear:hover{color:var(--text-strong);background:var(--surface-sunken)}
+
+/* ------------------------------------------------------------ level 1 nav */
+/* Chapter navigation. One scrolling row, never wrapped: a second row breaks
+   the single-line mental model and makes the active row ambiguous. */
+.tabs-wrap{position:sticky;top:0;z-index:40;
+  background:var(--surface-page);border-bottom:1px solid var(--border)}
+.tabs-shell{position:relative;min-width:0}
+.tabs{display:flex;flex-wrap:nowrap;gap:var(--space-1);
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;scrollbar-width:none;
+  padding:var(--space-2) 0}
+.tabs::-webkit-scrollbar{display:none}
+
+.tab{
+  flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;
+  min-height:var(--control-sm);
+  padding:var(--space-1) var(--space-3);
+  font:inherit;font-size:var(--size-300);font-weight:var(--weight-semibold);
+  line-height:var(--leading-tight);
+  color:var(--text-muted);background:none;
+  border:1px solid transparent;border-radius:var(--radius-sm);
+  cursor:pointer;transition:background var(--dur-fast) var(--ease);
+}
+.tab:hover{background:var(--primary-tint);color:var(--primary-strong)}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--text-on-primary);
+  border-color:var(--primary)}
+
+/* the strip fades on whichever side still has tabs; masking the strip itself
+   means the cue can never block a tap and works on any background */
+.tabs-shell.can-right .tabs{
+  -webkit-mask-image:linear-gradient(to right,#000 calc(100% - var(--space-6)),transparent);
+  mask-image:linear-gradient(to right,#000 calc(100% - var(--space-6)),transparent)}
+.tabs-shell.can-left .tabs{
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--space-6));
+  mask-image:linear-gradient(to right,transparent,#000 var(--space-6))}
+.tabs-shell.can-left.can-right .tabs{
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--space-6),
+    #000 calc(100% - var(--space-6)),transparent);
+  mask-image:linear-gradient(to right,transparent,#000 var(--space-6),
+    #000 calc(100% - var(--space-6)),transparent)}
+
+/* ------------------------------------------------------------ level 2 nav */
+/* Section navigation inside one exercise. Accent, and a different shape, so
+   the two levels never wear the same treatment. */
+.local-jump{position:sticky;top:var(--sticky-tabs);z-index:30;
+  display:flex;flex-wrap:wrap;gap:var(--space-1);
+  padding:var(--space-2) 0;background:var(--surface-page);
+  box-shadow:-50vw 0 0 var(--surface-page),50vw 0 0 var(--surface-page)}
+.local-jump.is-stuck{box-shadow:-50vw 0 0 var(--surface-page),
+  50vw 0 0 var(--surface-page),var(--shadow-sticky)}
+.local-jump a{
+  min-height:var(--control-sm);display:inline-flex;align-items:center;
+  padding:var(--space-1) var(--space-3);
+  font-size:var(--size-200);font-weight:var(--weight-semibold);
+  color:var(--text-muted);text-decoration:none;
+  background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+}
+.local-jump a:hover{border-color:var(--accent-line)}
+.local-jump a[aria-current="true"]{background:var(--accent-tint);
+  border-color:var(--accent);color:var(--accent-strong)}
+.jump-toggle{margin-left:auto;min-height:var(--control-sm);
+  padding:var(--space-1) var(--space-3);
+  font:inherit;font-size:var(--size-200);font-weight:var(--weight-medium);
+  color:var(--text-muted);background:none;
+  border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer}
+.jump-toggle:hover{border-color:var(--primary-line);color:var(--primary-strong)}
+
+/* --------------------------------------------------------------- sections */
+.panel{padding-bottom:var(--space-8);min-width:0}
+.flow-section{margin:0 0 var(--space-7);min-width:0;
+  scroll-margin-top:calc(var(--sticky-tabs) + var(--sticky-sections) + var(--space-2))}
+.flow-head{margin:var(--space-5) 0 var(--space-4)}
+.flow-head h3{font-size:var(--size-500);letter-spacing:-.005em}
+.flow-head p{font-size:var(--size-300);color:var(--text-muted);
+  margin:var(--space-1) 0 0}
+
+.sec-title{font-size:var(--size-500);letter-spacing:-.005em;margin:var(--space-5) 0 var(--space-1)}
+.sec-sub{font-size:var(--size-300);color:var(--text-muted);margin:0 0 var(--space-4)}
+/* A divider label ("Additional notes"), not a heading in the hierarchy. */
+.sub-head{font-size:var(--size-200);font-weight:var(--weight-bold);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);
+  margin:var(--space-6) 0 var(--space-2)}
+
+/* ============================ THE BLOCK ====================================
+   Panel -> Section -> BLOCK (one main question) -> PART ((i), (ii), (iii))
+
+   The block groups; the parts are the objects you read. So the block is NOT a
+   box: it is a sticky heading plus a lead, sitting on the page. Each part is
+   its own card. That avoids a box inside a box, which is what made the single
+   container feel crowded, while the heading and the spacing still make it
+   obvious that the parts belong to one question.
+   ========================================================================== */
+.qblock{min-width:0;margin:0 0 var(--gap-block)}
+
+.grp{position:sticky;top:calc(var(--sticky-tabs) + var(--sticky-sections));z-index:20;
+  padding:var(--space-2) 0;background:var(--surface-page);
+  box-shadow:-50vw 0 0 var(--surface-page),50vw 0 0 var(--surface-page)}
+.grp.is-stuck{box-shadow:-50vw 0 0 var(--surface-page),
+  50vw 0 0 var(--surface-page),var(--shadow-sticky)}
+.grp-title{margin:0;display:flex;align-items:baseline;gap:var(--space-2)}
+.grp-title .qn{
+  display:inline-flex;align-items:center;
+  min-height:var(--control-sm);padding:var(--space-1) var(--space-3);
+  font-size:var(--size-300);font-weight:var(--weight-bold);
+  color:var(--primary-strong);background:var(--primary-tint);
+  border:1px solid var(--primary-line);border-radius:var(--radius-pill)}
+
+.block-body{min-width:0}
+.block-body > .grp-lead{margin:var(--space-3) 0 var(--space-4);padding:0;
+  font-size:var(--size-400);color:var(--text-body)}
+
+/* a part is a card: one question-part, self-contained */
+.part{
+  min-width:0;margin:0 0 var(--gap-part);
+  background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-md);
+}
+.part:last-child{margin-bottom:0}
+.part-q{padding:var(--space-4)}
+.qblock.solo .part{margin-bottom:0}
+
+/* --------------------------------------------------------- question label */
+/* The number is optically tied to the FIRST LINE of the statement, never to
+   the middle of the block, and never to a wrapped line. */
+.q{display:grid;grid-template-columns:auto minmax(0,1fr);
+  column-gap:var(--space-3);align-items:baseline;min-width:0}
+.q-label-line{grid-column:1;grid-row:1;display:block}
+.q-statement{grid-column:2;grid-row:1;min-width:0}
+.q-body{grid-column:2;grid-row:2;min-width:0}
+
+.q-label{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:var(--space-6);min-height:var(--control-sm);
+  padding:0 var(--space-2);
+  font-size:var(--size-200);font-weight:var(--weight-semibold);
+  line-height:var(--leading-flat);white-space:nowrap;
+  color:var(--primary-strong);background:var(--primary-tint);
+  border:1px solid var(--primary-line);border-radius:var(--radius-sm);
+}
+.q-label.none{display:none}
+/* A solo block's chip already names the question ("Question 6"), so the part
+   must not repeat the number. Hiding the label alone is not enough: the
+   label-line still occupies row 1 of the grid and lands on top of the
+   statement, which is what produced "If6(2x + iy)". Take it out of the grid. */
+.qblock.solo .part .q-label-line{display:none}
+.qblock.solo .part .q{grid-template-columns:minmax(0,1fr)}
+.qblock.solo .part .q > .q-statement{grid-column:1;grid-row:1}
+.qblock.solo .part .q > .q-body{grid-column:1;grid-row:2}
+
+/* On a phone a wide label is stacked above the statement so the question keeps
+   the full column. Narrow labels stay inline, where first-line alignment is
+   what matters. */
+@media (max-width:26.875rem){
+  .q.stack-sm{grid-template-columns:minmax(0,1fr)}
+  .q.stack-sm > .q-label-line{grid-column:1;grid-row:1;
+    display:flex;align-items:center;line-height:var(--leading-flat);
+    margin-bottom:var(--space-2)}
+  .q.stack-sm > .q-label-line > .q-label{transform:none}
+  .q.stack-sm > .q-statement{grid-column:1;grid-row:2}
+  .q.stack-sm > .q-body{grid-column:1;grid-row:3}
+}
+
+/* --------------------------------------------------------- MCQ options */
+.opts{list-style:none;margin:var(--space-3) 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));
+  gap:var(--space-1) var(--space-5)}
+.opt{display:grid;grid-template-columns:auto minmax(0,1fr);
+  align-items:baseline;column-gap:var(--space-2);
+  padding:var(--space-1) 0;min-width:0}
+.opt .ol{font-size:var(--size-200);font-weight:var(--weight-semibold);
+  color:var(--primary-strong)}
+.opt .oc{min-width:0;overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------- the solution */
+/* Expanded by default: every serious solutions site shows the working, and an
+   accordion here would break the reading flow. One global control collapses
+   them all for students who want to try first. */
+details.sol{border-top:1px solid var(--border);background:var(--surface-sunken);
+  border-radius:0 0 var(--radius-md) var(--radius-md)}
+details.sol[open]{background:transparent}
+details.sol[open] > summary{border-bottom:1px dashed var(--border)}
+details.sol > summary{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);
+  padding:var(--space-2) var(--space-4);min-height:var(--tap-min);
+  font-size:var(--size-300);font-weight:var(--weight-semibold);
+  color:var(--primary-strong);cursor:pointer;list-style:none}
+details.sol > summary::-webkit-details-marker{display:none}
+details.sol > summary:hover{background:var(--primary-tint)}
+.chev{width:18px;height:18px;flex:0 0 auto;transition:transform var(--dur-fast) var(--ease)}
+details[open] > summary .chev{transform:rotate(180deg)}
+.sol-in{padding:0 var(--space-4) var(--space-4)}
+
+/* steps: one operation per line, its reason above it */
+.steps{list-style:none;margin:0;padding:0}
+.step{padding:var(--space-3) 0;border-top:1px dashed var(--border)}
+.step:first-child{border-top:0}
+.why{display:block;font-size:var(--size-200);color:var(--text-body);
+  margin:0 0 var(--space-1)}
+.given,.recall{font-size:var(--size-300);margin:0 0 var(--space-3)}
+.recall{padding:var(--space-2) var(--space-3);background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-sm)}
+.rl{display:block;font-size:var(--size-100);font-weight:var(--weight-bold);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--accent-strong);
+  margin-bottom:var(--space-1)}
+
+/* the final answer is emphasised — the one place a callout earns its keep */
+.answer{margin:var(--space-4) 0 0;padding:var(--space-3) var(--space-4);
+  background:var(--primary-tint);border:1px solid var(--primary-line);
+  border-radius:var(--radius-md)}
+.al{display:block;font-size:var(--size-100);font-weight:var(--weight-bold);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--primary-strong);
+  margin-bottom:var(--space-1)}
+.restr{display:block;font-size:var(--size-200);color:var(--text-muted);
+  margin-top:var(--space-1)}
+.answer-line{margin:0 0 var(--space-3);padding:var(--space-2) var(--space-3);
+  font-size:var(--size-300);background:var(--primary-tint);
+  border-radius:var(--radius-sm)}
+.ported{font-size:var(--size-100);font-weight:var(--weight-semibold);
+  letter-spacing:.05em;text-transform:uppercase;color:var(--text-faint);
+  margin:0 0 var(--space-3)}
+
+/* study notes */
+/* second level of disclosure: closed even when the solution is open */
+.notes-d{margin:var(--space-4) 0 0;border:1px solid var(--border);
+  border-radius:var(--radius-md);background:var(--surface-raised)}
+.notes-d > summary{display:flex;align-items:center;gap:var(--space-2);
+  min-height:var(--tap-min);padding:var(--space-2) var(--space-3);
+  cursor:pointer;list-style:none}
+.notes-d > summary::-webkit-details-marker{display:none}
+.notes-d > summary:hover{background:var(--surface-sunken)}
+.notes-d .nd-t{font-size:var(--size-200);font-weight:var(--weight-semibold);
+  color:var(--text-strong)}
+.notes-d .nd-k{flex:1 1 auto;font-size:var(--size-100);color:var(--text-faint)}
+.notes-d .chev{margin-left:auto}
+.notes{padding:0 var(--space-3) var(--space-3)}
+.notes-h{font-size:var(--size-100);font-weight:var(--weight-bold);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);
+  margin:0 0 var(--space-3)}
+.note{margin:0 0 var(--space-3);padding-left:var(--space-3);
+  border-left:2px solid var(--border-strong)}
+.note:last-child{margin-bottom:0}
+.note .nt{display:block;font-size:var(--size-200);font-weight:var(--weight-semibold);
+  color:var(--text-strong);margin-bottom:var(--space-1)}
+.note p{font-size:var(--size-300);margin:0}
+.note.rule{border-left-color:var(--primary)}
+.note.mistake{border-left-color:var(--danger)}
+.note.check{border-left-color:var(--accent)}
+
+/* ------------------------------------------------------------- mathematics */
+mjx-container{line-height:0}
+mjx-container svg g[stroke]{stroke-width:0}   /* squeeze() strips stroke-width="0" */
+mjx-container + .nb{white-space:nowrap;margin-left:-.06em}
+
+.eq{margin:var(--space-3) 0;padding:var(--space-1) 0;max-width:100%;
+  overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
+  text-align:center;scrollbar-width:none}
+.eq::-webkit-scrollbar{display:none}
+.eq.is-wide{
+  background-image:linear-gradient(to left,rgba(58,46,34,.14),rgba(58,46,34,0) 14px);
+  background-repeat:no-repeat;background-position:right center;
+  background-size:14px 100%;background-attachment:local}
+.eq.is-wide.at-end{background-image:none}
+.eq-hint{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.wide-inline{overflow-x:auto;overflow-y:hidden;max-width:100%;
+  scrollbar-width:none;overscroll-behavior-x:contain}
+.wide-inline::-webkit-scrollbar{display:none}
+
+figure.dg{margin:var(--space-4) 0;padding:var(--space-3) var(--space-2);
+  background:var(--surface-sunken);border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  overflow-x:auto;overflow-y:hidden;max-width:100%;scrollbar-width:none}
+figure.dg::-webkit-scrollbar{display:none}
+figure.dg > svg{display:block;margin:0 auto;height:auto;max-width:100%;min-width:260px}
+figure.dg figcaption{margin-top:var(--space-2);text-align:center;
+  font-size:var(--size-200);color:var(--text-muted)}
+figure.dg figcaption mjx-container svg{min-width:0;display:inline-block;margin:0}
+
+/* --------------------------------------------------------------- concepts */
+/* A concept is browsed, not read straight through, so it IS a card. */
+.concept-intro{padding:var(--space-4);background:var(--surface-sunken);
+  border:1px solid var(--border);border-radius:var(--radius-md);
+  margin:0 0 var(--space-4)}
+/* min-width:0 is required on every grid/flex child that can hold mathematics:
+   the default min-width:auto refuses to shrink below the content's intrinsic
+   width, so one wide formula pushes the whole page sideways. */
+.concept-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-3)}
+.concept-card,.card.concept{background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:var(--space-4);min-width:0}
+.concept-card h3{font-size:var(--size-400);margin:0 0 var(--space-3)}
+.card.concept > summary{display:flex;align-items:center;gap:var(--space-3);
+  min-height:var(--tap-min);cursor:pointer;list-style:none;
+  font-size:var(--size-400);font-weight:var(--weight-bold);color:var(--text-strong)}
+.card.concept > summary::-webkit-details-marker{display:none}
+.idx{font-size:var(--size-100);font-weight:var(--weight-bold);
+  color:var(--accent-strong);background:var(--accent-tint);
+  border-radius:var(--radius-sm);padding:var(--space-1) var(--space-2)}
+.concept-in{padding-top:var(--space-3)}
+.c-block{margin:0 0 var(--space-4);min-width:0}
+.c-h{font-size:var(--size-100);font-weight:var(--weight-bold);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--accent-strong);margin:0 0 var(--space-1)}
+.c-rule{padding:var(--space-3);background:var(--surface-sunken);
+  border:1px solid var(--border);border-radius:var(--radius-sm)}
+.quick{padding:var(--space-3);background:var(--primary-tint);
+  border:1px solid var(--primary-line);border-radius:var(--radius-sm)}
+.supplement{margin-top:var(--space-6);padding-top:var(--space-4);
+  border-top:1px solid var(--border)}
+
+/* the textbook's three-column law table */
+.law-table{display:grid;gap:1px;margin:var(--space-4) 0;
+  background:var(--surface-raised);border:1px solid var(--border);
+  border-radius:var(--radius-md);overflow:hidden}
+.law-table > div{display:grid;
+  grid-template-columns:minmax(7.5rem,auto) 1fr 1fr;
+  gap:var(--space-2) var(--space-5);align-items:baseline;
+  padding:var(--space-3) var(--space-4);border-top:1px solid var(--border);min-width:0}
+.law-table > div:first-child{border-top:0}
+.law-table > div > strong{font-size:var(--size-200);font-weight:var(--weight-semibold);
+  color:var(--primary-strong)}
+.law-table .math-cell{min-width:0;overflow-x:auto;scrollbar-width:none}
+@media (max-width:35rem){
+  .law-table > div{grid-template-columns:1fr;gap:var(--space-1)}
+}
+
+/* worked examples take the accent, matching their place in the section nav */
+/* A worked example is the same kind of object as a question; only its label
+   differs. No tinted strip. */
+.qblock.book-example .qn{color:var(--primary-strong);background:var(--primary-tint);
+  border-color:var(--primary-line)}
+
+/* ----------------------------------------------------------------- search */
+.results{margin:var(--space-3) 0 0}
+.results-head{font-size:var(--size-200);color:var(--text-faint);
+  margin:0 0 var(--space-3)}
+.result{display:block;text-decoration:none;color:inherit;
+  padding:var(--space-3) var(--space-4);margin:0 0 var(--space-2);
+  background:var(--surface-raised);border:1px solid var(--border);
+  border-radius:var(--radius-md)}
+.result:hover,.result:focus-visible{border-color:var(--primary);
+  background:var(--primary-tint)}
+.result *{text-decoration:none}
+.result .rtit{display:block;font-size:var(--size-300);
+  font-weight:var(--weight-semibold);color:var(--text-strong)}
+.result .rsec{display:block;font-size:var(--size-100);font-weight:var(--weight-semibold);
+  letter-spacing:.05em;text-transform:uppercase;color:var(--primary-strong);
+  margin:var(--space-1) 0}
+.result .rsnip{display:block;font-size:var(--size-300);color:var(--text-body);
+  overflow-wrap:anywhere}
+.result mark{background:var(--primary-tint);color:var(--text-strong);
+  border-radius:var(--radius-sm);padding:0 .12em;font-weight:var(--weight-semibold)}
+.no-results{padding:var(--space-4);color:var(--text-muted)}
+.more-btn{display:inline-flex;align-items:center;justify-content:center;
+  min-height:var(--control-md);padding:var(--space-2) var(--space-4);
+  font:inherit;font-size:var(--size-300);font-weight:var(--weight-semibold);
+  color:var(--primary-strong);background:var(--surface-raised);
+  border:1px solid var(--primary-line);border-radius:var(--radius-md);cursor:pointer}
+.more-btn:hover{background:var(--primary-tint)}
+
+/* ---------------------------------------------------------------- buttons */
+/* filled = primary, outlined = secondary. One primary action per view. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);
+  min-height:var(--control-lg);padding:var(--space-3) var(--space-5);
+  font:inherit;font-size:var(--size-300);font-weight:var(--weight-semibold);
+  color:var(--text-on-primary);background:var(--primary);
+  border:1px solid var(--primary);border-radius:var(--radius-md);cursor:pointer;
+  transition:background var(--dur-fast) var(--ease)}
+.btn:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
+.btn.ghost{background:var(--surface-raised);color:var(--primary-strong);
+  border-color:var(--primary-line);font-weight:var(--weight-medium)}
+.btn.ghost:hover{background:var(--primary-tint)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--space-3);margin:var(--space-5) 0}
+@media (max-width:32.5rem){ .btn{width:100%} }
+
+/* -------------------------------------------------------------- generator */
+.ctrl{margin:0 0 var(--space-5)}
+.ctrl-l{display:block;font-size:var(--size-100);font-weight:var(--weight-bold);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);
+  margin:0 0 var(--space-2)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.chip{min-height:var(--control-md);padding:var(--space-2) var(--space-4);
+  font:inherit;font-size:var(--size-300);font-weight:var(--weight-medium);
+  color:var(--text-body);background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-md);cursor:pointer}
+.chip[aria-pressed="true"],.chip.on{background:var(--primary);
+  border-color:var(--primary);color:var(--text-on-primary)}
+.nums{display:grid;gap:var(--space-3);
+  grid-template-columns:repeat(auto-fit,minmax(min(13rem,100%),1fr))}
+.num{padding:var(--space-3) var(--space-4);background:var(--surface-raised);
+  border:1px solid var(--border);border-radius:var(--radius-md)}
+.num .lab{display:block;font-size:var(--size-300);margin-bottom:var(--space-2)}
+.stepper{display:flex;align-items:center;gap:var(--space-3)}
+.stepper button{width:var(--control-md);height:var(--control-md);
+  font:inherit;font-size:var(--size-400);color:var(--primary-strong);
+  background:var(--surface-sunken);border:1px solid var(--border);
+  border-radius:var(--radius-sm);cursor:pointer}
+.stepper output{font-size:var(--size-500);font-weight:var(--weight-bold);
+  color:var(--text-strong);min-width:2.5ch;text-align:center}
+.avail{display:block;font-size:var(--size-100);color:var(--text-faint);
+  margin-top:var(--space-1)}
+.alert{padding:var(--space-3) var(--space-4);margin:var(--space-4) 0;
+  font-size:var(--size-300);color:var(--text-body);
+  background:var(--accent-tint);border:1px solid var(--accent-line);
+  border-radius:var(--radius-md)}
+
+/* --------------------------------------------------------- exam paper */
+.paper{margin:var(--space-5) 0;padding:var(--space-5);
+  background:var(--surface-raised);border:1px solid var(--border);
+  border-radius:var(--radius-lg)}
+.paper-head{text-align:center;margin:0 0 var(--space-5);
+  padding-bottom:var(--space-4);border-bottom:2px solid var(--text-strong)}
+.paper-head h3{font-size:var(--size-600)}
+.paper-meta{display:flex;flex-wrap:wrap;justify-content:center;
+  gap:var(--space-2) var(--space-5);font-size:var(--size-200);
+  color:var(--text-faint);margin-top:var(--space-2)}
+.paper-sec{margin:0 0 var(--space-6)}
+.paper-sec h4{display:flex;justify-content:space-between;align-items:flex-start;
+  gap:var(--space-3) var(--space-4);
+  font-size:var(--size-400);font-weight:var(--weight-bold);color:var(--text-strong);
+  padding-bottom:var(--space-2);margin:0 0 var(--space-3);
+  border-bottom:2px solid var(--primary)}
+.paper-sec h4 span:first-child{min-width:0}
+.paper-sec h4 span:last-child{white-space:nowrap;flex:0 0 auto}
+.paper-sec .inst{font-size:var(--size-300);margin:0 0 var(--space-4)}
+/* Question number counters in a generated or printed paper. "Q.1", "Q.2" are
+   the paper's own numbering and must read as labels, not as running prose. */
+.paper-sec .inst .qno{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:var(--space-7);min-height:var(--control-sm);
+  padding:var(--space-1) var(--space-3);margin-right:var(--space-3);
+  font-size:var(--size-300);font-weight:var(--weight-bold);
+  line-height:var(--leading-flat);
+  color:var(--primary-strong);background:var(--primary-tint);
+  border:1px solid var(--primary-line);border-radius:var(--radius-pill)}
+
+/* Part numbers inside the paper: (i), (ii), (iii) */
+.paper-part .q-label,.paper-part .q-label.sub{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:var(--space-6);min-height:var(--control-sm);
+  padding:0 var(--space-2);
+  font-size:var(--size-200);font-weight:var(--weight-semibold);
+  line-height:var(--leading-flat);
+  color:var(--primary-strong);background:var(--primary-tint);
+  border:1px solid var(--primary-line);border-radius:var(--radius-sm)}
+.paper-parts{counter-reset:none}
+.paper-part{display:block}
+
+@media print{
+  /* On paper the counters are plain bold text; tinted chips waste toner and
+     do not match a board paper. */
+  .paper-sec .inst .qno{background:none!important;border:0!important;
+    color:#000!important;min-width:0;min-height:0;padding:0 4pt 0 0;margin:0}
+  .paper-part .q-label,.paper-part .q-label.sub{background:none!important;
+    border:0!important;color:#000!important;min-width:0;min-height:0;padding:0 4pt 0 0}
+}
+.paper-parts{list-style:none;margin:0;padding:0}
+.paper-part{margin:0 0 var(--space-3);break-inside:avoid}
+.paper-part .q-statement,.paper-part .oc{overflow-x:auto;max-width:100%}
+
+/* ============================================================== print */
+@media print{
+  @page{size:A4;margin:13mm 12mm}
+  html,body{background:#fff;color:#000;font-size:10pt;line-height:1.35}
+  .tabs-wrap,.masthead,.searchbar,.search-scope,.results,.ctrl,.btn,.btn-row,
+  .no-print,.local-jump,.flow-head p,details.sol,.notes,
+  .panel > .wrap > .sec-title,.panel > .wrap > .sec-sub{display:none!important}
+  .panel[hidden]{display:none!important}
+  .wrap,.wrap-wide{max-width:none;padding:0}
+  .grp{position:static;box-shadow:none;background:none}
+
+  .paper{border:0;padding:0;margin:0;border-radius:0}
+  .paper-head{margin:0 0 6pt;padding-bottom:4pt;border-bottom-width:1pt}
+  .paper-head h3{font-size:13pt}
+  .paper-meta{font-size:8.6pt;color:#000;gap:2pt 14pt}
+  .paper-sec{break-inside:auto;margin:0 0 8pt}
+  .paper-sec h4{font-size:10.5pt;padding-bottom:2pt;margin:0 0 4pt;
+    border-bottom:1pt solid #000;break-after:avoid}
+  .paper-sec .inst{font-size:9.2pt;margin:0 0 5pt}
+  .paper-part{margin:0 0 4pt}
+  .paper-sec.objective .paper-part{margin:0 0 2.5pt}
+  .paper-sec.objective .opts{display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0 8pt;margin:1pt 0 0}
+  .paper-sec.objective .opt{padding:0;column-gap:3pt}
+  .paper-sec.objective + .paper-sec{break-before:page}
+
+  .q{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline}
+  .q-label,.q-label.sub{background:none!important;color:#000!important;
+    border:0!important;font-weight:700;padding:0 4pt 0 0;min-width:0;min-height:0}
+  .opt .ol{color:#000!important;font-weight:600}
+  .qblock,.part{border:0;background:none;margin:0;padding:0}
+  figure.dg{break-inside:avoid;overflow:visible;border:0;background:none}
+  .eq{overflow:visible;margin:3pt 0}
+}
+
+
+/* ============================================================================
+   THE BOOK
+   Two views in one document: the contents (choose a unit) and the chapter
+   (read one). Cards belong here, on the browsing surface, where the research
+   places them: "cards favour discovery, lists favour efficiency".
+   ========================================================================== */
+/* Two views in one document. On the contents, every unit is out of the way;
+   inside a unit, the contents index is. The unit itself is hidden by the
+   router, which also keeps only one unit on screen at a time. */
+body[data-view="contents"] .unit-doc{display:none}
+body[data-view="chapter"] #view-contents{display:none}
+body[data-view="contents"] .masthead{padding-bottom:0}
+
+.book-head{padding:var(--space-6) 0 var(--space-5)}
+.book-kicker{font-size:var(--size-100);font-weight:var(--weight-bold);
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);
+  margin:0 0 var(--space-2)}
+.book-title{font-size:var(--size-700);letter-spacing:-.02em;margin:0}
+.book-sub{font-size:var(--size-400);color:var(--text-muted);
+  margin:var(--space-2) 0 var(--space-4);max-width:var(--measure)}
+.book-sub strong{color:var(--text-strong)}
+.book-progress{height:var(--space-1);max-width:24rem;border-radius:var(--radius-pill);
+  background:var(--sand-300);overflow:hidden}
+.book-progress span{display:block;height:100%;background:var(--primary);
+  border-radius:var(--radius-pill)}
+
+.unit-grid{list-style:none;margin:0;padding:0 0 var(--space-8);display:grid;
+  gap:var(--space-3);grid-template-columns:repeat(auto-fill,minmax(min(20rem,100%),1fr))}
+
+.unit{display:flex;gap:var(--space-3);min-width:0;
+  padding:var(--space-4);text-decoration:none;color:inherit;
+  background:var(--surface-raised);border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition:border-color var(--dur-fast) var(--ease)}
+a.unit:hover,a.unit:focus-visible{border-color:var(--primary);
+  background:var(--primary-tint)}
+
+.unit-n{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:var(--control-md);height:var(--control-md);
+  font-size:var(--size-300);font-weight:var(--weight-bold);
+  color:var(--primary-strong);background:var(--primary-tint);
+  border:1px solid var(--primary-line);border-radius:var(--radius-md)}
+.unit-body{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.unit-tag{margin-top:auto}
+.unit-title{display:block;font-size:var(--size-500);font-weight:var(--weight-bold);
+  color:var(--text-strong);line-height:var(--leading-tight)}
+.unit-blurb{display:block;font-size:var(--size-300);color:var(--text-muted);
+  margin-top:var(--space-1)}
+.unit-parts{list-style:none;display:flex;flex-wrap:wrap;gap:var(--space-1);
+  margin:var(--space-3) 0 0;padding:0}
+.unit-grid > *{display:flex}
+.unit-parts li{font-size:var(--size-100);color:var(--text-muted);
+  padding:2px var(--space-2);background:var(--surface-sunken);
+  border:1px solid var(--border);border-radius:var(--radius-pill)}
+.unit-tag{display:inline-block;padding-top:var(--space-3);
+  font-size:var(--size-100);font-weight:var(--weight-semibold);
+  letter-spacing:.05em;text-transform:uppercase;color:var(--text-faint)}
+.unit-tag.is-live{color:var(--primary-strong)}
+
+/* An honest empty state: the unit exists in the book, the solutions do not
+   exist yet, and the card says so rather than pretending to be a link. */
+.unit.is-planned{background:none;border-style:dashed;cursor:default}
+.unit.is-planned .unit-n{color:var(--text-faint);background:var(--surface-sunken);
+  border-color:var(--border)}
+.unit.is-planned .unit-title{color:var(--text-muted)}
+.unit.is-planned .unit-blurb{color:var(--text-faint)}
+
+/* breadcrumb back to the contents */
+.crumb ol{list-style:none;display:flex;flex-wrap:wrap;align-items:center;
+  gap:var(--space-2);margin:0 0 var(--space-2);padding:0;
+  font-size:var(--size-200)}
+.crumb li + li::before{content:"›";margin-right:var(--space-2);color:var(--text-faint)}
+.crumb a{color:var(--primary-strong);text-decoration:none;font-weight:var(--weight-medium)}
+.crumb a:hover{text-decoration:underline}
+.crumb-unit{color:var(--text-faint)}
+
+@media print{ #view-contents,.crumb{display:none!important} }

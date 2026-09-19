@@ -1,0 +1,10 @@
+dist/
+.local/
+node_modules/
+test-results/
+*.log
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc

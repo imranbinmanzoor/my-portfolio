@@ -1,0 +1,2135 @@
+{
+  "units": {
+    "1": {
+      "index": [
+        {
+          "target": "thy-11-1",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Rational numbers: definition and examples",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Rational numbers A real number is rational when it can be written in the form p/q , where p,q Z and q 0 . rational numbers = x real numbers x= p/q , p,q integers , q 0 Integers are rational because every integer n can be written as n/1 . 57= 57/1 , -4= -4/1 , 0= 0/1",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-2",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Decimal test for rational and irrational numbers",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "The decimal test A terminating decimal has finitely many digits after the decimal point. A recurring decimal continues forever but repeats a fixed block. 0.5= 12, 2.75= 11/4 , 0. 3 recurring = 13 A real number is rational exactly when its decimal expansion terminates or eventually repeats. A nonterminating, nonrecurring decimal is irrational.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-3",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Irrational numbers and the real-number set",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Irrational and real numbers An irrational number cannot be expressed as a quotient of two integers. Its decimal expansion is nonterminating and nonrecurring. sqrt 2 , sqrt 3 , , e real numbers rational numbers The real-number set is the union of the rational and irrational numbers. real numbers = rational numbers ( real numbers rational numbers ), rational numbers ( real numbers rational numbers )=",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-4",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Perfect squares and irrational square roots",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Perfect-square test If n is a positive integer and is not a perfect square, then sqrt n is irrational. sqrt 49 =7 rational numbers , sqrt 50 =5 sqrt 2 rational numbers Quick check. The nearest perfect squares around 30 are 25 and 36 . Therefore sqrt 30 is irrational and lies between 5 and 6 .",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-5",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Properties of addition multiplication equality and order",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Properties of real numbers Commutative a+b=b+a ab=ba Associative (a+b)+c=a+(b+c) (ab)c=a(bc) Identity a+0=a a 1=a Inverse a+(-a)=0 a x 1a=1 (a 0) Distributive a(b+c)=ab+ac (a+b)c=ac+bc Cancellation a+c=b+c a=b ac=bc, c is not equal to 0 a=b",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-6",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Order properties and inequality direction",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Order and inequality Adding the same real number to both sides does not change the direction of an inequality. a lt;b a+c lt;b+c Multiplication or division by a positive number keeps the direction. Multiplication or division by a negative number reverses it. a lt;b, c gt;0 ac lt;bc, a lt;b, c lt;0 ac gt;bc The reciprocal rule requires nonzero numbers on the same side of zero. 0 lt;a lt;b 1a gt; 1b, a lt;b lt;0 1a gt; 1b",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-7",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Infinitely many rational numbers between two numbers",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Numbers between numbers Between any two distinct rational numbers there are infinitely many rational numbers. The average gives one immediately. a lt;b a lt; a+b/2 lt;b Repeating the averaging process gives more and more rational numbers.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-8",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Historical note on square root of two",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Historical note By about 430 , BCE , Greek mathematicians knew that the side and diagonal of a square are incommensurable. In modern language, the diagonal of a unit square has length sqrt 2 , and sqrt 2 is irrational. The exact individual responsible is uncertain. Further reading: Mathematical Association of America .",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-11-9",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Key Concepts",
+          "title": "Fun fact zero point nine recurring equals one",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Fun fact: a recurring decimal can equal an integer 0.999 and so on =1 There is no real number between 0.999 and so on and 1 ; they are two notations for the same real number.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "example-1",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Worked Examples",
+          "title": "Example 1",
+          "question": "Identify the following decimal numbers as rational or irrational: 0.35 , 0.444 and so on , 3. 5 , 3.36788542 and so on , and 1.709975947 and so on .",
+          "solution": "0.35 has finitely many digits after the decimal point. It is a terminating decimal and therefore a rational number. 0.444 and so on is nonterminating and recurring because the digit 4 repeats. Therefore it is rational. 3. 5=3.555 and so on is nonterminating and recurring. Therefore it is rational. 3.36788542 and so on is nonterminating and nonrecurring. Therefore it is irrational. 1.709975947 and so on is nonterminating and nonrecurring. Therefore it is irrational.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-2",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Worked Examples",
+          "title": "Example 2",
+          "question": "Represent sqrt 5 on a number line.",
+          "solution": "sqrt 5 can be located by a geometric construction. Draw a horizontal number line and mark the origin O . Mark A two units to the right of O , so OA=2 . At A , draw a perpendicular and mark B one unit above A , so AB=1 . Join O to B . Use the Pythagorean theorem: (OB)^2 amp;=(OA)^2+(AB)^2 amp;=2^2+1^2 amp;=4+1 amp;=5, [2pt] OB amp;= sqrt 5 . With O as center and OB as radius, draw an arc to meet the number line at C . The point C represents sqrt 5 . Geometric construction of sqrt 5 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-3",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Worked Examples",
+          "title": "Example 3",
+          "question": "Express 0. 5 and 0. 93 recurring as rational numbers in the form pq .",
+          "solution": "(i) Let x=0. 5=0.555 and so on . 10x amp;=5.555 and so on 10x-x amp;=5.555 and so on -0.555 and so on 9x amp;=5 amp;= 59. Therefore, 0. 5= 59 . (ii) Let y=0. 93 recurring =0.939393 and so on . 100y amp;=93.939393 and so on 100y-y amp;=93.939393 and so on -0.939393 and so on 99y amp;=93 amp;= 93/99 = 31/33 . Therefore, 0. 93 recurring = 31/33 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-4",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Worked Examples",
+          "title": "Example 4",
+          "question": "Insert two rational numbers between 2 and 3 .",
+          "solution": "There are infinitely many rational numbers between 2 and 3 . Take the average to obtain one: 2+3/2 = 52 Now take the average of 52 and 3 : 52+3/2 amp;= 52+ 62/2 amp;= 11/2 2 amp;= 11/4 . Thus 52 and 11/4 are two rational numbers between 2 and 3 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-5",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Worked Examples",
+          "title": "Example 5",
+          "question": "If a= 23 , b= 32 , and c= 53 , verify the distributive properties over addition.",
+          "solution": "The left distributive property is a(b+c)=ab+ac . LHS =a(b+c) amp;= 23 ( 32+ 53 ) amp;= 23 ( 96+ 10/6 ) amp;= 23 ( 19/6 ) amp;= 38/18 amp;= 19/9 . RHS =ab+ac amp;= 23 x 32+ 23 x 53 amp;= 66+ 10/9 amp;=1+ 10/9 amp;= 99+ 10/9 amp;= 19/9 . Since the two sides are equal, the left distributive property is verified. The right distributive property is (b+c)a=ba+ca . LHS =(b+c)a amp;= ( 32+ 53 ) 23 amp;= 19/6 x 23 amp;= 38/18 amp;= 19/9 , [2pt] RHS =ba+ca amp;= 32 x 23+ 53 x 23 amp;= 66+ 10/9 amp;= 19/9 . Therefore the right distributive property is also verified.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-6",
+          "panel": "ex11",
+          "section": "Exercise 1.1 · Worked Examples",
+          "title": "Example 6",
+          "question": "Identify the property that justifies each statement: a gt;13 a+2 gt;15 3 lt;9 and 6 lt;12 9 lt;21 7 gt;4 and 5 gt;3 35 gt;12 -5 lt;-4 20 gt;16",
+          "solution": "Adding 2 to both sides of a gt;13 gives a+2 gt;15 . This is the additive property of order. Adding the two inequalities gives 3+6 lt;9+12 , hence 9 lt;21 . This is addition of inequalities. All four numbers are positive, so multiplying corresponding sides gives 7 5 gt;4 3 , hence 35 gt;12 . Multiplying -5 lt;-4 by the negative number -4 reverses the inequality: -5(-4) gt;-4(-4) , so 20 gt;16 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-sets",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "The number sets: natural, whole, integer, rational, real",
+          "concept": "natural numbers N=\\1,2,3, \\ are the natural numbers. Adding 0 gives the whole numbers whole numbers W=\\0,1,2,3, \\. Adding the negatives gives the integers integers Z=\\ ,-2,-1,0,1,2, \\. A rational number is any number of the form pq with p,q Z and q 0; these form rational numbers Q. An irrational number is a real number that is not rational. Together they form the real numbers real numbers R. Each set sits inside the next: natural numbers N numbers W Z numbers Q numbers R. Every point of the number line is exactly one real number, and every real number is exactly one point. rational numbers Q and real numbers R numbers Q have no member in common: no number is both rational and irrational.",
+          "question": "To which sets does -7 belong?",
+          "solution": "-7 Z, -7 numbers Q and -7 numbers R, but -7 numbers N and -7 numbers W.",
+          "note": "“Irrational means it has a square root sign.” sqrt 9=3 is rational, and is irrational with no radical sign at all. Classification depends on the value, not on how it is written. Write real numbers R numbers Q for the set of irrational numbers. The older symbol rational numbers Q' is ambiguous unless the universal set has been stated, so this book avoids it.",
+          "tags": [
+            "natural",
+            "whole",
+            "integer",
+            "rational",
+            "real",
+            "sets"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-decimals",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Classifying a number from its decimal expansion",
+          "concept": "Every real number has a decimal expansion, and the expansion tells you immediately whether the number is rational.  A bar marks the recurring block: 0. recurring 6 =0.666 and 0.1 recurring 23 =0.1232323",
+          "question": "Classify 3.1 recurring 45.",
+          "solution": "Rational.",
+          "note": "“A long decimal must be irrational.” 117=0. recurring 0588235294117647 has a recurring block of 16 digits. It looks random on a calculator screen but is perfectly rational. pq in lowest terms has a terminating decimal exactly when the only prime factors of q are 2 and 5. So 340 terminates (40=2^3 5) but 335 does not (35=5 7).",
+          "tags": [
+            "decimal",
+            "terminating",
+            "recurring",
+            "classify"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-recurring",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Converting a recurring decimal to p/q form",
+          "concept": "Any recurring decimal can be written as a quotient of integers by multiplying, subtracting and solving.  If some digits come before the recurring block, multiply twice, once to reach the start of the block and once to pass over it.",
+          "question": "Express 0.2 recurring 7 as a fraction.",
+          "solution": "0.2 7= 518",
+          "note": "Using the wrong multiplier The multiplier is decided by the length of the recurring block, not by the total number of decimal places. For 0. recurring 123 the block has 3 digits, so multiply by 1000. Apply the method to 0. 9: 10x-x=9x=9, so x=1. That is, 0. 9=1 exactly, not approximately.",
+          "tags": [
+            "recurring",
+            "convert",
+            "fraction",
+            "algebra"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-irrational-roots",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Why sqrt n is irrational when n is not a perfect square",
+          "concept": "For a natural number n, the square root sqrt n is rational exactly when n is a perfect square. Otherwise it is irrational.  ",
+          "question": "Prove that sqrt 2 is irrational.",
+          "solution": "The assumption fails, so sqrt 2 is irrational.",
+          "note": "“Irrational + irrational is always irrational.” False. sqrt 2+(- sqrt 2)=0 and (3+ sqrt 5)+(3- sqrt 5)=6 are rational. Similarly sqrt 2 x sqrt 2=2 is rational. Each case must be checked on its own. Rational + irrational, however, is always irrational. The Pythagorean school in ancient Greece discovered that the diagonal of a unit square is incommensurable with its side, in modern terms, that sqrt 2 is irrational. The story that Hippasus was drowned for revealing it is a much later legend and should not be presented as established fact.",
+          "tags": [
+            "irrational",
+            "proof",
+            "square root",
+            "contradiction"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-properties",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Properties of the real numbers, and the conditions they carry",
+          "concept": "For all a,b,c numbers R the operations + and x obey a fixed list of properties. Two of them carry conditions that are easy to forget.  ",
+          "question": "Name the property: (3+ sqrt 2)+ sqrt 5=3+( sqrt 2+ sqrt 5).",
+          "solution": "Associative property of addition.",
+          "note": "Cancelling without checking c 0 From 5 0=3 0 you may not conclude 5=3. The cancellation property ac=bc a=b holds only when c 0. The same condition is why 0 has no multiplicative inverse. rational numbers Q is closed under +,-, x and (excluding division by 0). The irrationals are not closed under any of these: sqrt 2 x sqrt 2=2 is rational.",
+          "tags": [
+            "property",
+            "associative",
+            "commutative",
+            "distributive",
+            "inverse",
+            "identity"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-order",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Order properties and inequalities",
+          "concept": "The real numbers are ordered: given any two of them, one is smaller, or they are equal.  Adding never changes the direction. Multiplying or dividing by a negative number always reverses it.",
+          "question": "Solve -3x+5<14.",
+          "solution": "x>-3",
+          "note": "Forgetting to reverse Writing x<-3 above is the single most common inequality error in this unit. Any time a negative factor is divided out, flip the symbol. Between any two distinct real numbers there is another real number, in fact infinitely many rationals and infinitely many irrationals. The number line has no gaps and no smallest step.",
+          "tags": [
+            "order",
+            "inequality",
+            "trichotomy",
+            "transitive",
+            "reversal"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-numberline",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Constructing irrational numbers on the number line",
+          "concept": "Every real number, rational or irrational, corresponds to exactly one point on the number line. Irrational lengths such as sqrt 2 can be constructed exactly with a straight edge and compasses.  Repeating the step on each new hypotenuse produces sqrt 2, sqrt 3, sqrt 5, in turn.",
+          "question": "Construct sqrt 5 on the number line.",
+          "solution": "P lies between 2 and 3, since sqrt 5 2.236.",
+          "note": "Measuring instead of constructing Marking 2.24 with a ruler gives an approximation, not sqrt 5. The compass-and-straight-edge construction gives the exact point. sqrt 2 can be drawn exactly, but cannot: it is transcendental, which is why squaring the circle with straight edge and compasses is impossible. Lindemann settled this in 1882.",
+          "tags": [
+            "number line",
+            "construction",
+            "Pythagoras",
+            "geometry"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-i",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (i)",
+          "question": "Identify each of the following as a rational or an irrational number. 2.353535",
+          "solution": "Count the digits after the decimal point. There are exactly 6 digits after the point, and the expansion stops. So 2.353535 is a terminating decimal. Write the terminating decimal as a quotient of integers.  Check the definition of a rational number. Numerator and denominator are integers and the denominator is not 0, so the number has the form pq with p,q Z, q 0.",
+          "note": "Terminating decimals are always rational A decimal that stops after n digits equals the digits as a whole number10^n, which is a quotient of two integers. Do not confuse this with 2. recurring 35 2.353535 stops. 2. recurring 35 =2.353535 never stops. Both are rational, but for different reasons: the first is terminating, the second is non-terminating recurring.",
+          "concept": "",
+          "tags": [
+            "rational",
+            "terminating decimal",
+            "classify"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-ii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (ii)",
+          "question": "Identify each of the following as a rational or an irrational number. 0. recurring 6",
+          "solution": "Read the recurring bar. The bar over 6 means 0. 6=0.6666, so the expansion is non-terminating and the single digit 6 repeats for ever. Name the number so we can work with it.  One digit recurs, so multiply by 10 to shift the block one place.  Subtract the first equation from the second; the identical tails cancel.  Collect like terms on each side.  Divide both sides by 9.  Cancel the common factor 3. ",
+          "note": "Why multiply by 10 here Multiply by 10^k where k is the length of the recurring block. Here the block is the single digit 6, so k=1 and the multiplier is 10^1=10. Check by division Divide 2 by 3: 2 3=0.666, which returns the original decimal.",
+          "concept": "",
+          "tags": [
+            "rational",
+            "recurring decimal",
+            "classify"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-iii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (iii)",
+          "question": "Identify each of the following as a rational or an irrational number. 2.236067",
+          "solution": "Read what the dots tell us. The dots show the expansion never ends, and no group of digits is marked as repeating. Apply the decimal test. A decimal that is non-terminating and non-recurring cannot be written as pq with integers p,q and q 0.",
+          "note": "The three-way decimal test Terminating rational. Non-terminating recurring rational. Non-terminating non-recurring irrational. A calculator cannot decide this A calculator shows only about 10 digits. Seeing no pattern on screen is not a proof of irrationality; the classification comes from knowing the number is sqrt 5 and that 5 is not a perfect square.",
+          "concept": "",
+          "tags": [
+            "irrational",
+            "non-terminating",
+            "classify"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-iv",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (iv)",
+          "question": "Identify each of the following as a rational or an irrational number. sqrt 7",
+          "solution": "Test whether the radicand is a perfect square. 2^2=4 and 3^2=9, so 7 lies strictly between two consecutive perfect squares and is therefore not a perfect square. Apply the theorem on square roots. If a natural number n is not a perfect square, then sqrt n is irrational.",
+          "note": " For n numbers N, sqrt n is rational exactly when n is a perfect square. Otherwise sqrt n is irrational. Where the rule comes from Suppose sqrt 7= pq in lowest terms. Squaring gives 7q^2=p^2, so 7 p^2 and hence 7 p. Writing p=7k gives 7q^2=49k^2, so q^2=7k^2 and 7 q too. Then p and q share the factor 7, contradicting lowest terms.",
+          "concept": "",
+          "tags": [
+            "irrational",
+            "surd",
+            "square root"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-v",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (v)",
+          "question": "Identify each of the following as a rational or an irrational number. e",
+          "solution": "Recall what e is. e=2.718281828 is the base of the natural logarithm. State the known result. e has a non-terminating, non-recurring decimal expansion; it was proved irrational by Euler in 1737.",
+          "note": "The early digits look like a pattern e=2.718281828 appears to repeat 1828, but the next digits are 459045 The pattern breaks. Recurrence must continue for ever, not for a few digits. Did you know? e is not merely irrational, it is transcendental: it is not a root of any polynomial equation with integer coefficients. Hermite proved this in 1873.",
+          "concept": "",
+          "tags": [
+            "irrational",
+            "e",
+            "constant"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-vi",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (vi)",
+          "question": "Identify each of the following as a rational or an irrational number.",
+          "solution": "Recall the decimal expansion. =3.14159265, non-terminating and non-recurring. State the known result. Lambert proved in 1761 that cannot be written as a quotient of two integers.",
+          "note": "(22)/(7) is not 227=3. recurring 142857 is a rational approximation of , correct only to 2 decimal places. itself is irrational.",
+          "concept": "",
+          "tags": [
+            "irrational",
+            "pi",
+            "constant"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-vii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (vii)",
+          "question": "Identify each of the following as a rational or an irrational number. 5 + sqrt 11",
+          "solution": "Classify the two parts separately. 5 is rational. 11 is not a perfect square, so sqrt 11 is irrational. Argue by contradiction: suppose the sum were rational.  Subtract 5 from both sides to isolate the radical.  Closure of rational numbers Q under subtraction. r and 5 are both rational, so r-5 is rational. That would make sqrt 11 rational, which is false.",
+          "note": "Rational + irrational is always irrational If a numbers Q and b numbers Q, then a+b numbers Q. The proof above works for any such a and b: isolate b and use closure of rational numbers Q under subtraction. This does not extend to two irrationals Irrational + irrational may be rational. For example sqrt 2+ (- sqrt 2 )=0, which is rational. See part (viii).",
+          "concept": "",
+          "tags": [
+            "irrational",
+            "sum",
+            "proof by contradiction"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-viii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (viii)",
+          "question": "Identify each of the following as a rational or an irrational number. sqrt 3 + sqrt 13",
+          "solution": "Both terms are irrational, so no shortcut rule applies. Neither 3 nor 13 is a perfect square, so sqrt 3 and sqrt 13 are both irrational. The sum of two irrational numbers is not automatically irrational, so this case needs a proof of its own. Argue by contradiction.  Square both sides to remove the outer structure.  Expand the left side using (a+b)^2=a^2+2ab+b^2.  Use ( sqrt a)^2=a and sqrt a sqrt b= sqrt ab.  Add the two integers.  Isolate the radical term.  Divide both sides by 2.  Closure of rational numbers Q under multiplication, subtraction and division. If r were rational then r^2-162 would be rational, forcing sqrt 39 to be rational. But 39 is not a perfect square, so sqrt 39 is irrational, a contradiction.",
+          "note": "The textbook claim needs correction It is not true that the sum of two irrational numbers is always irrational. sqrt 2+(- sqrt 2)=0 and (2+ sqrt 3)+(2- sqrt 3)=4 are both rational. Each such sum must be settled on its own. Why squaring is the right move Squaring turns sqrt 3+ sqrt 13 into 16+2 sqrt 39, which contains only one radical. A single isolated radical can then be forced to be rational, which is the contradiction we want. Numerical sanity check sqrt 3 1.7321 and sqrt 13 3.6056, so the sum is about 5.3377, and 5.3377^2 28.49 16+2(6.2450). Consistent.",
+          "concept": "",
+          "tags": [
+            "irrational",
+            "sum of two irrationals",
+            "proof"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-ix",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (ix)",
+          "question": "Identify each of the following as a rational or an irrational number. (15)/(4)",
+          "solution": "Check the definition directly. 15 Z, 4 Z and 4 0, so 154 is already in the form pq.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "rational",
+            "fraction"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q1-x",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 1 (x)",
+          "question": "Identify each of the following as a rational or an irrational number. (2- sqrt 2)(2+ sqrt 2)",
+          "solution": "Recognise the form before multiplying out. The two brackets are conjugates: they match the pattern (a-b)(a+b) with a=2 and b= sqrt 2. Apply the difference-of-squares identity (a-b)(a+b)=a^2-b^2.  Evaluate each square; ( sqrt 2)^2=2.  Subtract.  Classify the result. 2= 21 is a quotient of integers with non-zero denominator.",
+          "note": "Why the radical disappeared Multiplying by the conjugate squares the surd, and ( sqrt 2)^2=2 is rational. This is exactly the mechanism behind rationalizing a binomial denominator in Exercise 1.2. Do not judge by appearance An expression containing sqrt 2 is not automatically irrational. Always simplify first, then classify.",
+          "concept": "",
+          "tags": [
+            "rational",
+            "difference of squares",
+            "conjugate"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q2-i",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 2 (i)",
+          "question": "Represent the following numbers on the number line. sqrt 2",
+          "solution": "Start from a unit length on the line. Draw the number line and mark O at 0 and A at 1, so OA=1. Create a right angle so Pythagoras can be applied. At A, draw AB OA with AB=1. Use Pythagoras' theorem in right triangle OAB.  Put in the two known lengths.  Evaluate the squares and add.  Take the positive square root; a length cannot be negative.  Transfer the length back onto the line. With centre O and radius OB, draw an arc cutting the number line at P. Then OP= sqrt 2, so P represents sqrt 2.",
+          "note": " Pythagoras' theorem: in a right triangle, hypotenuse^2= leg^2+ leg^2. Check the position 1^2=1<2<4=2^2, so 1< sqrt 2<2. The arc must cut the line between 1 and 2.",
+          "concept": "",
+          "tags": [
+            "number line",
+            "construction",
+            "Pythagoras"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q2-ii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 2 (ii)",
+          "question": "Represent the following numbers on the number line. sqrt 3",
+          "solution": "Build on the previous construction. First construct OB= sqrt 2 exactly as in part (i). Raise a new unit perpendicular on the hypotenuse just built. At B, draw BC OB with BC=1. Apply Pythagoras in right triangle OBC.  Substitute OB= sqrt 2 and BC=1.  Use ( sqrt 2)^2=2 and 1^2=1.  Take the positive square root.  Transfer the length to the line. With centre O and radius OC, draw an arc cutting the line at Q. Then Q represents sqrt 3.",
+          "note": "The spiral of Theodorus Repeating this step, a unit perpendicular on each new hypotenuse, produces sqrt 2, sqrt 3, sqrt 4, sqrt 5, in turn. The figure is called the spiral of Theodorus.",
+          "concept": "",
+          "tags": [
+            "number line",
+            "construction",
+            "Pythagoras"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q2-iii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 2 (iii)",
+          "question": "Represent the following numbers on the number line. 4(1)/(3)",
+          "solution": "Change the mixed number to an improper fraction to see its size.  Identify the two consecutive integers it lies between. 4 13=4+ 13, so the point lies between 4 and 5, close to 4. Divide the correct unit interval, not the whole line. Divide the segment from 4 to 5 into 3 equal parts and take the first division point.",
+          "note": " For a mixed number a bc with a>0, the point lies between a and a+1. Divide that unit interval into c equal parts and count b of them.",
+          "concept": "",
+          "tags": [
+            "number line",
+            "mixed number"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q2-iv",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 2 (iv)",
+          "question": "Represent the following numbers on the number line. -2(1)/(7)",
+          "solution": "Write it as a single improper fraction.  Decide which side of zero and between which integers. The number is negative, so it lies to the left of 0. Since 2< 157<3, the point lies between -3 and -2. Divide the correct unit interval. Divide the segment from -2 to -3 into 7 equal parts and take the first division point moving left from -2.",
+          "note": "The commonest error with negatives -2 17 means -(2+ 17), not -2+ 17. It is therefore further from zero than -2, so it lies between -3 and -2 and not between -2 and -1.",
+          "concept": "",
+          "tags": [
+            "number line",
+            "negative",
+            "mixed number"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q2-v",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 2 (v)",
+          "question": "Represent the following numbers on the number line. (5)/(8)",
+          "solution": "Compare numerator and denominator. 5<8, so 58<1 and the point lies between 0 and 1. Split the unit interval into as many parts as the denominator. Divide the segment from 0 to 1 into 8 equal parts and count 5 of them from 0.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "number line",
+            "proper fraction"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q2-vi",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 2 (vi)",
+          "question": "Represent the following numbers on the number line. 2(3)/(4)",
+          "solution": "Write as an improper fraction.  Identify the correct unit interval. 2 34=2+ 34, so the point lies between 2 and 3, not between 3 and 4. Divide that unit interval into 4 equal parts. Divide the segment from 2 to 3 into 4 equal parts and take the third division point.",
+          "note": "Check with the improper fraction 114=2.75 and 2<2.75<3, confirming the interval.",
+          "concept": "",
+          "tags": [
+            "number line",
+            "mixed number"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q3-i",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 3 (i)",
+          "question": "Express the following recurring decimals as the rational number (p)/(q), where p and q are integers and q 0. 0. recurring 4",
+          "solution": "Name the number.  The recurring block has 1 digit, so multiply by 10^1.  Subtract to destroy the infinite tail.  Collect like terms.  Divide both sides by 9. ",
+          "note": " If a recurring block of length k starts immediately after the decimal point, multiply by 10^k, subtract, and solve. Here k=1.",
+          "concept": "",
+          "tags": [
+            "recurring decimal",
+            "convert"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q3-ii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 3 (ii)",
+          "question": "Express the following recurring decimals as the rational number (p)/(q), where p and q are integers and q 0. 0. recurring 37",
+          "solution": "Name the number.  The recurring block 37 has 2 digits, so multiply by 10^2=100.  Subtract; the two tails are identical and cancel.  Collect like terms.  Divide both sides by 99. ",
+          "note": "Why 100 and not 10 The multiplier must shift the decimal point by exactly one whole block. The block 37 occupies 2 places, so the multiplier is 10^2. Using 10 would leave 3.7373, whose tail no longer matches 0.3737, and the subtraction would fail.",
+          "concept": "",
+          "tags": [
+            "recurring decimal",
+            "convert"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q3-iii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 3 (iii)",
+          "question": "Express the following recurring decimals as the rational number (p)/(q), where p and q are integers and q 0. 0. recurring 21",
+          "solution": "Name the number.  Block length 2, so multiply by 100.  Subtract to remove the tail.  Collect like terms.  Divide both sides by 99.  (21,99)=3, so cancel the common factor 3. ",
+          "note": "(21)/(99) is not the final answer pq should be given in lowest terms unless the question says otherwise. Always test the numerator and denominator for a common factor at the end. Check by division 7 33=0.212121, which is the original decimal.",
+          "concept": "",
+          "tags": [
+            "recurring decimal",
+            "convert",
+            "reduce"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-i",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (i)",
+          "question": "Name the property used in each of the following. (a+4)+b = a+(4+b)",
+          "solution": "The order of the terms is unchanged; only the bracketing moves. a, 4, b stay in the same left-to-right order, so this is a regrouping, not a reordering.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "associative",
+            "addition"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-ii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (ii)",
+          "question": "Name the property used in each of the following. sqrt 2+ sqrt 3 = sqrt 3+ sqrt 2",
+          "solution": "The two terms have swapped places. There are no brackets to move; only the order of the addends has changed.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "commutative",
+            "addition"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-iii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (iii)",
+          "question": "Name the property used in each of the following. x - x = 0",
+          "solution": "Write subtraction as adding the opposite.  A number added to its opposite gives the additive identity. ",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "additive inverse"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-iv",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (iv)",
+          "question": "Name the property used in each of the following. a(b+c) = ab + ac",
+          "solution": "Multiplication is spread across a sum. The factor a outside the bracket multiplies each term inside.",
+          "note": " For all a,b,c numbers R: a(b+c)=ab+ac. This is the single most used step in the whole of Exercise 1.2.",
+          "concept": "",
+          "tags": [
+            "property",
+            "distributive"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-v",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (v)",
+          "question": "Name the property used in each of the following. 16 + 0 = 16",
+          "solution": "Adding 0 left the number unchanged. 0 is the additive identity of real numbers R.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "additive identity"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-vi",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (vi)",
+          "question": "Name the property used in each of the following. 100 x 1 = 100",
+          "solution": "Multiplying by 1 left the number unchanged. 1 is the multiplicative identity of real numbers R.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "multiplicative identity"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-vii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (vii)",
+          "question": "Name the property used in each of the following. 4 x (5 x 8) = (4 x 5) x 8",
+          "solution": "Only the bracketing changed. 4, 5, 8 remain in the same order; the grouping moved.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "associative",
+            "multiplication"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q4-viii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 4 (viii)",
+          "question": "Name the property used in each of the following. ab = ba",
+          "solution": "The two factors swapped places. Order of multiplication changed, no grouping involved.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "property",
+            "commutative",
+            "multiplication"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q5-i",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 5 (i)",
+          "question": "Name the property used in each of the following. -3 < -1 0 < 2",
+          "solution": "Find what was done to both sides. The left side went from -3 to 0 and the right side from -1 to 2. Both increased by 3. Adding the same number to both sides preserves the inequality. ",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "order",
+            "additive property of inequality"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q5-ii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 5 (ii)",
+          "question": "Name the property used in each of the following. If a < b, then (1)/(a) > (1)/(b)",
+          "solution": "Taking reciprocals reversed the inequality sign. This is the reciprocal (multiplicative inverse) property of inequalities. State the condition the textbook omits. The statement holds only when a and b have the same sign and neither is 0. Show what goes wrong without the condition. ",
+          "note": "The condition is essential As printed, the statement is false for a=-2, b=3. Always check that a and b lie on the same side of zero before reversing the sign.",
+          "concept": "",
+          "tags": [
+            "order",
+            "reciprocal",
+            "condition"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q5-iii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 5 (iii)",
+          "question": "Name the property used in each of the following. If a < b, then a+c < b+c",
+          "solution": "The same quantity c was added to both sides and the sign did not change. Addition never reverses an inequality, whatever the sign of c.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "order",
+            "additive property of inequality"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q5-iv",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 5 (iv)",
+          "question": "Name the property used in each of the following. If ac < bc and c > 0, then a < b",
+          "solution": "A common positive factor was cancelled from both sides. Dividing by the positive number c keeps the direction of the inequality.",
+          "note": "Why c>0 matters Dividing by a positive number preserves order; dividing by a negative number reverses it. That is exactly the difference between this part and part (v).",
+          "concept": "",
+          "tags": [
+            "order",
+            "cancellation",
+            "positive multiplier"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q5-v",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 5 (v)",
+          "question": "Name the property used in each of the following. If ac < bc and c < 0, then a > b",
+          "solution": "A common negative factor was cancelled and the sign flipped. Dividing both sides by a negative number reverses the inequality. See it on a concrete case. ",
+          "note": "The single most common inequality error Forgetting to reverse the sign when multiplying or dividing by a negative number. Whenever a negative factor is removed, flip < to > and to .",
+          "concept": "",
+          "tags": [
+            "order",
+            "cancellation",
+            "negative multiplier",
+            "reversal"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q5-vi",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 5 (vi)",
+          "question": "Name the property used in each of the following. Either a > b or a = b or a < b",
+          "solution": "Exactly one of three mutually exclusive relations must hold. For any two real numbers, precisely one of >, =, < is true.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "order",
+            "trichotomy"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q6-i",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 6 (i)",
+          "question": "Insert two rational numbers between the given pairs. Insert two rational numbers between (1)/(3) and (1)/(4).",
+          "solution": "Decide which number is smaller before averaging. With equal numerators, the larger denominator gives the smaller fraction, so 14< 13. The mean of two numbers always lies strictly between them.  LCM of 4 and 3 is 12.  Multiply by 12.  Average again, this time between 14 and r_1, to get a second number.  LCM of 4 and 24 is 24.  Multiply by 12. ",
+          "note": "density of rational numbers Q Between any two distinct rational numbers there is another rational number, namely their average. Repeating the step gives as many as you like. Check numerically 14=0.25, (13)/(48) 0.2708, 724 0.2917, 13 0.3333, correctly ordered.  Rewrite both with a common denominator large enough to leave room: 14=(15)/(60) and 13=(20)/(60), so (16)/(60) and (17)/(60) work immediately.",
+          "concept": "",
+          "tags": [
+            "density",
+            "average",
+            "rational"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q6-ii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 6 (ii)",
+          "question": "Insert two rational numbers between the given pairs. Insert two rational numbers between 3 and 4.",
+          "solution": "Take the mean of the two given numbers.  Average 3 with r_1 to obtain a second number.  Write 3 as 62.  Multiply by 12. ",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "density",
+            "average",
+            "rational"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex11-q6-iii",
+          "panel": "ex11",
+          "section": "Exercise 1.1",
+          "title": "Question 6 (iii)",
+          "question": "Insert two rational numbers between the given pairs. Insert two rational numbers between (3)/(5) and (4)/(5).",
+          "solution": "The denominators already match, so add the numerators.  The denominators already match, so add the numerators inside the bracket.  Multiply the two fractions: numerator times numerator, denominator times denominator.  Average 35 with r_1.  LCM of 5 and 10 is 10.  Multiply by 12. ",
+          "note": " Scale both fractions: 35=(30)/(50) and 45=(40)/(50), so (31)/(50) and (32)/(50)=(16)/(25) also work.",
+          "concept": "",
+          "tags": [
+            "density",
+            "average",
+            "rational"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-1",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Radical expressions nth roots radicand and index",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Radicals and the n th root A real number x is an n th root of a when x^n=a . The principal root is written root n of a . In root n of a , a is the radicand and n is the index . If no index is written, the index is 2 . root n of a =a^ 1n For even indices in the real-number system, the radicand must be nonnegative and the principal root is nonnegative. sqrt a^2 =|a|, root 4 of a^4 =|a|",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-2",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Laws of radicals with conditions",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Laws of radicals For real values for which both sides are defined: root n of a , root n of b = root n of ab root n of ab = root n of a root n of b (b 0) ( root n of a )^m=a^ mn Example. sqrt 12 = sqrt 4 3 = sqrt 4 sqrt 3 =2 sqrt 3 .",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-3",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Laws of indices exponents",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Laws of indices Product a^m a^n=a^ m+n Quotient a^m/a^n =a^ m-n ;(a 0) Power of a power (a^m)^n=a^ mn Power of a product (ab)^n=a^n b^n Zero exponent a^0=1 ;(a is not equal to 0) Negative exponent a^ -n = 1 a^n ;(a 0)",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-4",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Surds monomial binomial and like surds",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Surds and like terms A surd is an irrational radical with a rational radicand. Examples include sqrt 2 and root 3 of 5 . Surds with one term are monomial; expressions such as sqrt 2 + sqrt 3 are binomial surds. Only like surds can be combined by adding coefficients. 2 sqrt 3 +5 sqrt 3 =7 sqrt 3 , sqrt 2 + sqrt 3 cannot be combined",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-5",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Conjugate surds and difference of squares",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Conjugates The conjugates of a+ sqrt b and sqrt a + sqrt b are obtained by changing the sign between the terms. (a+ sqrt b )(a- sqrt b )=a^2-b ( sqrt a + sqrt b )( sqrt a - sqrt b )=a-b The middle terms cancel, so the product contains no surd.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-6",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Rationalizing a monomial or binomial denominator",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Rationalizing the denominator Multiplying numerator and denominator by the same nonzero expression multiplies the fraction by 1 and does not change its value. 1 sqrt 2 x sqrt 2 / sqrt 2 = sqrt 2 /2 For a binomial denominator, multiply by its conjugate. 1 sqrt 2 + sqrt 3 x sqrt 2 - sqrt 3 / sqrt 2 - sqrt 3 = sqrt 3 - sqrt 2",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-7",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Common mistakes with radicals and exponents",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Common mistakes sqrt a+b is not equal to sqrt a + sqrt b in general. (a+b)^2 is not equal to a^2+b^2 ; the middle term 2ab is required. For even roots, sqrt x^2 =|x| , not automatically x . When rationalizing, multiply both numerator and denominator by the same factor.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-12-8",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Key Concepts",
+          "title": "Historical note ancient approximation of square root two",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Historical note Ancient Babylonian mathematics contained a remarkably accurate approximation to sqrt 2 . Much later, Greek mathematics proved that the diagonal-to-side ratio of a square cannot be a ratio of integers. Further reading: American Mathematical Society .",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "example-7",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Worked Examples",
+          "title": "Example 7",
+          "question": "Simplify root 4 of 16x^4y^8 , root 3 of 27x^6y^9z^3 , and 64^ - 43 .",
+          "solution": "(i) root 4 of 16x^4y^8 amp;=(16x^4y^8)^ 14 amp;=(2^4x^4y^8)^ 14 amp;=(2^4)^ 14 (x^4)^ 14 (y^8)^ 14 amp;=2xy^2. The textbook assumes the variables are nonnegative. Otherwise root 4 of x^4 =|x| . (ii) root 3 of 27x^6y^9z^3 amp;=(27x^6y^9z^3)^ 13 amp;=(3^3x^6y^9z^3)^ 13 amp;=(3^3)^ 13 (x^6)^ 13 (y^9)^ 13 (z^3)^ 13 amp;=3x^2y^3z. (iii) 64^ - 43 amp;=(2^6)^ - 43 amp;=2^ 6 (- 43 ) amp;=2^ -8 amp;= 1 2^8 amp;= 1 256 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-8",
+          "panel": "ex12",
+          "section": "Exercise 1.2 · Worked Examples",
+          "title": "Example 8",
+          "question": "Rationalize the denominators of 3 sqrt 5 + sqrt 2 and 3 sqrt 5 - sqrt 3 .",
+          "solution": "(i) 3 sqrt 5 + sqrt 2 amp;= 3 sqrt 5 + sqrt 2 x sqrt 5 - sqrt 2 / sqrt 5 - sqrt 2 amp;= 3( sqrt 5 - sqrt 2 )/( sqrt 5 + sqrt 2 )( sqrt 5 - sqrt 2 ) amp;= 3( sqrt 5 - sqrt 2 )/( sqrt 5 )^2-( sqrt 2 )^2 amp;= 3( sqrt 5 - sqrt 2 )/5-2 amp;= sqrt 5 - sqrt 2 . (ii) 3 sqrt 5 - sqrt 3 amp;= 3 sqrt 5 - sqrt 3 x sqrt 5 + sqrt 3 / sqrt 5 + sqrt 3 amp;= 3( sqrt 5 + sqrt 3 )/( sqrt 5 )^2-( sqrt 3 )^2 amp;= 3( sqrt 5 + sqrt 3 )/5-3 amp;= 3( sqrt 5 + sqrt 3 ) 2.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-radicals",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Radicals, surds and their laws",
+          "concept": "For n numbers N, n 2, the symbol rootn a denotes the nth root of a. A surd is a root that cannot be evaluated exactly as a rational number, such as sqrt 2 or root3 5.  For even n, the laws require a 0 and b 0 so that the roots are real.",
+          "question": "Simplify sqrt 72.",
+          "solution": "sqrt 72=6 sqrt 2",
+          "note": "sqrt a^2=a is not always true For a=-5: sqrt (-5)^2= sqrt 25=5, not -5. The correct statement for even roots is rootn a^n=|a|. This matters whenever a variable could be negative. There is a product law and a quotient law, but no sum law. Test it: sqrt 9+ sqrt 16=3+4=7, while sqrt 9+16= sqrt 25=5.",
+          "tags": [
+            "radical",
+            "surd",
+            "root",
+            "product law",
+            "quotient law",
+            "simplify"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-rationalize",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "Rationalizing a denominator",
+          "concept": "To rationalize a denominator is to rewrite a fraction so that no radical remains below the line, without changing its value.  Monomial denominator multiply by the surd itself. Binomial denominator multiply by the conjugate.",
+          "question": "Rationalize (5)/(2- sqrt 3).",
+          "solution": "52- sqrt 3=10+5 sqrt 3",
+          "note": "Using a conjugate on a monomial denominator For (1)/( sqrt 7) there is nothing to conjugate, multiply by ( sqrt 7)/( sqrt 7) to get ( sqrt 7)/(7). Reach for a conjugate only when the denominator has two terms. Before calculators, dividing by 1.41421 by hand was far harder than dividing by 2. Today the reason is different: a rationalized form is unique, so two students' answers can be compared directly.",
+          "tags": [
+            "rationalize",
+            "conjugate",
+            "denominator",
+            "surd"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "c-exponents",
+          "panel": "concepts",
+          "section": "Key Concepts",
+          "title": "The laws of exponents",
+          "concept": "For a,b>0 and real m,n, powers obey a fixed set of laws. Every simplification in Exercise 1.2 is one of these laws applied one at a time.  ",
+          "question": "Simplify 2^n+2+2^n2^n+1.",
+          "solution": "52",
+          "note": "a^m+a^n has no law The laws cover multiplication, division and powers of powers, never addition. 2^3+2^4 is 8+16=24, not 2^7. When terms are added, factor instead. Follow the quotient law: a^na^n=a^n-n=a^0. But any non-zero number divided by itself is 1. So a^0=1 for every a 0, the definition is forced, not arbitrary.",
+          "tags": [
+            "exponent",
+            "index",
+            "power",
+            "law",
+            "negative exponent",
+            "fractional exponent"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q1-i",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 1 (i)",
+          "question": "Rationalize the denominators of the following. 134+ sqrt 3",
+          "solution": "The denominator is the binomial 4+ sqrt 3, so its conjugate is 4- sqrt 3.  Multiply numerator and denominator by the conjugate. This does not change the value, because (4- sqrt 3)/(4- sqrt 3)=1.  Distribute 13 over the bracket in the numerator.  The denominator matches (a+b)(a-b)=a^2-b^2 with a=4, b= sqrt 3.  Apply the difference-of-squares identity to the bracket pair.  Evaluate each square; ( sqrt 3)^2=3.  Subtract.  Put numerator over denominator.  Cancel the common factor 13.  Write what is left. ",
+          "note": "conjugate of a binomial surd The conjugate of a+ sqrt b is a- sqrt b. Their product a^2-b is rational, because the difference-of-squares identity squares away the radical. Why the conjugate and not sqrt 3 Multiplying by sqrt 3 alone would give (4+ sqrt 3) sqrt 3=4 sqrt 3+3, which still contains a radical. Only the conjugate removes it in one step. Numerical check (13)/(4+1.7321) (13)/(5.7321) 2.268, and 4-1.7321 2.268. They agree.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "conjugate",
+            "binomial denominator"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q1-ii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 1 (ii)",
+          "question": "Rationalize the denominators of the following. sqrt 2+ sqrt 5 sqrt 3",
+          "solution": "The denominator is the single surd sqrt 3, so multiply by sqrt 3, not by a conjugate.  Multiply numerator and denominator by sqrt 3.  Distribute sqrt 3 over the bracket in the numerator.  Apply the product law for radicals, sqrt a x sqrt b= sqrt ab, to each term.  Multiply under each radical.  The denominator becomes ( sqrt 3)^2=3, which is rational.  A factor multiplied by itself is that factor squared.  Squaring a square root undoes it, because sqrt 3 0.  Combine numerator and denominator. ",
+          "note": "Why multiply by ( sqrt 3)/( sqrt 3) and not by a conjugate The denominator here contains the single surd sqrt 3, with nothing added to it. Multiplying by sqrt 3 turns it into ( sqrt 3)^2=3, which is rational. A conjugate is needed only when the denominator is a binomial such as a+ sqrt b. Do not forget to distribute ( sqrt 2+ sqrt 5) sqrt 3 is sqrt 6+ sqrt 15, not sqrt 2+ sqrt 15. Every term inside the bracket must be multiplied.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "monomial denominator",
+            "distribute"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q1-iii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 1 (iii)",
+          "question": "Rationalize the denominators of the following. sqrt 2-1 sqrt 5",
+          "solution": "Single surd sqrt 5 in the denominator.  Multiply above and below by sqrt 5.  Distribute sqrt 5 over both terms of the numerator.  Apply sqrt a x sqrt b= sqrt ab to the first term.  Multiply under the radical.  The denominator becomes rational.  Combine. ",
+          "note": "Why multiply by ( sqrt 5)/( sqrt 5) The denominator is the single surd sqrt 5. Multiplying by sqrt 5 turns it into ( sqrt 5)^2=5, which is rational. Because the numerator is a two-term bracket, the same sqrt 5 must then be distributed over both terms. sqrt 10- sqrt 55 cannot be simplified further You may not cancel the 5 against sqrt 5. Cancellation needs a common factor of the whole numerator, and sqrt 10- sqrt 5 has no factor of 5.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "monomial denominator",
+            "distribute"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q1-iv",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 1 (iv)",
+          "question": "Rationalize the denominators of the following. 6-4 sqrt 26+4 sqrt 2",
+          "solution": "The denominator is the binomial 6+4 sqrt 2; its conjugate is 6-4 sqrt 2.  Multiply numerator and denominator by the conjugate.  The numerator becomes the same bracket multiplied by itself.  Apply (a-b)^2=a^2-2ab+b^2 with a=6, b=4 sqrt 2.  Evaluate each of the three parts separately. Note (4 sqrt 2)^2=4^2( sqrt 2)^2=16 2.  Add the two rational terms 36 and 32.  The denominator matches (a+b)(a-b)=a^2-b^2.  Evaluate both squares.  Combine numerator and denominator.  Take out the common factor 4 from the numerator so it can be cancelled.  Cancel the common factor 4.  Write what remains. ",
+          "note": "Why the numerator became a square The numerator and the conjugate happen to be the same bracket, 6-4 sqrt 2. So the multiplication is a squaring, and (a-b)^2 applies rather than (a+b)(a-b). (4 sqrt 2)^2 not equal 4 2 The whole coefficient is squared as well: (4 sqrt 2)^2=4^2 x ( sqrt 2)^2=16 2=32. Numerical check (6-5.657)/(6+5.657) (0.343)/(11.657) 0.0294, and 17-12(1.41421) 0.0294.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "conjugate",
+            "square of a binomial"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q1-v",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 1 (v)",
+          "question": "Rationalize the denominators of the following. sqrt 3- sqrt 2 sqrt 3+ sqrt 2",
+          "solution": "Conjugate of sqrt 3+ sqrt 2 is sqrt 3- sqrt 2.  Multiply numerator and denominator by the conjugate.  The numerator becomes a square.  Apply (a-b)^2=a^2-2ab+b^2 with a= sqrt 3, b= sqrt 2.  Use ( sqrt a)^2=a and sqrt 3 sqrt 2= sqrt 6.  Add the rational terms.  Denominator by difference of squares.  Evaluate both squares and subtract.  Divide by 1. ",
+          "note": " For denominators of the form sqrt a+ sqrt b, the conjugate is sqrt a- sqrt b and the product is a-b, always rational. Numerical check (1.7321-1.4142)/(1.7321+1.4142) (0.3178)/(3.1463) 0.1010, and 5-2(2.4495) 0.1010.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "conjugate",
+            "square of a binomial"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q1-vi",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 1 (vi)",
+          "question": "Rationalize the denominators of the following. 4 sqrt 3 sqrt 7+ sqrt 5",
+          "solution": "Conjugate of sqrt 7+ sqrt 5 is sqrt 7- sqrt 5.  Multiply numerator and denominator by the conjugate.  Distribute 4 sqrt 3 over the bracket.  Apply sqrt a x sqrt b= sqrt ab to each term.  Multiply under each radical.  Denominator by difference of squares.  Apply the difference-of-squares identity to the bracket pair.  Combine.  Take out the common factor 4 so the fraction can be reduced.  Divide 4 by 2; write 4=2 2 and cancel one 2.  Write what remains. ",
+          "note": "Why factor before cancelling 4 sqrt 21-4 sqrt 152 cannot be reduced term by term until the common factor 4 is taken outside a bracket. Cancellation is only valid against a factor of the entire numerator.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "conjugate",
+            "distribute"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-i",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (i)",
+          "question": "Simplify the following. ((81)/(16))^-(3)/(4)",
+          "solution": "A negative exponent means the reciprocal: ( ab)^-n=( ba)^n.  Write both numbers as powers of a prime so the fractional exponent can act.  Apply ( ab)^n=(a^n)/(b^n).  Apply (a^m)^n=a^mn; multiply the exponents.  4 x 34=3 in both cases.  Evaluate the cubes. ",
+          "note": " a^-n= 1a^n, so a fraction raised to a negative power is the reciprocal raised to the positive power. Why factor into 2^4 and 3^4 The exponent 34 asks for a fourth root followed by a cube. Writing 16=2^4 and 81=3^4 makes the fourth root exact and removes all guesswork.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "negative exponent",
+            "fractional exponent"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-ii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (ii)",
+          "question": "Simplify the following. ((3)/(4))^-2 ((4)/(9))^3 x (16)/(27)",
+          "solution": "Turn the negative exponent into a reciprocal.  Square numerator and denominator separately.  Cube the second fraction.  Substitute both results back into the expression.  Dividing by a fraction is multiplying by its reciprocal.  Cancel 16 against 64=16 4.  Cancel 729=9 81 against the 9.  Cancel 16 against 4, and 81 against 27.  Multiply. ",
+          "note": "Order of operations and x have equal precedence and are worked from left to right. The division must be converted to multiplication by the reciprocal before the final x (16)/(27) is applied. Do not cancel across a sign Cancellation is only valid once every operation is a multiplication. Convert (64)/(729) into x (729)/(64) first.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "negative exponent",
+            "division of fractions"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-iii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (iii)",
+          "question": "Simplify the following. (0.027)^-(1)/(3)",
+          "solution": "Write the decimal as a fraction so the root can be taken exactly.  Negative exponent means reciprocal.  Write both as perfect cubes.  Apply ( ab)^n=(a^n)/(b^n).  Multiply the exponents: 3 x 13=1.  Write the result. ",
+          "note": "Why convert the decimal first 0.027 hides the fact that it is (0.3)^3. Writing (27)/(1000) shows both parts as perfect cubes, so the cube root is exact instead of approximate.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "decimal to fraction",
+            "cube root"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-iv",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (iv)",
+          "question": "Simplify the following. root7 x^14 y^21 z^35y^14 z^7",
+          "solution": "Inside the radical, subtract exponents of like bases: (a^m)/(a^n)=a^m-n.  Do each subtraction.  Write the seventh root as the exponent 17.  Apply (abc)^n=a^nb^nc^n.  Multiply each exponent by 17.  Simplify each fraction. ",
+          "note": "Why y 0 and z 0 The original expression has y^14z^7 in a denominator, so it is undefined when y=0 or z=0. The restriction belongs in the answer even though the simplified form x^2yz^4 looks harmless. Check with a quick substitution Put x=y=z=2: the fraction is 2^14 2^21 2^352^14 2^7=2^49, and root7 2^49=2^7=128. The answer gives 2^2 2 2^4=2^7=128.",
+          "concept": "",
+          "tags": [
+            "radical",
+            "quotient of powers",
+            "nth root"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-v",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (v)",
+          "question": "Simplify the following. 5(25)^n+1 - 25(5)^2n5(5)^2n+3 - (25)^n+1",
+          "solution": "Every term must sit on one base. Write 25=5^2.  Multiply the exponents.  Rewrite the numerator with this substitution.  Add exponents in the first term: 5^1 5^2n+2=5^2n+3.  Take out the common factor 5^2n; note 5^2n+3=5^2n 5^3.  Evaluate inside the bracket.  Now the denominator, using the same substitutions.  Add exponents in the first term.  Take out 5^2n.  Evaluate inside the bracket.  Form the quotient.  Cancel the common factor 5^2n, which is never 0.  Cancel the common factor 100. ",
+          "note": "one base first When an expression mixes 5, 25 and 125, rewrite everything as a power of the smallest base. Only then can exponents be added, subtracted or factored. Why 5^2n may be cancelled 5^2n>0 for every real n, so it is never zero and the cancellation is always valid, no restriction is needed here.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "common base",
+            "factorization"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-vi",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (vi)",
+          "question": "Simplify the following. (16)^x+1 + 20(4^2x)2^x-3 x 8^x+2",
+          "solution": "Choose base 2: 16=2^4, 4=2^2, 8=2^3.  Convert the second numerator term.  Rewrite the numerator on base 2.  Take out 2^4x; note 2^4x+4=2^4x 2^4.  Evaluate the bracket.  Convert the denominator to base 2.  Multiply powers of the same base by adding exponents.  Collect the exponent.  Separate the constant part so it can cancel: 2^4x+3=2^4x 2^3.  Form the quotient.  Cancel 2^4x, which is positive for all real x.  Cancel the common factor 4. ",
+          "note": "Check with x=0 Numerator: 16^1+20 1=36. Denominator: 2^-3 8^2= 18 64=8. So the value is 368= 92, matching.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "common base",
+            "factorization"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-vii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (vii)",
+          "question": "Simplify the following. (64)^-(2)/(3) (9)^-(3)/(2)",
+          "solution": "Write 64 as a perfect cube.  Apply the exponent: (4^3)^- 23=4^3 x (- 23).  Convert to a reciprocal.  Write 9 as a perfect square.  Apply the exponent: (3^2)^- 32=3^2 x (- 32).  Convert to a reciprocal.  Dividing by a fraction is multiplying by its reciprocal.  Multiply. ",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "negative exponent",
+            "division"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-viii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (viii)",
+          "question": "Simplify the following. 3^n x 9^n+13^n-1 x 9^n-1",
+          "solution": "Write 9 as 3^2 everywhere.  Multiply powers of the same base by adding exponents (numerator).  Product of powers with the same base: keep the base, add the exponents.  Collect the like terms n and 2n in the exponent.  Same for the denominator.  Product of powers with the same base: keep the base, add the exponents.  Remove the brackets and collect like terms in the exponent.  Divide powers of the same base by subtracting exponents.  Expand the bracket carefully: 3n+2-3n+3.  Evaluate the power. ",
+          "note": "Watch the double negative (3n+2)-(3n-3) is 3n+2-3n+3=5, not 3n+2-3n-3=-1. The minus sign applies to both terms in the bracket.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "common base",
+            "quotient of powers"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q2-ix",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 2 (ix)",
+          "question": "Simplify the following. 5^n+3 - 6 x 5^n+19 x 5^n - 2^n x 5^n",
+          "solution": "In the numerator, the lowest power of 5 present is 5^n+1. Take it out.  Evaluate the bracket.  Write 5^n+1=5 5^n so the numerator carries the same factor as the denominator.  In the denominator, take out the common factor 5^n.  Form the quotient.  Cancel 5^n, which is positive for every real n. ",
+          "note": " Factor out the lowest power of the base that appears. Here that is 5^n+1 above and 5^n below. The denominator does not simplify to a number 9 5^n-2^n 5^n contains two different bases, so 9-2^n cannot be reduced further. The answer therefore still contains n, unlike parts (v), (vi) and (viii). Check with n=1 Numerator: 5^4-6 5^2=625-150=475. Denominator: 9 5-2 5=45-10=35. So the value is (475)/(35)=(95)/(7), and the formula gives (95)/(9-2)= 957. They agree.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "factorization",
+            "common factor"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q3-i",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 3 (i)",
+          "question": "If x = 3 + sqrt 8, find the value of each of the following. If x = 3+ sqrt 8, find x + (1)/(x).",
+          "solution": "Simplify the surd first: 8=4 2 and sqrt 4=2.  Write down the reciprocal that has to be simplified.  The denominator is a binomial surd, so use its conjugate 3-2 sqrt 2.  Denominator by (a+b)(a-b)=a^2-b^2 with a=3, b=2 sqrt 2.  (2 sqrt 2)^2=2^2( sqrt 2)^2=4 2=8.  Divide by 1.  Now add x and 1x.  The sqrt 2 terms are opposites and cancel.  Add the rational parts. ",
+          "note": " When x=a+b sqrt c and a^2-b^2c=1, the reciprocal is simply the conjugate a-b sqrt c. That is exactly what happened here, since 9-8=1. Why simplify sqrt 8 first 3+ sqrt 8 and 3+2 sqrt 2 are the same number, but the second form makes the conjugate obvious and the arithmetic (2 sqrt 2)^2=8 easy to see.",
+          "concept": "",
+          "tags": [
+            "surd",
+            "reciprocal",
+            "rationalize"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q3-ii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 3 (ii)",
+          "question": "If x = 3 + sqrt 8, find the value of each of the following. Find x - (1)/(x).",
+          "solution": "Substitute the two values into x- 1x.  Remove the second bracket; the minus sign changes both signs inside it.  The rational parts cancel and the surd terms add.  Simplify. ",
+          "note": "The sign trap -(3-2 sqrt 2) is -3+2 sqrt 2, not -3-2 sqrt 2. Writing the distribution as a separate line, as above, is the safest way to avoid this.",
+          "concept": "",
+          "tags": [
+            "surd",
+            "reciprocal"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q3-iii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 3 (iii)",
+          "question": "If x = 3 + sqrt 8, find the value of each of the following. Find x^2 + (1)/(x^2).",
+          "solution": "Square the known sum, using (a+b)^2=a^2+2ab+b^2 with a=x and b= 1x.  In the middle term, x cancels with 1x.  So the middle term is 2 1=2.  Make x^2+ 1x^2 the subject by subtracting 2.  Substitute the value 6 from part (i).  Evaluate. ",
+          "note": " x^2+ 1x^2=(x+ 1x)^2-2. The -2 comes from the middle term 2 x x x 1x=2. Why not substitute x=3+2 sqrt 2 directly You could square 3+2 sqrt 2 and rationalize 1x^2, but that is far longer. Using the result of part (i) turns the whole problem into one subtraction.",
+          "concept": "",
+          "tags": [
+            "identity",
+            "square of a binomial",
+            "substitution"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q3-iv",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 3 (iv)",
+          "question": "If x = 3 + sqrt 8, find the value of each of the following. Find x^2 - (1)/(x^2).",
+          "solution": "Recognise x^2- 1x^2 as a difference of two squares: a^2-b^2=(a+b)(a-b) with a=x, b= 1x.  Substitute the two values recalled above.  Multiply the rational coefficients. ",
+          "note": "This answer is not 34 34 is the value of x^2 + 1x^2 from part (iii). The difference x^2- 1x^2 is a different quantity and is irrational. Direct check x^2=(3+2 sqrt 2)^2=17+12 sqrt 2 and 1x^2=(3-2 sqrt 2)^2=17-12 sqrt 2. Subtracting gives 24 sqrt 2, confirming the identity route.  a^2-b^2=(a+b)(a-b). Here both factors were already known, so no further expansion was needed.",
+          "concept": "",
+          "tags": [
+            "identity",
+            "difference of squares",
+            "substitution"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q3-v",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 3 (v)",
+          "question": "If x = 3 + sqrt 8, find the value of each of the following. Find x^4 + (1)/(x^4).",
+          "solution": "Square the known value, using (a+b)^2=a^2+2ab+b^2 with a=x^2 and b= 1x^2.  In the middle term, x^2 cancels with 1x^2.  So the middle term equals 2.  Make x^4+ 1x^4 the subject.  Substitute 34, the value inherited from part (iii).  Evaluate 34^2=1156, then subtract. ",
+          "note": "Where 34 came from It is the answer to part (iii): x^2+ 1x^2=(x+ 1x)^2-2=6^2-2=34. If you meet this question on its own, derive 34 first from x=3+2 sqrt 2. The doubling pattern x^2+ 1x^2=(x+ 1x)^2-2 and x^4+ 1x^4=(x^2+ 1x^2)^2-2. Each step squares the previous result and subtracts 2.",
+          "concept": "",
+          "tags": [
+            "identity",
+            "square of a binomial",
+            "inherited value"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q3-vi",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 3 (vi)",
+          "question": "If x = 3 + sqrt 8, find the value of each of the following. Find (x - (1)/(x))^2.",
+          "solution": "Substitute the value from part (ii) into the square.  Square the coefficient and the radical separately: (ab)^2=a^2b^2.  4^2=16 and ( sqrt 2)^2=2.  Multiply. ",
+          "note": " (x- 1x)^2=x^2-2+ 1x^2=34-2=32, using part (iii). Both routes agree, which is a useful self-check.",
+          "concept": "",
+          "tags": [
+            "identity",
+            "substitution"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q4-4",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 4",
+          "question": "Find rational numbers p and q such that (8-3 sqrt 2)/(4+3 sqrt 2)=p+q sqrt 2.",
+          "solution": "Rationalize the left side first; the conjugate of 4+3 sqrt 2 is 4-3 sqrt 2.  Expand the numerator term by term.  Work out each of the four products; note (-3 sqrt 2)^2=9 2=18.  Collect the rational terms and the sqrt 2 terms separately.  Expand the denominator by difference of squares.  (3 sqrt 2)^2=9 2=18.  Form the quotient.  Divide each term of the numerator by -2 separately.  Carry out each division, watching the signs.  Compare with the required form p+q sqrt 2. Since p,q are rational and sqrt 2 is irrational, the rational parts and the sqrt 2 parts must match separately. ",
+          "note": "comparing coefficients If a+b sqrt 2=c+d sqrt 2 with a,b,c,d numbers Q, then a=c and b=d. This works because sqrt 2 is irrational: otherwise sqrt 2=(a-c)/(d-b) would be rational. Watch the negative denominator Dividing by -2 flips the sign of both terms. (50)/(-2)=-25 and (-36 sqrt 2)/(-2)=+18 sqrt 2. Numerical check (8-4.243)/(4+4.243) (3.757)/(8.243) 0.4558, and -25+18(1.41421) 0.4558.",
+          "concept": "",
+          "tags": [
+            "rationalize",
+            "conjugate",
+            "comparing coefficients"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q5-i",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 5 (i)",
+          "question": "Simplify the following. (25)^(3)/(2) x (243)^(3)/(5)(16)^(5)/(4) x (8)^(4)/(3)",
+          "solution": "Write each base as a power of a prime.  Write the base as a power of a prime.  Power of a power: multiply the two exponents.  Work out the product of the exponents.  Evaluate the power.  Write the base as a power of a prime.  Power of a power: multiply the two exponents.  Work out the product of the exponents.  Evaluate the power.  Write the base as a power of a prime.  Power of a power: multiply the two exponents.  Work out the product of the exponents.  Evaluate the power.  Write the base as a power of a prime.  Power of a power: multiply the two exponents.  Work out the product of the exponents.  Evaluate the power.  Substitute all four values.  Multiply numerator and denominator. ",
+          "note": "Why prime factorization first A fractional exponent such as 54 asks for a fourth root and then a fifth power. Writing 16=2^4 makes the fourth root exact in one step instead of guessing.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "fractional exponent",
+            "prime factorization"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q5-ii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 5 (ii)",
+          "question": "Simplify the following. 54 root3 (27)^2x9^x+1+216(3^2x-1)",
+          "solution": "Write the cube root as the exponent 13.  Write 27 as 3^3.  Multiply all three exponents: 3 2x x 13=2x.  The numerator is therefore a single term.  Now the denominator. Write 9=3^2.  Separate the constant part: 3^2x+2=3^2x 3^2.  For the second term, 3^2x-1=3^2x 3^-1= 3^2x3.  Divide 216 by 3.  Add the two denominator terms; both carry the factor 3^2x.  Both terms share the factor 3^2x, so take it outside a bracket.  Add the two numbers inside the bracket.  Form the quotient.  Cancel 3^2x, which is positive for every real x.  (54,81)=27; cancel it. ",
+          "note": " rootn a=a^ 1n, then (a^m)^n=a^mn. Converting radicals to exponents turns every root into ordinary index arithmetic. Check with x=0 Numerator: 54 root3 27^0=54 1=54. Denominator: 9^1+216(3^-1)=9+72=81. So (54)/(81)= 23.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "cube root",
+            "common base",
+            "factorization"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q5-iii",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 5 (iii)",
+          "question": "Simplify the following. sqrt (216)^(2)/(3) x (25)^(1)/(2)(0.04)^-(3)/(2)",
+          "solution": "Write 216 as a perfect cube.  Write the base as a power of a prime.  Power of a power: multiply the two exponents.  Work out the product of the exponents.  Evaluate the power.  Evaluate the second numerator factor.  Write the decimal as a fraction.  Negative exponent means reciprocal.  Write 25=5^2 and multiply exponents.  Power of a power: multiply the exponents, 2 x 32=3.  Evaluate 5^3.  Substitute all three values inside the radical.  Multiply in the numerator.  (180,125)=5; cancel it.  Apply sqrt ab=( sqrt a)/( sqrt b).  Take both square roots. ",
+          "note": "quotient law for radicals sqrt ab=( sqrt a)/( sqrt b) for a 0 and b>0. It is what lets sqrt (36)/(25) split into sqrt 36 sqrt 25, so both roots can be taken exactly. (0.04)^- 32 is in the denominator Because it already sits below the line, its negative exponent does not move it up. Evaluate it as 125 and keep it where it is.",
+          "concept": "",
+          "tags": [
+            "exponent",
+            "negative exponent",
+            "decimal to fraction",
+            "square root"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex12-q5-iv",
+          "panel": "ex12",
+          "section": "Exercise 1.2",
+          "title": "Question 5 (iv)",
+          "question": "Simplify the following. (a^(1)/(3)+b^(2)/(3))(a^(2)/(3)-a^(1)/(3)b^(2)/(3)+b^(4)/(3))",
+          "solution": "Look for the sum-of-cubes pattern by naming the two pieces.  Check that the second bracket matches X^2-XY+Y^2: X^2=a^ 23, XY=a^ 13b^ 23, Y^2=b^ 43.  Apply the sum-of-cubes identity (X+Y)(X^2-XY+Y^2)=X^3+Y^3.  Put X and Y back.  Multiply the exponents in each term.  Simplify the exponents. ",
+          "note": "sum of cubes X^3+Y^3=(X+Y)(X^2-XY+Y^2). Recognising it saves expanding six separate products. How to spot it The second bracket has three terms, the outer two are perfect squares of the terms in the first bracket, and the middle term is their product with a minus sign. That signature means sum of cubes. Check with numbers Put a=8, b=27: X=2, Y=9. Then (2+9)(4-18+81)=11 67=737, and a+b^2=8+729=737.",
+          "concept": "",
+          "tags": [
+            "identity",
+            "sum of cubes",
+            "fractional exponent"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-1",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Modeling a word problem with equations",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "From words to equations Name the unknown quantity. Translate each condition into an equation. Solve one step at a time. Substitute the answer back into the original conditions. Example. If two numbers have sum 8 and difference 2 , write x+y=8 and x-y=2 .",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-2",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Temperature conversion Celsius Fahrenheit Kelvin",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Temperature conversion ^ F= 95( ^ C)+32 ^ C= 59( ^ F-32) K= ^ C+273.15 The school text rounds 273.15 to 273 in its exercises. Scientific work normally uses 273.15 . Reference: NIST temperature conversions .",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-3",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Percentage as a fraction of one hundred",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Percent means “per hundred” r %= r 100 To find r % of a quantity B , calculate r 100 x B . 15 % of 1520= 15/100 1520",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-4",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Profit loss and percentage formulas",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Profit and loss profit = selling price - cost price profit % = profit cost price 100 loss = cost price - selling price loss % = loss cost price 100 The denominator is the cost price because profit or loss is measured relative to what was originally paid.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-5",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Simple profit tax and ratio sharing",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Simple profit, tax, and ratios I=Prt In I=Prt , use the rate as a decimal and time in years. For ratio sharing, add the ratio parts first, find one part, then multiply. 4:7:14 4+7+14=25 parts",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-6",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Compound markup formula and variables",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Compound markup A=P (1+ rn )^ nt Here P is principal, r is the annual rate in decimal form, n is the number of compounding periods per year, and t is time in years. compound markup =A-P",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "thy-13-7",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Key Concepts",
+          "title": "Reasonableness checks for word problems",
+          "question": "",
+          "solution": "",
+          "note": "",
+          "concept": "Check before accepting an answer A selling price with profit should exceed the cost price. A loss percentage should be positive and below 100 % in ordinary cases. A Fahrenheit temperature corresponding to a hot Celsius temperature should be larger numerically. Ages, lengths, money, and counts must use appropriate units.",
+          "tags": [],
+          "aliases": []
+        },
+        {
+          "target": "example-9",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Worked Examples",
+          "title": "Example 9",
+          "question": "The sum of two real numbers is 8 and their difference is 2 . Find the numbers.",
+          "solution": "Let the numbers be a and b . a+b amp;=8 -b amp;=2. Add the equations: (a+b)+(a-b) amp;=8+2 2a amp;=10 amp;= 10/2 amp;=5. Substitute a=5 into a+b=8 : 5+b amp;=8 amp;=8-5 amp;=3. The required numbers are 5 and 3 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-10",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Worked Examples",
+          "title": "Example 10",
+          "question": "Normal human body temperature is 98.6^ F . Convert it to Celsius and Kelvin.",
+          "solution": "^ C amp;= 59( ^ F-32) amp;= 59(98.6-32) amp;= 59(66.6) amp;=37^ C. K amp;= ^ C+273 amp;=37+273 amp;=310 , K . Using the more precise scientific offset 273.15 would give 310.15 , K .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-11",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Worked Examples",
+          "title": "Example 11",
+          "question": "Hamail purchased a bicycle for Rs. 6 , 590 and sold it for Rs. 6 , 850 . Find the profit percentage.",
+          "solution": "profit amp;= selling price - cost price amp;=6 , 850-6 , 590 amp;=260. profit % amp;= profit cost price 100 amp;= 260 6 , 590 100 amp; 3.95 %. Therefore, the profit percentage is approximately 3.95 % .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-12",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Worked Examples",
+          "title": "Example 12",
+          "question": "Umair bought a book for Rs. 850 and sold it for Rs. 720 . Find the loss percentage.",
+          "solution": "loss amp;= cost price - selling price amp;=850-720 amp;=130. loss % amp;= loss cost price 100 amp;= 130/850 100 amp; 15.29 %. Therefore, the loss percentage is approximately 15.29 % .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-13",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Worked Examples",
+          "title": "Example 13",
+          "question": "Saleem, Nadeem, and Tanveer earned a profit of Rs. 4 , 50 , 000 . Their investments were in the ratio 4:7:14 . Find each person’s share of the profit.",
+          "solution": "total parts amp;=4+7+14 amp;=25, profit per part amp;= 4 , 50 , 000 25 amp;=18 , 000. Saleem's share amp;=4 18 , 000=72 , 000, Nadeem's share amp;=7 18 , 000=1 , 26 , 000, Tanveer's share amp;=14 18 , 000=2 , 52 , 000. The three shares total 72 , 000+1 , 26 , 000+2 , 52 , 000=4 , 50 , 000 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "example-14",
+          "panel": "ex13",
+          "section": "Exercise 1.3 · Worked Examples",
+          "title": "Example 14",
+          "question": "The simple profit on Rs. 6 , 400 for 12 years is Rs. 3 , 840 . Find the annual rate of profit.",
+          "solution": "For simple profit, I=Prt . Solving for r gives r amp;= I/Pt amp;= 3 , 840 6 , 400 12 amp;=0.05. 0.05 100 %=5 % Therefore, the annual rate of profit is 5 % .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "example",
+            "textbook example"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q1-1",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 1",
+          "question": "The sum of three consecutive integers is 42. Find the integers.",
+          "solution": "Choose the middle integer as the variable; this keeps the algebra symmetric.  Turn the words \"sum ... is 42\" into an equation.  Collect like terms; -1 and +1 cancel.  Divide both sides by 3.  Put n=14 back into the three expressions. ",
+          "note": "Alternative labelling Taking the integers as n, n+1, n+2 gives 3n+3=42, so n=13 and the same answer follows. Choosing the middle term simply removes the constant. Consecutive odd integers are different Three consecutive odd integers are 2n+1, 2n+3, 2n+5, whose sum is 6n+9, always odd, so it can never equal 42.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "consecutive integers",
+            "linear equation"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q2-2",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 2",
+          "question": "In right-angled ABC, AC=( sqrt 3+ sqrt 5) cm and area =(1+ sqrt 15)\\ cm^2. Find AB in the form (a sqrt 3+b sqrt 5) cm.",
+          "solution": "AB and AC are the two legs, so they are the base and height.  Put in the given area and the given side.  Multiply both sides by 2 to clear the fraction.  Divide both sides by ( sqrt 3+ sqrt 5) to isolate AB.  The denominator is a binomial surd; its conjugate is sqrt 5- sqrt 3.  Denominator by difference of squares.  Squaring each square root removes it, since both radicands are positive.  Subtract.  The 2 in the numerator cancels the 2 in the denominator.  Expand the product term by term.  Apply sqrt a sqrt b= sqrt ab to the last two terms.  Simplify each surd: 75=25 3 and 45=9 5.  Group the sqrt 3 terms and the sqrt 5 terms.  Combine each group. ",
+          "note": "Numerical check AB 4(1.7321)-2(2.2361) 2.456 cm and AC 3.968 cm, so the area is 12(2.456)(3.968) 4.873 cm^2, which matches 1+ sqrt 15 4.873. Why the answer stays positive 4 sqrt 3 6.93 and 2 sqrt 5 4.47, so AB>0 as a length must be, even though b is negative.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "area",
+            "rationalize",
+            "surd"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q3-3",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 3",
+          "question": "A rectangle has sides (2+ sqrt 18) m and (5- 4 sqrt 2) m. Express the area as a+b sqrt 2.",
+          "solution": "Simplify the first side: 18=9 2 and sqrt 9=3.  The second side has sqrt 2 in a denominator, so rationalize it.  Numerator 4 sqrt 2; denominator ( sqrt 2)^2=2.  So the second side simplifies.  Area of a rectangle is length times width.  Expand term by term.  Work out each product; note 3 sqrt 2 x (-2 sqrt 2)=-6( sqrt 2)^2=-12.  Group rational terms and sqrt 2 terms.  Simplify each group. ",
+          "note": "area of a rectangle, and rationalizing a monomial denominator Area = length x width. Before multiplying, each side is written in the form p+q sqrt 2: the surd sqrt 18 is simplified to 3 sqrt 2, and 4 sqrt 2 is rationalized by multiplying above and below by sqrt 2. Simplify the surds before multiplying Expanding (2+ sqrt 18)(5- 4 sqrt 2) directly produces sqrt 18 sqrt 2 terms and far more work. Reduce each side to the form p+q sqrt 2 first.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "area",
+            "surd",
+            "rationalize"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q4-4",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 4",
+          "question": "Find two numbers whose sum is 68 and whose difference is 22.",
+          "solution": "Name the unknowns.  Write the two conditions as equations.  The second condition.  Add equations (1) and (2); the y terms cancel.  Collect like terms.  Divide both sides by 2.  Substitute x=45 into equation (1).  Subtract 45 from both sides. ",
+          "note": "elimination When one unknown appears with opposite signs in the two equations, adding them removes it in a single step.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "simultaneous equations",
+            "elimination"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q5-5",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 5",
+          "question": "The temperature in Lahore was 48^ C. Convert it to Fahrenheit.",
+          "solution": "State the conversion formula.  Substitute C=48.  Multiply the fraction by 48; keep it exact.  Divide.  Add 32. ",
+          "note": "Celsius to Fahrenheit F= 95C+32. The factor 95 rescales the degree size (100 Celsius degrees span 180 Fahrenheit degrees) and the +32 shifts the freezing point from 0^ C to 32^ F. Keep 95 as a fraction Replacing 95 by 1.8 is exact here, but replacing 59 by 0.55 in the reverse formula is not. Work with the fraction and you never lose accuracy. Reverse check C= 59(F-32)= 59(118.4-32)= 59(86.4)=48. ✓",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "temperature",
+            "conversion",
+            "formula"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q6-6",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 6",
+          "question": "The father’s and son’s current ages have sum 72. Six years ago, the father was twice the son’s age. Find the son’s age six years ago.",
+          "solution": "Name the present ages.  Use the sum condition to express the father's present age.  Write both ages six years ago.  Turn \"the father was twice as old as his son\" into an equation.  Expand the right side.  Add s to both sides.  Add 12 to both sides.  Divide both sides by 3.  The question asks for the son's age six years ago. ",
+          "note": "Read what is actually asked The equation gives the son's present age, 26. The question asks for his age six years ago, so the final subtraction is part of the answer, not an optional extra.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "ages",
+            "simultaneous equations"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q7-7",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 7",
+          "question": "Mirha buys a toy for Rs. 1,520. Find the selling price that gives a profit of 15\\%.",
+          "solution": "Identify which amount is the cost price.  Convert the percentage to a fraction of the cost price.  Profit is that fraction of the cost price.  Cancel the common factor 20 between 1520 and 100.  Cancel 5 into 15.  Multiply.  Selling price is cost price plus profit.  Add. ",
+          "note": "One-step method S.P.= C.P. x (1+(15)/(100))=1520 1.15=1748. Useful once the two-step method is understood. Profit percentage is always on cost price Unless the question says otherwise, a stated profit or loss percentage is measured against the cost price, not the selling price.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "percentage",
+            "profit"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q8-8",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 8",
+          "question": "Tayyab’s annual income is Rs. 9,60,000, and Rs. 1,30,000 is exempt from tax. Find the tax at 0.75\\%.",
+          "solution": "Tax is charged only on the part of the income that is not exempt.  Substitute the two given amounts.  Subtract.  Per cent means “out of one hundred”.  Clear the decimal by multiplying top and bottom by 100.  Reduce the fraction to lowest terms.  Tax is that fraction of the taxable income.  Cancel the common factor 400: 830000=400 2075.  Multiply. ",
+          "note": "Do not tax the whole income Applying 0.75\\% to 9,60,000 gives 7,200, which is wrong. The exempt amount must be subtracted first. Why 0.75\\%= 3400 0.75\\%=(0.75)/(100). Multiplying top and bottom by 100 clears the decimal: (75)/(10000), which reduces by 25 to 3400.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "percentage",
+            "tax"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "ex13-q9-9",
+          "panel": "ex13",
+          "section": "Exercise 1.3",
+          "title": "Question 9",
+          "question": "Find the compound markup on Rs. 3,75,000 for 1 year at 14\\% compounded annually.",
+          "solution": "State the compound amount formula. Here A is the amount after t years, P the principal and r the annual rate.  Per cent means “out of one hundred”.  Clear the decimal by multiplying top and bottom by 100.  Reduce the fraction to lowest terms.  Substitute P=375000, r=0.14, t=1.  Add inside the bracket.  Multiply.  Compound markup is the amount minus the principal.  Subtract. ",
+          "note": "Use t, not n, for the number of years In A=P(1+r)^t, the exponent t counts the compounding periods. Some printings write n for the number of periods; either symbol is fine as long as it is defined. Why simple and compound agree here For t=1 there is only one compounding period, so compound markup equals simple markup: 375000 0.14=52500. A difference appears only from the second year onwards. What year 2 would give A=375000(1.14)^2=487350, so the two-year compound markup would be 1,12,350, more than twice the first year's figure.",
+          "concept": "",
+          "tags": [
+            "word problem",
+            "compound markup",
+            "percentage"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-1",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (i)",
+          "question": "sqrt 7 is a/an:",
+          "solution": "integer · rational number · irrational number · natural number sqrt 7 is an irrational number because it is the square root of a \"non-perfect-square\" number.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-2",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (ii)",
+          "question": "and e are:",
+          "solution": "natural numbers · integers · rational numbers · irrational numbers and e are well-known irrational numbers . Neither can be expressed as a fraction of two integers.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-3",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (iii)",
+          "question": "If n is not a perfect square, then sqrt n is:",
+          "solution": "rational · natural number · integer · irrational If n is not a perfect square, then sqrt n is an irrational number, e.g., sqrt 7 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-4",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (iv)",
+          "question": "sqrt 3 + sqrt 5 is:",
+          "solution": "whole number · integer · rational · irrational To justify this specific sum, suppose sqrt 3 + sqrt 5 =r is rational. Then r^2=8+2 sqrt 15 , which would make sqrt 15 rational, a contradiction. Therefore sqrt 3 + sqrt 5 is irrational.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-5",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (v)",
+          "question": "For all x real numbers , x=x . This is:",
+          "solution": "reflexive · transitive · symmetric · trichotomy This is the reflexive property : every real number equals itself, i.e., a = a for all a real numbers .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-6",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (vi)",
+          "question": "a gt;b and b gt;c a gt;c . This is:",
+          "solution": "trichotomy · transitive · additive · multiplicative This is the transitive property of order: if a gt; b and b gt; c , then a gt; c .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-7",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (vii)",
+          "question": "2^x x 8^x = 64 , then x= :",
+          "solution": "3/2 · 3/4 · 5/6 · 2/3 2^x 8^x amp;=64 2^x x (2^3)^x amp;=2^6 2^x 2^ 3x amp;=2^6 2^ 4x amp;=2^6 4x amp;=6 x amp;= 64 x amp;= 32. Therefore, x= 32 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-8",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (viii)",
+          "question": "a=b and b=a is the ___ property.",
+          "solution": "reflexive · symmetric · transitive · additive This is the symmetric property of equality: if a = b , then b = a .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-9",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (ix)",
+          "question": "sqrt 75 + sqrt 27 equals:",
+          "solution": "sqrt 102 · 9 sqrt 3 · 5 sqrt 3 · 8 sqrt 3 sqrt 75 + sqrt 27 amp;= sqrt 25 3 + sqrt 9 3 amp;= sqrt 25 sqrt 3 + sqrt 9 sqrt 3 , amp;=5 sqrt 3 +3 sqrt 3 amp;= sqrt 3 (5+3) amp;=8 sqrt 3 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-mcq-10",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Multiple choice (x)",
+          "question": "Product of (3+ sqrt 5 )(3- sqrt 5 ) is:",
+          "solution": "prime · odd · irrational · rational Using the difference of squares: (3+ sqrt 5 )(3- sqrt 5 ) amp;= 3^2-( sqrt 5 )^2 amp;= 9-5 amp;= 4. Since 4 is rational, the answer is (d) rational .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review",
+            "mcq"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-2",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 2",
+          "question": "If a= 4/3 , b= 5/2 , c= 7/4 , verify associative property for addition and multiplication.",
+          "solution": "Calculate (a + b) + c : a + b amp;= 4/3 + 5/2 = 8+15/6 = 23/6 , (a + b) + c amp;= 23/6 + 7/4 = 46+21/12 = 67/12 . Calculate a + (b + c) : b + c amp;= 5/2 + 7/4 = 10+7/4 = 17/4 , a + (b + c) amp;= 4/3 + 17/4 = 16+51/12 = 67/12 . Since (a + b) + c = a + (b + c) = 67/12 , the associative property of addition is verified. Associative Property of Multiplication: The associative property of real numbers with respect to multiplication states that (a x b) x c = a x (b x c) . Calculate (a x b) x c : a x b amp;= 4/3 x 5/2 = 20/6 = 10/3 , (a x b) x c amp;= 10/3 x 7/4 = 70/12 = 35/6 . Calculate a x (b x c) : b x c amp;= 5/2 x 7/4 = 35/8 , a x (b x c) amp;= 4/3 x 35/8 = 140/24 = 35/6 . Since (a x b) x c = a x (b x c) = 35/6 , the associative property of multiplication is verified.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-3",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 3",
+          "question": "Is 0 a rational number? Explain.",
+          "solution": "Yes, 0 is a rational number because it can be expressed as the quotient of two integers, such as 0/1 or 0/-5 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-4",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 4",
+          "question": "State the trichotomy property.",
+          "solution": "The trichotomy property of real numbers states that for any two real numbers a and b , exactly one of the following is true: (i) a lt;b , (ii) a=b , or (iii) a gt;b . This property ensures that any two real numbers can be compared, and one of the three possible relationships will hold.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-5",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 5",
+          "question": "Find two rational numbers between 4 and 5 .",
+          "solution": "There are infinitely many rational numbers between 4 and 5 . One such number is the average of the two numbers, i.e., 4+5/2 = 9/2 =4.5. Another rational number can be found by taking the average of 4.5 and 5 , i.e., 4.5+5/2 = 9.5/2 =4.75. Therefore, two rational numbers between 4 and 5 are 4.5 and 4.75 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-6i",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 6i",
+          "question": "[5] x^ 15 y^ 35 z^ 20",
+          "solution": "[5] x^ 15 y^ 35 z^ 20 amp;= ( x^ 15 y^ 35 z^ 20 )^ 1/5 amp;= x^ 15 x 1/5 y^ 35 x 1/5 z^ 20 x 1/5 amp;= x^3 y^7/z^4 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-6ii",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 6ii",
+          "question": "[3] (27)^ 2x",
+          "solution": "[3] (27)^ 2x amp;= ( 27 )^ 2x/3 amp;= ( 3^3 )^ 2x/3 amp;= 3^ 3 x 2x/3 amp;= 3^ 2x .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-6iii",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 6iii",
+          "question": "6(3)^ n+2 3^ n-1 -3^n",
+          "solution": "6 3^ n+2 3^ n-1 -3^n amp;= 6 3^ n-1 3^3 3^ n-1 (1-3) amp;= 6 x 3^ n-1 27 3^ n-1 (-2) amp;= 162/-2 amp;=-81.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-7",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 7",
+          "question": "Sum of three consecutive odd integers is 51 . Find them.",
+          "solution": "Let the three consecutive odd integers be x , x+2 , and x+4 . The sum of these integers is x + (x+2) + (x+4) = 3x + 6. Given that the sum is 51 , we can write 3x + 6 = 51. Solving for x gives 3x amp;= 51 - 6 = 45 x amp;= 45/3 = 15. Therefore, the three consecutive odd integers are 15, 15+2 = 17, and 15+4 = 19.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-8",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 8",
+          "question": "96 balls in two buckets, one has 28 more. How many in each?",
+          "solution": "Let the number of balls in the first bucket be x . Then the number of balls in the second bucket is x + 28 . The total number of balls is x + (x + 28) = 96. Solving for x gives 2x + 28 amp;= 96 2x amp;= 96 - 28 = 68 x amp;= 68/2 = 34. Therefore, the number of balls in the first bucket is 34 , and the number of balls in the second bucket is 34 + 28 = 62.",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        },
+        {
+          "target": "review-q-9",
+          "panel": "review",
+          "section": "Review Exercise",
+          "title": "Question 9",
+          "question": "Salma invested Rs. 3 , 50 , 000 at 7 1/4 % for 2 years, then 8 % for 5 years. Find total amount.",
+          "solution": "First convert the mixed percent into decimal form. 7 1/4 % = 7.25 % = 7.25/100 = 0.0725 Now find the first profit for 2 years. Profit _1 = 3 , 50 , 000 x 0.0725 x 2 = 50 , 750 For the next 5 years at 8 % , Profit _2 = 3 , 50 , 000 x 8/100 x 5 = 1 , 40 , 000 Total amount = principal + both profits. Total amount = 3 , 50 , 000 + 50 , 750 + 1 , 40 , 000 = 5 , 40 , 750 Therefore, the total amount is Rs. 5 , 40 , 750 .",
+          "note": "",
+          "concept": "",
+          "tags": [
+            "review"
+          ],
+          "aliases": []
+        }
+      ],
+      "blueprint": {
+        "title": "Unit-Test Pattern · 75 Marks",
+        "verified": false,
+        "note": "Derived from the structure of the printed Unit Test for this unit. It is deliberately NOT called a board paper: that name is reserved until an official current blueprint has been obtained and versioned.",
+        "marks": 75,
+        "time": "2 hours 30 minutes",
+        "sections": [
+          {
+            "title": "Section A: Multiple choice",
+            "type": "mcq",
+            "marks": 1,
+            "draw": 15,
+            "sectionMarks": 15,
+            "instruction": "Attempt all 15 parts. Each part carries 1 mark. Suggested time: 20 minutes."
+          },
+          {
+            "title": "Section B: Short questions",
+            "type": "short",
+            "marks": 2,
+            "draw": 18,
+            "sectionMarks": 36,
+            "instruction": "Three groups of nine. Attempt any six parts from each group. Each part carries 2 marks."
+          },
+          {
+            "title": "Section C: Long questions",
+            "type": "long",
+            "marks": 8,
+            "draw": 3,
+            "sectionMarks": 24,
+            "instruction": "Attempt any three questions. Each question carries 8 marks."
+          }
+        ]
+      }
+    }
+  }
+}
