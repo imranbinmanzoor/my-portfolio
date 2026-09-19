@@ -1,20 +1,22 @@
 # Project state
 
-Updated: 2026-09-19. Phase: broader redesign checked; publication requested for live review.
+Updated: 2026-09-19. Phase: broader redesign published and verified; live visual review.
 
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35427841753).
-- Source digest: `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
-- All 35 checks passed locally and in GitHub's Linux build. All 51 publicly served files
+- Published source: `055b4c078c82c935818541dbce21b44e604c7135` (redesign implementation: `0822093`).
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35430190214).
+- Source digest: `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
+- All 38 checks passed locally; GitHub's build/check job succeeded. All 53 publicly served files
   match the local output byte for byte. `.nojekyll` is upload metadata and is not served.
 - Pages now publishes a checked `dist/` artifact. Custom domain and enforced HTTPS remain
   unchanged; the `github-pages` environment still permits only `main`.
 - Actual live Browser checks covered home/library, Class 10 compact/search/Practice,
-  paper generation/randomization/keys, Class 9 lesson/generation, mobile navigation and
-  legacy links. Evidence and precise limits: `docs/PILOT_QA.md`.
+  paper generation/randomization/keys, Class 9 overview, mobile navigation and legacy
+  links, with responsive samples at 320/430/768/1440px. Evidence: `docs/REDESIGN_QA.md`.
+- Previous checked release / rollback: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
+  Its digest is `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
 - Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`.
   Use the documented recovery procedure; the old source has no new build pipeline.
 
@@ -100,7 +102,7 @@ rollout will consolidate the reusable book/practice interface across books incre
 ## Broader redesign — current work
 
 The owner requested a real redesign instead of a consistency-patching pass.
-The local implementation now includes:
+The published implementation now includes:
 
 - A fresh work-led homepage: original mathematical study, selected projects, research
   ledger, teaching, background and contact; repeated overview grids removed.
@@ -116,12 +118,12 @@ The local implementation now includes:
 
 Evidence: docs/REDESIGN_QA.md. Direction: docs/REDESIGN.md and docs/DESIGN_SYSTEM.md.
 The deployed rollback point remains 1478f06bfc0a8aa679564497bb2c94f2a31b8034.
-No new production publication has been performed.
+Published through the checked Pages workflow on 2026-09-19 for the owner's live review.
 
 ## Next checkpoint
 
-Publish the checked redesign for live visual review, then continue agreed refinements
-under the owner's standing publication approval.
+Continue the owner's visual review and agreed refinements, publishing completed, checked
+updates under the standing approval. Publication does not mean final aesthetic acceptance.
 The separate mathematics work still includes independent editorial/correctness review,
 Class 9 authoring-source recovery and further shared Practice/renderer consolidation.
 A visual redesign does not complete those tasks.

@@ -1,9 +1,11 @@
 # Deployment and rollback
 
-Current published source: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
-[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35427841753).
-Live digest: `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
-Published and verified 2026-09-19. This is the checked recovery point for subsequent releases.
+Current published source: `055b4c078c82c935818541dbce21b44e604c7135`.
+[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35430190214).
+Live digest: `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
+Published and verified 2026-09-19. Previous checked release / rollback source:
+`1478f06bfc0a8aa679564497bb2c94f2a31b8034`, digest
+`afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
 
 ## Authority and verified configuration
 
@@ -36,7 +38,7 @@ Only the allowlisted `dist/` is uploaded by the new workflow.
 build/deploy permissions. Build and Check precede artifact upload and deployment. No
 package install, server, paid service, or new domain is required. `.gitattributes` enforces
 LF text checkout so Windows and Linux build inputs match. Build also normalizes gzip's
-informational OS byte. Final Windows output and all 51 served Linux-built files match
+informational OS byte. Final Windows output and all 53 served Linux-built files match
 byte for byte; `.nojekyll` is metadata, intentionally not served by Pages.
 
 1. Inspect Git status and preserve user work. Develop on a `codex/` branch.

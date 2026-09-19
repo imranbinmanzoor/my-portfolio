@@ -1,6 +1,6 @@
 # Broader redesign verification
 
-Date: 2026-09-19. Local branch: `codex/site-wide-redesign`. Not published.
+Date: 2026-09-19. Source branch: `codex/site-wide-redesign`. Published for live review.
 Source digest: `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
 Live recovery point: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
 
@@ -13,7 +13,7 @@ Live recovery point: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
   baseline preservation hashes. Existing Practice selection/serialization regressions pass.
 - Added a typography regression: bare Re/Im function notation is made upright inside
   math delimiters while existing TeX and prose remain unchanged.
-- `git diff --check` passes. No production branch push or deployment performed.
+- `git diff --check` passes. Publication evidence is recorded below.
 
 ## Browser measurements
 
@@ -87,10 +87,36 @@ and the interactive page exited its printing state. No contact/student informati
   page PNGs and ignored `test-results/redesign-print.json`. These are QA artifacts, not
   public site output. The print CSS was not redesigned in this pass.
 
+## Live publication verification
+
+- Published source: `055b4c078c82c935818541dbce21b44e604c7135`; implementation: `0822093`.
+- [Pages workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35430190214)
+  completed successfully, including build/check and deployment. Normal fast-forward push.
+- Re-ran local Check: 38 passed, zero failed. All 53 publicly served files match the local
+  build byte for byte. `.nojekyll` remains upload-only metadata. Sampled AGENTS, content,
+  project-state and local-helper URLs return 404. Report: `test-results/live-release.json`.
+- Actual HTTPS Browser: desktop home/library/compact/Practice; multiplication/reset;
+  Practice search for conjugate; paper generation; Objective randomization changed the
+  paper; answer key opened. At 320px, paper/key and home stayed within the page width;
+  mobile menu focused Close and Escape restored Open menu focus.
+- Class 9 overview at 430px and library at 768px were measured and visually inspected.
+  `/math-9/` resolved to the Class 9 book; `/projects/omnifood.html` to its clean case URL.
+  All 11 measured route/state samples had one visible h1, no page-width overflow and
+  no KaTeX error elements. This is a release smoke test, not a repeated full local matrix.
+- One Class 9 navigation call timed out; the following Browser observation confirmed
+  the correct page had loaded. The full-session event buffer was truncated, so no
+  whole-session error-free claim is made. A fresh, untruncated homepage reload window
+  contained no Runtime exceptions or Network loading failures. KaTeX Main/Math and Inter
+  loaded; font synthesis remained disabled.
+- Evidence: `test-results/redesign-live-browser.json`; live desktop screenshot
+  `live-redesign-home-1440.jpg` in the screenshot directory above. Temporary viewport
+  overrides were reset and the live homepage was left open for the owner.
+- Previous checked release / rollback: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
+
 ## Limits and next review
 
-The owner has not accepted this new visual direction. No live verification is claimed
-for these local changes. Browser testing is viewport emulation, not physical-device,
+The owner requested publication for live review; final visual acceptance remains open.
+Browser testing is viewport emulation, not physical-device,
 screen-reader, or cross-browser certification. External project demos, form delivery,
 all historical content anchors and every possible question combination were not retested.
 
@@ -99,4 +125,4 @@ shares the visual foundations/overview/reading layout, but complete cross-book P
 consolidation remains separate work. Its original authoring source is still missing.
 No exhaustive mathematical correctness audit, every-solution typography review, or
 restoration of unpublished units has been claimed. Remaining organization/date claims
-retain prior site provenance and need factual review before a final publication decision.
+retain prior site provenance and need factual review before final content acceptance.

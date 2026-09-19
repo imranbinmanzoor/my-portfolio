@@ -1,6 +1,6 @@
 # Design system
 
-Status: broader local redesign, awaiting owner review. The published pilot is a recovery
+Status: broader redesign published for owner review. The published pilot is a recovery
 point; the owner requested a fresh design rather than a consistency-only pass.
 Direction and research: `REDESIGN.md`. Current evidence: `REDESIGN_QA.md`.
 
