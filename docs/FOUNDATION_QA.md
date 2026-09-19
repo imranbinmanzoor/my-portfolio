@@ -42,3 +42,11 @@ A derivation crossing a bottom margin was found and corrected: native details co
 ## Limits and follow-up
 
 No physical touch-device certification, broad cross-browser certification, exhaustive accessibility certification or independent full mathematics audit is claimed. Wide mathematics still requires local horizontal scrolling on narrow phones. Class 9 original authoring-source recovery, historical-unit recovery, editorial correctness, and incremental common book-engine consolidation remain separate work. The original archive remains unmodified. This release is for live visual review under standing publication authorization.
+
+## Publication verification
+
+Released as `e14dc18dc9752407e0240411164af993ef3883a5` through the [successful Pages workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35445626091). All 62 served files compare byte for byte with the local build. AGENTS.md, content/library.json, docs/PROJECT_STATE.md and the private release helper return 404 publicly.
+
+Actual HTTPS Browser checks covered home at 1440px, library at 430px, Class 10 compact reading at 320px, Class 9 at 768px and Practice at 1440px. The explorer's live Chance controls produced the expected one-head probability in two tosses. Paper generation and the lowercase answer key worked; only paper-return was sticky. The mobile question marker is 36px tall at 98px, with the compact target at 150px. Final bounded route diagnostics are untruncated with no exceptions or network failures, and no overflow, broken loaded images or KaTeX errors. The first capture after changing origins was truncated and discarded, then repeated successfully.
+
+Records: test-results/live-release.json and foundation-live-browser.json. Screenshots: foundation-live-home-1440, foundation-live-library-430, foundation-live-compact-320 and foundation-live-class9-768. Rollback remains `055b4c078c82c935818541dbce21b44e604c7135`. The release is for continued visual review; mathematics editorial/source-recovery work remains outstanding.

@@ -1,11 +1,12 @@
 # Deployment and rollback
 
-Current published source: `055b4c078c82c935818541dbce21b44e604c7135`.
-[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35430190214).
-Live digest: `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
-Published and verified 2026-09-19. Previous checked release / rollback source:
-`1478f06bfc0a8aa679564497bb2c94f2a31b8034`, digest
-`afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
+Current published source: `e14dc18dc9752407e0240411164af993ef3883a5`.
+[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35445626091).
+Live digest: `7a35ed57df7194af9b0a0f1801f97ffbf4b3587d7448be125c6c0c5728ce1cab`.
+Published and verified 2026-09-19. Immediate checked rollback source:
+`055b4c078c82c935818541dbce21b44e604c7135`, digest
+`7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
+All 62 publicly served files match the checked local output; source/private paths tested return 404.
 
 ## Authority and verified configuration
 
@@ -38,7 +39,7 @@ Only the allowlisted `dist/` is uploaded by the new workflow.
 build/deploy permissions. Build and Check precede artifact upload and deployment. No
 package install, server, paid service, or new domain is required. `.gitattributes` enforces
 LF text checkout so Windows and Linux build inputs match. Build also normalizes gzip's
-informational OS byte. Final Windows output and all 53 served Linux-built files match
+informational OS byte. Final Windows output and all 62 served Linux-built files match
 byte for byte; `.nojekyll` is metadata, intentionally not served by Pages.
 
 1. Inspect Git status and preserve user work. Develop on a `codex/` branch.

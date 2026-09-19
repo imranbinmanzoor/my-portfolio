@@ -1,25 +1,19 @@
 # Project state
 
-Updated: 2026-09-19. Phase: original-design foundation implemented and checked; preparing
-its live visual-review release under standing publication authorization.
+Updated: 2026-09-19. Phase: original-design foundation published and verified for live visual review.
 
 ## Current production release
 
 - Live site: https://imranbinmanzoor.com/
-- Published source: `055b4c078c82c935818541dbce21b44e604c7135` (redesign implementation: `0822093`).
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35430190214).
-- Source digest: `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
-- All 38 checks passed locally; GitHub's build/check job succeeded. All 53 publicly served files
-  match the local output byte for byte. `.nojekyll` is upload metadata and is not served.
-- Pages now publishes a checked `dist/` artifact. Custom domain and enforced HTTPS remain
-  unchanged; the `github-pages` environment still permits only `main`.
-- Actual live Browser checks covered home/library, Class 10 compact/search/Practice,
-  paper generation/randomization/keys, Class 9 overview, mobile navigation and legacy
-  links, with responsive samples at 320/430/768/1440px. Evidence: `docs/REDESIGN_QA.md`.
-- Previous checked release / rollback: `1478f06bfc0a8aa679564497bb2c94f2a31b8034`.
-  Its digest is `afc43465ab6771612db9f23e68e14f303f839762e1841fc723fe6bbd49a42071`.
-- Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`.
-  Use the documented recovery procedure; the old source has no new build pipeline.
+- Published source: `e14dc18dc9752407e0240411164af993ef3883a5`.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35445626091).
+- Source digest: `7a35ed57df7194af9b0a0f1801f97ffbf4b3587d7448be125c6c0c5728ce1cab`.
+- 43 checks passed locally; two builds produced 63 identical output files. GitHub's build/check and deployment jobs succeeded. All 62 publicly served files match local output byte for byte; .nojekyll is upload metadata.
+- Actual live Browser checks covered the new homepage explorer, library, Class 10 compact deep link, Class 9 overview and Practice generation/answer key across representative 1440/768/430/320px widths. The 36px current-question marker clears deep-linked mathematics. Generated papers keep only their return control sticky. Evidence: docs/FOUNDATION_QA.md.
+- The first production diagnostic capture was truncated at the origin switch and was repeated; final bounded route diagnostic windows are complete and show no errors or failed requests.
+- Pages continues to publish checked dist/ output. The custom domain, HTTPS and main-only deployment environment are unchanged. Excluded source/document/private helper paths return 404.
+- Immediate rollback source: `055b4c078c82c935818541dbce21b44e604c7135`; digest `7cb70abac538ffb5bf1b49ff53b746fbc645ff944ab58f779287d2d1928fdd28`.
+- Pre-pilot recovery point: `7a2d89409c81312b0439727e18dd93724357968e`. Use DEPLOYMENT.md; that old source has no current build pipeline.
 
 ## Accepted baseline and authority
 
@@ -137,11 +131,10 @@ working behaviors, reproducible defects, design decisions and limitations are re
 `docs/ORIGINAL_DESIGN_REVIEW.md`. Raw records are in ignored `test-results/`; screenshots
 and a local visual atlas are outside public output. Native physical touch remains untested.
 
-No production sources or archive contents changed during this inspection. Production
-remains `055b4c078c82c935818541dbce21b44e604c7135`; use this as the immediate recoverable
+No production sources or archive contents changed during the reference inspection. At that checkpoint, production was `055b4c078c82c935818541dbce21b44e604c7135`; use this as the immediate recoverable
 source for the next design implementation. The earlier rollback remains documented above.
 
-## Foundation implementation — checked release candidate
+## Foundation implementation — published for review
 
 The original-inspired personal sidebar, neutral panel system, compact homepage, shared
 library/book overviews, reading/Practice surfaces, project cards and tutoring are implemented.
@@ -153,14 +146,11 @@ Authored book content and banks remain unchanged. Worked-key print fragmentation
 The homepage now opens with an explorer of odd-number patterns, tangent slopes and coin probabilities instead of a complex-number-only artifact. Its mathematical models have independent checks; deeper explanations are compact. Shared introduction typography is measured across catalogue, project, tutoring and book pages.
 
 Current evidence is docs/FOUNDATION_QA.md: 43 checks pass, 63 reproducible output files,
-40 final route/viewport observations and inspected A4 proofs. Publication remains pending
-at this commit; record the actual release identity and verification after deployment.
+40 representative route/viewport observations, final changed-state checks and inspected A4 proofs. This foundation is now published; the release identity and live verification are recorded above.
 
 ## Next checkpoint
 
-Publish the checked foundation, verify actual HTTPS output and record release/rollback
-identities. Continue visual refinement from owner feedback while retaining the static build
-and recovered content/runtime boundaries.
+Continue visual refinement from owner feedback while retaining the verified release and its rollback point. Keep the static build and recovered content/runtime boundaries.
 Use verified current biography, keep Layyah, and do not restore the old portrait without
 a new owner instruction. Give the mathematical artifact a deliberate place in the new
 composition. Validate the new pilot and publish checked website updates for live review
