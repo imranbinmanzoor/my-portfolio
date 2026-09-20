@@ -1,5 +1,16 @@
 # Project state
 
+## SEO foundation — 2026-09-20 candidate
+
+Six static Class 10 reading pages now build from the unchanged authored JSON.
+The supplied package was adapted for content fidelity, current design, build identity,
+and Google’s crawl-size limit. Class 10 has an initial HTML overview; planned Classes
+11/12 are noindex,follow. All 59 current checks pass. Release/live verification and
+Search Console are next; see SEO_INDEXING.md. Immediate verified rollback source is
+`6128616b94f7d1366d818e1fe6b74d8c2d144407`, digest
+`4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
+
+
 Updated: 2026-09-19. Phase: original-design foundation published and verified for live visual review.
 
 ## Current production release

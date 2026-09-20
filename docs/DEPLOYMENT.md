@@ -1,5 +1,14 @@
 # Deployment and rollback
 
+SEO foundation candidate (2026-09-20): see SEO_INDEXING.md. Build/check passed
+59 checks. Publish through the existing workflow after a normal fast-forward.
+For this release the verified rollback source is
+`6128616b94f7d1366d818e1fe6b74d8c2d144407`; its successful Pages run is
+https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009 and its
+digest is `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
+No Pages settings, DNS, domain, environment rules or HTTPS settings are changed.
+
+
 Current published source: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`.
 [Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35451753344).
 Live digest: `f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
