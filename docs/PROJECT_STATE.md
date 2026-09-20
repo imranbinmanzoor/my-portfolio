@@ -1,31 +1,27 @@
 # Project state
 
-## SEO foundation — 2026-09-20 candidate
+Updated: 2026-09-20. Phase: integrated homepage, navigation and real-content SEO release candidate.
 
-Six static Class 10 reading pages now build from the unchanged authored JSON.
-The supplied package was adapted for content fidelity, current design, build identity,
-and Google’s crawl-size limit. Class 10 has an initial HTML overview; planned Classes
-11/12 are noindex,follow. All 59 current checks pass. Release/live verification and
-Search Console are next; see SEO_INDEXING.md. Immediate verified rollback source is
-`6128616b94f7d1366d818e1fe6b74d8c2d144407`, digest
-`4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
+## Current milestone
 
+The owner rejected separate Continuous reading pages. Canonical Class 10 exercise URLs
+now prerender the existing book UI and use its shared renderer/runtime. No mathematical
+source or bank data changed. Mobile navigation spans the full panel; header depth and
+sticky breadcrumbs share a measured offset. Homepage audience paths, scientific/AI
+toolkit, social metadata and a custom 404 are included. See SEO_INDEXING.md, SEO_UX_REVIEW.md
+and HOME_PATHWAYS_QA.md for scope, evidence and explicit limitations.
 
-Updated: 2026-09-19. Phase: original-design foundation published and verified for live visual review.
+Candidate checks: npm run build and npm run check passed 64 checks; two builds produced
+82 identical output files across 27 HTML routes. Source digest:
+e3cea1766ca913c7aed93428d91fc020caaf8a27a227cd41a8adb040fd9f7f6e. Browser checks include both books at five responsive widths,
+legacy/deep links, search, history, review, Practice and no-JavaScript reading. Fresh A4
+PDF verification is unavailable on this browser host. Class 9 crawl-size reduction and
+Search Console remain follow-up work. Live release identity will be recorded after Pages.
 
-## Current production release
-
-- Live site: https://imranbinmanzoor.com/
-- Published source: `6128616b94f7d1366d818e1fe6b74d8c2d144407`.
-- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009).
-- Source digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
-- 45 local checks passed; two builds produced 70 identical output files. Live Browser confirmed the requested exercise padding after a fresh stylesheet load. After transient connection failures, all 69 public files matched byte for byte and four excluded source/private paths returned 404.
-- Exercise buttons now have 12px inline padding, adding horizontal space at every viewport. Their 36px height and the Concepts / Examples / Exercise controls (6px padding, 32px height) are unchanged. Eight responsive book/viewport checks passed. The preceding height and sticky-navigation fixes remain included. Evidence: docs/NAVIGATION_DENSITY_QA.md.
-- The preceding sticky-navigation, separate footer panels and editorial-icon cleanup remain included. Historical evidence: docs/STICKY_NAV_FOOTER_QA.md.
-- The preceding project-case redesign remains included: genuine device views, enlargement, concise stories and breadcrumbs. Evidence: docs/PROJECT_CASE_REVIEW.md.
-- Pages publishes checked dist/ output. Custom domain, HTTPS and the main-only environment are unchanged.
-- Immediate rollback: `7f73d9310503795d9cc1115ddd20a1cfc8be1f38`, digest `f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
-- Pre-pilot recovery: `7a2d89409c81312b0439727e18dd93724357968e`; use DEPLOYMENT.md.
+Immediate rollback: c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed, the previously published SEO
+foundation (Pages run 35483735643, digest 958ccc00f33b2bfd2e1ba74f56b8c7c543c88bcf96c8f6eb8fa450c2db505af4).
+Earlier fully byte-verified fallback: 6128616b94f7d1366d818e1fe6b74d8c2d144407, digest
+4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a.
 
 ## Accepted baseline and authority
 

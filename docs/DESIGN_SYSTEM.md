@@ -132,3 +132,19 @@ Research: [React Flow handles](https://reactflow.dev/learn/customization/handles
 Research consulted: [NN/g visual hierarchy](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), [homepage guidelines](https://www.nngroup.com/articles/top-ten-guidelines-for-homepage-usability/), [Carbon button usage](https://carbondesignsystem.com/components/button/usage/), [USWDS links](https://designsystem.digital.gov/components/link/) and [W3C consistent identification](https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification), 2026-09-19.
 
 Mathematical references checked: [OpenStax derivatives](https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative), [OpenStax binomial distribution](https://openstax.org/books/contemporary-mathematics/pages/7-10-the-binomial-distribution), and [University of Hawaii odd-number reasoning notes](https://crdg.hawaii.edu/developing-teacher-expertise-mathematics/modules/facilitator-resources/facilitator-reasoning-and-explanations-resources/Session5/resources/s05_p3_mathnotes_sum-consecutive-odd-problem.pdf). Diagrams, copy and controls are implemented locally; the references are not copied designs.
+
+## Shared mobile chrome and real book routes (2026-09-20)
+
+The mobile header has a restrained border, translucent surface and shadow. Every sticky
+breadcrumb uses the measured --site-chrome-top property; when the header appears, book
+exercise/local/question rows move with it. Animate that shared property, not each row's
+top independently. Reduced motion removes the transition.
+
+Below 1000px, horizontal exercise and local navigation scroll across the full book panel
+width. Put the normal gutter inside the scrolling content, not around its clipping box.
+At rest the first label aligns with content; overflow enters from the panel edges. Keep
+the existing 36px/32px control heights and 12px/6px inline padding.
+
+Canonical Class 10 exercise paths render the same book UI, not an additional reading
+format. Native links and solution disclosures must remain usable before enhancement.
+The shared pure renderer is the only presentation implementation for authored lessons.

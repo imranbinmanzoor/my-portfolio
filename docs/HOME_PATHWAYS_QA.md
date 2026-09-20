@@ -51,15 +51,24 @@ This is responsive Chromium emulation, not physical-device/cross-browser certifi
 Contact submission, mathematical correctness and print were not re-tested for this
 homepage-only change. Existing book source/data were not edited.
 
-## Release
+## Integrated release follow-up
 
-The source branch was merged with the newly published SEO foundation at
-`c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed`. Both the homepage CSS and factual Person/
-WebSite JSON-LD were retained; the duplicate author meta was consolidated. The six
-new static reading pages, book links, noindex rules and SEO regression checks remain.
+The published SEO foundation c8dc702 was merged into this branch, then revised following
+the owner's rejection of duplicate reading pages. The release uses the existing book
+interface for canonical exercise URLs; see SEO_INDEXING.md and SEO_UX_REVIEW.md.
 
-Combined build: 60 checks passed, zero failed; two builds produced 79 identical files
-across 26 HTML routes. Source digest:
-`a120473cac6bb7ff38cd81657f0f29dea39541c294a122816d483fa72e436ace`.
-The project preview link and all three updated portfolio device views were exercised
-again on this combined build. Live identity and rollback are recorded after publication.
+The toolkit now has four consistent discipline cards. Shared mobile header depth and
+breadcrumb offsets were checked across project, tutoring, library and book pages.
+Book navigation was measured at 320/430/768/1024/1440px in both classes: full panel-width
+horizontal strips below 1000px, desktop rail above it, 36px exercise controls and 32px
+local controls everywhere. The shared measured header offset prevents stacked rows
+from briefly overlapping while the mobile header reappears.
+
+Final smoke checks repeated Cards/List keyboard selection, retained focus and reduced
+motion (zero animations). Legacy compact bookmarks, exercise history/reload, canonical
+search links, review feedback and Practice generation passed in the actual browser.
+The 404 recovery page was opened at a genuinely missing local path. This broadens the
+original homepage-only scope; fresh PDF export was unavailable on this browser host.
+
+Final source digest, reproducibility, Pages identity, live byte verification and rollback
+are recorded in PROJECT_STATE.md and DEPLOYMENT.md after publication.

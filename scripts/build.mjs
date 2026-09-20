@@ -4,7 +4,9 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {renderOverview} from '../src/books/overview.mjs';
 import {renderProject} from '../src/projects/render.mjs';
-import {buildMathReadingPages,breadcrumbs} from './seo-pages.mjs';
+import {breadcrumbs} from './seo-pages.mjs';
+import {buildBookPages} from './book-pages.mjs';
+import {socialMetadata} from './social-metadata.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 process.chdir(root);
 const out=path.join(root,'dist');
@@ -31,7 +33,7 @@ export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP|BOOK|PROJECT)\(([^)]
   if(kind==='BOOK') {
     const cls=Number(file);if(![9,10].includes(cls))throw new Error('Unknown book');
     const meta=JSON.parse(read('content/library.json')).books.find(b=>b.class===cls);
-    const units=cls===9?JSON.parse(read('content/books/class-9/catalog.json')):JSON.parse(read('content/books/class-10/book-data.json')).units.map(u=>({n:u.n,title:u.title,available:meta.units.some(m=>m.id==='unit-'+u.n),exercises:u.exercises.length,href:'#/unit-'+u.n+'/ex'+u.exercises[0].replace('.',''),practice:'#/unit-'+u.n+'/generator',reading:'/solutions/class-10/'+u.slug+'/'}));
+    const units=cls===9?JSON.parse(read('content/books/class-9/catalog.json')):JSON.parse(read('content/books/class-10/book-data.json')).units.map(u=>({n:u.n,title:u.title,available:meta.units.some(m=>m.id==='unit-'+u.n),exercises:u.exercises.length,href:'/solutions/class-10/'+u.slug+'/exercise-'+u.exercises[0].replaceAll('.','-')+'/',practice:'/solutions/class-10/#/unit-'+u.n+'/generator'}));
     return renderOverview({class:cls,board:meta.board,edition:meta.edition,units});
   }
   if(!/^(src|content)\//.test(file)||file.includes('..'))throw new Error('Invalid source include');
@@ -57,6 +59,7 @@ for(const cls of [9,10]) {
     html=html.replace('<main class="wrap" id="book-main" tabindex="-1"></main>',`<main class="wrap" id="book-main" tabindex="-1">${overview}</main>`);
   }
   html=html.replace('</head>',breadcrumbs([{name:'Home',href:'/'},{name:'Mathematics',href:'/solutions/'},{name:'Class '+cls}])+'</head>');
+  if(cls===10) html=html.replace(/<script type="text\/plain" id="book-runtime">([\s\S]*?)<\/script>/,(_,runtime)=>{write('assets/books/class-10-runtime.js',runtime);return '<script src="/assets/book-data.js" data-book-runtime="/assets/books/class-10-runtime.js" defer></script>';});
   // Externalize recovered CSS and behavior, preserving execution order and JSON IDs.
   let si=0,ji=0;
   html=html.replace(/<style\b([^>]*)>([\s\S]*?)<\/style>/g,(_,attrs,body)=>{
@@ -67,8 +70,9 @@ for(const cls of [9,10]) {
   });
   write(`solutions/class-${cls}/index.html`,html);
 }
-buildMathReadingPages({read,write,expand});
+buildBookPages({read,write,bookHTML:read(path.join(out,'solutions/class-10/index.html'))});
 const routes=walk(out).filter(p=>p.endsWith('.html')).map(p=>p.slice(out.length+1).replaceAll('\\','/'));
+for(const route of routes) write(route,socialMetadata(read(path.join(out,route))));
 const canonicalRoutes=routes.filter(p=>!/(?:http-equiv="refresh"|name="robots" content="noindex)/i.test(read(path.join(out,p)))).map(p=>'/'+p.replace(/index.html$/,''));
 write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+canonicalRoutes.map(p=>`  <url><loc>https://imranbinmanzoor.com${p}</loc></url>`).join('\n')+'\n</urlset>\n');
 const digest=createHash('sha256');

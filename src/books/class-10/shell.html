@@ -34,9 +34,9 @@
 @@SOURCE(src/components/site-foundation.html)@@
 <link rel="stylesheet" href="/assets/book.css">
 </head>
-  <body data-book-pilot data-book-frame data-book="10">
+  <body data-book-pilot data-book-frame data-book="10" data-book-pending>
 @@SOURCE(src/components/site-header.html)@@
-    <a class="skip" href="#book-main">Skip to content</a>
+    <a class="skip skip-link" href="#book-main">Skip to content</a>
 
     <!-- ===================== BOOK VIEW ===================== -->
     <section class="view" id="view-book">
@@ -49,7 +49,7 @@
             <ol>
               <li><a href="/"><span class="crumb-home-icon" aria-hidden="true">⌂</span><span class="crumb-home-label">Home</span></a></li>
               <li><a href="/solutions/">Mathematics</a></li>
-              <li><a href="#/">Class 10</a></li>
+              <li><a href="/solutions/class-10/">Class 10</a></li>
               <li aria-current="page" id="crumb-unit"></li>
             </ol>
           </nav>
@@ -80,6 +80,7 @@
             </svg>
             <input
               id="q"
+              disabled
               type="search"
               aria-label="Search this unit"
               placeholder="Search this unit"
@@ -130,8 +131,8 @@
 
     <noscript
       ><p class="wrap">
-        This interactive book needs JavaScript to show its worked solutions.
-        Enable JavaScript, then reload this page.
+        Worked solutions and their disclosures remain available without JavaScript.
+        Search, interactive answer checks and Practice require JavaScript.
       </p></noscript
     >
     <p class="math-status wrap" id="math-status" role="status" hidden>
@@ -153,9 +154,10 @@
 
     <template id="book-overview">@@BOOK(10)@@</template>
     <script id="book-data" type="application/json">@@JSON(content/books/class-10/book-data.json)@@</script>
-    <script id="content-data" type="application/json">@@JSON(content/books/class-10/content-data.json)@@</script>
-    <script id="banks-data" type="application/json">@@JSON(content/books/class-10/banks-data.json)@@</script>
-    <script>@@SOURCE(src/books/class-10/runtime-1.js)@@</script>
+    <script id="content-data" type="application/json" data-book-gzip>@@GZIP(content/books/class-10/content-data.json)@@</script>
+    <script id="banks-data" type="application/json" data-book-gzip>@@GZIP(content/books/class-10/banks-data.json)@@</script>
+    <p class="wrap" data-book-load-status role="status" hidden>Interactive controls could not load. The worked solutions below remain readable. Reload to try again.</p>
+    <script type="text/plain" id="book-runtime">@@SOURCE(src/books/class-10/runtime-1.js)@@</script>
   @@SOURCE(src/components/site-footer.html)@@
 <script src="/assets/scripts.js"></script>
 <script src="/assets/book-layout.js"></script>

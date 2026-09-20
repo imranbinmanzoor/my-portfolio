@@ -1,85 +1,78 @@
-# SEO and indexing foundation
+# SEO on the existing website
 
-Work date: 2026-09-20. Repository baseline and rollback source:
-`6128616b94f7d1366d818e1fe6b74d8c2d144407`.
-Baseline live digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
-Baseline Pages run: https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009 (success).
+Updated 2026-09-20. The owner explicitly rejected a separate continuous-reading
+format and duplicated content created only for SEO. This supersedes the initial SEO
+foundation published at c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed.
 
-## Implementation
+## One book interface
 
-The supplied package matched the Class 10 authoring schema and most integration anchors,
-but not the current design. Its regular-expression HTML stripping could remove inequalities
-and surrounding text. It also omitted givens, compact working, source notes, history and
-rule explanations. It linked to absent exercises/reviews for partially published units,
-relied on client-side math rendering, and did not include the new module in build identity.
-Those issues are corrected in the maintained generator; the patch script was not applied.
+The five existing Class 10 exercise/review views now have canonical paths under
+/solutions/class-10/complex-numbers/: exercise-1-1 through exercise-1-4 and review.
+They use the same book shell, CSS, controls, renderer and runtime as the original
+interactive book. There is no separate reading stylesheet, reading format or
+Continuous reading entry point. The former unit directory redirects to Exercise 1.1
+and is excluded from the sitemap. The book overview remains at /solutions/class-10/.
 
-`content/books/class-10/content-data.json` remains the single mathematical authoring source.
-No content or bank data changed. `scripts/seo-pages.mjs` builds these six canonical pages:
+Initial HTML contains the selected exercise's real concepts, examples and solutions.
+Native solution disclosures and exercise links work before JavaScript. The shared
+runtime adds search, tab keyboard behavior, MCQ feedback and Practice. Its routes
+preserve old unit/exercise/part/compact fragments and saved-paper parameters; normal
+exercise selection now updates the canonical path. Reload and browser Back work.
 
-- https://imranbinmanzoor.com/solutions/class-10/complex-numbers/
-- https://imranbinmanzoor.com/solutions/class-10/complex-numbers/exercise-1-1/
-- https://imranbinmanzoor.com/solutions/class-10/complex-numbers/exercise-1-2/
-- https://imranbinmanzoor.com/solutions/class-10/complex-numbers/exercise-1-3/
-- https://imranbinmanzoor.com/solutions/class-10/complex-numbers/exercise-1-4/
-- https://imranbinmanzoor.com/solutions/class-10/complex-numbers/review/
+content/books/class-10/content-data.json is unchanged. render.js is shared by the
+build and runtime, avoiding two authored presentations. All 130 question/example
+parts and authored mathematical fields are checked. Review solutions now also show
+existing authored steps and answers that the old renderer omitted. This is a display
+correction, not new mathematical authoring or mathematical certification.
 
-The unit directory links only to published work. Exercises contain their definitions,
-reasoning, worked examples, full solutions, answers, optional compact work and authored
-notes. All 130 parts remain present. Content is in the initial HTML. Build-time KaTeX
-produces visual HTML plus accessible MathML; compact alternate derivations use native
-MathML to avoid excessive repeated layout markup. The longest new page stays below
-Googlebot's documented 2 MB uncompressed HTML fetch limit. Rendering fails the build on
-unsupported TeX. The MIT-licensed renderer is pinned to the existing book's 0.16.47 and
-vendored outside the public output. Building remains offline with no npm install.
+Build-time KaTeX provides visible mathematics and MathML. Closed working initially
+uses native MathML, with full content present; the runtime uses the existing typesetter
+when opened. Compressed inline book data reduces repeated transport size without
+changing hashes or saved-paper identity. The data loader uses DecompressionStream;
+if enhancement is unavailable, canonical exercises remain readable and disclose a
+load-status message. All five exercise pages are below 2 MB uncompressed HTML.
+Class 9 remains about 2.59 MB and needs a separate, content-preserving reduction.
 
-The shared site navigation, colors and typography are reused. Each new page has a title,
-description, self-canonical, one H1, visible linked breadcrumbs, BreadcrumbList, accurate
-LearningResource/author metadata, and a return link to its matching interactive view.
-No MathSolver markup, fabricated publication date, board approval or ranking guarantee.
-The existing experimental-edition limitation remains visible.
+## Site-wide metadata
 
-Class 10's initial response now contains the existing book overview and a crawlable
-unit link, instead of an empty main element. Its template and fragment application remain.
-Classes 11/12 retain their status pages and follow links with noindex,follow, and leave
-the sitemap. Both book overviews and the library have breadcrumb JSON-LD; the homepage
-has minimal factual Person/WebSite markup. The source digest includes build modules.
+Titles, descriptions and factual Person/WebSite metadata cover the actual AI evaluation,
+frontend, code, mathematics and learning work. Exercise pages have LearningResource
+and BreadcrumbList data. Titles describe individual pages instead of repeating every
+keyword everywhere. No fabricated dates, qualifications, ratings or MathSolver claims.
 
-## Verification
+Every indexable page has canonical and page-specific social metadata and a 1200x630
+share image. Planned Classes 11/12 and the custom 404 use noindex,follow and are excluded
+from the sitemap. Redirects are excluded too. A custom 404 offers existing destinations.
 
-Baseline: npm run build and npm run check passed 45 checks, live digest matched main.
-Candidate: npm run build and npm run check passed 59 checks, including tests/seo.mjs.
-Checks cover all local assets; absolute/relative internal links and static fragments;
-unique titles/descriptions/canonicals; initial visible H1 (inert templates and hidden
-interactive views excluded); exact sitemap/indexability agreement; only the two planned
-books noindex; no orphan indexable pages; robots; parsed JSON-LD/breadcrumb requirements;
-all 130 authored parts and all displayed mathematical fields; inequalities and unsafe
-markup; partial-unit generation; and a 2 MB ceiling on new pages. Existing content hash,
-SVG, question bank and 100-seed Practice regression checks remain active.
+## Verification and limits
 
-Cloud Browser blocks loopback and file previews. No local Browser success is claimed.
-The available browser surface has no viewport resizing capability; desktop and mobile
-verification must be distinguished in the release evidence. Production browser inspection
-and HTTP byte verification will be recorded after the checked Pages deployment.
+64 automated checks passed on the release candidate, including content/bank hashes,
+Class 9 SVG preservation, 100-seed Practice tests, initial HTML content and mathematics,
+partial-unit generation, internal links/fragments, metadata, JSON-LD, sitemap agreement,
+page-size limits and canonical/legacy/saved-paper route compatibility.
 
-## Search Console
+Actual Chromium browser checks covered both books at 320, 430, 768, 1024 and 1440px;
+no document overflow, full-width mobile navigation and unchanged compact control sizes.
+Canonical navigation, keyboard tab selection, search-result navigation, Back, reload,
+legacy compact bookmarks, review feedback and Practice generation were exercised.
+With JavaScript disabled, Exercise 1.2 retained its 37 native solution disclosures,
+967 MathML elements and keyboard-accessible exercise links; a solution was opened.
 
-Not configured or inspected yet in this release work. Continue after live verification:
-Domain property if practical; ownership verification; sitemap submission; URL Inspection
-for home, /solutions/, /solutions/class-10/, unit and Exercise 1.1; indexing requests and
-Page indexing report. Account/DNS intervention must use the secure browser flow. Do not
-claim Google indexed a page from HTTP success or a sitemap submission alone.
+The browser cannot export PDFs on this host (Printing is not available), so no fresh
+A4 print certification is claimed. Contact submission was not sent. Search Console
+was not configured or inspected; deployment is not evidence of indexing or ranking.
+See SEO_UX_REVIEW.md for the external audit assessment and remaining work.
 
-## Official references checked
+## Primary references checked
 
 - https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
-- https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-- https://developers.google.com/search/docs/crawling-indexing/block-indexing
+- https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- https://developers.google.com/search/docs/appearance/title-link
+- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - https://developers.google.com/search/docs/appearance/structured-data/breadcrumb
 - https://developers.google.com/search/docs/crawling-indexing/googlebot
-- https://support.google.com/webmasters/answer/9008080
-- https://support.google.com/webmasters/answer/9012289
+- https://developers.google.com/search/blog/2026/03/crawler-blog-post
 - https://katex.org/docs/api
 
-These support static discoverable URLs, canonical sitemap entries, crawlable noindex status
-pages, breadcrumb markup, the fetch-size limit, and the Search Console verification process.
+The approach follows discoverable URLs, useful existing content and accurate metadata;
+it does not require a second reading product or guarantee search placement.

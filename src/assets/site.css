@@ -113,3 +113,16 @@ body[data-site]{margin:0;display:flex;flex-direction:column;min-height:100vh;bac
 
 /* Background and research form one compact, balanced panel. */
 @media(min-width:1000px){.background-panel{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:40px;align-items:start}.background-panel>.panel-heading,.background-panel>p,.background-panel>.background-facts{grid-column:1}.background-panel>.research-notes{grid-column:2;grid-row:1/5;padding-top:0}.background-panel>.background-facts{margin-top:20px!important;padding-bottom:0;border-bottom:0}}
+
+/* One breadcrumb position and gutter across catalogue, tutoring and project pages. */
+@media screen{
+ body[data-site] main:not(.home-workspace){--page-inset:24px;padding:var(--page-inset)}
+ body[data-site] .page-breadcrumb{position:sticky;top:var(--site-chrome-top,0px);margin:calc(-1 * var(--page-inset,24px)) calc(-1 * var(--page-inset,24px)) 20px;padding-inline:var(--page-inset,24px);background:color-mix(in srgb,var(--ds-surface) 94%,transparent);backdrop-filter:blur(12px)}
+ body[data-site] .page-breadcrumb ol{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;max-width:100%}
+ body[data-site] main:not(.math-reading) [id]{scroll-margin-top:calc(var(--site-chrome-top,0px) + 64px)}
+ body[data-site] .site-footer{padding-inline:24px}
+}
+@media screen and (max-width:599px){body[data-site] main:not(.home-workspace){--page-inset:18px}body[data-site] .site-footer{padding-inline:18px}}
+
+.recovery-links{display:flex;flex-wrap:wrap;gap:12px;margin-block:0 24px}
+.library-card__foot .book-status{display:inline-flex;align-items:center;min-height:32px;padding:4px 6px}

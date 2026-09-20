@@ -34,6 +34,11 @@ body.nav-open{overflow:hidden}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .skip-link{position:fixed;top:-100px;left:24px;z-index:120;padding:12px 20px;background:var(--ds-ink);color:var(--ds-surface);border-radius:8px;font:500 14px var(--ds-font)}.skip-link:focus{top:16px}
 :focus-visible{outline:2px solid var(--ds-focus);outline-offset:4px}
+/* Outrank page link resets in both themes; this is the first keyboard control. */
+body:is([data-site],[data-book]) a.skip-link{color:var(--ds-surface)}
+@property --site-chrome-top{syntax:'<length>';inherits:true;initial-value:0px}
+@media screen and (max-width:799px){body:is([data-site],[data-book]){transition:--site-chrome-top .22s ease}}
+@media screen and (max-width:799px) and (prefers-reduced-motion:reduce){body:is([data-site],[data-book]){transition:none}}
 @media screen{body:is([data-site],[data-book]){padding:100px 12px 0}}
 @media screen and (min-width:800px){
  html:has(body:is([data-site],[data-book])){height:100%;overflow:hidden;background:var(--ds-page)}
@@ -63,6 +68,15 @@ body.nav-open{overflow:hidden}
 @media print{.nav,.mobile-menu,.site-footer,.skip-link{display:none!important}body:is([data-site],[data-book]){padding:0!important}}
 
 /* Shared directional icon geometry; names stay in the adjacent text. */
+@media screen{
+ body:is([data-site],[data-book]){--site-chrome-top:94px}
+}
+@media screen and (max-width:799px){
+ .nav{border-color:var(--ds-line-strong);background:color-mix(in srgb,var(--ds-surface) 94%,transparent);backdrop-filter:blur(16px);box-shadow:0 6px 20px color-mix(in srgb,var(--ds-ink) 12%,transparent),0 1px 3px color-mix(in srgb,var(--ds-ink) 8%,transparent)}
+ .nav__mobile-toggle{background:var(--ds-page);border:1px solid var(--ds-line)}
+}
+@media screen and (min-width:800px){body:is([data-site],[data-book]){--site-chrome-top:0px}}
+
 .action-icon{display:inline-block;width:18px;height:18px;flex:none;vertical-align:-3px;background:currentColor;mask:var(--action-mask) center/contain no-repeat}
 .action-icon--forward{--action-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16m-6-6 6 6-6 6'/%3E%3C/svg%3E")}
 .action-icon--back{--action-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12H4m6-6-6 6 6 6'/%3E%3C/svg%3E")}

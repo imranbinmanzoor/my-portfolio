@@ -42,7 +42,8 @@ for(const cls of [9,10])check(`Class ${cls}: authored data and question identiti
   const html=read(`dist/solutions/class-${cls}/index.html`),expected=baseline.books[`class-${cls}`];
   for(const [id,expectedHash]of Object.entries(expected.dataHashes)){
     const match=html.match(new RegExp(`<script[^>]+id="${id}"[^>]*>([\\s\\S]*?)<\\/script>`));assert(match,`missing ${id}`);
-    const data=JSON.parse(cls===9&&id==='bank-data'?gunzipSync(Buffer.from(match[1],'base64')).toString():match[1]);
+    const compressed=(cls===9&&id==='bank-data')||(cls===10&&['content-data','banks-data'].includes(id));
+    const data=JSON.parse(compressed?gunzipSync(Buffer.from(match[1],'base64')).toString():match[1]);
     assert.equal(hash(JSON.stringify(data)),expectedHash,`${id} changed`);
     if(id==='bank-data'||id==='banks-data'){
       const items=Object.values(data).flat();assert.equal(items.length,expected.bankCount);
@@ -101,7 +102,7 @@ check('Practice: unit-test pattern has 75 marks and correct attempts',()=>{
   assert.deepEqual(json(p.settings.pattern.short.attempts),[6,6,6]);assert.equal(p.settings.pattern.long.attempt,3);
 });
 check('Math typography: upright operators preserve prose and existing TeX',()=>{
-  const runtime=read('src/books/class-10/runtime-1.js');
+  const runtime=read('src/books/class-10/render.js');
   const start=runtime.indexOf('function themeMath(text)');
   const end=runtime.indexOf('/* R7: a single TeX',start);
   assert(start>=0&&end>start);

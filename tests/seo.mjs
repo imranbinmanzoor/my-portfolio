@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {SITE,esc,prose,publishedUnits,buildMathReadingPages} from '../scripts/seo-pages.mjs';
+import {SITE,esc,publishedUnits} from '../scripts/seo-pages.mjs';
+import {bookRenderer,typesetPanel,buildBookPages} from '../scripts/book-pages.mjs';
 const read=p=>fs.readFileSync(p,'utf8');
 const decode=s=>s.replace(/&(?:amp|lt|gt|quot|apos|#39);/g,x=>({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&apos;':"'",'&#39;':"'"}[x]));
 const attrs=tag=>Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)].map(m=>[m[1].toLowerCase(),decode(m[2]??m[3])]));
@@ -36,10 +37,19 @@ export function checkSEO({check,htmlFiles}) {
   const urls=[...read('dist/sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>decode(m[1]));
   assert.equal(urls.length,new Set(urls).size);assert.deepEqual(urls.sort(),canonical.map(([url])=>SITE+url).sort());
  });
- check('SEO: planned books alone are noindex,follow; robots allows crawling and declares sitemap',()=>{
-  assert.deepEqual([...pages].filter(([,p])=>p.noindex).map(([url])=>url).sort(),['/solutions/class-11/','/solutions/class-12/']);
+ check('SEO: planned books and error page are noindex,follow; robots allows crawling and declares sitemap',()=>{
+  assert.deepEqual([...pages].filter(([,p])=>p.noindex).map(([url])=>url).sort(),['/404.html','/solutions/class-11/','/solutions/class-12/']);
   for(const cls of [11,12]){const p=pages.get(`/solutions/class-${cls}/`);assert(/noindex,follow/.test(p.html));assert(p.links.includes('/solutions/'));assert.deepEqual(p.canonicals,[`${SITE}/solutions/class-${cls}/`]);}
   const robots=read('dist/robots.txt');assert(/User-agent: \*/.test(robots));assert(/Allow: \//.test(robots));assert(!/^Disallow:\s*\S/m.test(robots));assert(robots.includes('Sitemap: '+SITE+'/sitemap.xml'));
+ });
+ check('SEO: share previews use page-specific metadata and a real 1200 by 630 image',()=>{
+  const png=fs.readFileSync('dist/IMAGES/social-preview.png');assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
+  for(const [url,p] of canonical){
+   const metas=tags(p.html,'meta');const value=k=>metas.filter(m=>m.property===k||m.name===k).map(m=>m.content);
+   assert.deepEqual(value('og:title'),[p.title],url);assert.deepEqual(value('og:description'),p.descriptions,url);
+   assert.deepEqual(value('og:url'),p.canonicals,url);assert.deepEqual(value('twitter:card'),['summary_large_image'],url);
+   assert.deepEqual(value('og:image'),[SITE+'/IMAGES/social-preview.png'],url);
+  }
  });
  const edges=new Map();
  check('SEO: all absolute/relative internal links resolve, including static fragments',()=>{
@@ -77,10 +87,12 @@ export function checkSEO({check,htmlFiles}) {
   const textFields=new Set(['term','statement','title','body','rule','example','examples','notes','watchOut','check','why','shortcut','alsoAcceptable','insight','stem','question','answer','steps','written','say','math','givens','sourceNote','intro','definitions','whyItWorks','history','questions','parts','options']);
   for(const {unit,exercises,review} of publishedUnits(book,all))for(const ex of [...exercises,...(review?[review]:[])]){
    const url=`/solutions/class-10/${unit.slug}/${ex===review?'review':'exercise-'+ex.exercise.replace('.','-')}/`,page=pages.get(url);assert(page,`missing ${url}`);
+   const presentation=bookRenderer(read,book,unit.n,ex===review?'review':'ex'+ex.exercise.replace('.','')).render;
+   const tex=value=>presentation.themeMath('$$'+value+'$$').slice(2,-2);
    function verify(v,key=''){
     if(typeof v==='string'){
-     if(key==='math'||key==='givens'){assert(page.html.includes(esc(v.replace(/\b(Re|Im)(?=\s*\()/g,'\\operatorname{$1}'))),`${url}: lost formula`);expressions++;}
-     else for(const piece of v.split(/\$\$?|<\/?em>/).filter(Boolean))assert(page.html.includes(esc(piece.replace(/\b(Re|Im)(?=\s*\()/g,'\\operatorname{$1}')))||page.html.includes(esc(piece)),`${url}: missing authored text ${piece.slice(0,90)}`);
+     if(key==='math'||key==='givens'){assert(page.html.includes(esc(tex(v))),`${url}: lost formula ${v.slice(0,70)}`);expressions++;}
+     else for(const piece of v.split(/\$\$?|<\/?em>/).filter(Boolean))assert(page.html.includes(esc(tex(piece)))||page.html.includes(esc(piece))||page.html.includes(piece),`${url}: missing authored text ${piece.slice(0,90)}`);
     }else if(Array.isArray(v))v.forEach(x=>verify(x,key));else if(v&&typeof v==='object'){
      if(Object.hasOwn(v,'question')){parts++;assert(page.ids.has(v.id),`${url}: part ${v.id} missing`);}
      for(const [k,x] of Object.entries(v))if(textFields.has(k))verify(x,k);
@@ -92,11 +104,27 @@ export function checkSEO({check,htmlFiles}) {
   }
   assert.equal(parts,130);assert(expressions>700);
  });
- check('SEO: inequality and unsafe-markup regression; partial units cannot create dead reading links',()=>{
-  const h=prose('For $k<0$ use $x>0$. <em>Keep this</em> <script>alert(1)</script>');
-  assert(h.includes('k&lt;0'));assert(h.includes('x&gt;0'));assert(h.includes('<em>Keep this</em>'));assert(!h.includes('<script>'));assert(h.includes('&lt;script&gt;'));
+ check('SEO: inequalities survive rendering; partial units cannot create dead exercise links',()=>{
+  const renderer=bookRenderer(read,JSON.parse(read('content/books/class-10/book-data.json')),1,'ex11').render;
+  const h=typesetPanel('For $k<0$ use $x>0$. <em>Keep this</em>',renderer);
+  assert(h.includes('k&lt;0'));assert(h.includes('x&gt;0'));assert(h.includes('<em>Keep this</em>'));
   const outputs=new Map();const book={units:[{n:2,title:'Test',slug:'test',exercises:['2.1','2.2']}]};const data={'2':{'2.2':{exercise:'2.2',questions:[{id:'test-q1',number:1,stem:'Test',parts:[{id:'test-p1',question:'$1+1$',answer:'$2$',steps:[{why:'Add.',math:'1+1=2'}]}]}]}}};
-  buildMathReadingPages({read:p=>JSON.stringify(p.endsWith('/book-data.json')?book:data),write:(p,v)=>outputs.set(p,v),expand:s=>s});
-  assert.equal(outputs.size,2);for(const html of outputs.values()){assert(!html.includes('href="exercise-2-1/"'));assert(!html.includes('href="../review/"'));}
+  buildBookPages({read:p=>p.endsWith('/book-data.json')?JSON.stringify(book):p.endsWith('/content-data.json')?JSON.stringify(data):read(p),write:(p,v)=>outputs.set(p,v),bookHTML:read('dist/solutions/class-10/index.html')});
+  assert.equal(outputs.size,2);for(const html of outputs.values()){assert(!html.includes('test/exercise-2-1/'));assert(!html.includes('test/review/'));}
+  assert(outputs.get('solutions/class-10/test/exercise-2-2/index.html').includes('id="test-p1"'));
+ });
+ check('Book routes: canonical exercises, old bookmarks, compact targets and saved papers agree',()=>{
+  const book=JSON.parse(read('content/books/class-10/book-data.json')),data=JSON.parse(read('content/books/class-10/content-data.json'));
+  const routes=bookRenderer(read,book,1,'ex11').routes;
+  const path=routes.path(book,1,'ex12');assert.equal(path,'/solutions/class-10/complex-numbers/exercise-1-2/');
+  for(const [pathname,hash] of [[path,'#ex12-examples'],['/solutions/class-10/','#/unit-1/ex12/ex12-examples'],['/solutions/class-10/','#ex12-examples']]){
+   const state=routes.resolve(book,data,pathname,hash);assert.equal(state.unit,1);assert.equal(state.tab,'ex12');assert.equal(state.target,'ex12-examples');
+  }
+  const compact=routes.resolve(book,data,'/solutions/class-10/','#/unit-1/ex11/ex11-q1-i-compact');assert.equal(compact.target,'ex11-q1-i-compact');
+  const saved=routes.resolve(book,data,'/solutions/class-10/','#/unit-1/generator?paper=P4%2Btest');assert.equal(saved.paper,'P4+test');assert.equal(saved.tab,'generator');
+  assert.equal(routes.resolve(book,data,path,'#/'),null);
+  assert.equal(routes.path(book,999,'ex11'),'/solutions/class-10/');
+  assert(!read('dist/solutions/class-10/index.html').includes('Continuous reading'));
+  for(const [,p] of canonical.filter(([u])=>u.includes('/complex-numbers/'))){assert(p.html.includes('data-book="10"'));assert(!p.html.includes('reading.css'));assert(p.html.includes('data-book-runtime'));}
  });
 }

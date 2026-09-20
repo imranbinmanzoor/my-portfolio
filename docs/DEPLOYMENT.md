@@ -1,19 +1,9 @@
 # Deployment and rollback
 
-Homepage audience paths are being integrated with the published SEO foundation from
-`origin/main` (2026-09-20). See HOME_PATHWAYS_QA.md and SEO_INDEXING.md. Release identity
-will be updated after the combined build passes checks and Pages verification.
-
-Previous fully byte-verified release:
-Current published source: `6128616b94f7d1366d818e1fe6b74d8c2d144407`.
-[Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009).
-Live digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.
-Published and verified 2026-09-19. Immediate checked rollback source:
-`7f73d9310503795d9cc1115ddd20a1cfc8be1f38`, digest
-`f679a4e2c18c30f484035083b8fb1fbb6e7482cb448c02c456f0f4d5a7498fd6`.
-Live Browser confirmed the new exercise widths after refreshing cached styles.
-After transient connection timeouts, all 69 public files matched the checked output
-byte for byte and four excluded source/private paths returned 404.
+The 2026-09-20 integrated release is in final verification. See PROJECT_STATE.md for
+current identity and SEO_UX_REVIEW.md for scope/limits. Immediate rollback is the
+published source c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed (Pages run 35483735643).
+Earlier fully byte-verified fallback: 6128616b94f7d1366d818e1fe6b74d8c2d144407.
 
 ## Authority and verified configuration
 

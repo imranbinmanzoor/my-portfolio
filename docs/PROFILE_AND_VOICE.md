@@ -33,6 +33,12 @@ Updated 2026-09-19. Keep this local project memory current; it is not public out
 
 ## Evidence consulted and its limits
 
+- On 2026-09-20, the owner asked for a toolkit reflecting their scientific/AI persona
+  and explicitly allowed inference from the work. NumPy, SciPy, SymPy, Matplotlib and
+  Jupyter are inferred scientific-Python choices, not independently verified proficiency.
+  Present them without mastery ratings, daily-use claims, certifications or fabricated
+  projects. Python, Git, LaTeX and the frontend languages already appear in the public copy.
+
 - Public [GitHub profile](https://github.com/imranbinmanzoor), read in Browser on
   2026-09-19: name Muhammad Imran; bio describes a mathematician and coder who is
   always learning. Public projects shown include Mapty, animated sign-in/sign-up,

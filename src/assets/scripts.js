@@ -82,6 +82,14 @@
   var nav = document.querySelector('[data-nav-sticky]');
   var desktopNavigation = window.matchMedia('(min-width: 800px)');
   if (nav) {
+    function syncChromeOffset() {
+      var hidden = nav.classList.contains('is-scroll-hidden') && !nav.matches(':focus-within');
+      body.style.setProperty('--site-chrome-top', desktopNavigation.matches || hidden ? '0px' : (nav.offsetHeight + 20) + 'px');
+    }
+    function setNavHidden(hidden) {
+      nav.classList.toggle('is-scroll-hidden', hidden);
+      syncChromeOffset();
+    }
     var previousScroll = Math.max(0, window.scrollY);
     var scrollTravel = 0;
     var scrollDirection = 0;
@@ -89,14 +97,14 @@
       previousScroll = Math.max(0, window.scrollY);
       scrollTravel = 0;
       scrollDirection = 0;
-      nav.classList.remove('is-scroll-hidden');
+      setNavHidden(false);
     };
     function updateNavState() {
       var current = Math.max(0, window.scrollY);
       var delta = current - previousScroll;
       previousScroll = current;
       if (desktopNavigation.matches || body.classList.contains('nav-open') || nav.matches(':focus-within') || current < 80) {
-        nav.classList.remove('is-scroll-hidden');
+        setNavHidden(false);
         scrollTravel = 0;
         return;
       }
@@ -106,13 +114,16 @@
       scrollDirection = direction;
       scrollTravel += Math.abs(delta);
       if (scrollTravel >= (direction > 0 ? 16 : 8)) {
-        nav.classList.toggle('is-scroll-hidden', direction > 0 && current > 120);
+        setNavHidden(direction > 0 && current > 120);
         scrollTravel = 0;
       }
     }
     window.addEventListener('scroll', updateNavState, { passive: true });
     window.addEventListener('resize', resetNavState);
     nav.addEventListener('focusin', resetNavState);
+    new ResizeObserver(syncChromeOffset).observe(nav);
+    desktopNavigation.addEventListener('change', resetNavState);
+    syncChromeOffset();
   }
 
   /* ---------- 3. MOBILE MENU (separate element, fully cross-platform) ---------- */
