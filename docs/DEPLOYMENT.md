@@ -1,5 +1,10 @@
 # Deployment and rollback
 
+Homepage audience paths are being integrated with the published SEO foundation from
+`origin/main` (2026-09-20). See HOME_PATHWAYS_QA.md and SEO_INDEXING.md. Release identity
+will be updated after the combined build passes checks and Pages verification.
+
+Previous fully byte-verified release:
 Current published source: `6128616b94f7d1366d818e1fe6b74d8c2d144407`.
 [Successful release workflow](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35452139009).
 Live digest: `4d8cb3dc3f0cd9af18052825b6148f74791f9c525da58756f9487a33b072ea8a`.

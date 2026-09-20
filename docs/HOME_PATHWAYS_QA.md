@@ -53,4 +53,13 @@ homepage-only change. Existing book source/data were not edited.
 
 ## Release
 
-Build, check, exact live identity and rollback are recorded at publication below.
+The source branch was merged with the newly published SEO foundation at
+`c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed`. Both the homepage CSS and factual Person/
+WebSite JSON-LD were retained; the duplicate author meta was consolidated. The six
+new static reading pages, book links, noindex rules and SEO regression checks remain.
+
+Combined build: 60 checks passed, zero failed; two builds produced 79 identical files
+across 26 HTML routes. Source digest:
+`a120473cac6bb7ff38cd81657f0f29dea39541c294a122816d483fa72e436ace`.
+The project preview link and all three updated portfolio device views were exercised
+again on this combined build. Live identity and rollback are recorded after publication.

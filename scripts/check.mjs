@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {checkSEO} from '../tests/seo.mjs';
 import path from 'node:path';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
@@ -15,7 +16,7 @@ const files=walk('dist');
 const htmlFiles=files.filter(p=>p.endsWith('.html'));
 check('Build matches the current source inputs',()=>{
   const digest=createHash('sha256');
-  for(const file of [...walk('src'),...walk('content'),...walk('public'),'scripts/build.mjs'].sort()){digest.update(file);digest.update(fs.readFileSync(file));}
+  for(const file of [...walk('src'),...walk('content'),...walk('public'),...walk('scripts')].sort()){digest.update(file);digest.update(fs.readFileSync(file));}
   assert.equal(JSON.parse(read('dist/build-info.json')).sourceDigest,digest.digest('hex'),'Rebuild before checking');
 });
 check('Public output excludes sources, documents, credentials and caches',()=>{
@@ -27,7 +28,7 @@ for(const f of htmlFiles)check(`HTML structure and local assets: ${f}`,()=>{
   assert.equal((text.match(/<html\b/gi)||[]).length,1,'one document');
   assert(/^\s*<!doctype html>/i.test(text),'doctype first');assert(!text.includes('@@SOURCE('),'unexpanded source');
   assert.equal((text.match(/<title>/gi)||[]).length,1,'one title');
-  const structural=text.replace(/<script\b[\s\S]*?<\/script>/gi,'').replace(/<style\b[\s\S]*?<\/style>/gi,'').replace(/<svg\b[\s\S]*?<\/svg>/gi,'');
+  const structural=text.replace(/<script\b[\s\S]*?<\/script>/gi,'').replace(/<template\b[\s\S]*?<\/template>/gi,'').replace(/<style\b[\s\S]*?<\/style>/gi,'').replace(/<svg\b[\s\S]*?<\/svg>/gi,'');
   const ids=[...structural.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size,'duplicate structural IDs');
   for(const m of text.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)){
     const url=m[1];if(!url.startsWith('/')||url.startsWith('//'))continue;
@@ -140,6 +141,8 @@ check('Math explorer: exact coin probabilities agree with exhaustive outcomes',(
   }
   for(const n of [1,13,2.5,NaN])assert.throws(()=>models.fairCoins(n));
 });
+
+checkSEO({check,htmlFiles});
 
 fs.mkdirSync('test-results',{recursive:true});
 fs.writeFileSync('test-results/check.json',JSON.stringify({build:JSON.parse(read('dist/build-info.json')),checks,failed:results.filter(x=>x.status==='fail').length,results,limitations:['Content preservation is not mathematical verification.','Browser and A4 evidence are recorded separately.']},null,2));
