@@ -65,9 +65,24 @@ Book introductions place a modest cover beside the text instead of at the far en
 
 ## Interaction and grouping
 
-The three discipline controls are disclosures, with native buttons, aria-expanded and aria-controls. One can be open at a time. On desktop, the detail spans the row and forms a continuous boundary with its selected card; its accessible name comes from the selected button without a duplicate visible title. On mobile it follows its card. Connector geometry is measured from actual border boxes, including fractional browser scaling, rather than inferred from nominal grid widths. Enter and Space operate the button; opening a panel does not move focus unexpectedly.
+The homepage provides two explicit audience paths after its personal introduction.
+AI & digital work is the larger desktop column; Learn with me groups the mathematics
+library and personal tutoring. Below 900px the paths stack in that order. At tablet
+width the learning panel groups library and tutoring side by side; phones use one
+column. The earlier three discipline disclosures are replaced, rather than repeated.
 
-This applies NN/g's common-region guidance (https://www.nngroup.com/articles/common-region/) and the W3C disclosure pattern (https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), consulted 2026-09-19. It is a design judgment, not a claim of user-study validation.
+The professional path contains a working project browser with real preview images
+and native Cards / List pressed buttons. A native disclosure reveals the CSS that
+corresponds to the selected layout. Keep the preview links functional without scripts;
+only reveal layout controls after enhancement. Focus stays on the selected control.
+The brief, user-triggered transition respects reduced motion. There is no autoplay,
+editable code execution, invented benchmark or simulated AI claim.
+Implementation: home-pathways.html, home-pathways.css and home-pathways.js.
+
+This uses evidence of actual work alongside clear service routes, informed by
+[NN/g's homepage iteration study](https://www.nngroup.com/articles/case-study-iterative-design-prototyping/)
+and [W3C animation guidance](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html),
+consulted 2026-09-20. This is a design judgment, not user-study validation of this site.
 
 Project tiles are single links with a View project hover/focus cue and no decorative arrows. Tutoring uses concise subject introductions and three grouped learning cards instead of a tall asymmetric text split. Footer links have 44px targets, coherent padding and a separate copyright row.
 
@@ -77,7 +92,12 @@ Contact success replaces the form with a prominent Message sent panel, animated 
 
 Use visible focus, semantic controls, measured contrast, reduced-motion behavior, mobile-menu focus containment and Escape return. Keep long mathematics in its own accessible horizontal scroller. Empty search fields must not show a clear button; the clear control appears immediately when text is entered. The search wrapper owns the border and focus ring.
 
-The homepage leads with the compact personal introduction, followed immediately by research, development and teaching. The mathematical explorer lives after the library book catalogue inside a native, initially closed "Interactive mathematics" disclosure. A secondary "Interactive ideas" link in the homepage library panel targets /solutions/#interactive-ideas; this opens the disclosure and focuses its summary. Closing it removes its controls from keyboard navigation. The homepage does not load explorer or KaTeX assets.
+The homepage leads with the compact personal introduction and explicit professional
+and learning paths. The mathematical explorer lives after the library book catalogue
+inside a native, initially closed "Interactive mathematics" disclosure. The direct
+/solutions/#interactive-ideas route opens the disclosure and focuses its summary.
+Closing it removes its controls from keyboard navigation. The homepage does not load
+explorer or KaTeX assets.
 
 The explorer offers three independent views: odd-number square layers, a parabola and its tangent, and exact fair-coin probabilities. Native sliders, keyboard tabs and a magnification checkbox update the visual and mathematical account together. A compact disclosure gives the reasoning and assumptions. Diagram and explanation align at their top edges so opening a proof does not push its diagram down. There is no autoplay, experimental simulation, or claim of research provenance. Math labels use KaTeX; model functions are separate from rendering.
 
@@ -97,8 +117,7 @@ The single homepage introduction identifies the person and their work; there is 
 
 The homepage work map connects AI & research, Code, Mathematics and Teaching to actual
 work destinations. At 700px and above it shares the compact introduction; below that it
-follows the professional role cards in both DOM and visual order. The contact row aligns
-with the map's lower edge on desktop. Use the shared colours and SVG line-icon family,
+follows the two audience paths in both DOM and visual order. Use the shared colours and SVG line-icon family,
 one selected-field description and no repeated heading. About is a personal account
 beside the factual contributions panel, with aligned section typography.
 

@@ -3,11 +3,11 @@
   const specimen=document.querySelector('[data-work-specimen]');
   if(!specimen)return;
   const welcome=document.querySelector('.welcome--specimen');
-  const disciplines=document.querySelector('.disciplines');
+  const pathways=document.querySelector('.home-pathways');
   const mobile=matchMedia('(max-width:699.98px)');
   function placeSpecimen(){
     const focused=specimen.contains(document.activeElement)?document.activeElement:null;
-    if(mobile.matches){disciplines.after(specimen);welcome.removeAttribute('data-specimen');}
+    if(mobile.matches){pathways.after(specimen);welcome.removeAttribute('data-specimen');}
     else{welcome.append(specimen);welcome.setAttribute('data-specimen','');}
     focused?.focus({preventScroll:true});
     requestAnimationFrame(()=>{
