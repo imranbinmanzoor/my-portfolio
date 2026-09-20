@@ -1,8 +1,27 @@
 # Project state
 
-Updated: 2026-09-20. Phase: integrated homepage, navigation and real-content SEO release candidate.
+Updated: 2026-09-20. Phase: integrated homepage, navigation and real-content SEO published for review.
 
-## Current milestone
+## Current production release
+
+Published and verified 2026-09-20: https://imranbinmanzoor.com/
+
+- Source commit: 8421208c9f41e8c63a101c686603212ac1e9e1bc.
+- Source digest: e3cea1766ca913c7aed93428d91fc020caaf8a27a227cd41a8adb040fd9f7f6e.
+- Successful [Pages run](https://github.com/imranbinmanzoor/my-portfolio/actions/runs/35495435757).
+- 64 automated checks passed; two builds produced 82 identical files across 27 HTML routes.
+- All 81 public files matched the checked build byte for byte; four excluded source/private
+  paths returned 404. Local evidence: test-results/live-release.json.
+- Actual live browser verified homepage audience paths at 1440px, Class 9 navigation,
+  Class 10 Practice generation, and the old compact bookmark resolving to the canonical
+  exercise with its solution open and target focused. At 430px the breadcrumb, exercise
+  strip and local strip all span the same 389.33px panel, with no document overflow.
+- Immediate rollback: c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed, Pages run 35483735643.
+  Earlier fully byte-verified fallback: 6128616b94f7d1366d818e1fe6b74d8c2d144407.
+- Remaining limits: Class 9 HTML is 2,585,603 bytes; Search Console was not inspected;
+  this browser cannot export PDFs, so fresh A4 verification remains outstanding.
+
+## Completed milestone
 
 The owner rejected separate Continuous reading pages. Canonical Class 10 exercise URLs
 now prerender the existing book UI and use its shared renderer/runtime. No mathematical
@@ -16,7 +35,7 @@ Candidate checks: npm run build and npm run check passed 64 checks; two builds p
 e3cea1766ca913c7aed93428d91fc020caaf8a27a227cd41a8adb040fd9f7f6e. Browser checks include both books at five responsive widths,
 legacy/deep links, search, history, review, Practice and no-JavaScript reading. Fresh A4
 PDF verification is unavailable on this browser host. Class 9 crawl-size reduction and
-Search Console remain follow-up work. Live release identity will be recorded after Pages.
+Search Console remain follow-up work. Live release identity and verification are recorded above.
 
 Immediate rollback: c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed, the previously published SEO
 foundation (Pages run 35483735643, digest 958ccc00f33b2bfd2e1ba74f56b8c7c543c88bcf96c8f6eb8fa450c2db505af4).
