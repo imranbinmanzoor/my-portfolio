@@ -299,3 +299,16 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
    distance a linked item gets from its own padding. */
 @media screen{body[data-book] .crumb li[aria-current=page]::before{margin-right:15px}}
 @media screen and (width < 600px){body[data-book] .crumb li[aria-current=page]::before{margin-right:13px}}
+
+/* Short viewports (phone landscape, 200–400% zoom): the breadcrumb, exercise strip, section
+   links and question label together cover 127–163px, up to 80% of a 204px window. Below 480px
+   of height they scroll with the page, and every sticky offset is zero so anchors and scripts
+   agree. Practice keeps its single Back to paper settings bar. */
+@media screen and (height < 480px){
+  body[data-book]{--breadcrumb-height:0px;--sticky-tabs:0px;--sticky-jump:0px;--sticky-sections:0px;--question-heading-height:0px}
+  body[data-book] :is(.crumb--unit,.library-top,#book-masthead,.tabs-wrap,.local-jump,.grp){position:relative;top:auto}
+}
+
+/* Reading measure: the book frame stops growing at 1160px (about its 1440px-window width), so
+   lesson prose stays near 95 characters per line instead of reaching 140 on wide screens. */
+body[data-book]{--ds-width:1160px}
