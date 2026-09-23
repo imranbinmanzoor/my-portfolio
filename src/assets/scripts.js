@@ -319,6 +319,39 @@
     });
   });
 
+  /* ---------- 8b. Keep keyboard focus clear of the frame edge and sticky bars ----------
+     Browsers scroll a newly focused element to the viewport edge; they do not know that a
+     16px frame mask or a sticky breadcrumb covers that edge. After keyboard focus moves,
+     nudge the element into the clear area (WCAG 2.4.11). Anchor links keep their own
+     measured scroll-margin, which scroll-padding would have doubled. */
+  var chromeInset = function () {
+    return parseFloat(getComputedStyle(html).getPropertyValue('--frame-inset')) || 0;
+  };
+  document.addEventListener('focusin', function (e) {
+    var el = e.target;
+    if (!el || !el.matches || !el.matches(':focus-visible') || el.closest('.nav,.mobile-menu,.skip-link,dialog')) return;
+    requestAnimationFrame(function () {
+      var r = el.getBoundingClientRect();
+      if (!r.height) return;
+      var inset = window.innerWidth >= 800 ? chromeInset() : 0;
+      var top = inset, bottom = window.innerHeight - inset;
+      // Sticky and fixed bars across the top of the reading area (not the side rail).
+      document.querySelectorAll('.page-breadcrumb,.crumb--unit,.library-top,#tabsWrap,.tabs-wrap,.local-jump,.grp,.paper-return,.nav').forEach(function (bar) {
+        if (bar.contains(el) || el.contains(bar)) return;
+        var cs = getComputedStyle(bar);
+        if (cs.position !== 'sticky' && cs.position !== 'fixed') return;
+        var b = bar.getBoundingClientRect();
+        if (!b.height || b.top > window.innerHeight / 3 || b.right <= r.left || b.left >= r.right) return;
+        if (bar.classList.contains('nav') && window.innerWidth >= 800) return; // side rail
+        if (Math.abs(b.top - (parseFloat(cs.top) || 0)) > 1) return; // not currently stuck
+        top = Math.max(top, b.bottom);
+      });
+      var room = bottom - top - 16;
+      if (r.top < top + 4) window.scrollBy({top: r.top - top - 12, behavior: 'instant'});
+      else if (r.bottom > bottom - 4 && r.height < room) window.scrollBy({top: r.bottom - bottom + 12, behavior: 'instant'});
+    });
+  });
+
   /* ---------- 9. Year auto-update ---------- */
   var yearEls = document.querySelectorAll('[data-year]');
   var nowYear = String(new Date().getFullYear());

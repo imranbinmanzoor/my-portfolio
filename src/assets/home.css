@@ -76,7 +76,8 @@
 /* ---------- Learning: library beside tutoring ---------- */
 .learning-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px}
 .learning-grid h3{margin-bottom:6px}
-.learning-grid h3 .text-link{font-size:inherit;font-weight:inherit}
+.learning-grid h3 .text-link{display:inline-flex;align-items:center;min-height:44px;font-size:inherit;font-weight:inherit}
+.learning-grid h3:has(.text-link){margin-bottom:0}
 .learning-library>p,.learning-tutoring>p{max-width:52ch;font-size:14px;line-height:1.7}
 .learning-books{display:grid;gap:8px;margin-top:14px}
 .learning-books a{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border:1px solid var(--ds-line);border-radius:8px;background:var(--ds-page);color:var(--ds-ink)}

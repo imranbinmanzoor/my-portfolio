@@ -312,3 +312,6 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
 /* Reading measure: the book frame stops growing at 1160px (about its 1440px-window width), so
    lesson prose stays near 95 characters per line instead of reaching 140 on wide screens. */
 body[data-book]{--ds-width:1160px}
+
+/* Secondary book actions keep a 44px target like every other control. */
+body[data-book] .feature-practice{display:inline-flex;align-items:center;min-height:44px}
