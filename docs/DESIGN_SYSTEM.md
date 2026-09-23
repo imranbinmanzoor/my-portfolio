@@ -51,9 +51,35 @@ Use compact, purposeful spacing: enough separation to distinguish groups without
 
 Inter owns prose and controls, including genuine italic faces. Synthetic slant is disabled. KaTeX owns Class 10 mathematics and the library explorer; Class 9 mathematical SVGs remain preserved. Named operators are upright; mathematical variables use math italics. Standard operators replace bare Re/Im in rendered Class 10 expressions without changing authored data or paper identities.
 
+Both typefaces are self-hosted (`public/vendor/`): Inter 4 variable (upright and italic,
+latin and latin-ext, OFL) with a metric-matched fallback, and KaTeX 0.16.47 (MIT), the same
+release as the build-time renderer. No page loads scripts, styles or fonts from another host;
+a blocked CDN previously left Class 10 showing raw LaTeX. `npm run check` enforces this.
+
+Type and rhythm tokens live in tokens.css: `--ds-h1` (40/36/31px), `--ds-h1-page`, `--ds-h2`
+(26/24/22px), `--ds-h3`, body 15px, lead 16px, UI 13px, meta 11–12px, `--ds-panel-pad`
+(28/20px) and `--ds-gap` (20/16px). Element defaults in site.css use zero-specificity
+`:where()` so component classes win without `!important`.
+
+Wide Class 10 expressions scroll inside their own box; an edge fade marks the side that still
+hides mathematics (as Class 9 already did) and disappears at each end. On phones and tablets,
+where there is no margin beside the text, Back to top appears only while scrolling up.
+
 ## Page frame and scrolling
 
-At 800px and wider, the personal navigation and right workspace share a 16px top/bottom inset. The right workspace scrolls internally; navigation remains aligned with its frame. The rail is 80px at 800–1199px and 248px from 1200px. At narrower widths, the document scrolls normally with a compact personal header and accessible menu. SiteScroll handles the owner change; book code must not assume window.scrollY is always the page position.
+At 800px and wider, the personal navigation and right workspace share a 16px inset
+(`--frame-inset`). The rail is 80px at 800–1199px and 248px from 1200px. The **document is
+the only scroller at every width** (September 2026): the rounded workspace frame is drawn by a
+fixed, click-through mask (`body::after`: a rounded window with a page-coloured spread shadow),
+so content appears to scroll inside the frame while keyboard scrolling, find-in-page, zoom and
+back/forward scroll restoration stay native. The earlier fixed, internally scrolling `<body>`
+broke all three and left WebKit unable to paint the fixed sidebar; do not reintroduce it.
+
+`--site-chrome-top` is where sticky layers start: the frame inset on desktop, the floating
+header's height while it is shown on phones. Every sticky `top` and `scroll-margin-top` is
+computed from it, and `SiteScroll.top` reads the same property, so CSS and scripts agree.
+Breakpoints use range syntax (`width < 800px`, `width >= 800px`): paired `max-width: 799px`
+and `min-width: 800px` leave fractional widths (reachable with browser zoom) unmatched.
 
 Shared content maximum is 1280px; book gutters are 24px, reducing to 18px on phones. Exercise navigation, section headings and reading wrappers share their appropriate content edge. At 1000px, a content-sized unit rail sits beside the reading area with a 16px gap. Its longest label determines the rail width, while each button fits its own label. Smaller screens use a horizontal exercise strip.
 
@@ -65,19 +91,28 @@ Book introductions place a modest cover beside the text instead of at the far en
 
 ## Interaction and grouping
 
-The homepage provides two explicit audience paths after its personal introduction.
-AI & digital work is the larger desktop column; Learn with me groups the mathematics
-library and personal tutoring. Below 900px the paths stack in that order. At tablet
-width the learning panel groups library and tutoring side by side; phones use one
-column. The earlier three discipline disclosures are replaced, rather than repeated.
+Homepage order (September 2026): introduction with the work map → evidence row
+(Selected contributions beside About me; equal-height panels) → Projects → Learn with me
+(library beside tutoring) → Tools → Contact. The introduction's two text links still offer
+the professional and learning paths (`#professional-work`, `#learning`). The previous layout
+headed "AI & digital work" with frontend course projects only, placed the AI-evaluation
+evidence third, and showed the same projects twice; those duplicates are merged, not deleted.
 
-The professional path contains a working project browser with real preview images
-and native Cards / List pressed buttons. A native disclosure reveals the CSS that
-corresponds to the selected layout. Keep the preview links functional without scripts;
-only reveal layout controls after enhancement. Focus stays on the selected control.
-The brief, user-triggered transition respects reduced motion. There is no autoplay,
-editable code execution, invented benchmark or simulated AI claim.
-Implementation: home-pathways.html, home-pathways.css and home-pathways.js.
+Projects is one browser with native Cards / List pressed buttons; a native disclosure shows
+the CSS for the current layout. Card columns follow the browser's own width through a
+container query (1, 2 or 4, never an orphan). Cards and the /projects/ tiles are both
+generated from `content/projects.json` (`summary`, `tags`, `thumb`), so they cannot drift.
+Preview links work without script; layout controls appear only after enhancement.
+Implementation: home-projects.html, home.css and project-browser.js.
+
+The sidebar marks the listed section that contains the reading line, and nothing while the
+reader is in an unlisted section (projects, learning, tools). Navigation order matches page
+order: Home, Research, About me, Projects, Mathematics, Tutoring, Contact.
+
+Discipline colours mean the same thing everywhere: AI & research green, code cyan,
+mathematics study blue, teaching purple. Tutoring subjects follow them (mathematics blue,
+programming cyan, Arabic purple). No green "status" dots: the monogram and location carry no
+availability claim.
 
 This uses evidence of actual work alongside clear service routes, informed by
 [NN/g's homepage iteration study](https://www.nngroup.com/articles/case-study-iterative-design-prototyping/)

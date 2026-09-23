@@ -47,6 +47,8 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
 .page-breadcrumb li:first-child a{margin-left:-8px}
 .page-breadcrumb a:hover{background:var(--ds-page);color:var(--ds-ink)}
 .page-breadcrumb [aria-current]{color:var(--ds-ink);white-space:nowrap}
+/* Linked items carry 8px of padding after the separator; the current item matches it. */
+.page-breadcrumb li[aria-current]::before{margin-right:15px}
 .page-hero{padding-block:8px 32px}
 .page-hero__eyebrow{margin-bottom:12px}
 .page-hero__title{max-width:24ch}
@@ -172,6 +174,7 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
  .page-breadcrumb li+li::before{width:5px;height:5px;margin:0 5px}
  .page-breadcrumb a{padding-inline:4px}
  .page-breadcrumb li:first-child a{margin-left:-4px}
+ .page-breadcrumb li[aria-current]::before{margin-right:9px}
  .page-hero{padding-block:4px 28px}
  .page-hero__lede{font-size:15px}
  .catalog-heading{flex-direction:column;align-items:start;gap:6px}

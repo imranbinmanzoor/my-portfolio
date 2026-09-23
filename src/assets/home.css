@@ -1,6 +1,8 @@
 /* Homepage: introduction → evidence (contributions, about) → projects → learning →
    tools → contact. Every section is one panel; widths follow the shared frame. */
 .home-workspace{display:grid;gap:var(--ds-gap)}
+/* In-page links land a section just below the frame edge or the phone header. */
+.home-workspace [id]{scroll-margin-top:calc(var(--site-chrome-top,0px) + 16px)}
 
 /* ---------- Introduction ---------- */
 .welcome{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.92fr);gap:36px;align-items:stretch}

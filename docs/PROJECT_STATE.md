@@ -1,8 +1,26 @@
 # Project state
 
-Updated: 2026-09-20. Phase: integrated homepage, navigation and real-content SEO release candidate.
+Updated: 2026-09-23. Phase: full audit, redesign and verification candidate on local branch
+`claude/portfolio-audit-2026-09`, based on `8421208` (byte-identical to the live site on
+2026-09-23: 81 of 81 served files). **Not pushed or published**: the owner's brief for this
+work withheld publication authority, which overrides the standing approval below for this
+candidate. Evidence and the change report are delivered outside the repository.
 
-## Current milestone
+## Audit candidate (2026-09-23)
+
+- Desktop now scrolls the document (the fixed `<body>` scroller broke keyboard scrolling and
+  back/forward restoration, and WebKit did not paint the sidebar); a mask keeps the inset frame.
+- KaTeX 0.16.47 and Inter 4 are self-hosted; a blocked CDN had left Class 10 as raw LaTeX.
+- Skip links are first on book pages; Class 9 gains one through a build-time transform.
+- Range media queries close fractional-width gaps found with Firefox device scaling at 150%.
+- Homepage restructured around evidence; projects generated from `content/projects.json`;
+  library separates published and planned books; US spelling; clearer edition notes; new
+  monogram favicon and social image; site.css rewritten without dead rules or override chains.
+- Independent mathematics audit: no errors in Class 10; three Class 9 MCQs with two correct
+  options and other items logged in `docs/MATH_CORRECTION_LOG.md`, not applied (locked).
+- New checks: `tests/site.mjs` (in `npm run check`) and `tests/browser.mjs` (interaction suite).
+
+## Previous milestone (2026-09-20)
 
 The owner rejected separate Continuous reading pages. Canonical Class 10 exercise URLs
 now prerender the existing book UI and use its shared renderer/runtime. No mathematical

@@ -41,6 +41,7 @@
           pending.clear();
           for (const [shell, scroller, wide] of writes) {
             shell.classList.toggle("is-overflowing", wide);
+            edges(shell, scroller);
             const control = shell.closest("button,a");
             if (wide && !control) {
               scroller.tabIndex = 0;
@@ -59,6 +60,13 @@
             }
           }
         }
+        /* Which sides still hide mathematics: drives the edge fade, the only cue
+           visible before a reader touches a wide expression. */
+        function edges(shell, s) {
+          const wide = shell.classList.contains("is-overflowing");
+          shell.classList.toggle("is-at-start", !wide || s.scrollLeft <= 1);
+          shell.classList.toggle("is-at-end", !wide || s.scrollLeft + s.clientWidth >= s.scrollWidth - 1);
+        }
         function pulse(scroller) {
           if (!scroller.parentElement.classList.contains("is-overflowing"))
             return;
@@ -76,7 +84,7 @@
           }
           known.add(shell);
           const s = shell.firstElementChild;
-          s.addEventListener("scroll", () => pulse(s), { passive: true });
+          s.addEventListener("scroll", () => { pulse(s); edges(shell, s); }, { passive: true });
           s.addEventListener("pointerdown", () => pulse(s), { passive: true });
           s.addEventListener("pointerup", () => pulse(s), { passive: true });
           s.addEventListener("keydown", (event) => {
@@ -1022,7 +1030,9 @@
 
       function wireToTop() {
         const b = document.getElementById("toTop");
-        let frame = 0;
+        let frame = 0,
+          lastY = SiteScroll.y,
+          goingUp = false;
         const place = () => {
           frame = 0;
           const home = !document.getElementById("view-book").hidden;
@@ -1040,7 +1050,13 @@
             "--back-top-left",
             Math.round(x) + "px",
           );
-          b.classList.toggle("on", SiteScroll.y > 600);
+          /* With no margin beside the text the button would sit on top of it, so there
+             it appears only while the reader scrolls back up, like the mobile header. */
+          const y = SiteScroll.y;
+          if (Math.abs(y - lastY) > 4) goingUp = y < lastY;
+          lastY = y;
+          const overlaps = inMargin > limit;
+          b.classList.toggle("on", y > 600 && (!overlaps || goingUp));
         };
         const schedule = () => {
           if (!frame) frame = requestAnimationFrame(place);

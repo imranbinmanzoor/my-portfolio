@@ -19,6 +19,32 @@ seeds, unique calculations, attempt-based marks, split timing, code round trips,
 option-answer consistency, invalid inputs, partial randomization and the unit-test pattern.
 Details are written to ignored `test-results/check.json` with the build identity.
 
+`check` also runs `tests/site.mjs`: locked mathematics sources match `tests/locked-sources.json`
+byte for byte; no page loads third-party scripts, styles or fonts; the skip link is the first
+focusable element and targets a visible element; headings keep word spacing; portfolio copy
+uses US spelling; stylesheets use range media queries; homepage anchors and project data agree;
+the contact form validates natively without script and each field is described by its error.
+Each of these checks fails on the pre-audit build (8421208) for the defect it names.
+
+## Browser regression suite
+
+`tests/browser.mjs` drives Chromium through real interactions on a served build and checks
+outcomes: keyboard scrolling and scroll restoration, skip links, in-page link focus and offset,
+current-section marking, theme persistence (including blocked storage), work-map keyboard
+tabs, the project browser, every contact-form state against an intercepted endpoint (nothing
+is sent), 404 status, legacy redirects with fragments, Class 10 exercise routing, search and
+Practice, Class 9 views, the library explorer deep link, case-study gallery and dialog, the
+phone menu (focus trap, scroll lock, Escape, resize), reduced motion, JavaScript disabled, and
+unreachable third-party hosts.
+
+```powershell
+npm run build
+npm run preview                      # keep running
+npm i --no-save playwright@1.56.0    # not a project dependency
+npx playwright install chromium
+node tests/browser.mjs http://127.0.0.1:4173 --json test-results/browser.json
+```
+
 ## Browser checks
 
 For every changed major screen inspect 1440px desktop, 768px tablet, 320px narrow mobile,

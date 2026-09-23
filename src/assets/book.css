@@ -287,3 +287,15 @@ body[data-book] .nav :is(a,button){font-family:var(--ds-font)}
  body[data-book] :is(.tab,.local-jump a):focus-visible{outline-offset:-2px}
 }
 @media screen and (width >= 1000px){body[data-book-pending]{--sticky-tabs:0px;--sticky-jump:41px}}
+
+/* Wide Class 10 mathematics: fade whichever edge still hides part of the expression,
+   matching the Class 9 cue. The fade never covers the last characters once reached. */
+.math-enhanced body[data-book="10"] .is-overflowing:not(.is-at-end)>.math-scroll{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 32px),transparent)}
+.math-enhanced body[data-book="10"] .is-overflowing:not(.is-at-start).is-at-end>.math-scroll{-webkit-mask-image:linear-gradient(to right,transparent,#000 32px);mask-image:linear-gradient(to right,transparent,#000 32px)}
+.math-enhanced body[data-book="10"] .is-overflowing:not(.is-at-start):not(.is-at-end)>.math-scroll{-webkit-mask-image:linear-gradient(to right,transparent,#000 32px,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(to right,transparent,#000 32px,#000 calc(100% - 32px),transparent)}
+@media print{body[data-book="10"] .math-scroll{-webkit-mask-image:none!important;mask-image:none!important}}
+
+/* The current breadcrumb item has no link padding, so give its separator the same
+   distance a linked item gets from its own padding. */
+@media screen{body[data-book] .crumb li[aria-current=page]::before{margin-right:15px}}
+@media screen and (width < 600px){body[data-book] .crumb li[aria-current=page]::before{margin-right:13px}}
