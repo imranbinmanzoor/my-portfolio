@@ -15,3 +15,15 @@
 @media(width < 1000px){.case-intro__copy,.case-intro>.project-gallery,.case-brief{grid-area:auto}.case-brief h2{font-size:22px}.case-brief{padding-top:24px}}
 .project-gallery:not(:has(.gallery-tabs)) .gallery-label{display:block}.gallery-enlarge{margin-left:auto}
 .gallery-stage{position:relative}.gallery-stage img{position:absolute;inset:0;max-height:none}
+
+/* The brief reads as the first numbered section, full width under the preview, like 02
+   and 03 below it. The preview no longer leaves an empty block beside the brief. */
+@media(width >= 1000px){
+ .case-intro>.project-gallery{grid-area:1/2}
+ .case-brief{grid-area:2/1/3/3;display:grid;grid-template-columns:minmax(150px,.45fr) minmax(0,1.55fr);column-gap:28px;padding:28px 0 0;font-size:14px;line-height:1.8}
+ .case-brief>.case-section__label{grid-row:1/span 2;align-self:start;margin:0}
+ .case-brief>p{grid-column:2;max-width:72ch}
+ .case-brief h2{font-size:22px}
+ .case-brief .case-context{font-size:12px}
+}
+@media(1000px <= width < 1200px){.case-brief{grid-template-columns:160px minmax(0,1fr);column-gap:24px}}

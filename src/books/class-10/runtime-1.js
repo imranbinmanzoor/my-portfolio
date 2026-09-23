@@ -560,7 +560,7 @@
         if (!u) return false;
         CURRENT_UNIT = n;
 
-        document.title = `Unit ${n} · ${u.title} : Class 10 Mathematics`;
+        document.title = `Unit ${n} · ${u.title} — Class 10 Mathematics`;
         document.getElementById("crumb-unit").textContent =
           `Unit ${n} · ${u.title}`;
         document.getElementById("unit-title").innerHTML =
@@ -872,7 +872,7 @@
           : `<div class="res-head"><h2>No results</h2>
          <button class="res-clear" type="button" id="res-back">Back to the unit</button></div>
        <div class="res-none">Nothing in this unit matches that. Try a shorter word,
-       or a symbol such as <code>sqrt</code> or <code>conjugate</code>.</div>`;
+       or a name such as <code>sqrt</code> or <code>conjugate</code>.</div>`;
 
         typeset(box);
         const back = document.getElementById("res-back");
@@ -1166,16 +1166,29 @@
           return "";
         }
       }
+      /* Back/forward and reload: the browser restores the reading position, so
+         the first route() must not reset it (or jump to a fragment target). */
+      let restoringPosition = (() => {
+        try {
+          const nav = performance.getEntriesByType("navigation")[0];
+          return !!nav && (nav.type === "back_forward" || nav.type === "reload");
+        } catch {
+          return false;
+        }
+      })();
       function route() {
+        const keepPosition = restoringPosition;
+        restoringPosition = false;
         document.querySelectorAll("dialog[open]").forEach((d) => d.close());
         document.body.classList.remove("dialog-open");
         const state = BookRoutes.resolve(BOOK,CONTENT,location.pathname,location.hash);
         if (!state || !BOOK.units.some(u=>u.n===state.unit) || !CONTENT[state.unit]) {
           stopVideos(); showView('book');
           if(location.pathname!==BookRoutes.root || location.hash) history.replaceState(null,'',BookRoutes.root);
-          document.title='Class 10 Mathematics : PECTAA solutions';
+          document.title='Class 10 Mathematics Solutions (PECTAA) — Muhammad Imran';
           document.querySelector('link[rel=canonical]').href='https://imranbinmanzoor.com'+BookRoutes.root;
-          SiteScroll.to({top:0,behavior:'auto'}); return;
+          if(!keepPosition) SiteScroll.to({top:0,behavior:'auto'});
+          return;
         }
         const n=state.unit;
         const rebuilt=CURRENT_UNIT!==n || !document.getElementById('panels').children.length;
@@ -1186,7 +1199,8 @@
         const destination=pathFor(n,wanted,state.target)+(state.paper?'?paper='+encodeURIComponent(state.paper):'');
         if(location.pathname+location.hash!==destination) history.replaceState(null,'',destination);
         if(rebuilt) wireGenerator(n,BANKS[n]);
-        if(state.target) focusTarget(state.target);else SiteScroll.to({top:0,behavior:'auto'});
+        if(keepPosition) {/* keep the restored position */}
+        else if(state.target) focusTarget(state.target);else SiteScroll.to({top:0,behavior:'auto'});
         if(state.paper){document.getElementById('gen-code').value=state.paper;document.getElementById('gen-restore').click();}
       }
 
@@ -1203,6 +1217,9 @@
       function preparePrint() {
         stopVideos();
         if (document.body.classList.contains("printing-paper")) return;
+        /* A generated paper prints through Practice's own print preparation. */
+        const workspace = document.getElementById("practice-workspace");
+        if (workspace && !workspace.hidden && workspace.getClientRects().length) return;
         const scope = document.querySelector(".view:not([hidden])");
         if (!scope) return;
         const panel =

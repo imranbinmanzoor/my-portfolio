@@ -150,10 +150,24 @@ for (const [label, reply, expect] of [
     await page.route(FORM, reply);
     await go(page, '/#contact'); await fill(page); await page.click('#submit-btn');
     await page.waitForSelector('#form-status.is-error');
-    const s = await page.evaluate(() => ({msg: document.getElementById('form-status').textContent, message: document.getElementById('f-message').value, disabled: document.getElementById('submit-btn').disabled, confirm: !document.getElementById('contact-confirmation').hidden, mail: !!document.querySelector('#form-status a[href^="mailto:"]')}));
-    assert(expect.test(s.msg) && s.message === 'A local test message.' && !s.disabled && !s.confirm && s.mail, JSON.stringify(s));
+    const s = await page.evaluate(() => ({msg: document.getElementById('form-status').textContent, message: document.getElementById('f-message').value, disabled: document.getElementById('submit-btn').disabled, confirm: !document.getElementById('contact-confirmation').hidden, mail: !!document.querySelector('#form-status a[href^="mailto:"]'), focus: document.activeElement.id}));
+    assert(expect.test(s.msg) && s.message === 'A local test message.' && !s.disabled && !s.confirm && s.mail && s.focus === 'form-status', JSON.stringify(s));
   });
 }
+await test('Contact: a field rejected by the service is flagged on that field', async page => {
+  await page.route(FORM, r => r.fulfill({status: 422, contentType: 'application/json', body: '{"errors":[{"field":"email","code":"TYPE_EMAIL","message":"should be an email"}]}'}));
+  await go(page, '/#contact'); await fill(page); await page.click('#submit-btn');
+  await page.waitForSelector('#form-status.is-error');
+  const s = await page.evaluate(() => ({invalid: document.getElementById('f-email').getAttribute('aria-invalid'), note: !document.getElementById('f-email-error').hidden, focus: document.activeElement.id, msg: document.getElementById('form-status').textContent}));
+  assert(s.invalid === 'true' && s.note && s.focus === 'f-email' && /highlighted/.test(s.msg), JSON.stringify(s));
+});
+await test('Contact: tutoring links open the form with Tutoring chosen', async page => {
+  await go(page, '/tutoring/');
+  const href = await page.getAttribute('.tutoring-inquiry a[href*="#contact"]', 'href');
+  assert(href === '/?topic=tutoring#contact', href);
+  await go(page, href);
+  assert(await page.inputValue('#f-topic') === 'Tutoring inquiry', await page.inputValue('#f-topic'));
+});
 await test('Contact: a second click while sending does not send twice', async page => {
   let posted = 0; await page.route(FORM, async r => { posted++; await new Promise(res => setTimeout(res, 800)); await r.fulfill({status: 200, body: '{}'}); });
   await go(page, '/#contact'); await fill(page);
@@ -197,10 +211,44 @@ await test('Class 10 Practice: generate, one sticky layer, answer key, back to s
   assert(sticky.length === 1 && /paper-return/.test(sticky[0]), JSON.stringify(sticky));
   const order = await page.evaluate(() => { const y = s => document.querySelector(s)?.getBoundingClientRect().top ?? NaN; return {randomize: y('#randomize-scope') , paper: y('#paper-wrap'), print: y('#gen-print'), key: y('#gen-key')}; });
   assert(order.randomize < order.paper && order.paper < order.print && order.paper < order.key, JSON.stringify(order));
+  // Straight after Generate, Randomize is in view and not under the return bar.
+  const hit = await page.evaluate(() => { const b = document.getElementById('gen-new').getBoundingClientRect(); const e = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2); return {top: Math.round(b.top), self: !!e && !!e.closest('#gen-new')}; });
+  assert(hit.self && hit.top > 0, 'Randomize hidden after Generate: ' + JSON.stringify(hit));
   await page.click('#gen-key'); await page.waitForTimeout(500);
   assert(await page.evaluate(() => { const k = document.getElementById('key-wrap'); return !!k && !k.hidden && k.getClientRects().length > 0; }), 'answer key not shown');
   await page.click('.paper-return'); await page.waitForTimeout(500);
   assert(await page.locator('#gen-go').isVisible(), 'settings not restored');
+});
+await test('Class 10: Back from another page restores the reading position', async page => {
+  await go(page, '/solutions/class-10/complex-numbers/exercise-1-2/');
+  await page.evaluate(() => scrollTo({top: 4000, behavior: 'instant'})); await page.waitForTimeout(300);
+  await page.click('.nav a[href="/tutoring/"]'); await settle(page);
+  await page.goBack(); await settle(page); await page.waitForTimeout(1500);
+  const y = await scrollY(page);
+  assert(Math.abs(y - 4000) < 150, `restored ${y}`);
+});
+await test('Class 10: the search count sits below its help text', async page => {
+  await go(page, '/solutions/class-10/complex-numbers/exercise-1-1/');
+  await page.fill('#q', 'conjugate'); await page.waitForTimeout(700);
+  const r = await page.evaluate(() => { const a = document.getElementById('q-help').getBoundingClientRect(), b = document.getElementById('q-count').getBoundingClientRect(); return {help: [a.top, a.bottom], count: [b.top, b.bottom]}; });
+  assert(r.count[0] >= r.help[1] - 1, JSON.stringify(r));
+}, {viewport: {width: 1280, height: 900}});
+await test('Class 9 Practice: one return bar, Randomize above the paper, focus on the paper', async page => {
+  await go(page, '/solutions/class-9/#generator');
+  await page.click('.gen-run'); await page.waitForTimeout(600);
+  const s = await page.evaluate(() => {
+    const y = sel => document.querySelector(sel)?.getBoundingClientRect().top ?? NaN;
+    const sticky = [...document.querySelectorAll('.panel[data-panel="generator"] *, .crumb--unit, .library-top, #book-masthead, .tabs-wrap')].filter(e => getComputedStyle(e).position === 'sticky' && e.getClientRects().length).map(e => e.className);
+    const b = document.querySelector('.gen-new').getBoundingClientRect(); const hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+    return {sticky, bar: y('.gen-return'), randomize: y('.gen-new'), paper: y('.gen-out .paper'), key: y('.gen-key'), focus: document.activeElement.id, clear: !!hit && !!hit.closest('.gen-new')};
+  });
+  assert(s.sticky.length === 1 && /gen-return/.test(s.sticky[0]), JSON.stringify(s));
+  assert(s.bar < s.randomize && s.randomize < s.paper && s.paper < s.key && s.clear && s.focus === 'paper-test', JSON.stringify(s));
+  const first = await page.textContent('.gen-out .paper-meta');
+  await page.click('.gen-new'); await page.waitForTimeout(400);
+  assert(await page.textContent('.gen-out .paper-meta') !== first, 'Randomize did not draw a new paper');
+  await page.click('.gen-edit'); await page.waitForTimeout(400);
+  assert(await page.evaluate(() => { const r = document.querySelector('.panel[data-panel="generator"] .sec-title').getBoundingClientRect(); return r.top >= 0 && r.top < innerHeight / 2; }), 'settings not shown');
 });
 await test('Class 9: contents, exercise and generator views load', async page => {
   for (const hash of ['#unit-1', '#ex11', '#generator']) {
@@ -263,7 +311,35 @@ await test('Phone menu: a link navigates and closes; widening the window closes 
   assert(!(await page.evaluate(() => document.getElementById('mobile-menu').classList.contains('is-open'))), 'menu still open on desktop');
 }, phone);
 
+await test('Phone: moving focus backwards never leaves it under the sticky bars', async page => {
+  for (const path of ['/solutions/class-10/complex-numbers/exercise-1-2/', '/solutions/class-9/#ex11']) {
+    await go(page, path);
+    await page.evaluate(() => scrollTo({top: document.documentElement.scrollHeight, behavior: 'instant'})); await page.waitForTimeout(300);
+    await page.focus('.site-footer a');
+    const hidden = [];
+    for (let i = 0; i < 40; i++) {
+      await page.keyboard.press('Shift+Tab'); await page.waitForTimeout(420);
+      const r = await page.evaluate(() => {
+        const a = document.activeElement; if (!a || a === document.body || a.closest('.nav,.mobile-menu')) return null;
+        const b = a.getBoundingClientRect(); if (!b.width) return null;
+        const pts = [[.5, .5], [.1, .2], [.9, .2], [.1, .8], [.9, .8]].map(([x, y]) => [b.left + b.width * x, Math.min(innerHeight - 1, b.top + Math.min(b.height, 40) * y)]);
+        const seen = pts.some(([x, y]) => { const h = document.elementFromPoint(x, y); return h && (h === a || a.contains(h) || h.contains(a)); });
+        return seen ? null : (a.tagName + ' ' + (a.textContent || '').trim().slice(0, 24));
+      });
+      if (r) hidden.push(r);
+    }
+    assert(hidden.length === 0, path + ': ' + hidden.join(' | '));
+  }
+}, phone);
+
 // ---------- Preferences and degraded conditions ----------
+await test('Printing in dark theme uses the light print colours', async page => {
+  await go(page, '/solutions/class-10/complex-numbers/exercise-1-2/');
+  await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+  await page.emulateMedia({media: 'print'});
+  const s = await page.evaluate(() => ({page: getComputedStyle(document.documentElement).getPropertyValue('--ds-page').trim(), ink: getComputedStyle(document.body).color}));
+  assert(s.page === '#fff' && s.ink === 'rgb(0, 0, 0)', JSON.stringify(s));
+});
 await test('Reduced motion: smooth scrolling and transitions are off', async page => {
   await go(page, '/');
   const s = await page.evaluate(() => ({sb: getComputedStyle(document.documentElement).scrollBehavior, t: getComputedStyle(document.querySelector('.btn')).transitionDuration}));
@@ -277,6 +353,9 @@ await test('Without JavaScript: exercise solutions and navigation still work', a
   assert(new URL(page.url()).pathname.endsWith('/exercise-1-3/'), 'native link failed');
   await go(page, '/');
   assert(!(await page.evaluate(() => document.getElementById('contact-form').noValidate)), 'native validation disabled without script');
+  await go(page, '/solutions/class-9/');
+  const c9 = await page.evaluate(() => ({note: !!document.querySelector('.noscript-note') && document.querySelector('.noscript-note').getClientRects().length > 0, unit: document.querySelector('.unit-doc').getClientRects().length > 0, panels: [...document.querySelectorAll('.panel')].filter(p => p.getClientRects().length).length}));
+  assert(c9.note && c9.unit && c9.panels >= 5, 'Class 9 without JavaScript: ' + JSON.stringify(c9));
 }, {javaScriptEnabled: false});
 await test('Third-party hosts unreachable: mathematics and fonts still render', async (page, context) => {
   await context.route(url => !url.href.startsWith(base), r => r.abort());

@@ -205,6 +205,15 @@
           el.focus({ preventScroll: true });
           el.scrollIntoView({ behavior: motion(), block: "start" });
         }
+        /* Focus the paper but show the workspace from its top, so the Randomize
+           row sits in view directly under the sticky Back to paper settings bar. */
+        function showPaperTop() {
+          const paperWrap = $("paper-wrap");
+          if (!paperWrap) return;
+          paperWrap.tabIndex = -1;
+          paperWrap.focus({ preventScroll: true });
+          out.scrollIntoView({ behavior: motion(), block: "start" });
+        }
         function closeDialog(d) {
           d.close();
           document.body.classList.remove("dialog-open");
@@ -459,7 +468,7 @@
           measureSticky();
           watchStuck();
           typeset(out);
-          focusRegion($("paper-wrap"));
+          showPaperTop();
         }
         function showSetup() {
           setup.hidden = false;
@@ -571,7 +580,8 @@
                 short: "paper-part-i",
                 long: "paper-part-ii",
               }[scope];
-              focusRegion($(target));
+              if (scope === "all") showPaperTop();
+              else focusRegion($(target));
             } catch (e) {
               $("randomize-status").textContent = e.message;
               measureSticky();
@@ -720,6 +730,40 @@
           closeDialog($("print-dialog"));
           printPaper(printMode);
         });
+        /* Running header and footer for printed papers: title, marks, page numbers. */
+        function runningHeadStyle() {
+          const style = document.createElement("style");
+          style.id = "paper-running";
+          const q = (s) =>
+            '"' + String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+          const box = "font-size:8pt;font-family:Inter,'Inter Fallback',Arial,sans-serif;color:#333";
+          style.textContent = `@page{size:A4 portrait;@top-left{content:${q(paper.title)};${box}}@top-right{content:${q(paper.marks + " marks")};${box}}@bottom-left{content:'Class 10 Mathematics';${box}}@bottom-right{content:'Page ' counter(page) ' of ' counter(pages);${box}}}`;
+          return style;
+        }
+        /* The browser's own Print command (Ctrl+P) on a generated paper prints what the
+           Print button would: the paper, plus the answer key when it is open on screen,
+           without the screen controls. */
+        addEventListener("beforeprint", () => {
+          if (!paper || document.body.classList.contains("printing-paper")) return;
+          if (workspace.hidden || !workspace.getClientRects().length) return;
+          const kw = $("key-wrap");
+          const printMode = kw && !kw.hidden ? "key" : "paper";
+          PaperOptionLayout.prepare();
+          document.body.classList.add("printing-paper");
+          document.body.dataset.printMode = printMode;
+          const style = runningHeadStyle();
+          document.head.appendChild(style);
+          addEventListener(
+            "afterprint",
+            () => {
+              document.body.classList.remove("printing-paper");
+              delete document.body.dataset.printMode;
+              style.remove();
+              MathLayout.refresh();
+            },
+            { once: true },
+          );
+        });
         async function printPaper(printMode) {
           if (!paper) return;
           if (!window.renderMathInElement) {
@@ -746,12 +790,7 @@
           PaperOptionLayout.prepare();
           document.body.classList.add("printing-paper");
           document.body.dataset.printMode = printMode;
-          const style = document.createElement("style");
-          style.id = "paper-running";
-          const q = (s) =>
-            '"' + String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
-          const box = "font-size:8pt;font-family:Inter,'Inter Fallback',Arial,sans-serif;color:#333";
-          style.textContent = `@page{size:A4 portrait;@top-left{content:${q(paper.title)};${box}}@top-right{content:${q(paper.marks + " marks")};${box}}@bottom-left{content:'Class 10 Mathematics';${box}}@bottom-right{content:'Page ' counter(page) ' of ' counter(pages);${box}}}`;
+          const style = runningHeadStyle();
           document.head.appendChild(style);
           let cleaned = false;
           const done = () => {

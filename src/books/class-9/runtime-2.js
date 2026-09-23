@@ -98,6 +98,20 @@
     var active = $('.tab[aria-selected="true"]');
     if (active && active.scrollIntoView) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     scheduleAlign($('.panel[data-panel="' + id + '"]') || document);
+    syncTitle();
+  }
+  /* The tab title follows the view: the contents, or the open section of a unit. */
+  function syncTitle() {
+    if (document.body.dataset.view !== 'chapter') {
+      document.title = 'Class 9 Mathematics Solutions (Punjab Textbook Board) — Muhammad Imran';
+      return;
+    }
+    var tab = $('.tab[aria-selected="true"]'), unit = unitRoot();
+    var heading = unit && unit.querySelector ? unit.querySelector('h1') : null;
+    var parts = [];
+    if (tab) parts.push(tab.textContent.replace(/\s+/g, ' ').trim());
+    if (heading) parts.push(heading.textContent.replace(/\s+/g, ' ').trim());
+    document.title = parts.join(' — ') + ' | Class 9 Mathematics';
   }
   $$('.tab').forEach(function (t) {
     t.addEventListener('click', function () { showPanel(t.dataset.panel); SiteScroll.to({ top: 0 }); });
@@ -206,14 +220,14 @@ function hilite(s, ts) {
   function renderResults() {
     var box = $('.results');
     if (!lastHits.length) {
-      box.innerHTML = '<div class="no-results">No match in Key Concepts, worked examples, ' +
-        'Exercises 1.1 to 1.3 or the Review Exercise. Try a shorter word, or a symbol name such as ' +
+      box.innerHTML = '<div class="no-results">No match in the concepts, worked examples, ' +
+        'Exercises 1.1 to 1.3 or the Review Exercise. Try a shorter word, or a name such as ' +
         '<b>sqrt</b>, <b>conjugate</b> or <b>recurring</b>.</div>';
       return;
     }
     var slice = lastHits.slice(0, shownNow);
-    var html = '<p class="results-head">' + lastHits.length + ' match' + (lastHits.length === 1 ? '' : 'es') +
-      ' · showing ' + slice.length + '</p><div class="result-list">';
+    var html = '<p class="results-head">' + lastHits.length + ' result' + (lastHits.length === 1 ? '' : 's') +
+      (lastHits.length > slice.length ? ' · showing the first ' + slice.length : '') + '</p><div class="result-list">';
     slice.forEach(function (h) {
       var it = h.item;
       html += '<a class="result" href="#' + it.target + '" data-goto="' + it.panel + '">' +
@@ -247,7 +261,12 @@ function hilite(s, ts) {
   function runSearch(q) {
     var box = $('.results'), clear = $('.s-clear');
     clear.hidden = !q;
-    if (!q || q.trim().length < 2) { box.innerHTML = ''; clear.removeAttribute('data-on'); return; }
+    if (!q || !q.trim()) { box.innerHTML = ''; clear.removeAttribute('data-on'); return; }
+    if (q.trim().length < 2) {
+      clear.setAttribute('data-on', '1');
+      box.innerHTML = '<div class="no-results">Type at least two characters, or a name such as <b>sqrt</b>.</div>';
+      return;
+    }
     clear.setAttribute('data-on', '1');
     lastTerms = terms(q); shownNow = SHOWN;
     lastHits = [];
@@ -376,20 +395,34 @@ function hilite(s, ts) {
     }
     return out;
   }
+  /* Spoken labels of the recovered SVG mathematics still carry TeX spacing and
+     alignment debris ("\\;", "&", "\\\\"). Remove the debris only; the words are kept. */
+  function cleanMathLabel(t) {
+    if (!/[\\&]/.test(t)) return t;
+    return t.replace(/\\\\/g, ' ; ').replace(/&amp;|&(?!(?:[a-z]+|#\d+|#x[0-9a-f]+);)/gi, ' ')
+      .replace(/\\([%#$_{}])/g, '$1').replace(/\\[,;:!]/g, ' ').replace(/\\ /g, ' ').replace(/\\\s*$/, '')
+      .replace(/^\s*aligned\s+|\s+aligned\s*$/g, '')
+      .replace(/\s+([,;:])/g, '$1').replace(/;(\s*;)+/g, ';').replace(/\s{2,}/g, ' ').trim();
+  }
+  function cleanLabels(html) {
+    return String(html || '').replace(/aria-label="([^"]*)"/g, function (m, t) {
+      return 'aria-label="' + cleanMathLabel(t) + '"';
+    });
+  }
   function qBlock(label, r, opts) {
     var h = '<div class="q pq" id="pq-' + r.id + '">';
     h += '<span class="q-label-line"><span class="q-label sub">' + label + '</span></span>' +
-      '<div class="q-statement">' + r.q + '</div>';
+      '<div class="q-statement">' + cleanLabels(r.q) + '</div>';
     var body = '';
     if (r.type === 'mcq' && r.opts) {
       body += '<ul class="opts">' + r.opts.map(function (o, i) {
         return '<li class="opt' + (opts && opts.key && i === r.ans ? ' correct' : '') + '">' +
-          '<span class="ol">(' + 'ABCD'[i] + ')</span><span class="oc">' + o + '</span></li>';
+          '<span class="ol">(' + 'ABCD'[i] + ')</span><span class="oc">' + cleanLabels(o) + '</span></li>';
       }).join('') + '</ul>';
     }
     /* No ruled answer space: the paper is a question paper, answers are written
        on a separate answer sheet. */
-    if (opts && opts.solution) body += '<div class="sol-in" style="padding-left:0">' + r.solution + '</div>';
+    if (opts && opts.solution) body += '<div class="sol-in" style="padding-left:0">' + cleanLabels(r.solution) + '</div>';
     if (body) h += '<div class="q-body">' + body + '</div>';
     return h + '</div>';
   }
@@ -426,7 +459,8 @@ function hilite(s, ts) {
       '<span>Coverage: ' + (G.coverage === 'all' ? 'whole unit' : 'Exercise ' + G.coverage) + '</span>' +
       '<span>Total marks: ' + p.total + '</span>' +
       '<span>Time: ' + (G.format === 'blueprint' ? BLUEPRINT.time : G.minutes + ' minutes') + '</span>' +
-      '<span>Paper ' + p.id + '</span></div></div>';
+      '<span>Paper ' + p.id + '</span></div></div>' +
+      (isKey ? '' : '<div class="paper-candidate"><span>Name</span><span>Roll number</span><span>Date</span></div>');
     /* Same numbering as the printed unit test: each section is one board
        question, its items are parts (i), (ii), ... and marks are stated once
        in the section heading. */
@@ -565,6 +599,7 @@ function bindBookRouter() {
     var was = document.body.dataset.view;
     document.body.dataset.view = chapter ? 'chapter' : 'contents';
     SiteScroll.to({ top: 0 });
+    syncTitle();
     /* Everything that measures layout ran while this view was hidden, where
        every element reports zero size. Ask them all to measure again. */
     if (was !== document.body.dataset.view) {
@@ -712,18 +747,64 @@ function bindGenerator() {
         input.value = v; G[key] = v; refreshAvailability();
       });
     });
-    $('.gen-run').addEventListener('click', function () {
-      current = buildPaper((Math.random() * 4294967296) >>> 0);
+    function renderCurrent() {
       $('.gen-out').innerHTML = paperHTML(current, 'test');
       $('.gen-after').hidden = false;
       alignLabels($('.gen-out'));
-      $('.gen-out').scrollIntoView({ block: 'start' });
+      if ($('.gen-key').getAttribute('aria-expanded') === 'true') {
+        $('.gen-sol').innerHTML = paperHTML(current, 'key');
+        alignLabels($('.gen-sol'));
+      }
+    }
+    /* Show the paper from the top of its workspace: the return bar on its sticky
+       line, the Randomize row under it, then the paper, which takes focus. */
+    function showPaperTop() {
+      var bar = $('.gen-return'), paper = $('#paper-test', $('.gen-out'));
+      if (paper) { paper.tabIndex = -1; paper.focus({ preventScroll: true }); }
+      if (!bar) return;
+      var line = parseFloat(getComputedStyle(bar).top) || 0;
+      SiteScroll.to({ top: Math.max(0, SiteScroll.y + bar.getBoundingClientRect().top - line) });
+    }
+    function ensureWorkspace() {
+      if ($('.gen-return')) return;
+      var out = $('.gen-out');
+      var bar = document.createElement('div');
+      bar.className = 'gen-return no-print';
+      bar.innerHTML = '<button type="button" class="gen-edit"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to paper settings</button>';
+      var top = document.createElement('div');
+      top.className = 'gen-top no-print';
+      top.setAttribute('role', 'group');
+      top.setAttribute('aria-label', 'Randomize questions');
+      top.innerHTML = '<button type="button" class="btn ghost gen-new">Randomize questions</button><p class="gen-status" role="status" aria-live="polite"></p>';
+      out.parentNode.insertBefore(bar, out);
+      out.parentNode.insertBefore(top, out);
+      $('.gen-edit').addEventListener('click', function () {
+        var panel = out.closest('.panel'), title = panel.querySelector('.sec-title') || panel;
+        title.tabIndex = -1;
+        title.focus({ preventScroll: true });
+        var line = parseFloat(getComputedStyle(document.body).getPropertyValue('--site-chrome-top')) || 0;
+        SiteScroll.to({ top: Math.max(0, SiteScroll.y + title.getBoundingClientRect().top - line - 16) });
+      });
+      $('.gen-new').addEventListener('click', function () {
+        if (!current) return;
+        current = buildPaper((Math.random() * 4294967296) >>> 0);
+        renderCurrent();
+        $('.gen-status').textContent = 'New questions drawn with the same settings. Paper ' + current.id + '.';
+        showPaperTop();
+      });
+    }
+    $('.gen-run').addEventListener('click', function () {
+      current = buildPaper((Math.random() * 4294967296) >>> 0);
+      ensureWorkspace();
+      $('.gen-status').textContent = '';
+      renderCurrent();
+      showPaperTop();
     });
     $('.gen-key').addEventListener('click', function () {
       if (!current) return;
       var open = $('.gen-key').getAttribute('aria-expanded') === 'true';
       $('.gen-key').setAttribute('aria-expanded', String(!open));
-      $('.gen-key').textContent = open ? 'Show solutions' : 'Hide solutions';
+      $('.gen-key').textContent = open ? 'Answer key' : 'Hide answer key';
       $('.gen-sol').innerHTML = open ? '' : paperHTML(current, 'key');
       alignLabels($('.gen-sol'));
     });
@@ -743,8 +824,9 @@ function bindGenerator() {
     document.body.setAttribute('data-print-target', sel);
     var style = document.createElement('style');
     style.id = 'print-scope';
-    style.textContent = '@media print{#panel-' + host.id.replace('panel-', '') + ' > .wrap > *{display:none}' +
-      sel + ',' + sel + ' *{display:revert}' + sel + '{display:block!important}}';
+    var wrap = '.panel[data-panel="' + host.dataset.panel + '"] > .wrap';
+    style.textContent = '@media print{' + wrap + ' > :not(' + sel + '):not(:has(' + sel + ')){display:none!important}' +
+      sel + '{display:block!important}}';
     document.head.appendChild(style);
     var done = function () {
       style.remove(); marks.forEach(function (m) { m[0].hidden = m[1]; });

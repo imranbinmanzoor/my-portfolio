@@ -680,7 +680,9 @@ figure.dg figcaption mjx-container svg{min-width:0;display:inline-block;margin:0
 
 /* ============================================================== print */
 @media print{
-  @page{size:A4;margin:13mm 12mm}
+  @page{size:A4;margin:13mm 12mm;
+    @bottom-left{content:'Class 9 Mathematics';font:8pt Inter,'Inter Fallback',Arial,sans-serif;color:#333}
+    @bottom-right{content:'Page ' counter(page) ' of ' counter(pages);font:8pt Inter,'Inter Fallback',Arial,sans-serif;color:#333}}
   html,body{background:#fff;color:#000;font-size:10pt;line-height:1.35}
   .tabs-wrap,.masthead,.searchbar,.search-scope,.results,.ctrl,.btn,.btn-row,
   .no-print,.local-jump,.flow-head p,details.sol,.notes,

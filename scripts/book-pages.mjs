@@ -44,7 +44,7 @@ export function buildBookPages({read,write,bookHTML}) {
         .replace(/(<link rel="canonical" href=")[^"]+/, '$1'+SITE+url)
         .replace('<a class="skip skip-link" href="#book-main">','<a class="skip skip-link" href="#main">')
         .replace('<section class="view" id="view-book">','<section class="view" id="view-book" hidden>')
-        .replace('<section class="view" id="view-unit" hidden>','<section class="view" id="view-unit">')
+        .replace('<main class="view" id="view-unit" hidden>','<main class="view" id="view-unit">')
         .replace('id="crumb-unit"></li>',`id="crumb-unit">Unit ${unit.n} · ${esc(unit.title)}</li>`)
         .replace('id="unit-title"></h1>',`id="unit-title">Unit ${unit.n} · ${esc(unit.title)}</h1>`)
         .replace('role="tablist"','role="navigation"')

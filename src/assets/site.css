@@ -163,7 +163,8 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
  .subject-detail__body article{padding:16px}
  .library-card{grid-template-columns:76px minmax(0,1fr);gap:0 16px;padding:20px}
  .library-cover strong{font-size:40px}
- .library-cover small{font-size:7px}
+ /* Too small to set cleanly on a narrow cover; the card title already names the subject. */
+ .library-cover small{display:none}
 }
 @media (width < 800px){
  .page-breadcrumb{position:relative;top:auto}
@@ -204,10 +205,12 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
 }
 
 /* ---------- Preferences ---------- */
+@media screen{
 [data-theme=dark] .library-card{--book-tint:var(--ds-page);--book-color:#a5bedd}
 [data-theme=dark] .library-card:first-child{--book-color:#8bd7b8}
 [data-theme=dark] .mini-book{border-color:#4b5b69;background:#26313c;color:#b7cde0;box-shadow:none}
 [data-theme=dark] .mini-book:nth-child(2){border-left-color:#9d8fcb;background:#2c2838;color:#cfc3ef}
+}
 @media (forced-colors:active){.project-view{background:Canvas}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 

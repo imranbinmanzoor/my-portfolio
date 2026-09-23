@@ -7,6 +7,9 @@ import {renderProject,renderProjectCards,renderProjectTiles} from '../src/projec
 import {breadcrumbs} from './seo-pages.mjs';
 import {buildBookPages} from './book-pages.mjs';
 import {socialMetadata} from './social-metadata.mjs';
+import {cleanMarkupLabels} from './math-labels.mjs';
+// Without JavaScript the Class 9 book shows every section in order, and says what needs JavaScript.
+const CLASS9_NOSCRIPT='<noscript><style>html body[data-book="9"][data-view] .unit-doc{display:block!important}html body[data-book="9"] .panel[hidden]:not([data-panel="generator"]){display:block!important}html body[data-book="9"] :is(.tabs-wrap,.searchbar,.search-scope,.panel[data-panel="generator"]){display:none!important}</style><p class="noscript-note">JavaScript is turned off, so every section of Unit 1 appears below the contents, one after another. Search and Practice papers need JavaScript.</p></noscript>';
 const root=path.resolve(import.meta.dirname,'..');
 process.chdir(root);
 const out=path.join(root,'dist');
@@ -79,6 +82,11 @@ for(const cls of [9,10]) {
     html=replaceOnce(html,'<meta name="description" content="Punjab Textbook Board. Worked solutions for 1 of 13 units, exercise by exercise.">','<meta name="description" content="Free worked solutions for Punjab Textbook Board Class 9 Mathematics by Muhammad Imran. Unit 1, Real Numbers: concepts, examples, exercises, a unit test and practice papers.">\n<meta name="author" content="Muhammad Imran">\n<meta content="#f0f1f5" media="(prefers-color-scheme: light)" name="theme-color">\n<meta content="#17191e" media="(prefers-color-scheme: dark)" name="theme-color">');
     html=html.replace(/(<body\b[^>]*>)/,'$1\n<a class="skip-link" href="#book-content">Skip to content</a>');
     html=replaceOnce(html,'<main class="book">','<main class="book" id="book-content" tabindex="-1">');
+    // Interface copy only: the search scope and the Unit Test note name what readers can see.
+    html=replaceOnce(html,'Searches Concepts, Exercise 1.1 to 1.3 and their solutions. The Unit Test and generated papers are not searched.','Searches the concepts, worked examples, Exercises 1.1 to 1.3, the Review Exercise and their solutions. The Unit Test and generated papers are not searched.');
+    html=replaceOnce(html,'<p class="sec-sub">Real Numbers. The printed unit test, with the corrections listed in the correction ledger applied.</p>','<p class="sec-sub">Real Numbers. The printed unit test, with the errors found in the printed version corrected.</p>');
+    // Spoken labels: remove TeX debris only (see scripts/math-labels.mjs and docs/MATH_CORRECTION_LOG.md).
+    html=cleanMarkupLabels(html);
   }
   if(cls===10) html=html.replace(/<script type="text\/plain" id="book-runtime">([\s\S]*?)<\/script>/,(_,runtime)=>{write('assets/books/class-10-runtime.js',runtime);return '<script src="/assets/book-data.js" data-book-runtime="/assets/books/class-10-runtime.js" defer></script>';});
   // Externalize recovered CSS and behavior, preserving execution order and JSON IDs.
@@ -89,6 +97,8 @@ for(const cls of [9,10]) {
     if(/\b(src|id)\s*=/.test(attrs)||/type=["']application\/(?:ld\+)?json["']/.test(attrs))return whole;
     const p=`assets/books/class-${cls}-${++ji}.js`;write(p,body);return `<script src="/${p}"></script>`;
   });
+  // Added after styles are externalized so this block stays inline and file numbering is unchanged.
+  if(cls===9) html=replaceOnce(html,'<main class="book" id="book-content" tabindex="-1">','<main class="book" id="book-content" tabindex="-1">'+CLASS9_NOSCRIPT);
   write(`solutions/class-${cls}/index.html`,html);
 }
 buildBookPages({read,write,bookHTML:read(path.join(out,'solutions/class-10/index.html'))});

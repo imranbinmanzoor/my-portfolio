@@ -232,6 +232,11 @@
     var confirmation = document.getElementById('contact-confirmation');
     var emailFallback = 'You can also email <a href="mailto:imranbinmanzoor1@gmail.com">imranbinmanzoor1@gmail.com</a>.';
     var fields = Array.prototype.slice.call(form.querySelectorAll('input[required], textarea[required]'));
+    // Links such as /?topic=tutoring#contact open the form with that topic chosen.
+    var topicSelect = document.getElementById('f-topic');
+    var topicParam = (location.search.match(/[?&]topic=([a-z-]+)/) || [])[1];
+    var topicValue = { tutoring: 'Tutoring inquiry', frontend: 'Frontend project', research: 'AI evaluation or research' }[topicParam];
+    if (topicSelect && topicValue) topicSelect.value = topicValue;
     var escapeText = function (text) { return String(text).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); };
     function showFieldState(field) {
       var error = document.getElementById(field.id + '-error');
@@ -244,9 +249,14 @@
       // Once a field has been flagged, re-check it as it is corrected.
       field.addEventListener('input', function () { if (field.getAttribute('aria-invalid') === 'true') showFieldState(field); });
     });
-    function setError(html) {
+    function setError(html, focusStatus) {
       statusEl.innerHTML = html;
       statusEl.className = 'form-status is-error';
+      if (!focusStatus) return;
+      // After a failed send, bring the explanation into view and put focus on it.
+      statusEl.setAttribute('tabindex', '-1');
+      statusEl.focus({ preventScroll: true });
+      statusEl.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
     }
     document.querySelector('[data-contact-another]').addEventListener('click', function () {
       confirmation.hidden = true;
@@ -287,13 +297,30 @@
           }
           // A rejected submission: show the service's own reasons when it gives them.
           return res.json().catch(function () { return null; }).then(function (d) {
-            var reasons = d && d.errors && d.errors.map(function (x) { return x && x.message; }).filter(Boolean);
-            var text = reasons && reasons.length ? reasons.join('. ').replace(/\.?$/, '.') : 'The message could not be sent (error ' + res.status + ').';
-            setError(escapeText(text) + ' Your text is still here. ' + emailFallback);
+            var errors = (d && d.errors) || [];
+            // Field-level rejections (for example an address the service does not accept)
+            // are shown on the field itself, like the checks made before sending.
+            var flagged = null;
+            errors.forEach(function (x) {
+              var field = x && x.field && form.querySelector('[name="' + String(x.field).replace(/[^a-z_]/gi, '') + '"][required]');
+              if (!field) return;
+              field.setAttribute('aria-invalid', 'true');
+              var note = document.getElementById(field.id + '-error');
+              if (note) note.hidden = false;
+              if (!flagged) flagged = field;
+            });
+            if (flagged) {
+              setError('Please check the highlighted fields. Your text is still here. ' + emailFallback);
+              flagged.focus();
+              return;
+            }
+            var reasons = errors.map(function (x) { return x && x.message; }).filter(Boolean);
+            var text = reasons.length ? reasons.join('. ').replace(/\.?$/, '.') : 'The message could not be sent (error ' + res.status + ').';
+            setError(escapeText(text) + ' Your text is still here. ' + emailFallback, true);
           });
         })
         .catch(function () {
-          setError('The message could not be sent. Check your connection and try again; your text is still here. ' + emailFallback);
+          setError('The message could not be sent. Check your connection and try again; your text is still here. ' + emailFallback, true);
         })
         .finally(function () {
           textEl.textContent = originalText;
@@ -327,16 +354,14 @@
   var chromeInset = function () {
     return parseFloat(getComputedStyle(html).getPropertyValue('--frame-inset')) || 0;
   };
-  document.addEventListener('focusin', function (e) {
-    var el = e.target;
-    if (!el || !el.matches || !el.matches(':focus-visible') || el.closest('.nav,.mobile-menu,.skip-link,dialog')) return;
-    requestAnimationFrame(function () {
+  function keepFocusClear(el) {
+    if (document.activeElement !== el) return;
       var r = el.getBoundingClientRect();
       if (!r.height) return;
       var inset = window.innerWidth >= 800 ? chromeInset() : 0;
       var top = inset, bottom = window.innerHeight - inset;
       // Sticky and fixed bars across the top of the reading area (not the side rail).
-      document.querySelectorAll('.page-breadcrumb,.crumb--unit,.library-top,#tabsWrap,.tabs-wrap,.local-jump,.grp,.paper-return,.nav').forEach(function (bar) {
+      document.querySelectorAll('.page-breadcrumb,.crumb--unit,.library-top,#book-masthead,#tabsWrap,.tabs-wrap,.local-jump,.grp,.paper-return,.gen-return,.nav').forEach(function (bar) {
         if (bar.contains(el) || el.contains(bar)) return;
         var cs = getComputedStyle(bar);
         if (cs.position !== 'sticky' && cs.position !== 'fixed') return;
@@ -349,7 +374,14 @@
       var room = bottom - top - 16;
       if (r.top < top + 4) window.scrollBy({top: r.top - top - 12, behavior: 'instant'});
       else if (r.bottom > bottom - 4 && r.height < room) window.scrollBy({top: r.bottom - bottom + 12, behavior: 'instant'});
-    });
+  }
+  document.addEventListener('focusin', function (e) {
+    var el = e.target;
+    if (!el || !el.matches || !el.matches(':focus-visible') || el.closest('.nav,.mobile-menu,.skip-link,dialog')) return;
+    requestAnimationFrame(function () { keepFocusClear(el); });
+    // Moving focus backwards scrolls up, which brings the phone header back a moment
+    // later; check again once it has settled.
+    setTimeout(function () { keepFocusClear(el); }, 350);
   });
 
   /* ---------- 9. Year auto-update ---------- */
