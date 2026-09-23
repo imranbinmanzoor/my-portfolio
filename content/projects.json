@@ -4,7 +4,7 @@
     "title": "Portfolio & mathematics library",
     "shortTitle": "Portfolio & library",
     "category": "Personal project · In development",
-    "intro": "A personal workspace for my research, development and teaching, with a growing mathematics library at its heart.",
+    "intro": "My personal site: AI evaluation, frontend work and teaching in one place, with a growing mathematics library at its heart.",
     "demo": "/solutions/",
     "demoLabel": "Explore the library",
     "facts": [
@@ -45,12 +45,12 @@
         "caption": "Mobile view of the current homepage. Captured September 2026; the site continues to evolve."
       }
     ],
-    "brief": "Bring different kinds of work together without making every page look or behave the same. The portfolio introduces the person; the library gives students a focused place to read, understand and practise.",
+    "brief": "Bring different kinds of work together without making every page look or behave the same. The portfolio introduces the person; the library gives students a focused place to read, understand and practice.",
     "context": "An ongoing personal project. One unit is available in each of Classes 9 and 10; Classes 11 and 12 are planned.",
     "decisions": [
       {
         "title": "A shared visual language",
-        "text": "Typography, colour, navigation and controls carry across the portfolio and books. Reading views keep their own measure, while Practice papers have a separate printable layout."
+        "text": "Typography, color, navigation and controls carry across the portfolio and books. Reading views keep their own measure, while Practice papers have a separate printable layout."
       },
       {
         "title": "Content with a source of truth",
@@ -62,7 +62,10 @@
     "nextTitle": "The next chapter",
     "next": "Expand the books with independent mathematical review, recover a maintainable authoring path for Class 9, and continue consolidating the shared reading and Practice tools.",
     "previous": "pig-game",
-    "nextProject": "omnifood"
+    "nextProject": "omnifood",
+    "summary": "Worked solutions, configurable practice papers and the static build behind this site.",
+    "tags": "Mathematics · Publishing · JavaScript",
+    "thumb": null
   },
   {
     "slug": "omnifood",
@@ -92,19 +95,19 @@
     "views": [
       {
         "label": "Desktop",
-        "src": "/IMAGES/omnifood.webp",
+        "src": "/IMAGES/omnifood-1600.webp",
         "alt": "Omnifood — desktop presentation",
         "caption": "Desktop presentation: the introduction leads into the service, meals and pricing."
       },
       {
         "label": "Tablet",
-        "src": "/IMAGES/omnifood-tablet.webp",
+        "src": "/IMAGES/omnifood-tablet-1100.webp",
         "alt": "Omnifood — tablet presentation",
         "caption": "Tablet presentation: the same page adapts to a narrower reading space."
       },
       {
         "label": "Mobile",
-        "src": "/IMAGES/omnifood-mobile.webp",
+        "src": "/IMAGES/omnifood-mobile-780.webp",
         "alt": "Omnifood — mobile presentation",
         "caption": "Mobile presentation: a single-column view of the original learning project."
       }
@@ -126,7 +129,10 @@
     "nextTitle": "Where I would take it next",
     "next": "Revisit the original implementation with keyboard and assistive-technology testing, tighter asset delivery and real content. Any claims about usability or conversion would need evidence from actual users.",
     "previous": "portfolio",
-    "nextProject": "modern-page"
+    "nextProject": "modern-page",
+    "summary": "Responsive layout and visual hierarchy for a fictional food service.",
+    "tags": "HTML · CSS · JavaScript",
+    "thumb": "/IMAGES/omnifood-960.webp"
   },
   {
     "slug": "modern-page",
@@ -157,32 +163,32 @@
     "views": [
       {
         "label": "Desktop",
-        "src": "/IMAGES/modern-page.webp",
+        "src": "/IMAGES/modern-page-1600.webp",
         "alt": "Animated sign-in interface — desktop presentation",
-        "caption": "Desktop presentation: forms and the coloured panel share one composition."
+        "caption": "Desktop presentation: forms and the colored panel share one composition."
       },
       {
         "label": "Tablet",
-        "src": "/IMAGES/modern-page-tablet.webp",
+        "src": "/IMAGES/modern-page-tablet-1100.webp",
         "alt": "Animated sign-in interface — tablet presentation",
         "caption": "Tablet presentation: registration within the same visual system."
       },
       {
         "label": "Mobile",
-        "src": "/IMAGES/modern-page-mobile.webp",
+        "src": "/IMAGES/modern-page-mobile-780.webp",
         "alt": "Animated sign-in interface — mobile presentation",
         "caption": "Mobile presentation: the original compact arrangement of the form and panel."
       }
     ],
     "brief": "Make switching between sign-in and registration feel like a change of state within one interface. Keep the form hierarchy clear while the surrounding panel changes position.",
-    "context": "A frontend learning prototype. The public demo shows interface behaviour; it does not provide a working authentication service.",
+    "context": "A frontend learning prototype. The public demo shows interface behavior; it does not provide a working authentication service.",
     "decisions": [
       {
         "title": "One state, coordinated motion",
-        "text": "A class on the main container controls the visual state. CSS positions the forms and coloured panel, while JavaScript switches that state in response to the controls."
+        "text": "A class on the main container controls the visual state. CSS positions the forms and colored panel, while JavaScript switches that state in response to the controls."
       },
       {
-        "title": "Keep the task recognisable",
+        "title": "Keep the task recognizable",
         "text": "Fields, the main action and the option to switch forms retain a clear grouping. The saved device views show how the composition was arranged for different screen sizes."
       }
     ],
@@ -191,7 +197,10 @@
     "nextTitle": "Before real authentication",
     "next": "A production version needs secure server-side authentication, proper field labels and errors, password-manager support, keyboard testing and a reduced-motion option. Those are separate from the visual prototype.",
     "previous": "omnifood",
-    "nextProject": "pig-game"
+    "nextProject": "pig-game",
+    "summary": "Sign-in and registration in one composition, with coordinated motion between states.",
+    "tags": "Forms · Animation · JavaScript",
+    "thumb": "/IMAGES/modern-page-960.webp"
   },
   {
     "slug": "pig-game",
@@ -221,7 +230,7 @@
     "views": [
       {
         "label": "Gameplay",
-        "src": "/IMAGES/pig-game.webp",
+        "src": "/IMAGES/pig-game-1600.webp",
         "alt": "The Pig Game showing the two player panels and game controls",
         "caption": "Original gameplay view. Try the demo to explore rolling, holding and restarting."
       }
@@ -243,6 +252,9 @@
     "nextTitle": "A useful next iteration",
     "next": "Add explicit tests for turn changes, score resets and winning states, then revisit keyboard access and small-screen play. The original demo remains available as a record of the learning project.",
     "previous": "modern-page",
-    "nextProject": "portfolio"
+    "nextProject": "portfolio",
+    "summary": "A two-player dice game built around rules, decisions and changing state.",
+    "tags": "Game logic · DOM · JavaScript",
+    "thumb": "/IMAGES/pig-game-960.webp"
   }
 ]

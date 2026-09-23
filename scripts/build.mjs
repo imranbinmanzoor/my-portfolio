@@ -3,7 +3,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {renderOverview} from '../src/books/overview.mjs';
-import {renderProject} from '../src/projects/render.mjs';
+import {renderProject,renderProjectCards,renderProjectTiles} from '../src/projects/render.mjs';
 import {breadcrumbs} from './seo-pages.mjs';
 import {buildBookPages} from './book-pages.mjs';
 import {socialMetadata} from './social-metadata.mjs';
@@ -14,6 +14,7 @@ if(path.dirname(out)!==root || path.basename(out)!=='dist' || (fs.existsSync(out
 if(fs.existsSync(out))fs.rmSync(out,{recursive:true});
 fs.mkdirSync(out);
 const read=p=>fs.readFileSync(p,'utf8');
+const replaceOnce=(text,from,to)=>{const i=text.indexOf(from);if(i<0||text.indexOf(from,i+1)>=0)throw new Error('Expected exactly one: '+from.slice(0,60));return text.slice(0,i)+to+text.slice(i+from.length);};
 const write=(p,value)=>{fs.mkdirSync(path.dirname(path.join(out,p)),{recursive:true});fs.writeFileSync(path.join(out,p),value);};
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name)).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);
 function portableGzip(value) {
@@ -23,7 +24,13 @@ function portableGzip(value) {
   bytes[9]=255;
   return bytes.toString('base64');
 }
-export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP|BOOK|PROJECT)\(([^)]+)\)@@/g,(_,kind,file)=>{
+export const expand=text=>text.replace(/@@(SOURCE|JSON|GZIP|BOOK|PROJECTS|PROJECT)\(([^)]+)\)@@/g,(_,kind,file)=>{
+  if(kind==='PROJECTS') {
+    const projects=JSON.parse(read('content/projects.json'));
+    if(file==='cards')return renderProjectCards(projects);
+    if(file==='tiles')return renderProjectTiles(projects);
+    throw new Error('Unknown project collection');
+  }
   if(kind==='PROJECT') {
     const projects=JSON.parse(read('content/projects.json'));
     const project=projects.find(p=>p.slug===file);
@@ -46,9 +53,15 @@ for(const p of walk('public'))write(p.slice(7),fs.readFileSync(p));
 for(const p of walk('src/assets'))write(p.slice(4),fs.readFileSync(p));
 const library=JSON.parse(read('content/library.json'));
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function cards(){return library.books.map(b=>`<article class="library-card ${b.status==='planned'?'is-planned':''}"><div class="library-cover" aria-hidden="true"><small>MATHEMATICS</small><strong>${String(b.class).padStart(2,'0')}</strong></div><span class="publication-state">${b.units.length?'Available to study':'In preparation'}</span><h2>Class ${b.class}<span>Mathematics</span></h2><p class="edition">${escape(b.board||'FSc Mathematics')}</p><p class="book-description">${b.units.length?'Begin with '+escape(b.units[0].title)+'. Worked exercises, review questions, and practice papers.':'A future addition to the library. Solutions are not published yet.'}</p><div class="library-card__foot"><span>${b.units.length?b.units.length+' of '+b.inventory+' units available':'Publication planned'}</span><a class="${b.units.length?'book-entry':'book-status'}" href="/solutions/class-${b.class}/"><span class="btn__inner"><span class="btn__text">${b.units.length?'Open book':'View status'} <span class="sr-only"> — Class ${b.class}</span></span></span></a></div></article>`).join('\n');}
+function cards(){
+  // Available books are the page's primary actions; planned books are a quieter status list.
+  const available=library.books.filter(b=>b.units.length).map(b=>`<article class="library-card"><div class="library-cover" aria-hidden="true"><small>MATHEMATICS</small><strong>${String(b.class).padStart(2,'0')}</strong></div><div class="library-card__body"><p class="publication-state">Available to study</p><h3>Class ${b.class} <span>Mathematics</span></h3><p class="edition">${escape(b.board)}</p><p class="book-description">Begin with ${escape(b.units[0].title)}: worked exercises, review questions and practice papers.</p></div><div class="library-card__foot"><span>${b.units.length} of ${b.inventory} units published</span><a class="book-entry" href="/solutions/class-${b.class}/">Open book<span class="sr-only"> — Class ${b.class}</span></a></div></article>`).join('\n');
+  const planned=library.books.filter(b=>!b.units.length).map(b=>`<li><a href="/solutions/class-${b.class}/"><span class="library-planned__number" aria-hidden="true">${b.class}</span><span class="library-planned__text"><strong>Class ${b.class} Mathematics</strong><small>Solutions not published yet</small></span><span class="library-planned__action">View status</span></a></li>`).join('');
+  return {available,planned};
+}
 for(const p of walk('src/pages')) {
-  let html=expand(read(p)).replace('@@LIBRARY_CARDS@@',cards());
+  const catalog=cards();
+  let html=expand(read(p)).replace('@@LIBRARY_CARDS@@',catalog.available).replace('@@LIBRARY_PLANNED@@',catalog.planned);
   for(const b of library.books) html=html.replaceAll(`@@CLASS_${b.class}_COUNT@@`,String(b.units.length));
   write(p.slice(10),html);
 }
@@ -59,6 +72,14 @@ for(const cls of [9,10]) {
     html=html.replace('<main class="wrap" id="book-main" tabindex="-1"></main>',`<main class="wrap" id="book-main" tabindex="-1">${overview}</main>`);
   }
   html=html.replace('</head>',breadcrumbs([{name:'Home',href:'/'},{name:'Mathematics',href:'/solutions/'},{name:'Class '+cls}])+'</head>');
+  if(cls===9){
+    // The Class 9 shell is a locked, byte-preserved source (its mathematics exists only as
+    // rendered SVG). Page-level metadata and landmarks are applied here, never in the shell.
+    html=replaceOnce(html,'<title>Class 9 Mathematics — worked solutions</title>','<title>Class 9 Mathematics Solutions (Punjab Textbook Board) — Muhammad Imran</title>');
+    html=replaceOnce(html,'<meta name="description" content="Punjab Textbook Board. Worked solutions for 1 of 13 units, exercise by exercise.">','<meta name="description" content="Free worked solutions for Punjab Textbook Board Class 9 Mathematics by Muhammad Imran. Unit 1, Real Numbers: concepts, examples, exercises, a unit test and practice papers.">\n<meta name="author" content="Muhammad Imran">\n<meta content="#f0f1f5" media="(prefers-color-scheme: light)" name="theme-color">\n<meta content="#17191e" media="(prefers-color-scheme: dark)" name="theme-color">');
+    html=html.replace(/(<body\b[^>]*>)/,'$1\n<a class="skip-link" href="#book-content">Skip to content</a>');
+    html=replaceOnce(html,'<main class="book">','<main class="book" id="book-content" tabindex="-1">');
+  }
   if(cls===10) html=html.replace(/<script type="text\/plain" id="book-runtime">([\s\S]*?)<\/script>/,(_,runtime)=>{write('assets/books/class-10-runtime.js',runtime);return '<script src="/assets/book-data.js" data-book-runtime="/assets/books/class-10-runtime.js" defer></script>';});
   // Externalize recovered CSS and behavior, preserving execution order and JSON IDs.
   let si=0,ji=0;

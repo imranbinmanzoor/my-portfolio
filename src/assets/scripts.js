@@ -1,7 +1,7 @@
 /* ================================================================
    SHARED SCRIPTS — Muhammad Imran
-   Behavior for theme toggle, nav scroll state, mobile menu,
-   reveal animations, smooth scroll, and form handling.
+   Theme, mobile header and menu, current-section navigation,
+   in-page links, the contact form, and the footer year.
    ================================================================ */
 
 (function () {
@@ -36,38 +36,7 @@
     html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
   }
   syncThemeButtons();
-  /* A shared detail row keeps the discipline cards aligned on wider screens. */
-  var disciplines = document.querySelector('.disciplines');
-  if (disciplines) {
-    var disciplineButtons = Array.from(disciplines.querySelectorAll('.discipline__trigger'));
-    disciplines.setAttribute('data-enhanced', '');
-    function measureDisciplineJoin() {
-      var button = disciplines.querySelector('[aria-expanded="true"]');
-      if (!button) return;
-      var panel = document.getElementById(button.getAttribute('aria-controls'));
-      var b = button.getBoundingClientRect(), p = panel.getBoundingClientRect();
-      var edge = parseFloat(getComputedStyle(panel).borderTopWidth);
-      var buttonEdge = parseFloat(getComputedStyle(button).borderTopWidth);
-      panel.style.setProperty('--join-left', (b.left - p.left - edge) + 'px');
-      panel.style.setProperty('--join-width', b.width + 'px');
-      panel.style.setProperty('--join-top', (b.bottom - p.top - edge - buttonEdge) + 'px');
-      panel.style.setProperty('--join-height', (p.top - b.bottom + edge + buttonEdge) + 'px');
-    }
-    new ResizeObserver(measureDisciplineJoin).observe(disciplines);
-    disciplineButtons.forEach(function (button) {
-      button.setAttribute('aria-expanded', 'false');
-      document.getElementById(button.getAttribute('aria-controls')).hidden = true;
-      button.addEventListener('click', function () {
-        var opening = button.getAttribute('aria-expanded') !== 'true';
-        disciplineButtons.forEach(function (item) {
-          var expanded = item === button && opening;
-          item.setAttribute('aria-expanded', String(expanded));
-          document.getElementById(item.getAttribute('aria-controls')).hidden = !expanded;
-        });
-        measureDisciplineJoin();
-      });
-    });
-  }
+
   themeToggles.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
@@ -84,7 +53,9 @@
   if (nav) {
     function syncChromeOffset() {
       var hidden = nav.classList.contains('is-scroll-hidden') && !nav.matches(':focus-within');
-      body.style.setProperty('--site-chrome-top', desktopNavigation.matches || hidden ? '0px' : (nav.offsetHeight + 20) + 'px');
+      // Desktop uses the stylesheet's frame inset; phones follow the floating header.
+      if (desktopNavigation.matches) body.style.removeProperty('--site-chrome-top');
+      else body.style.setProperty('--site-chrome-top', hidden ? '0px' : (nav.offsetHeight + 20) + 'px');
     }
     function setNavHidden(hidden) {
       nav.classList.toggle('is-scroll-hidden', hidden);
@@ -216,20 +187,22 @@
   if (document.getElementById('home') && !observedIds.includes('home')) observedIds.unshift('home');
   var observedSections = observedIds
     .map(function (id) { return document.getElementById(id); })
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
 
   if (observedSections.length) {
     var activeFrame = 0;
     function syncSectionLocation() {
       activeFrame = 0;
-      var ordered = observedSections.slice().sort(function (a, b) {
-        return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+      // Mark the listed section that contains the reading line. Between listed sections
+      // (projects, learning, tools) nothing is marked rather than the last one passed.
+      var line = SiteScroll.top + Math.min(200, window.innerHeight * .25);
+      var current = null;
+      observedSections.forEach(function (section) {
+        var box = section.getBoundingClientRect();
+        if (!current && box.top <= line && box.bottom > line) current = section;
       });
-      var current = ordered[0];
-      ordered.forEach(function (section) {
-        if (section.getBoundingClientRect().top <= Math.min(200, window.innerHeight * .25)) current = section;
-      });
-      if (SiteScroll.y + SiteScroll.height >= SiteScroll.extent - 2) current = ordered[ordered.length - 1];
+      if (SiteScroll.y + SiteScroll.height >= SiteScroll.extent - 2) current = observedSections[observedSections.length - 1];
       navLinks.forEach(function (link) {
         var active = localAnchor(link) === current;
         link.classList.toggle('is-active', active);
@@ -245,43 +218,36 @@
     window.addEventListener('resize', scheduleSectionLocation);
   }
 
-  /* ---------- 5. REVEAL ANIMATIONS ---------- */
-  var reveals = document.querySelectorAll('.reveal');
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if ('IntersectionObserver' in window && !reduceMotion && reveals.length) {
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-    reveals.forEach(function (el) {
-      if (el.closest('.hero, .page-hero')) {
-        requestAnimationFrame(function () { el.classList.add('is-visible'); });
-      } else {
-        revealObserver.observe(el);
-      }
-    });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
-  /* ---------- 6. Image fallback ---------- */
-  document.querySelectorAll('.work-card__media img, .about-portrait__img img, .project-screenshot img')
-    .forEach(function (img) {
-      img.addEventListener('error', function () { img.style.display = 'none'; }, { once: true });
-    });
-
-  /* ---------- 7. Contact form (Formspree AJAX) ---------- */
+  /* ---------- 7. Contact form (Formspree) ----------
+     Without JavaScript the form posts normally with native validation. With it, fields
+     are checked in place, the request is sent once, and only a confirmed 2xx response
+     replaces the form with the confirmation. Anything else keeps every typed value. */
   var form = document.getElementById('contact-form');
   if (form) {
+    form.noValidate = true;
     var submitBtn = document.getElementById('submit-btn');
     var statusEl = document.getElementById('form-status');
     var confirmation = document.getElementById('contact-confirmation');
+    var emailFallback = 'You can also email <a href="mailto:imranbinmanzoor1@gmail.com">imranbinmanzoor1@gmail.com</a>.';
+    var fields = Array.prototype.slice.call(form.querySelectorAll('input[required], textarea[required]'));
+    var escapeText = function (text) { return String(text).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); };
+    function showFieldState(field) {
+      var error = document.getElementById(field.id + '-error');
+      var invalid = !field.value.trim() || !field.checkValidity();
+      field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+      if (error) error.hidden = !invalid;
+      return !invalid;
+    }
+    fields.forEach(function (field) {
+      // Once a field has been flagged, re-check it as it is corrected.
+      field.addEventListener('input', function () { if (field.getAttribute('aria-invalid') === 'true') showFieldState(field); });
+    });
+    function setError(html) {
+      statusEl.innerHTML = html;
+      statusEl.className = 'form-status is-error';
+    }
     document.querySelector('[data-contact-another]').addEventListener('click', function () {
       confirmation.hidden = true;
       form.hidden = false;
@@ -292,13 +258,14 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.checkValidity()) {
-        statusEl.textContent = 'Please complete the required fields and check your email address.';
-        statusEl.className = 'form-status is-error';
-        form.reportValidity();
+      if (submitBtn.disabled) return;
+      var firstInvalid = null;
+      fields.forEach(function (field) { if (!showFieldState(field) && !firstInvalid) firstInvalid = field; });
+      if (firstInvalid) {
+        setError('Please check the highlighted fields.');
+        firstInvalid.focus();
         return;
       }
-      if (submitBtn.disabled) return;
       var textEl = submitBtn.querySelector('.btn__text');
       var originalText = textEl.textContent;
       textEl.textContent = 'Sending…';
@@ -306,37 +273,33 @@
       form.setAttribute('aria-busy', 'true');
       statusEl.textContent = '';
       statusEl.className = 'form-status';
-      var data = new FormData(form);
 
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (res) {
-        if (res.ok) {
-          form.reset();
-          form.hidden = true;
-          confirmation.hidden = false;
-          confirmation.focus({preventScroll:true});
-          confirmation.scrollIntoView({block:'nearest',behavior:reduceMotion ? 'auto' : 'smooth'});
-        } else {
-          return res.json().then(function (d) {
-            var msg = (d && d.errors && d.errors.map(function(e){ return e.message; }).join(', ')) || 'Something went wrong. Please try again.';
-            statusEl.textContent = msg;
-            statusEl.className = 'form-status is-error';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+        .then(function (res) {
+          if (res.ok) {
+            form.reset();
+            fields.forEach(function (field) { field.removeAttribute('aria-invalid'); });
+            form.hidden = true;
+            confirmation.hidden = false;
+            confirmation.focus({ preventScroll: true });
+            confirmation.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+            return;
+          }
+          // A rejected submission: show the service's own reasons when it gives them.
+          return res.json().catch(function () { return null; }).then(function (d) {
+            var reasons = d && d.errors && d.errors.map(function (x) { return x && x.message; }).filter(Boolean);
+            var text = reasons && reasons.length ? reasons.join('. ').replace(/\.?$/, '.') : 'The message could not be sent (error ' + res.status + ').';
+            setError(escapeText(text) + ' Your text is still here. ' + emailFallback);
           });
-        }
-      })
-      .catch(function () {
-        statusEl.textContent = 'Network error. Please try again or email me directly.';
-        statusEl.className = 'form-status is-error';
-      })
-      .finally(function () {
-        textEl.textContent = originalText;
-        submitBtn.disabled = false;
-        form.removeAttribute('aria-busy');
-      });
+        })
+        .catch(function () {
+          setError('The message could not be sent. Check your connection and try again; your text is still here. ' + emailFallback);
+        })
+        .finally(function () {
+          textEl.textContent = originalText;
+          submitBtn.disabled = false;
+          form.removeAttribute('aria-busy');
+        });
     });
   }
 

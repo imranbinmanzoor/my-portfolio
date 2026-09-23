@@ -2,20 +2,6 @@
   'use strict';
   const specimen=document.querySelector('[data-work-specimen]');
   if(!specimen)return;
-  const welcome=document.querySelector('.welcome--specimen');
-  const pathways=document.querySelector('.home-pathways');
-  const mobile=matchMedia('(max-width:699.98px)');
-  function placeSpecimen(){
-    const focused=specimen.contains(document.activeElement)?document.activeElement:null;
-    if(mobile.matches){pathways.after(specimen);welcome.removeAttribute('data-specimen');}
-    else{welcome.append(specimen);welcome.setAttribute('data-specimen','');}
-    focused?.focus({preventScroll:true});
-    requestAnimationFrame(()=>{
-      drawConnections();
-      focused?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
-    });
-  }
-  mobile.addEventListener('change',placeSpecimen);placeSpecimen();
   const tabs=[...specimen.querySelectorAll('[role=tab]')];
   const panel=specimen.querySelector('[role=tabpanel]');
   const map=specimen.querySelector('.work-map');
@@ -41,11 +27,12 @@
   [map,core,...tabs].forEach(element=>sizes.observe(element));
   document.fonts.ready.then(drawConnections);
   const fields={
-    research:{accent:'green',description:'Scientific tasks. Reference solutions. Model evaluation.',href:'#research',link:'Explore research'},
-    code:{accent:'cyan',description:'Responsive interfaces. Interaction. Careful testing.',href:'/projects/',link:'Explore projects'},
-    math:{accent:'study',description:'Complete reasoning. Precise notation. Practice tools.',href:'/solutions/',link:'Open the mathematics library'},
-    teaching:{accent:'purple',description:'Clear explanations. Guided, then independent practice.',href:'/tutoring/',link:'Explore tutoring'}
+    research:{accent:'green',description:'Designing and reviewing mathematical and scientific tasks, reference solutions and model answers.',href:'#research',link:'See contributions'},
+    code:{accent:'cyan',description:'Responsive interfaces, interaction states, and the static build behind this site.',href:'#work',link:'See projects'},
+    math:{accent:'study',description:'Worked solutions with every step shown, plus configurable practice papers.',href:'/solutions/',link:'Open the mathematics library'},
+    teaching:{accent:'purple',description:'One-on-one lessons in mathematics, programming, and Arabic.',href:'/tutoring/',link:'Explore tutoring'}
   };
+
   function select(tab){
     const key=tab.dataset.field,data=fields[key];
     specimen.style.setProperty('--map-accent',`var(--ds-${data.accent})`);
@@ -69,5 +56,5 @@
       e.preventDefault();tabs[next].focus();select(tabs[next]);
     });
   });
-  select(tabs[0]);specimen.querySelector('.specimen-caption__detail').textContent='Select a field';
+  select(tabs[0]);
 })();

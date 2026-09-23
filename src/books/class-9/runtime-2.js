@@ -460,7 +460,8 @@ function trackStuck() {
   var watch = function () {
     $$('.local-jump, .grp').forEach(function (el) {
       if (getComputedStyle(el).position !== 'sticky') { el.classList.remove('is-stuck'); return; }
-      var want = (parseFloat(getComputedStyle(el).top) || 0) + SiteScroll.top;
+      /* Sticky offsets are viewport-relative and already include the frame top. */
+      var want = parseFloat(getComputedStyle(el).top) || 0;
       el.classList.toggle('is-stuck', Math.abs(el.getBoundingClientRect().top - want) < 1.5);
     });
   };

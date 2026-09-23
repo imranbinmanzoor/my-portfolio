@@ -1191,7 +1191,7 @@
         color: var(--text-secondary);
       }
 
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         /* overflow-x:hidden here would make html a scroll container, and every
      position:sticky descendant would then compute against a box that never
      scrolls, so nothing would pin on a phone. overflow-x:clip contains the
@@ -4477,7 +4477,7 @@
         color: var(--text-chrome);
         margin-top: 1px;
       }
-      @media (max-width: 900px) {
+      @media (width <= 900px) {
         .builder-grid {
           grid-template-columns: minmax(0, 1fr) 260px;
           gap: 22px;
@@ -4503,7 +4503,7 @@
           gap: 8px;
         }
       }
-      @media (max-width: 700px) {
+      @media (width <= 700px) {
         #book-main {
           padding-inline: 20px;
         }
@@ -4859,7 +4859,7 @@
           font-size: 1.2rem;
         }
       }
-      @media (max-width: 370px) {
+      @media (width <= 370px) {
         #book-main {
           padding-inline: 16px;
         }
@@ -5113,7 +5113,7 @@
       #gen-status {
         font-size: 0.75rem;
       }
-      @media (min-width: 701px) {
+      @media (width >= 701px) {
         .builder-summary .summary-marks strong {
           font-size: 2.7rem;
         }
@@ -5127,7 +5127,7 @@
           padding-block: 24px;
         }
       }
-      @media (max-width: 700px) {
+      @media (width <= 700px) {
         .builder-summary {
           display: grid;
           grid-template-columns: 1fr;
@@ -5192,7 +5192,7 @@
       .practice #scope-fields[hidden] + #unit-pattern {
         margin-top: 0;
       }
-      @media (max-width: 700px) {
+      @media (width <= 700px) {
         .practice .builder-group + .builder-group {
           margin-top: 24px;
         }
@@ -5687,7 +5687,7 @@
       .practice .keyrow {
         padding-block: 20px;
       }
-      @media (max-width: 760px) {
+      @media (width <= 760px) {
         .builder-grid {
           grid-template-columns: 1fr;
           gap: 20px;
@@ -5716,7 +5716,7 @@
           margin-top: 16px;
         }
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .practice-heading {
           gap: 8px;
           flex-wrap: wrap;
@@ -5820,7 +5820,7 @@
           margin-top: 20px;
         }
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .mode-option small {
           display: block;
           font-size: 0.75rem;
@@ -6072,7 +6072,7 @@
         letter-spacing: 0;
         font-size: 0.875rem;
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .practice-jump button {
           padding: 6px 10px;
         }
@@ -6255,7 +6255,7 @@
       .paper-action-row {
         gap: 10px;
       }
-      @media (max-width: 700px) {
+      @media (width <= 700px) {
         .library-hero {
           grid-template-columns: minmax(0, 1fr) 140px;
           gap: 24px;
@@ -6269,7 +6269,7 @@
           font-size: 4.5rem;
         }
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .library-hero {
           grid-template-columns: minmax(0, 1fr) 108px;
           gap: 16px;
@@ -6291,7 +6291,7 @@
           padding: 20px 16px;
         }
       }
-      @media (max-width: 370px) {
+      @media (width <= 370px) {
         .library-hero {
           grid-template-columns: 1fr;
         }
@@ -6510,7 +6510,7 @@
       .workspace-top #randomize-status:empty {
         display: none;
       }
-      @media (max-width: 850px) {
+      @media (width <= 850px) {
         #practice-workspace #gen-out {
           grid-template-columns: minmax(0, 1fr);
         }
@@ -7252,7 +7252,7 @@
         font-size: var(--size-100);
         line-height: 1.55;
       }
-      @media (max-width: 760px) {
+      @media (width <= 760px) {
         .practice .builder-summary {
           position: static;
         }
@@ -7263,7 +7263,7 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .practice #scope-fields .source-option {
           padding: 10px;
           gap: 8px;
@@ -7413,7 +7413,7 @@
           flex-wrap: wrap;
         }
       }
-      @media (max-width: 360px) {
+      @media (width <= 360px) {
         .practice #scope-fields .source-option {
           padding: 9px;
           gap: 6px;
@@ -7711,7 +7711,7 @@
         font-size: inherit;
         text-align: right;
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         #long-attempt-field {
           display: grid;
           grid-template-columns: 4rem minmax(0, 1fr);
@@ -7899,7 +7899,7 @@
         vertical-align: middle;
         padding: 0 !important;
       }
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .library-masthead > .library-top.wrap {
           padding-block: 20px;
         }
@@ -8056,7 +8056,7 @@
         background: var(--blue-tint);
         text-decoration: none;
       }
-      @media (max-width: 700px) {
+      @media (width <= 700px) {
         #practice-workspace .workspace-top {
           grid-template-columns: minmax(0, 1fr);
           gap: 6px;
@@ -8115,7 +8115,7 @@
       /* The Practice title and saved-paper action remain a single header on phones.
    The action is deliberately compact instead of becoming a centered second
    heading. */
-      @media (max-width: 700px) {
+      @media (width <= 700px) {
         .practice .practice-heading {
           flex-direction: row;
           flex-wrap: nowrap;
@@ -8142,7 +8142,7 @@
 
       /* Three counters share a common control baseline even when “Short questions”
    needs two lines on a phone. */
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .practice .count-field {
           display: flex;
           flex-direction: column;
@@ -8156,7 +8156,7 @@
           margin-top: 0;
         }
       }
-      @media (max-width: 340px) {
+      @media (width <= 340px) {
         .practice .count-field > label {
           min-height: 4.5rem;
           font-size: 0.875rem;
@@ -8168,7 +8168,7 @@
 
       /* The later mobile rule from r7 intentionally made marks full-width, but the
    new flow-root/float behavior above supersedes it. */
-      @media (max-width: 520px) {
+      @media (width <= 520px) {
         .exam-paper .q-marks {
           width: auto;
           margin-left: 14px;

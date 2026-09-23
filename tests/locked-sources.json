@@ -1,0 +1,12 @@
+{
+  "note": "Authored mathematics and book data that must stay byte-identical. Presentation changes go through shared styles or build-time transforms, never these files. Record any mathematical correction separately in docs/MATH_CORRECTION_LOG.md before changing a hash here.",
+  "files": {
+    "content/books/class-9/bank-data.json": "72eb52ac5c1817ef47fd87f1562ef2e8598b752ac312c784d99ce0626a2796ce",
+    "content/books/class-9/book-data.json": "14fbc6b348022108cbb33daf9cd3cfb96ccaf7c9164e22ed5840ed69e5893d7c",
+    "content/books/class-9/catalog.json": "c542f772ecc048e53ccdf581eb3eb663ba616c75f0145b3a1eb8af5bc6cb7544",
+    "content/books/class-10/banks-data.json": "a1c25430c44520f37a137a74ee1947536737a94b09955f03dd0a5a7f76ab6f6d",
+    "content/books/class-10/book-data.json": "23840de6074bd73ad0474a6f11cce3cd15cf0149b88260be0e40e72c29257d00",
+    "content/books/class-10/content-data.json": "4fbf650161b509dcb343bd16fc58e28b0083f1e9ed52783e6341f547920d947f",
+    "src/books/class-9/shell.html": "b4eec0e40930373e7f4f071b95f28fe4a18631750d41cd84ab103e198e8a8fcf"
+  }
+}

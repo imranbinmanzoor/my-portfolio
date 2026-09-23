@@ -42,6 +42,7 @@ export function buildBookPages({read,write,bookHTML}) {
       let html=bookHTML.replace(/<title>[\s\S]*?<\/title>/,`<title>${esc(title)}</title>`)
         .replace(/(<meta\s+name="description"\s+content=")[^"]*("\s*\/?>)/,(_,a,b)=>a+esc(description)+b)
         .replace(/(<link rel="canonical" href=")[^"]+/, '$1'+SITE+url)
+        .replace('<a class="skip skip-link" href="#book-main">','<a class="skip skip-link" href="#main">')
         .replace('<section class="view" id="view-book">','<section class="view" id="view-book" hidden>')
         .replace('<section class="view" id="view-unit" hidden>','<section class="view" id="view-unit">')
         .replace('id="crumb-unit"></li>',`id="crumb-unit">Unit ${unit.n} · ${esc(unit.title)}</li>`)

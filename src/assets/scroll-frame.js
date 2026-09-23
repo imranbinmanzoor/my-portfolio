@@ -1,31 +1,18 @@
-/* One page scroll owner: the inset desktop workspace or the mobile document. */
+/* The document is the page's only scroller at every width. SiteScroll keeps one small
+   API for book and site code: `top` is where the sticky frame begins in the viewport
+   (the desktop inset, or the mobile header while it is shown), read from the same
+   --site-chrome-top property the sticky CSS uses, so JavaScript and CSS cannot disagree. */
 (() => {
-  const desktop = matchMedia('(min-width:800px)');
-  const body = document.body;
   const listeners = new Set();
-  const owner = () => desktop.matches ? body : window;
-  let lastY = 0;
-  const position = () => desktop.matches ? body.scrollTop : window.scrollY;
-  const notify = () => {
-    lastY = position();
-    listeners.forEach(listener => listener());
-  };
-  body.addEventListener('scroll', notify, {passive:true});
-  window.addEventListener('scroll', () => { if (!desktop.matches) notify(); }, {passive:true});
+  const chromeTop = () => parseFloat(getComputedStyle(document.body).getPropertyValue('--site-chrome-top')) || 0;
+  window.addEventListener('scroll', () => listeners.forEach(listener => listener()), {passive: true});
   window.SiteScroll = Object.freeze({
-    get y() { return position(); },
-    get top() { return desktop.matches ? body.getBoundingClientRect().top : 0; },
-    get height() { return desktop.matches ? body.clientHeight : window.innerHeight; },
-    get extent() { return desktop.matches ? body.scrollHeight : document.documentElement.scrollHeight; },
-    to(options) { owner().scrollTo(options); },
+    get y() { return window.scrollY; },
+    get top() { return chromeTop(); },
+    get height() { return window.innerHeight; },
+    get extent() { return document.documentElement.scrollHeight; },
+    to(options) { window.scrollTo(options); },
     on(listener) { listeners.add(listener); },
     off(listener) { listeners.delete(listener); }
-  });
-  desktop.addEventListener('change', () => {
-    const previousY = lastY;
-    if (desktop.matches) window.scrollTo({top:0,behavior:'instant'});
-    else body.scrollTop = 0;
-    owner().scrollTo({top:previousY,behavior:'instant'});
-    notify();
   });
 })();

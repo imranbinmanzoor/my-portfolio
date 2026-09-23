@@ -1030,12 +1030,12 @@
           if (!main?.getClientRects().length) return;
           const r = main.getBoundingClientRect(),
             size = b.offsetWidth || 48,
-            inset = 16;
+            inset = 16,
+            /* Stay inside the rounded desktop frame and clear of a classic scrollbar. */
+            frameInset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--frame-inset")) || 0,
+            limit = document.documentElement.clientWidth - frameInset - inset - size;
           const inMargin = r.right + inset;
-          const x = Math.max(
-            inset,
-            Math.min(inMargin, innerWidth - inset - size),
-          );
+          const x = Math.max(inset, Math.min(inMargin, limit));
           document.documentElement.style.setProperty(
             "--back-top-left",
             Math.round(x) + "px",
@@ -1253,14 +1253,14 @@
               window.katex
                 ? null
                 : load(
-                    "https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js",
+                    "/vendor/katex-0.16.47/katex.min.js",
                   ),
             )
             .then(() =>
               window.renderMathInElement
                 ? null
                 : load(
-                    "https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js",
+                    "/vendor/katex-0.16.47/contrib/auto-render.min.js",
                   ),
             )
             .then(() => {

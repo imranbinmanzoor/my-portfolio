@@ -1,0 +1,28 @@
+<section class="panel home-work" id="work" aria-labelledby="work-title">
+  <div class="section-head">
+    <div><p class="eyebrow">Frontend &amp; code</p><h2 id="work-title">Projects</h2><p class="section-intro">My own site and three frontend learning projects. Each case study says what I built, what I learned, and what I would change.</p></div>
+    <a class="btn btn--ghost" href="/projects/">All projects</a>
+  </div>
+  <figure class="interface-demo" data-interface-demo>
+    <figcaption><span class="demo-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg>Project browser</span><span class="demo-format" role="group" aria-label="Project layout" hidden><button type="button" aria-pressed="true" data-layout="cards">Cards</button><button type="button" aria-pressed="false" data-layout="list">List</button></span></figcaption>
+    <div class="demo-stage">
+      <div class="preview-projects" data-layout="cards">@@PROJECTS(cards)@@</div>
+    </div>
+    <details class="demo-source"><summary>Inspect the layout CSS</summary><pre tabindex="0" aria-label="CSS for the project layout"><code data-layout-source>/* Columns follow the browser's width: 1, 2 or 4. */
+.demo-stage { container-type: inline-size; }
+.preview-projects {
+  display: grid;
+  gap: 12px;
+}
+@container (width >= 480px) {
+  .preview-projects[data-layout=cards] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (width >= 1000px) {
+  .preview-projects[data-layout=cards] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}</code></pre><p>This is the CSS behind the layout above. Switch between Cards and List to see it change.</p></details>
+  </figure>
+</section>

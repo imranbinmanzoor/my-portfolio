@@ -1,3 +1,5 @@
+/* Project browser: switch the homepage projects between Cards and List, and show the
+   CSS that produces the current layout. Links work without this script. */
 (() => {
   'use strict';
   const demo = document.querySelector('[data-interface-demo]');
@@ -8,13 +10,14 @@
   const source = demo.querySelector('[data-layout-source]');
   const cardsSource = source.textContent;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const listSource = `/* The same projects, in a compact list. */
-.preview-projects[data-layout=list] {
-  grid-template-columns: minmax(0, 1fr);
+  const listSource = `/* The same projects as a list: one column,
+   with a fixed-width preview beside the text. */
+.preview-projects {
+  display: grid;
+  gap: 12px;
 }
 .preview-projects[data-layout=list] .preview-project {
-  grid-template-columns: 100px minmax(0, 1fr);
-  align-items: center;
+  grid-template-columns: 168px minmax(0, 1fr);
 }`;
   let motion;
   function select(button) {

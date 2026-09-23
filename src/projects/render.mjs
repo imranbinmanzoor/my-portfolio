@@ -26,3 +26,20 @@ export function renderProject(project, projects) {
   <nav aria-label="Project navigation" class="page-footer-nav">${relation(p.previous,'Previous project','back')}${relation(p.nextProject,'Next project','forward')}</nav>
 </article>`;
 }
+
+// Both project collections are generated from content/projects.json, so the homepage
+// and the project index can never describe the same work differently.
+const bookArtwork = `<span class="book-artifact" aria-hidden="true"><span class="mini-book"><span>MATHEMATICS</span><strong>09</strong><small>Real Numbers</small></span><span class="mini-book"><span>MATHEMATICS</span><strong>10</strong><small>Complex Numbers</small></span></span>`;
+const visual = p => p.thumb
+  ? `<img src="${escape(p.thumb)}" alt="" width="960" height="571" loading="lazy" decoding="async">`
+  : bookArtwork;
+
+// Homepage: compact cards inside the Cards / List project browser.
+export function renderProjectCards(projects) {
+  return projects.map(p => `<a class="preview-project preview-project--${p.slug}" href="/projects/${p.slug}/"><span class="preview-project__visual">${visual(p)}</span><span class="preview-project__body"><span class="preview-project__kicker">${escape(p.category)}</span><h3>${escape(p.title)}</h3><p class="preview-project__summary">${escape(p.summary)}</p><span class="preview-project__tags">${escape(p.tags)}</span></span></a>`).join('');
+}
+
+// Project index: larger tiles with a hover and focus cue.
+export function renderProjectTiles(projects) {
+  return `<div class="selected-work">${projects.map(p => `<a class="project-tile project-tile--${p.slug}" href="/projects/${p.slug}/"><span class="project-visual">${visual(p)}<span class="project-view" aria-hidden="true">View project</span></span><span class="project-info"><span class="eyebrow">${escape(p.category)}</span><h3>${escape(p.title)}</h3><p>${escape(p.summary)}</p><span class="project-meta">${escape(p.tags)}</span></span></a>`).join('')}</div>`;
+}
