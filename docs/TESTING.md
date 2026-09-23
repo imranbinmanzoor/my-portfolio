@@ -35,7 +35,11 @@ tabs, the project browser, every contact-form state against an intercepted endpo
 is sent), 404 status, legacy redirects with fragments, Class 10 exercise routing, search and
 Practice, Class 9 views, the library explorer deep link, case-study gallery and dialog, the
 phone menu (focus trap, scroll lock, Escape, resize), reduced motion, JavaScript disabled, and
-unreachable third-party hosts.
+unreachable third-party hosts. Added after the independent review: Class 10 back/forward
+position, Randomize visible after Generate, search count below its help text, Class 9 Practice
+order and focus, backwards keyboard focus clear of phone sticky bars, dark-theme printing,
+contact field-level rejections and focus on failure, the tutoring topic link, and the Class 9
+page without JavaScript (38 checks).
 
 ```powershell
 npm run build

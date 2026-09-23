@@ -19,6 +19,15 @@ candidate. Evidence and the change report are delivered outside the repository.
 - Independent mathematics audit: no errors in Class 10; three Class 9 MCQs with two correct
   options and other items logged in `docs/MATH_CORRECTION_LOG.md`, not applied (locked).
 - New checks: `tests/site.mjs` (in `npm run check`) and `tests/browser.mjs` (interaction suite).
+- An independent review of the candidate (22 findings) led to a second pass: Class 10 keeps
+  the reading position on back/forward; Randomize stays visible after Generate; Class 9
+  Practice gains the Class 10 order (one sticky return bar, Randomize above the paper, focus
+  on the paper, answer key on its own printed page, page numbers); phones keep only the
+  breadcrumb and exercise strip sticky; dark theme never prints; Ctrl+P on a paper prints
+  like Print; contact failures take focus; tutoring links preselect the topic. Findings in
+  locked content (display punctuation, spoken labels, Class 9 spellings) are logged in
+  `docs/MATH_CORRECTION_LOG.md`; only TeX debris in spoken labels is removed, by a
+  documented transform, with the sources unchanged.
 
 ## Previous milestone (2026-09-20)
 

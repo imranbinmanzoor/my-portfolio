@@ -168,6 +168,28 @@ Research consulted: [NN/g visual hierarchy](https://www.nngroup.com/articles/vis
 
 Mathematical references checked: [OpenStax derivatives](https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative), [OpenStax binomial distribution](https://openstax.org/books/contemporary-mathematics/pages/7-10-the-binomial-distribution), and [University of Hawaii odd-number reasoning notes](https://crdg.hawaii.edu/developing-teacher-expertise-mathematics/modules/facilitator-resources/facilitator-reasoning-and-explanations-resources/Session5/resources/s05_p3_mathnotes_sum-consecutive-odd-problem.pdf). Diagrams, copy and controls are implemented locally; the references are not copied designs.
 
+## Review pass decisions (2026-09-23)
+
+- **Sticky layers.** Desktop and tablet books keep the breadcrumb, exercise strip, section
+  links and question label. Below 600px wide only the breadcrumb and exercise strip stay;
+  section links and the question label scroll with the page. Below 480px tall none of the
+  reading layers stick. A generated paper, in either book, has exactly one sticky layer:
+  Back to paper settings.
+- **Practice order in both books.** Settings; Back to paper settings (sticky while a paper is
+  open); Randomize; the paper, which takes focus after Generate; then Print, Save (Class 10)
+  and Answer key. Class 9 has no Save: its papers are not serialized, and adding that is a
+  feature decision, not a layout fix.
+- **Focus.** One focus colour (`--ds-focus`) on site and book pages. After keyboard focus
+  moves, it is checked again once the phone header has settled, so no control is left under
+  a sticky bar.
+- **Print.** Dark is a screen theme only; every printed page uses the light roles. The
+  browser's own Print command on a generated paper prints what the Print button prints.
+  Class 9 prints page numbers and starts its answer key on a new page.
+- **Width.** Portfolio pages use a 1280px column, widening to 1440px from 1760px windows.
+  Book reading stays capped at 1160px for line length.
+- **Project case studies.** From 1000px, "01 The brief" is a full-width numbered section
+  like 02 and 03, so the preview never leaves an empty block beside it.
+
 ## Shared mobile chrome and real book routes (2026-09-20)
 
 The mobile header has a restrained border, translucent surface and shadow. Every sticky
