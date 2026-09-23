@@ -750,7 +750,8 @@
           style.id = "paper-running";
           const q = (s) =>
             '"' + String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
-          style.textContent = `@page{size:A4 portrait;@top-left{content:${q(paper.title)};font-size:8pt}@top-right{content:${q(paper.marks + " marks")};font-size:8pt}@bottom-left{content:'Class 10 Mathematics';font-size:8pt}@bottom-right{content:'Page ' counter(page) ' of ' counter(pages);font-size:8pt}}`;
+          const box = "font-size:8pt;font-family:Inter,'Inter Fallback',Arial,sans-serif;color:#333";
+          style.textContent = `@page{size:A4 portrait;@top-left{content:${q(paper.title)};${box}}@top-right{content:${q(paper.marks + " marks")};${box}}@bottom-left{content:'Class 10 Mathematics';${box}}@bottom-right{content:'Page ' counter(page) ' of ' counter(pages);${box}}}`;
           document.head.appendChild(style);
           let cleaned = false;
           const done = () => {
