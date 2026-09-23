@@ -692,7 +692,18 @@ function markWideEquations(root) {
     m.style.fontSize = Math.max(0.85, Math.floor((ratio - 0.01) * 100) / 100) + 'em';
     /* Still too wide at the readability floor: let the line scroll rather than
        widen the whole page, exactly as a display equation does. */
-    host.classList.toggle('wide-inline', m.getBoundingClientRect().width > room + 1);
+    var wideInline = m.getBoundingClientRect().width > room + 1;
+    host.classList.toggle('wide-inline', wideInline);
+    /* A line that scrolls must be reachable by keyboard, like a wide display equation. */
+    if (wideInline && !host.hasAttribute('tabindex')) {
+      host.setAttribute('tabindex', '0');
+      host.setAttribute('role', 'group');
+      host.setAttribute('aria-label', 'Wide expression, scrollable sideways');
+      host.dataset.wideFocus = '1';
+    } else if (!wideInline && host.dataset.wideFocus) {
+      host.removeAttribute('tabindex'); host.removeAttribute('role'); host.removeAttribute('aria-label');
+      delete host.dataset.wideFocus;
+    }
   });
 
   Array.prototype.forEach.call(scope.querySelectorAll('.eq'), function (eq) {
