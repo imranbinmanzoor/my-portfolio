@@ -226,6 +226,23 @@ await test('Case study: device tabs change the preview; the dialog opens, closes
   assert(!s.open && s.focus, JSON.stringify(s));
 });
 
+await test('Short viewports (zoom, landscape): no sticky layer covers the reading column', async page => {
+  for (const [w, h] of [[320, 204], [683, 340], [844, 390]]) {
+    await page.setViewportSize({width: w, height: h});
+    await go(page, '/solutions/class-10/complex-numbers/exercise-1-2/');
+    await page.evaluate(() => scrollTo(0, 3000)); await page.waitForTimeout(400);
+    const covered = await page.evaluate(() => [...document.querySelectorAll('#view-unit *')].filter(e => ['sticky', 'fixed'].includes(getComputedStyle(e).position) && e.getBoundingClientRect().height > 0 && e.getBoundingClientRect().bottom > 0 && e.getBoundingClientRect().top < innerHeight && e.id !== 'toTop').map(e => e.className));
+    assert(covered.length === 0, `${w}x${h}: ${covered}`);
+  }
+});
+await test('Book prose keeps a readable measure on wide screens', async page => {
+  for (const w of [1440, 1920, 2560]) {
+    await page.setViewportSize({width: w, height: 900}); await go(page, '/solutions/class-10/complex-numbers/exercise-1-2/');
+    const width = await page.evaluate(() => document.getElementById('panels').getBoundingClientRect().width);
+    assert(width <= 980, `${w}: reading column ${width}px`);
+  }
+});
+
 // ---------- Phones ----------
 const phone = {viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2};
 await test('Phone menu: opens, traps focus, locks scroll, Escape closes and returns focus', async page => {

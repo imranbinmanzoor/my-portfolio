@@ -315,3 +315,6 @@ body[data-book]{--ds-width:1160px}
 
 /* Secondary book actions keep a 44px target like every other control. */
 body[data-book] .feature-practice{display:inline-flex;align-items:center;min-height:44px}
+
+/* Navigation chrome never prints on lessons or practice papers. */
+@media print{body[data-book] .crumb{display:none!important}}

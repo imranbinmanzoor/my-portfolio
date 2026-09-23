@@ -210,3 +210,16 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
 [data-theme=dark] .mini-book:nth-child(2){border-left-color:#9d8fcb;background:#2c2838;color:#cfc3ef}
 @media (forced-colors:active){.project-view{background:Canvas}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ---------- Print ----------
+   A printed portfolio page is a document: interactive-only controls go, panels lose their
+   shadows, and small cards never split across pages. Links to other sites show their address. */
+@media print{
+  body[data-site]{background:#fff;color:#000}
+  .panel,main:not(.home-workspace):where([data-site] *){border-color:#bbb;box-shadow:none}
+  .page-breadcrumb,.theme-toggle,.subject-nav,.recovery-links{display:none!important}
+  .project-tile,.library-card,.library-planned li,.subject-detail__body article,.learning-note li,.page-footer-nav a{break-inside:avoid}
+  .project-view{display:none}
+  :is(h1,h2,h3){break-after:avoid}
+  main a[href^="http"]:not(.btn)::after{content:" (" attr(href) ")";font-size:.85em;font-weight:400;overflow-wrap:anywhere}
+}

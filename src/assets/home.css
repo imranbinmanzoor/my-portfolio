@@ -168,3 +168,11 @@
 @media (prefers-reduced-motion:reduce){
  .contact-confirmation:not([hidden]) .contact-confirmation__check,.contact-confirmation:not([hidden]) .contact-confirmation__check path{animation:none}
 }
+
+@media print{
+  .home-workspace{gap:12px}
+  .work-specimen,.demo-format,.demo-source,.contact-form,.contact-confirmation,.welcome-paths,.welcome__aside .btn,.section-head .btn,.learning-tutoring .btn{display:none!important}
+  .welcome,.home-evidence,.learning-grid,.home-contact{grid-template-columns:1fr}
+  .preview-project,.research-notes li,.toolkit-grid article,.learning-books a{break-inside:avoid}
+  .contact-email>svg{display:none}
+}
