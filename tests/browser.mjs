@@ -171,8 +171,11 @@ await test('Contact: tutoring links open the form with Tutoring chosen', async p
 await test('Contact: a second click while sending does not send twice', async page => {
   let posted = 0; await page.route(FORM, async r => { posted++; await new Promise(res => setTimeout(res, 800)); await r.fulfill({status: 200, body: '{}'}); });
   await go(page, '/#contact'); await fill(page);
-  await page.click('#submit-btn'); await page.click('#submit-btn', {force: true}).catch(() => {});
+  await page.click('#submit-btn');
+  const during = await page.evaluate(() => ({focus: document.activeElement.id, busy: document.getElementById('submit-btn').getAttribute('aria-disabled')}));
+  await page.click('#submit-btn', {force: true}).catch(() => {});
   await page.waitForSelector('#contact-confirmation:not([hidden])'); assert(posted === 1, `${posted} posts`);
+  assert(during.focus === 'submit-btn' && during.busy === 'true', 'focus while sending: ' + JSON.stringify(during));
 });
 
 // ---------- Routes ----------
@@ -249,6 +252,14 @@ await test('Class 9 Practice: one return bar, Randomize above the paper, focus o
   assert(await page.textContent('.gen-out .paper-meta') !== first, 'Randomize did not draw a new paper');
   await page.click('.gen-edit'); await page.waitForTimeout(400);
   assert(await page.evaluate(() => { const r = document.querySelector('.panel[data-panel="generator"] .sec-title').getBoundingClientRect(); return r.top >= 0 && r.top < innerHeight / 2; }), 'settings not shown');
+});
+await test('Class 9: Back from another page restores the reading position', async page => {
+  await page.goto(base + '/solutions/class-9/#ex11', {waitUntil: 'load'}); await page.waitForTimeout(800);
+  await page.evaluate(() => scrollTo({top: 4000, behavior: 'instant'})); await page.waitForTimeout(400);
+  await page.evaluate(() => { location.href = '/tutoring/'; }); await page.waitForURL('**/tutoring/', {waitUntil: 'load'});
+  await page.goBack({waitUntil: 'commit'}); await page.waitForTimeout(2500);
+  const y = await scrollY(page);
+  assert(Math.abs(y - 4000) < 150, `restored ${y}`);
 });
 await test('Class 9: contents, exercise and generator views load', async page => {
   for (const hash of ['#unit-1', '#ex11', '#generator']) {
@@ -354,8 +365,8 @@ await test('Without JavaScript: exercise solutions and navigation still work', a
   await go(page, '/');
   assert(!(await page.evaluate(() => document.getElementById('contact-form').noValidate)), 'native validation disabled without script');
   await go(page, '/solutions/class-9/');
-  const c9 = await page.evaluate(() => ({note: !!document.querySelector('.noscript-note') && document.querySelector('.noscript-note').getClientRects().length > 0, unit: document.querySelector('.unit-doc').getClientRects().length > 0, panels: [...document.querySelectorAll('.panel')].filter(p => p.getClientRects().length).length}));
-  assert(c9.note && c9.unit && c9.panels >= 5, 'Class 9 without JavaScript: ' + JSON.stringify(c9));
+  const c9 = await page.evaluate(() => ({note: !!document.querySelector('.noscript-note') && document.querySelector('.noscript-note').getClientRects().length > 0, unit: document.querySelector('.unit-doc').getClientRects().length > 0, panels: [...document.querySelectorAll('.panel')].filter(p => p.getClientRects().length).length, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth}));
+  assert(c9.note && c9.unit && c9.panels >= 5 && c9.overflow <= 0, 'Class 9 without JavaScript: ' + JSON.stringify(c9));
 }, {javaScriptEnabled: false});
 await test('Third-party hosts unreachable: mathematics and fonts still render', async (page, context) => {
   await context.route(url => !url.href.startsWith(base), r => r.abort());

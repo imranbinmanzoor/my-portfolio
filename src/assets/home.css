@@ -176,3 +176,7 @@
   .preview-project,.research-notes li,.toolkit-grid article,.learning-books a{break-inside:avoid}
   .contact-email>svg{display:none}
 }
+
+/* The sending state keeps focus on the button; a failure message scrolls fully clear of the frame edge. */
+.btn[aria-disabled=true]{opacity:.65;cursor:progress}
+#form-status{scroll-margin-block:calc(var(--frame-inset,16px) + 16px)}

@@ -39,7 +39,7 @@ unreachable third-party hosts. Added after the independent review: Class 10 back
 position, Randomize visible after Generate, search count below its help text, Class 9 Practice
 order and focus, backwards keyboard focus clear of phone sticky bars, dark-theme printing,
 contact field-level rejections and focus on failure, the tutoring topic link, and the Class 9
-page without JavaScript (38 checks).
+page without JavaScript, Class 9 back/forward position, and focus kept on the send button while sending (39 checks).
 
 ```powershell
 npm run build

@@ -576,7 +576,29 @@ function markSection() {
 
 /** Two views, one document: #contents lists the units, #unit-N opens one. */
 function bindBookRouter() {
+  /* Back/forward and reload: the page first renders the contents view, so the browser's own
+     restoration can run against the short contents page and land near the top. Keep the
+     reading position in the history entry and put it back once the unit view is laid out. */
+  var restoreY = null;
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    if (nav && (nav.type === 'back_forward' || nav.type === 'reload') && history.state && typeof history.state.bookY === 'number') restoreY = history.state.bookY;
+  } catch (e) { restoreY = null; }
+  window.addEventListener('pagehide', function () {
+    try { var st = {}; for (var k in (history.state || {})) st[k] = history.state[k]; st.bookY = SiteScroll.y; history.replaceState(st, ''); } catch (e) { /* position is a convenience */ }
+  });
+  var interacted = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (type) {
+    window.addEventListener(type, function () { interacted = true; }, { once: true, passive: true });
+  });
+  function restorePosition() {
+    if (restoreY === null || interacted) return;
+    if (Math.abs(SiteScroll.y - restoreY) > 2) SiteScroll.to({ top: restoreY });
+  }
+  var first = true;
   function apply() {
+    var initial = first;
+    first = false;
     var h = (location.hash || '').replace('#', '');
     var m = h.match(/^unit-(\d+)$/);
     /* Show the requested unit and hide the rest before anything measures. */
@@ -598,7 +620,13 @@ function bindBookRouter() {
     var chapter = /^unit-\d+$/.test(h) || $('.tab[data-panel="' + h + '"]');
     var was = document.body.dataset.view;
     document.body.dataset.view = chapter ? 'chapter' : 'contents';
-    SiteScroll.to({ top: 0 });
+    if (initial && restoreY !== null) {
+      requestAnimationFrame(function () { requestAnimationFrame(restorePosition); });
+      window.addEventListener('load', function () { setTimeout(restorePosition, 50); });
+      setTimeout(restorePosition, 400);
+    } else {
+      SiteScroll.to({ top: 0 });
+    }
     syncTitle();
     /* Everything that measures layout ran while this view was hidden, where
        every element reports zero size. Ask them all to measure again. */

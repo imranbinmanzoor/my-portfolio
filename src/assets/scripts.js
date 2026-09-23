@@ -228,6 +228,7 @@
   if (form) {
     form.noValidate = true;
     var submitBtn = document.getElementById('submit-btn');
+    var sending = false;
     var statusEl = document.getElementById('form-status');
     var confirmation = document.getElementById('contact-confirmation');
     var emailFallback = 'You can also email <a href="mailto:imranbinmanzoor1@gmail.com">imranbinmanzoor1@gmail.com</a>.';
@@ -268,7 +269,7 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (submitBtn.disabled) return;
+      if (sending) return;
       var firstInvalid = null;
       fields.forEach(function (field) { if (!showFieldState(field) && !firstInvalid) firstInvalid = field; });
       if (firstInvalid) {
@@ -279,7 +280,9 @@
       var textEl = submitBtn.querySelector('.btn__text');
       var originalText = textEl.textContent;
       textEl.textContent = 'Sending…';
-      submitBtn.disabled = true;
+      // aria-disabled rather than disabled, so keyboard focus stays on the button.
+      sending = true;
+      submitBtn.setAttribute('aria-disabled', 'true');
       form.setAttribute('aria-busy', 'true');
       statusEl.textContent = '';
       statusEl.className = 'form-status';
@@ -324,7 +327,8 @@
         })
         .finally(function () {
           textEl.textContent = originalText;
-          submitBtn.disabled = false;
+          sending = false;
+          submitBtn.removeAttribute('aria-disabled');
           form.removeAttribute('aria-busy');
         });
     });

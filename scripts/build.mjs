@@ -9,7 +9,7 @@ import {buildBookPages} from './book-pages.mjs';
 import {socialMetadata} from './social-metadata.mjs';
 import {cleanMarkupLabels} from './math-labels.mjs';
 // Without JavaScript the Class 9 book shows every section in order, and says what needs JavaScript.
-const CLASS9_NOSCRIPT='<noscript><style>html body[data-book="9"][data-view] .unit-doc{display:block!important}html body[data-book="9"] .panel[hidden]:not([data-panel="generator"]){display:block!important}html body[data-book="9"] :is(.tabs-wrap,.searchbar,.search-scope,.panel[data-panel="generator"]){display:none!important}</style><p class="noscript-note">JavaScript is turned off, so every section of Unit 1 appears below the contents, one after another. Search and Practice papers need JavaScript.</p></noscript>';
+const CLASS9_NOSCRIPT='<noscript><style>html body[data-book="9"][data-view] .unit-doc{display:block!important;padding:0 var(--ds-gutter) 32px}html body[data-book="9"] .unit-doc .crumb--unit{position:static;margin-inline:0}html body[data-book="9"] .panel[hidden]:not([data-panel="generator"]){display:block!important}html body[data-book="9"] :is(.tabs-wrap,.searchbar,.search-scope,.panel[data-panel="generator"]){display:none!important}</style><p class="noscript-note">JavaScript is turned off, so every section of Unit 1 appears below the contents, one after another. Search and Practice papers need JavaScript.</p></noscript>';
 const root=path.resolve(import.meta.dirname,'..');
 process.chdir(root);
 const out=path.join(root,'dist');
