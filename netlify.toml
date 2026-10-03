@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/*"
+  to = "https://imranbinmanzoor.com"
+  status = 301
+  force = true
