@@ -7,7 +7,7 @@
   --ds-primary:#24272d; --ds-primary-hover:#40454e; --ds-on-primary:#fff;
   --ds-tint:#f0f1f5; --ds-hint:#47668b; --ds-focus:#416bb3; --ds-study:#456da4;
   --ds-green:#28775c; --ds-green-soft:#e8f6ef; --ds-cyan:#27697e; --ds-cyan-soft:#e7f5fb;
-  --ds-purple:#8050a2; --ds-purple-soft:#f4ecfa; --ds-error:#b03240; --ds-edge:rgba(47,58,74,.035);
+  --ds-purple:#8050a2; --ds-purple-soft:#f4ecfa; --ds-study-soft:#eaf1fb; --ds-error:#b03240; --ds-edge:rgba(47,58,74,.035);
   --ds-shadow:0 4px 12px rgba(52,72,84,.035); --ds-rail:0px;
   --ds-font:'Inter','Inter Fallback',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --ds-mono:ui-monospace,'Cascadia Code',Consolas,monospace;
@@ -25,6 +25,8 @@
   /* ---- Roles ---- */
   --ds-text-xs:var(--fs-12); --ds-text-sm:var(--fs-14); --ds-text-md:var(--fs-16); --ds-text-lg:var(--fs-20);
   --ds-h1:var(--fs-40); --ds-h1-page:var(--fs-32); --ds-h2:var(--fs-24); --ds-h3:var(--fs-16); --ds-title:var(--fs-20);
+  /* Section titles that sit on the canvas above their panel (homepage, direction A). */
+  --ds-h-canvas:var(--fs-32);
   /* Rhythm: label → heading 8, heading → text 12, block → block 24. */
   --ds-label-gap:var(--ds-space-2); --ds-heading-gap:var(--ds-space-3); --ds-block-gap:var(--ds-space-5);
   /* The frame inset and the gap between panels are one value, so every gutter matches. */
@@ -70,7 +72,7 @@
   --ds-primary:#edf0f5; --ds-primary-hover:#d1d7e2; --ds-on-primary:#22252c;
   --ds-tint:#2b303a; --ds-hint:#a4bce0; --ds-focus:#9ebff5; --ds-study:#9cb9e4;
   --ds-green:#8bd7b8; --ds-green-soft:#253c33; --ds-cyan:#8bcee3; --ds-cyan-soft:#243944;
-  --ds-purple:#d4b1ee; --ds-purple-soft:#3a2d46; --ds-error:#ffa1ab; --ds-edge:rgba(255,255,255,.04);
+  --ds-purple:#d4b1ee; --ds-purple-soft:#3a2d46; --ds-study-soft:#22303f; --ds-error:#ffa1ab; --ds-edge:rgba(255,255,255,.04);
   --tile-portfolio:#223540; --tile-omnifood:#3b3128; --tile-modern-page:#27324a; --tile-pig-game:#3a2b34;
   --ds-cover-9:#8bd7b8; --ds-cover-9-soft:var(--ds-page); --ds-cover-10:#a5bedd; --ds-cover-10-soft:var(--ds-page);
   --ds-cover-line:#4b5b69; --ds-cover-a-ink:#b7cde0; --ds-cover-a-paper:#26313c;
@@ -83,4 +85,4 @@
 /* Very wide windows: a wider page column, so the frame is not mostly empty bands. */
 @media (width >= 1760px){:root{--ds-width:1440px}}
 @media (width < 1000px){:root{--ds-h1:var(--fs-32);--ds-panel-pad:24px}}
-@media (width < 600px){:root{--ds-h2:var(--fs-20);--ds-text-lg:var(--fs-16);--ds-panel-pad:16px;--frame-inset:12px}}
+@media (width < 600px){:root{--ds-h2:var(--fs-20);--ds-h-canvas:var(--fs-24);--ds-text-lg:var(--fs-16);--ds-panel-pad:16px;--frame-inset:12px}}

@@ -6,7 +6,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-export const STRICT = ['chrome', 'site', 'home', 'project-case', 'work-specimen', 'math-lab']
+export const STRICT = ['chrome', 'site', 'home', 'project-case', 'math-lab']
   .map(n => `src/assets/${n}.css`);
 export const LEGACY = ['src/assets/book.css', 'src/books/class-9/style-1.css',
   'src/books/class-9/style-2.css', 'src/books/class-10/style-1.css'];

@@ -10,7 +10,7 @@ export function socialMetadata(html) {
   if (!title || !description || !canonical) throw new Error('Share metadata requires page metadata');
   const attribute = value => value.replaceAll('"','&quot;').replaceAll("'",'&#39;');
   const type = metas.find(m=>m.property==='og:type')?.content || 'website';
-  const values = {'og:type':type,'og:site_name':'Muhammad Imran','og:title':title,'og:description':description,'og:url':canonical,'og:image':'https://imranbinmanzoor.com/IMAGES/social-preview.png','og:image:width':'1200','og:image:height':'630','og:image:alt':'Muhammad Imran — AI evaluation, frontend development, mathematics and teaching'};
+  const values = {'og:type':type,'og:site_name':'Muhammad Imran','og:title':title,'og:description':description,'og:url':canonical,'og:image':'https://imranbinmanzoor.com/IMAGES/social-preview.png','og:image:width':'1200','og:image:height':'630','og:image:alt':'Muhammad Imran — mathematics for AI evaluation and for learners'};
   const cleaned = html.replace(/<meta\b[^>]*(?:property=["']og:[^"']+["']|name=["']twitter:[^"']+["'])[^>]*>\s*/gi,'');
   return cleaned.replace('</head>',Object.entries(values).map(([key,value])=>`<meta property="${key}" content="${attribute(value)}">`).join('\n')+'\n<meta name="twitter:card" content="summary_large_image">\n</head>');
 }

@@ -9,10 +9,12 @@ direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
   The private brief "Portfolio Reset Brief" (claude.ai artifact NvxkraDsb4VfAhxY9tMNF8)
   records the research, measured inconsistencies (25 font sizes, 14 text colours, 11 radii,
   22 button variants), a JavaScript audit and the proposed structure.
-- The owner chose **direction A**: the original sidebar-and-panels design, rebuilt on a
-  strict token system. Positioning, facts (Photomath dates, 2017 start, toolkit, Mindrift
-  codenames), photo, Arabic tutoring and library ambition are **still open owner decisions**;
-  do not rewrite homepage content or structure until they are answered.
+- The owner chose **direction A** and answered every open question on 2026-10-22:
+  one story ("mathematics that holds up, for AI evaluation and for learners"; frontend is
+  supporting evidence, not a pitch); Photomath Dec 2021 – Jan 2025; BS 2017–2021 confirmed;
+  tools Python, NumPy, SciPy, SymPy, Matplotlib (not Jupyter); Mindrift project codenames must
+  not appear; use the owner's photo; Arabic and Quran recitation is a one-line mention on the
+  tutoring page; present the library as a sample of the method (Unit 1 of each book).
 - Done in this milestone: canonical scale in tokens.css; every site stylesheet rewritten onto
   it; `tests/tokens.mjs` in `npm run check` rejects off-scale type, spacing, radius, colour
   and breakpoints (book CSS ratcheted by `tests/token-baseline.json`); hero work map and
@@ -20,7 +22,11 @@ direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
   page titles 32px at the same edge, book unit pages included). See DESIGN_SYSTEM.md.
 - Published 2026-10-22 as `5a81008`; 161 of 161 live files verified. Rollback: `8f9cbd9`.
   Release record: DEPLOYMENT.md.
-- Next: homepage restructure in direction A once the owner answers; then library shell
+- Homepage rebuilt in direction A (second release, see DEPLOYMENT.md): greeting, three
+  discipline cards, canvas-titled Work / Worked solutions / About / Contact sections; work map,
+  project browser and Tools grid removed; navigation Home, Work, Library, Tutoring, About,
+  Contact; photo identity; new social preview image.
+- Next: sample AI-evaluation tasks for /work/ (only from the owner's own material); library shell
   (maths rendered at build time; exercise pages open on questions), Class 9 router bugs
   (skip link and #generator), and migration of book.css and the legacy book CSS.
 

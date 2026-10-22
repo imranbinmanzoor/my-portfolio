@@ -4,7 +4,7 @@
     "title": "Portfolio & mathematics library",
     "shortTitle": "Portfolio & library",
     "category": "Personal project · In development",
-    "intro": "My personal site: AI evaluation, frontend work and teaching in one place, with a growing mathematics library at its heart.",
+    "intro": "My personal site and free mathematics library: mathematics for AI evaluation and for learners, in one place.",
     "demo": "/solutions/",
     "demoLabel": "Explore the library",
     "facts": [
@@ -46,7 +46,7 @@
       }
     ],
     "brief": "Bring different kinds of work together without making every page look or behave the same. The portfolio introduces the person; the library gives students a focused place to read, understand and practice.",
-    "context": "An ongoing personal project. One unit is available in each of Classes 9 and 10; Classes 11 and 12 are planned.",
+    "context": "An ongoing personal project. Unit 1 of the Class 9 and Class 10 books is complete as a sample; more units will follow.",
     "decisions": [
       {
         "title": "A shared visual language",

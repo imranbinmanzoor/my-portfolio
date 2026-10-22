@@ -236,7 +236,7 @@
     // Links such as /?topic=tutoring#contact open the form with that topic chosen.
     var topicSelect = document.getElementById('f-topic');
     var topicParam = (location.search.match(/[?&]topic=([a-z-]+)/) || [])[1];
-    var topicValue = { tutoring: 'Tutoring inquiry', frontend: 'Frontend project', research: 'AI evaluation or research' }[topicParam];
+    var topicValue = { tutoring: 'Tutoring inquiry', library: 'Library feedback', research: 'AI evaluation or research' }[topicParam];
     if (topicSelect && topicValue) topicSelect.value = topicValue;
     var escapeText = function (text) { return String(text).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); };
     function showFieldState(field) {

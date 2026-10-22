@@ -22,9 +22,9 @@ Where an older paragraph further down quotes a different number, this section wi
 
 Exemptions: a declaration ending in `/*art*/` is a proportion inside a drawn book cover;
 lengths inside calc()/min()/max() are derived geometry. The phone header and menu share the
-panels' padding, so the monogram sits on the same left edge as panel text (28.7px at 375px).
-The homepage evidence panels share a subgrid, so headings and content start on one line;
-the hero work map stretches to the copy's height.
+panels' padding, so the photo sits on the same left edge as panel text (28.7px at 375px).
+Discipline cards share one height and title line; section titles align with their panel edge.
+The hero action is centred on the heading line.
 
 Book stylesheets inherited from the original books (book.css, Class 9 and Class 10 CSS) are
 not migrated yet. They may not add off-scale values beyond `tests/token-baseline.json`;
@@ -117,28 +117,21 @@ Book introductions place a modest cover beside the text instead of at the far en
 
 ## Interaction and grouping
 
-Homepage order (September 2026): introduction with the work map → evidence row
-(Selected contributions beside About me; equal-height panels) → Projects → Learn with me
-(library beside tutoring) → Tools → Contact. The introduction's two text links still offer
-the professional and learning paths (`#professional-work`, `#learning`). The previous layout
-headed "AI & digital work" with frontend course projects only, placed the AI-evaluation
-evidence third, and showed the same projects twice; those duplicates are merged, not deleted.
+Homepage (2026-10-22, direction A): greeting panel with one action → three discipline cards
+(AI evaluation green, Worked solutions study blue, Teaching purple; Adaptify-style washes) →
+Work → Worked solutions → About → Contact. Section titles sit on the canvas above their panel
+(`--ds-h-canvas`, 32px; 24px on phones), aligned with the panel edge, 48px below the previous
+panel (28px on phones). Older anchors (#research, #professional-work, #learning, #tutoring)
+remain on the matching elements. The work map, project browser and Tools grid were removed;
+the course projects live on /projects/, linked from About and the footer.
 
-Projects is one browser with native Cards / List pressed buttons; a native disclosure shows
-the CSS for the current layout. Card columns follow the browser's own width through a
-container query (1, 2 or 4, never an orphan). Cards and the /projects/ tiles are both
-generated from `content/projects.json` (`summary`, `tags`, `thumb`), so they cannot drift.
-Preview links work without script; layout controls appear only after enhancement.
-Implementation: home-projects.html, home.css and project-browser.js.
+The sidebar marks the listed homepage section that contains the reading line, and the current
+page elsewhere. Navigation: Home, Work, Library, Tutoring, About, Contact. The identity is the
+owner's photo (avatar-96.webp, 2026-10-22 owner instruction), not the monogram.
 
-The sidebar marks the listed section that contains the reading line, and nothing while the
-reader is in an unlisted section (projects, learning, tools). Navigation order matches page
-order: Home, Research, About me, Projects, Mathematics, Tutoring, Contact.
-
-Discipline colours mean the same thing everywhere: AI & research green, code cyan,
-mathematics study blue, teaching purple. Tutoring subjects follow them (mathematics blue,
-programming cyan, Arabic purple). No green "status" dots: the monogram and location carry no
-availability claim.
+Discipline colours mean the same thing everywhere: AI evaluation green, worked solutions and
+mathematics study blue, teaching purple, code cyan. Tutoring subjects follow them. Arabic and
+Quran recitation is offered on request in one line on the tutoring page (#arabic).
 
 This uses evidence of actual work alongside clear service routes, informed by
 [NN/g's homepage iteration study](https://www.nngroup.com/articles/case-study-iterative-design-prototyping/)
@@ -170,25 +163,11 @@ Functional icons use a common line family. Generic action labels stay stationary
 
 Editorial card headings use text alone. Do not add isolated corner badges just to fill
 space: the homepage library and tutoring header badges were removed. Icons remain in
-navigation, controls, the connected-work map and coherent discipline/subject groups;
+navigation, controls, the discipline cards and coherent subject groups;
 tool logos identify the named technology. Consistency follows the role of an element,
 not a requirement to put an icon on every rectangle.
 
 The single homepage introduction identifies the person and their work; there is no competing promotional headline beside it. The owner rejected the explorer's prominence on the homepage because it distracted from professional roles. Keep interactive learning optional within the library. This is an owner-directed hierarchy decision, not a claim of usability-study validation.
-
-The homepage work map connects AI & research, Code, Mathematics and Teaching to actual
-work destinations. At 700px and above it shares the compact introduction; below that it
-follows the two audience paths in both DOM and visual order. Use the shared colours and SVG line-icon family,
-one selected-field description and no repeated heading. About is a personal account
-beside the factual contributions panel, with aligned section typography.
-
-Connectors use measured border attachment points, redrawn after resize and font loading.
-Keep paths outside control bounds and underneath opaque controls and focus indicators.
-Preserve roving keyboard tabs and focus when responsive placement changes. Implementation:
-work-specimen.html, work-specimen.css and work-specimen.js; no graph framework dependency.
-Research: [React Flow handles](https://reactflow.dev/learn/customization/handles),
-[W3C tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and
-[focus visibility](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html).
 
 Research consulted: [NN/g visual hierarchy](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), [homepage guidelines](https://www.nngroup.com/articles/top-ten-guidelines-for-homepage-usability/), [Carbon button usage](https://carbondesignsystem.com/components/button/usage/), [USWDS links](https://designsystem.digital.gov/components/link/) and [W3C consistent identification](https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification), 2026-09-19.
 

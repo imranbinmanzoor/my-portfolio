@@ -1,95 +1,58 @@
-/* Homepage: introduction → evidence (contributions, about) → projects → learning →
-   tools → contact. Every section is one panel; widths follow the shared frame.
-   Rhythm inside every panel: label → heading 8, heading → text 12, heading → content 24. */
+/* Homepage, direction A: greeting → three discipline cards → Work → Worked solutions →
+   About → Contact. Section titles sit on the canvas above their panel, as in the owner's
+   original (Adaptify-inspired) design. Every value comes from tokens.css.
+   Discipline colours: AI evaluation green, worked solutions study blue, teaching purple. */
 .home-workspace{display:grid;gap:var(--ds-gap)}
 /* In-page links land a section just below the frame edge or the phone header. */
 .home-workspace [id]{scroll-margin-top:calc(var(--site-chrome-top,0px) + 16px)}
 
-/* ---------- Introduction ---------- */
-.welcome{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.92fr);gap:var(--ds-space-6);align-items:stretch}
-.welcome__copy{display:flex;flex-direction:column;min-width:0}
-/* The work map fills the hero's height, so its bottom edge meets the copy's bottom edge. */
-.welcome>.work-specimen{display:flex;flex-direction:column;align-self:stretch}
-.welcome .eyebrow{margin-bottom:var(--ds-label-gap)}
-.welcome h1{margin-bottom:var(--ds-heading-gap);font-size:var(--ds-h1);line-height:1.1;letter-spacing:-.04em}
-.welcome__lede{max-width:52ch;font-size:var(--ds-text-md);line-height:1.7}
-.welcome-paths{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:12px}
-.welcome-paths a{display:inline-flex;align-items:center;min-height:var(--ds-control)}
-.welcome__aside{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:auto;padding-top:var(--ds-block-gap)}
-.location-note{display:inline-flex;align-items:center;gap:8px;color:var(--ds-muted);font-size:var(--ds-text-sm)}
-.location-note svg{flex:none;width:16px;height:16px}
+/* ---------- Greeting ---------- */
+.home-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title action" "lede lede";align-items:center;column-gap:var(--ds-block-gap)}
+.home-hero__top{display:contents}
+.home-hero h1{grid-area:title;font-size:var(--ds-h1);line-height:1.1;letter-spacing:-.04em}
+.home-hero__top>.btn{grid-area:action}
+.home-hero__lede{grid-area:lede;max-width:72ch;margin-top:var(--ds-heading-gap);font-size:var(--ds-text-md);line-height:1.7}
 
-/* ---------- Evidence: contributions beside a personal account ----------
-   Side by side, both panels share one subgrid: label, heading and content start on the
-   same lines whichever heading wraps. */
-.home-evidence{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:var(--ds-gap);align-items:stretch}
-.home-evidence>.panel{display:flex;flex-direction:column}
-.home-evidence .eyebrow{margin-bottom:var(--ds-label-gap)}
-.home-evidence h2{margin-bottom:var(--ds-block-gap)}
-@media (width >= 1000px){
- .home-evidence{grid-template-rows:auto auto 1fr;row-gap:0}
- .home-evidence>.panel{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
-}
-.research-notes{display:grid;gap:0;margin:0;padding:0;list-style:none}
-.research-notes li{position:relative;display:grid;grid-template-columns:10px minmax(0,1fr);gap:16px;padding-bottom:var(--ds-block-gap)}
-.research-notes li:last-child{padding-bottom:0}
-.research-notes li:not(:last-child)::after{content:'';position:absolute;top:18px;bottom:2px;left:4px;width:1px;background:var(--ds-line)}
-/* Centred on the first line of the 16px title. */
-.timeline-dot{position:relative;z-index:1;width:10px;height:10px;margin-top:calc((1.35em - 10px) / 2);border:2px solid var(--ds-green);border-radius:50%;background:var(--ds-surface)}
-.research-notes h3{font-size:var(--ds-h3)}
-.research-notes__source{margin-top:2px;color:var(--ds-green);font-size:var(--ds-text-sm);font-weight:500}
-.research-notes p:not(.research-notes__source){margin-top:4px;font-size:var(--ds-text-sm);line-height:1.7}
-.about-personal__body{display:flex;flex-direction:column;min-width:0}
-.about-personal__body>p{font-size:var(--ds-text-md);line-height:1.75}
-.about-personal__body>p+p{margin-top:12px}
-.about-personal__body>p:last-of-type{margin-bottom:var(--ds-block-gap)}
-.about-education{display:flex;flex-wrap:wrap;gap:12px 32px;margin:auto 0 0;padding-top:16px;border-top:1px solid var(--ds-line)}
-.about-education dt{color:var(--ds-muted);font-size:var(--ds-text-xs);letter-spacing:.04em;text-transform:uppercase}
-.about-education dd{margin:2px 0 0;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500}
+/* ---------- Discipline cards ---------- */
+.discipline-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-gap)}
+.discipline-card{--accent:var(--ds-green);--accent-soft:var(--ds-green-soft);position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:var(--ds-block-gap);border:1px solid var(--ds-edge);border-radius:var(--ds-radius);background:var(--ds-surface);box-shadow:var(--ds-shadow);color:var(--ds-ink);transition:border-color .16s ease}
+.discipline-card--library{--accent:var(--ds-study);--accent-soft:var(--ds-study-soft)}
+.discipline-card--teaching{--accent:var(--ds-purple);--accent-soft:var(--ds-purple-soft)}
+/* A soft wash behind the illustration, clipped by the card. */
+.discipline-card::before{content:'';position:absolute;z-index:-1;top:-56px;left:-56px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft) 0 58%,transparent 72%)}
+.discipline-card__art{display:grid;place-items:center;width:64px;height:64px;margin-bottom:var(--ds-space-6);color:var(--accent)}
+.discipline-card__art svg{width:56px;height:56px;stroke-width:1.3}
+.discipline-card__title{font-size:var(--ds-title);font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.discipline-card__text{margin-top:4px;color:var(--ds-body);font-size:var(--ds-text-sm);line-height:1.6}
+.discipline-card__arrow{position:absolute;top:24px;right:24px;width:20px;height:20px;color:var(--ds-muted);transition:color .16s ease}
+.discipline-card:is(:hover,:focus-visible){border-color:var(--accent)}
+.discipline-card:is(:hover,:focus-visible) .discipline-card__arrow{color:var(--accent)}
 
-/* ---------- Projects: one browser, two layouts ---------- */
-.interface-demo{margin:0;overflow:hidden;border:1px solid var(--ds-line-strong);border-radius:var(--ds-radius-card);background:var(--ds-surface)}
-.interface-demo figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 16px;border-bottom:1px solid var(--ds-line);font-size:var(--ds-text-sm)}
-.demo-caption{display:inline-flex;align-items:center;gap:8px;color:var(--ds-ink);font-weight:500}
-.demo-caption svg{flex:none;width:20px;height:20px;color:var(--ds-cyan)}
-.demo-format{display:flex;gap:2px;padding:2px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-control);background:var(--ds-page)}
-.demo-format button{min-width:56px;min-height:var(--ds-control-sm);padding:0 12px;border:1px solid transparent;border-radius:calc(var(--ds-radius-control) - 2px);background:transparent;color:var(--ds-muted);font:500 var(--ds-text-sm)/1.4 var(--ds-font)}
-.demo-format button[aria-pressed=true]{border-color:var(--ds-line-strong);background:var(--ds-surface);color:var(--ds-ink)}
-.demo-format button:hover{color:var(--ds-ink)}
-.demo-stage{padding:12px;background:var(--ds-page);container-type:inline-size}
-/* Columns follow the browser's own width, not the window: 1, 2 or 4, never an orphan. */
-.preview-projects{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
-@container (width >= 480px){.preview-projects[data-layout=cards]{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@container (width >= 1000px){.preview-projects[data-layout=cards]{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.preview-project{display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden;border:1px solid var(--ds-line);border-radius:var(--ds-radius-control);background:var(--ds-surface);color:var(--ds-ink)}
-.preview-project__visual{display:flex;align-items:center;justify-content:center;height:150px;padding:12px;overflow:hidden;border-bottom:1px solid var(--ds-line);background:var(--tile-portfolio)}
-.preview-project--omnifood .preview-project__visual{background:var(--tile-omnifood)}
-.preview-project--modern-page .preview-project__visual{background:var(--tile-modern-page)}
-.preview-project--pig-game .preview-project__visual{background:var(--tile-pig-game)}
-.preview-project__visual img{width:100%;height:100%;object-fit:contain}
-.preview-project .mini-book{width:64px;padding:7px/*art*/;border-left-width:4px;box-shadow:3px 3px 0 var(--ds-cover-shadow)}
-.preview-project .mini-book>span,.preview-project .mini-book small{font-size:5px/*art*/}
-.preview-project .mini-book strong{font-size:28px/*art*/}
-.preview-project .book-artifact{gap:12px}
-.preview-project__body{display:flex;flex-direction:column;gap:4px;min-width:0;padding:16px}
-.preview-project__kicker{color:var(--ds-muted);font-size:var(--ds-text-xs);letter-spacing:.05em;text-transform:uppercase}
-.preview-project h3{margin-top:2px;font-size:var(--ds-h3)}
-.preview-project__summary{font-size:var(--ds-text-sm);line-height:1.6}
-.preview-project__tags{margin-top:auto;padding-top:8px;color:var(--ds-muted);font-size:var(--ds-text-xs)}
-.preview-projects[data-layout=list] .preview-project{grid-template-columns:168px minmax(0,1fr);grid-template-rows:none}
-.preview-projects[data-layout=list] .preview-project__visual{height:auto;min-height:104px;border-right:1px solid var(--ds-line);border-bottom:0}
-.demo-source{border-top:1px solid var(--ds-line)}
-.demo-source summary{display:flex;align-items:center;min-height:var(--ds-control);padding:0 16px;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500;cursor:pointer}
-.demo-source pre{margin:0 16px;padding:16px;overflow-x:auto;border:1px solid var(--ds-line);border-radius:var(--ds-radius-control);background:var(--ds-page);color:var(--ds-cyan);font:var(--ds-text-xs)/1.75 var(--ds-mono);white-space:pre}
-.demo-source p{padding:12px 16px 16px;color:var(--ds-muted);font-size:var(--ds-text-xs);line-height:1.6}
+/* ---------- Sections: a canvas title above one panel ---------- */
+.home-section{display:grid;gap:var(--ds-gap);margin-top:var(--ds-space-6)}
+.home-section__title{font-size:var(--ds-h-canvas);line-height:1.2;letter-spacing:-.03em}
 
-/* ---------- Learning: library beside tutoring ---------- */
-.learning-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--ds-space-6)}
-.learning-grid h3{margin-bottom:8px}
-.learning-grid h3 .text-link{display:inline-flex;align-items:center;min-height:var(--ds-control);font-size:inherit;font-weight:inherit}
-.learning-grid h3:has(.text-link){margin-bottom:0}
-.learning-library>p,.learning-tutoring>p{max-width:52ch;font-size:var(--ds-text-sm);line-height:1.7}
-.learning-books{display:grid;gap:8px;margin-top:16px}
+/* ---------- Work ---------- */
+.experience{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-6);margin:0;padding:0;list-style:none}
+.experience li{--mark:var(--ds-green);position:relative;padding-top:var(--ds-block-gap);border-top:2px solid var(--ds-line)}
+.experience li:nth-child(3){--mark:var(--ds-study)}
+/* A 10px ring centred on the 2px rule. */
+.experience li::before{content:'';position:absolute;top:-6px;left:0;width:10px;height:10px;border:2px solid var(--mark);border-radius:50%;background:var(--ds-surface)}
+.experience__source{color:var(--mark);font-size:var(--ds-text-sm);font-weight:500}
+.experience h3{margin-top:4px}
+.experience p:not(.experience__source){margin-top:8px;font-size:var(--ds-text-sm);line-height:1.7}
+.home-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:var(--ds-space-6);padding-top:var(--ds-block-gap);border-top:1px solid var(--ds-line)}
+.home-tools h3{color:var(--ds-muted);font-size:var(--ds-text-sm);font-weight:500;letter-spacing:0}
+.home-tools ul{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.home-tools li{padding:4px 12px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-pill);background:var(--ds-page);color:var(--ds-ink);font:500 var(--ds-text-xs)/1.5 var(--ds-font)}
+
+/* ---------- Worked solutions ---------- */
+.home-library{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ds-space-6);align-items:center}
+.home-library__copy h3{font-size:var(--ds-title);letter-spacing:-.02em}
+.home-library__copy p{max-width:56ch;margin-top:var(--ds-heading-gap);font-size:var(--ds-text-md);line-height:1.7}
+.home-library__links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:var(--ds-block-gap)}
+.home-library__links .text-link{display:inline-flex;align-items:center;min-height:var(--ds-control)}
+.learning-books{display:grid;gap:8px}
 .learning-books a{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 16px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-card);background:var(--ds-page);color:var(--ds-ink)}
 .learning-books a:hover{border-color:var(--ds-study)}
 .learning-book-number{display:grid;flex:none;place-items:center;width:34px;height:44px;border-left:3px solid var(--ds-study);background:var(--ds-surface);color:var(--ds-study);font-size:var(--fs-20);letter-spacing:-.05em}
@@ -97,25 +60,20 @@
 .learning-books strong{font-size:var(--ds-text-sm);font-weight:600}
 .learning-books small{color:var(--ds-muted);font-size:var(--ds-text-xs);line-height:1.5}
 .learning-book-action{margin-left:auto;font-size:var(--ds-text-sm);font-weight:500;white-space:nowrap;text-decoration:underline;text-decoration-color:var(--ds-line-strong);text-underline-offset:4px}
-.learning-availability{margin-top:12px;color:var(--ds-muted);font-size:var(--ds-text-sm)}
-.learning-tutoring{padding-left:var(--ds-space-6);border-left:1px solid var(--ds-line)}
-.learning-subjects{display:grid;gap:8px;margin:16px 0 24px;padding:0;list-style:none;font-size:var(--ds-text-sm)}
-.learning-subjects li{display:flex;align-items:center;gap:12px}
-.learning-subjects li::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--ds-purple)}
 
-/* ---------- Tools ---------- */
-.toolkit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.toolkit-grid article{min-width:0;padding:24px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-card);background:var(--ds-page)}
-.toolkit-grid svg{width:24px;height:24px;margin-bottom:12px;color:var(--ds-cyan)}
-.toolkit-grid h3{margin-bottom:8px}
-.toolkit-grid p{margin-bottom:16px;font-size:var(--ds-text-sm);line-height:1.65}
-.toolkit-grid ul{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
-.toolkit-grid li{padding:2px 12px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-pill);background:var(--ds-surface);color:var(--ds-ink);font:500 var(--ds-text-xs)/1.5 var(--ds-font)}
+/* ---------- About ---------- */
+.home-about{display:grid;grid-template-columns:160px minmax(0,1fr) minmax(220px,280px);gap:var(--ds-space-6);align-items:start}
+.home-about__photo{width:160px;height:160px;border-radius:var(--ds-radius-card);background:var(--ds-page);object-fit:cover}
+.home-about__text p{font-size:var(--ds-text-md);line-height:1.75}
+.home-about__text p+p{margin-top:12px}
+.home-about__more .text-link{display:inline-flex;align-items:center;min-height:var(--ds-control)}
+.home-about__facts{display:grid;gap:16px;margin:0;padding-left:var(--ds-space-6);border-left:1px solid var(--ds-line)}
+.home-about__facts dt{color:var(--ds-muted);font-size:var(--ds-text-xs);letter-spacing:.04em;text-transform:uppercase}
+.home-about__facts dd{margin:2px 0 0;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500}
 
 /* ---------- Contact ---------- */
 .home-contact{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px}
-.contact-copy h2{margin:var(--ds-label-gap) 0 var(--ds-heading-gap)}
-.contact-copy p:not(.eyebrow){max-width:36ch;font-size:var(--ds-text-md);line-height:1.75}
+.contact-copy p{max-width:36ch;font-size:var(--ds-text-md);line-height:1.75}
 .contact-email{display:inline-flex;align-items:center;gap:12px;min-height:var(--ds-control);margin-top:var(--ds-block-gap);color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500;overflow-wrap:anywhere}
 .contact-email>svg{flex:none;width:36px;height:36px;padding:8px;border-radius:50%;background:var(--ds-green-soft);color:var(--ds-green)}
 .contact-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:8px}
@@ -151,25 +109,33 @@
 
 /* ---------- Responsive ---------- */
 @media (width < 1200px){
- .welcome{grid-template-columns:minmax(0,1fr) minmax(340px,1fr);gap:var(--ds-block-gap)}
- .toolkit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-about{grid-template-columns:120px minmax(0,1fr)}
+ .home-about__photo{width:120px;height:120px}
+ .home-about__facts{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));padding:var(--ds-block-gap) 0 0;border-top:1px solid var(--ds-line);border-left:0}
  .home-contact{gap:var(--ds-space-6)}
 }
 @media (width < 1000px){
- .welcome,.home-evidence{grid-template-columns:1fr}
- .welcome__aside{margin-top:0}
- .toolkit-grid article{padding:16px}
+ .experience{grid-template-columns:1fr;gap:var(--ds-block-gap)}
+ .discipline-card__art{margin-bottom:var(--ds-block-gap)}
 }
 @media (width < 800px){
- .home-contact,.learning-grid{grid-template-columns:1fr}
- .learning-tutoring{padding:var(--ds-block-gap) 0 0;border-top:1px solid var(--ds-line);border-left:0}
+ .home-library,.home-contact{grid-template-columns:1fr}
+ .discipline-grid{grid-template-columns:1fr}
+ /* Below 800px: one compact row per discipline, illustration beside the text, arrow in its own column. */
+ .discipline-card{display:grid;grid-template-columns:48px minmax(0,1fr) 20px;grid-template-areas:"art title arrow" "art text arrow";column-gap:16px;align-items:start;padding:var(--ds-panel-pad)}
+ .discipline-card::before{top:-48px;left:-48px;width:136px;height:136px}
+ .discipline-card__art{grid-area:art;width:48px;height:48px;margin:0}
+ .discipline-card__art svg{width:40px;height:40px}
+ .discipline-card__title{grid-area:title;font-size:var(--ds-text-md)}
+ .discipline-card__text{grid-area:text}
+ .discipline-card__arrow{position:static;grid-area:arrow}
 }
 @media (width < 600px){
- .welcome__aside .btn{flex:1}
- .research-notes li{gap:12px}
- .preview-projects[data-layout=list] .preview-project{grid-template-columns:104px minmax(0,1fr)}
- .preview-projects[data-layout=list] .preview-project__summary{display:none}
- .toolkit-grid{grid-template-columns:1fr}
+ .home-hero{grid-template-columns:1fr;grid-template-areas:"title" "lede" "action"}
+ .home-hero__top>.btn{width:100%;margin-top:var(--ds-block-gap)}
+ .home-section{margin-top:var(--ds-space-4)}
+ .home-about{grid-template-columns:1fr;gap:var(--ds-block-gap)}
+ .home-about__photo{width:96px;height:96px}
  .contact-form{grid-template-columns:1fr}
  .contact-confirmation{min-height:320px;padding:24px 16px}
 }
@@ -179,9 +145,9 @@
 
 @media print{
   .home-workspace{gap:12px}
-  .work-specimen,.demo-format,.demo-source,.contact-form,.contact-confirmation,.welcome-paths,.welcome__aside .btn,.section-head .btn,.learning-tutoring .btn{display:none!important}
-  .welcome,.home-evidence,.learning-grid,.home-contact{grid-template-columns:1fr}
-  .preview-project,.research-notes li,.toolkit-grid article,.learning-books a{break-inside:avoid}
+  .discipline-card__arrow,.contact-form,.contact-confirmation,.home-hero .btn{display:none!important}
+  .home-library,.home-about,.home-contact,.experience{grid-template-columns:1fr}
+  .experience li,.learning-books a,.discipline-card{break-inside:avoid}
   .contact-email>svg{display:none}
 }
 

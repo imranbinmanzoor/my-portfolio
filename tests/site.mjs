@@ -73,13 +73,14 @@ export function checkSite({check, htmlFiles, files}) {
   });
 
   check('Homepage: every anchor the site links to exists, and projects come from one data source', () => {
+    // research, professional-work, learning and tutoring are kept for older links.
     const home = read('dist/index.html');
     for (const id of ['home', 'professional-work', 'research', 'about', 'work', 'learning', 'tutoring', 'contact'])
       assert(new RegExp(`id="${id}"`).test(home), `missing #${id}`);
+    assert(home.includes('href="/projects/"'), 'homepage links the project archive');
     const projects = JSON.parse(read('content/projects.json'));
     const index = read('dist/projects/index.html');
     for (const p of projects) {
-      assert(home.includes(`href="/projects/${p.slug}/"`), `homepage lacks ${p.slug}`);
       assert(index.includes(`href="/projects/${p.slug}/"`), `project index lacks ${p.slug}`);
       for (const img of [p.thumb, ...p.views.map(v => v.src)].filter(Boolean)) assert(fs.existsSync('dist' + img), `${p.slug}: missing ${img}`);
     }

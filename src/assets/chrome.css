@@ -11,7 +11,8 @@ body.nav-open{overflow:hidden}
 .nav{position:fixed;inset:var(--frame-inset) var(--frame-inset) auto;z-index:70;border:1px solid var(--ds-edge);border-radius:var(--ds-radius);background:var(--ds-surface);color:var(--ds-ink);box-shadow:var(--ds-shadow);font:400 var(--ds-text-sm)/1.5 var(--ds-font);transition:transform .22s ease}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:var(--ds-nav-h);padding:12px var(--ds-panel-pad)}
 .brand{display:flex;align-items:center;gap:12px;min-width:0;flex:none;color:var(--ds-ink);text-decoration:none}
-.brand__mark{position:relative;display:grid;place-items:center;flex:none;width:44px;height:44px;padding-right:2px;border-radius:50%;background:var(--ds-ink);color:var(--ds-surface);font:600 var(--fs-20)/1 var(--ds-font);letter-spacing:-.09em}
+/* The owner's photo identifies the site; a faint ring keeps its edge on both canvases. */
+.brand__mark{display:block;flex:none;width:44px;height:44px;border-radius:50%;background:var(--ds-page);box-shadow:0 0 0 1px var(--ds-line);object-fit:cover}
 .brand__identity{display:flex;flex-direction:column;gap:2px;min-width:0}
 .brand__name{font-size:var(--ds-text-sm);font-weight:600;letter-spacing:-.03em}
 .brand__description{overflow:hidden;color:var(--ds-muted);font-size:var(--ds-text-xs);line-height:1.4;white-space:nowrap;text-overflow:ellipsis}
