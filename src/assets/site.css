@@ -149,9 +149,9 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
 .subject-detail__body h3{margin-bottom:8px;color:var(--subject)}
 .subject-detail__body p{font-size:var(--ds-text-sm);line-height:1.7}
 .subject-format{grid-column:1/-1;padding:12px 16px;border-left:2px solid var(--subject);border-radius:0 var(--ds-radius-control) var(--ds-radius-control) 0;background:var(--subject-soft);color:var(--ds-body);font-size:var(--ds-text-sm)}
-.tutoring-inquiry{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-top:var(--ds-space-6)}
-.tutoring-inquiry h2{margin:var(--ds-label-gap) 0 var(--ds-heading-gap)}
-.tutoring-inquiry p:not(.section-label){max-width:58ch;font-size:var(--ds-text-md)}
+:is(.tutoring-inquiry,.page-cta){display:flex;align-items:center;justify-content:space-between;gap:32px;padding-top:var(--ds-space-6)}
+:is(.tutoring-inquiry,.page-cta) h2{margin:var(--ds-label-gap) 0 var(--ds-heading-gap)}
+:is(.tutoring-inquiry,.page-cta) p:not(.section-label){max-width:58ch;font-size:var(--ds-text-md)}
 
 /* ---------- Small pages ---------- */
 .recovery-links{display:flex;flex-wrap:wrap;gap:12px;margin-block:0 24px}
@@ -169,7 +169,7 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
 }
 @media (width < 800px){
  .page-breadcrumb{position:relative;top:auto}
- .tutoring-inquiry{flex-direction:column;align-items:start;gap:24px}
+ :is(.tutoring-inquiry,.page-cta){flex-direction:column;align-items:start;gap:24px}
 }
 @media (width < 600px){
  .page-breadcrumb ol{gap:0}
@@ -218,3 +218,102 @@ body[data-site] main:not(.home-workspace) [id]{scroll-margin-top:calc(var(--site
 
 /* Tutoring: Arabic and Quran recitation is offered on request, in one line. */
 .tutoring-also{padding-block:var(--ds-block-gap);border-bottom:1px solid var(--ds-line);color:var(--ds-body);font-size:var(--ds-text-sm)}
+
+/* ---------- Full pages: Work, About and Contact ----------
+   The homepage shows a brief of each; these are the full versions. */
+.page-section{padding-block:var(--ds-space-6);border-top:1px solid var(--ds-line)}
+.page-section>h2{margin-bottom:var(--ds-block-gap)}
+
+/* Work: one row per role, the organisation and dates beside what the work involved. */
+.work-list{display:grid;margin:0;padding:0;list-style:none}
+.work-list li{--mark:var(--ds-green);display:grid;grid-template-columns:220px minmax(0,1fr);gap:var(--ds-space-6);padding-block:var(--ds-block-gap);border-top:1px solid var(--ds-line)}
+.work-list li:first-child{padding-top:0;border-top:0}
+.work-list li.is-solutions{--mark:var(--ds-study)}
+.work-list__source{display:grid;gap:2px;align-content:start}
+.work-list__source strong{color:var(--mark);font-size:var(--ds-text-sm);font-weight:600}
+.work-list__source span{color:var(--ds-muted);font-size:var(--ds-text-xs)}
+.work-list p{max-width:62ch;margin-top:8px;font-size:var(--ds-text-md);line-height:1.7}
+.tool-groups{display:grid;gap:var(--ds-block-gap)}
+.tool-groups h3{margin-bottom:12px;color:var(--ds-muted);font-size:var(--ds-text-sm);font-weight:500;letter-spacing:0}
+.tool-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tool-list li{padding:4px 12px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-pill);background:var(--ds-page);color:var(--ds-ink);font:500 var(--ds-text-xs)/1.5 var(--ds-font)}
+
+/* About: photo, account and facts. */
+.profile{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(220px,280px);gap:var(--ds-space-6);align-items:start}
+.profile__photo{width:200px;height:200px;border-radius:var(--ds-radius-card);background:var(--ds-page);object-fit:cover}
+.profile__text p{max-width:62ch;font-size:var(--ds-text-md);line-height:1.75}
+.profile__text p+p{margin-top:12px}
+.profile__facts{display:grid;gap:16px;margin:0;padding-left:var(--ds-space-6);border-left:1px solid var(--ds-line)}
+.profile__facts dt{color:var(--ds-muted);font-size:var(--ds-text-xs);letter-spacing:.04em;text-transform:uppercase}
+.profile__facts dd{margin:2px 0 0;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500}
+.link-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.link-list a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 16px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-card);background:var(--ds-page);color:var(--ds-ink)}
+.link-list a:hover{border-color:var(--ds-line-strong)}
+.link-list strong{display:block;font-size:var(--ds-text-sm);font-weight:600}
+.link-list small{display:block;color:var(--ds-muted);font-size:var(--ds-text-xs)}
+
+/* Contact: the invitation beside the form. */
+.contact-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px}
+.contact-copy p{max-width:36ch;font-size:var(--ds-text-md);line-height:1.75}
+.contact-email{display:inline-flex;align-items:center;gap:12px;min-height:var(--ds-control);margin-top:var(--ds-block-gap);color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500;overflow-wrap:anywhere}
+.contact-email>svg{flex:none;width:36px;height:36px;padding:8px;border-radius:50%;background:var(--ds-green-soft);color:var(--ds-green)}
+.contact-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:8px}
+.contact-links a{display:inline-flex;align-items:center;min-height:var(--ds-control);font-size:var(--ds-text-sm)}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+.field{min-width:0}
+.field:has(textarea),.field:has(select),.contact-form__footer{grid-column:1/-1}
+.field label{display:block;margin-bottom:8px;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500}
+/* Fields share the buttons' 44px height. */
+.field :is(input,select,textarea){width:100%;padding:0 16px;border:1px solid var(--ds-line-strong);border-radius:var(--ds-radius-control);background:var(--ds-page);color:var(--ds-ink);font:400 var(--ds-text-md)/1.5 var(--ds-font)}
+.field :is(input,select){height:var(--ds-control)}
+.field textarea{min-height:144px;padding-block:12px;resize:vertical}
+.field :is(input,select,textarea):focus-visible{outline:2px solid var(--ds-focus);outline-offset:2px}
+.field [aria-invalid=true]{border-color:var(--ds-error)}
+.field-error{margin-top:4px;color:var(--ds-error);font-size:var(--ds-text-sm)}
+.select-field{position:relative}
+.select-field select{padding-right:48px;appearance:none}
+.select-field__arrow{position:absolute;top:50%;right:16px;width:12px;height:8px;color:var(--ds-ink);transform:translateY(-50%);pointer-events:none}
+.contact-form__footer{display:flex;flex-direction:column;gap:12px}
+.contact-form__footer .btn{width:100%}
+.form-note{color:var(--ds-muted);font-size:var(--ds-text-xs);text-align:center}
+.form-status:empty{display:none}
+.form-status.is-error{padding:12px 16px;border:1px solid var(--ds-error);border-radius:var(--ds-radius-control);color:var(--ds-error);font-size:var(--ds-text-sm);line-height:1.6}
+.form-status.is-error a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.contact-confirmation{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:380px;padding:32px;border:1px solid var(--ds-green);border-radius:var(--ds-radius-card);background:var(--ds-green-soft);color:var(--ds-green);text-align:center}
+.contact-confirmation h3{color:var(--ds-green);font-size:var(--ds-h2)}
+.contact-confirmation p{max-width:34ch;color:var(--ds-body);font-size:var(--ds-text-md);line-height:1.7}
+.contact-confirmation__check{flex:none;width:64px;height:64px}
+.contact-confirmation:not([hidden]) .contact-confirmation__check{animation:confirmation-arrive .35s ease-out both}
+.contact-confirmation:not([hidden]) .contact-confirmation__check path{stroke-dasharray:40;animation:confirmation-check .4s .15s ease-out both}
+@keyframes confirmation-arrive{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes confirmation-check{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+/* The sending state keeps focus on the button; a failure message scrolls fully clear of the frame edge. */
+.btn[aria-disabled=true]{opacity:.65;cursor:progress}
+#form-status{scroll-margin-block:calc(var(--frame-inset,16px) + 16px)}
+
+@media (width < 1200px){
+ .profile{grid-template-columns:160px minmax(0,1fr)}
+ .profile__photo{width:160px;height:160px}
+ .profile__facts{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));padding:var(--ds-block-gap) 0 0;border-top:1px solid var(--ds-line);border-left:0}
+ .contact-layout{gap:var(--ds-space-6)}
+}
+@media (width < 800px){
+ .work-list li{grid-template-columns:1fr;gap:4px}
+ .contact-layout{grid-template-columns:1fr}
+}
+@media (width < 600px){
+ .page-section{padding-block:var(--ds-block-gap)}
+ .profile{grid-template-columns:1fr;gap:var(--ds-block-gap)}
+ .profile__photo{width:120px;height:120px}
+ .contact-form{grid-template-columns:1fr}
+ .contact-confirmation{min-height:320px;padding:24px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+ .contact-confirmation:not([hidden]) .contact-confirmation__check,.contact-confirmation:not([hidden]) .contact-confirmation__check path{animation:none}
+}
+@media print{
+ .contact-form,.contact-confirmation{display:none!important}
+ .profile,.contact-layout,.work-list li{grid-template-columns:1fr}
+ .contact-email>svg{display:none}
+}
+.profile+.page-section{margin-top:var(--ds-space-6)}

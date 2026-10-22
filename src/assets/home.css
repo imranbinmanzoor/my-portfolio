@@ -1,9 +1,10 @@
-/* Homepage, direction A: greeting → three discipline cards → Work → Worked solutions →
-   About → Contact. Section titles sit on the canvas above their panel, as in the owner's
-   original (Adaptify-inspired) design. Every value comes from tokens.css.
+/* Homepage: greeting → three discipline cards → a brief of each page (Work, Worked
+   solutions, Teaching, About) → an invitation to get in touch. Each brief links to its full
+   page, as in the owner's original (Adaptify-inspired) design. Section titles sit on the
+   canvas above their panel. Every value comes from tokens.css.
    Discipline colours: AI evaluation green, worked solutions study blue, teaching purple. */
 .home-workspace{display:grid;gap:var(--ds-gap)}
-/* In-page links land a section just below the frame edge or the phone header. */
+/* Older links to homepage sections land just below the frame edge or the phone header. */
 .home-workspace [id]{scroll-margin-top:calc(var(--site-chrome-top,0px) + 16px)}
 
 /* ---------- Greeting ---------- */
@@ -28,11 +29,14 @@
 .discipline-card:is(:hover,:focus-visible){border-color:var(--accent)}
 .discipline-card:is(:hover,:focus-visible) .discipline-card__arrow{color:var(--accent)}
 
-/* ---------- Sections: a canvas title above one panel ---------- */
+/* ---------- Briefs: a canvas title with a link to the full page, above one panel ---------- */
 .home-section{display:grid;gap:var(--ds-gap);margin-top:var(--ds-space-6)}
+.home-section__head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 24px}
 .home-section__title{font-size:var(--ds-h-canvas);line-height:1.2;letter-spacing:-.03em}
+.home-section__more{display:inline-flex;align-items:center;gap:8px;min-height:var(--ds-control);color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500;white-space:nowrap}
+.home-section__more:hover{text-decoration:underline;text-underline-offset:4px}
 
-/* ---------- Work ---------- */
+/* Work: the three roles in one row. */
 .experience{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-6);margin:0;padding:0;list-style:none}
 .experience li{--mark:var(--ds-green);position:relative;padding-top:var(--ds-block-gap);border-top:2px solid var(--ds-line)}
 .experience li:nth-child(3){--mark:var(--ds-study)}
@@ -40,18 +44,11 @@
 .experience li::before{content:'';position:absolute;top:-6px;left:0;width:10px;height:10px;border:2px solid var(--mark);border-radius:50%;background:var(--ds-surface)}
 .experience__source{color:var(--mark);font-size:var(--ds-text-sm);font-weight:500}
 .experience h3{margin-top:4px}
-.experience p:not(.experience__source){margin-top:8px;font-size:var(--ds-text-sm);line-height:1.7}
-.home-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:var(--ds-space-6);padding-top:var(--ds-block-gap);border-top:1px solid var(--ds-line)}
-.home-tools h3{color:var(--ds-muted);font-size:var(--ds-text-sm);font-weight:500;letter-spacing:0}
-.home-tools ul{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
-.home-tools li{padding:4px 12px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-pill);background:var(--ds-page);color:var(--ds-ink);font:500 var(--ds-text-xs)/1.5 var(--ds-font)}
 
-/* ---------- Worked solutions ---------- */
-.home-library{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ds-space-6);align-items:center}
-.home-library__copy h3{font-size:var(--ds-title);letter-spacing:-.02em}
-.home-library__copy p{max-width:56ch;margin-top:var(--ds-heading-gap);font-size:var(--ds-text-md);line-height:1.7}
-.home-library__links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:var(--ds-block-gap)}
-.home-library__links .text-link{display:inline-flex;align-items:center;min-height:var(--ds-control)}
+/* Worked solutions and teaching: copy beside a list of entry points. */
+.home-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ds-space-6);align-items:center}
+.home-split__copy h3{font-size:var(--ds-title);letter-spacing:-.02em}
+.home-split__copy p{max-width:56ch;margin-top:var(--ds-heading-gap);font-size:var(--ds-text-md);line-height:1.7}
 .learning-books{display:grid;gap:8px}
 .learning-books a{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 16px;border:1px solid var(--ds-line);border-radius:var(--ds-radius-card);background:var(--ds-page);color:var(--ds-ink)}
 .learning-books a:hover{border-color:var(--ds-study)}
@@ -60,66 +57,29 @@
 .learning-books strong{font-size:var(--ds-text-sm);font-weight:600}
 .learning-books small{color:var(--ds-muted);font-size:var(--ds-text-xs);line-height:1.5}
 .learning-book-action{margin-left:auto;font-size:var(--ds-text-sm);font-weight:500;white-space:nowrap;text-decoration:underline;text-decoration-color:var(--ds-line-strong);text-underline-offset:4px}
+.learning-books--teaching a:hover{border-color:var(--ds-purple)}
+.learning-books--teaching .learning-book-number{border-left-color:var(--ds-purple);color:var(--ds-purple)}
+.learning-books--teaching .learning-book-number svg{width:20px;height:20px}
 
-/* ---------- About ---------- */
-.home-about{display:grid;grid-template-columns:160px minmax(0,1fr) minmax(220px,280px);gap:var(--ds-space-6);align-items:start}
-.home-about__photo{width:160px;height:160px;border-radius:var(--ds-radius-card);background:var(--ds-page);object-fit:cover}
-.home-about__text p{font-size:var(--ds-text-md);line-height:1.75}
-.home-about__text p+p{margin-top:12px}
-.home-about__more .text-link{display:inline-flex;align-items:center;min-height:var(--ds-control)}
-.home-about__facts{display:grid;gap:16px;margin:0;padding-left:var(--ds-space-6);border-left:1px solid var(--ds-line)}
-.home-about__facts dt{color:var(--ds-muted);font-size:var(--ds-text-xs);letter-spacing:.04em;text-transform:uppercase}
-.home-about__facts dd{margin:2px 0 0;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500}
+/* About: photo beside a short account. */
+.home-about{display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--ds-space-6);align-items:center}
+.home-about__photo{width:120px;height:120px;border-radius:var(--ds-radius-card);background:var(--ds-page);object-fit:cover}
+.home-about p{max-width:62ch;font-size:var(--ds-text-md);line-height:1.75}
 
-/* ---------- Contact ---------- */
-.home-contact{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px}
-.contact-copy p{max-width:36ch;font-size:var(--ds-text-md);line-height:1.75}
-.contact-email{display:inline-flex;align-items:center;gap:12px;min-height:var(--ds-control);margin-top:var(--ds-block-gap);color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500;overflow-wrap:anywhere}
-.contact-email>svg{flex:none;width:36px;height:36px;padding:8px;border-radius:50%;background:var(--ds-green-soft);color:var(--ds-green)}
-.contact-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:8px}
-.contact-links a{display:inline-flex;align-items:center;min-height:var(--ds-control);font-size:var(--ds-text-sm)}
-.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
-.field{min-width:0}
-.field:has(textarea),.field:has(select),.contact-form__footer{grid-column:1/-1}
-.field label{display:block;margin-bottom:8px;color:var(--ds-ink);font-size:var(--ds-text-sm);font-weight:500}
-/* Fields share the buttons' 44px height. */
-.field :is(input,select,textarea){width:100%;padding:0 16px;border:1px solid var(--ds-line-strong);border-radius:var(--ds-radius-control);background:var(--ds-page);color:var(--ds-ink);font:400 var(--ds-text-md)/1.5 var(--ds-font)}
-.field :is(input,select){height:var(--ds-control)}
-.field textarea{min-height:144px;padding-block:12px;resize:vertical}
-.field :is(input,select,textarea):focus-visible{outline:2px solid var(--ds-focus);outline-offset:2px}
-.field [aria-invalid=true]{border-color:var(--ds-error)}
-.field-error{margin-top:4px;color:var(--ds-error);font-size:var(--ds-text-sm)}
-.select-field{position:relative}
-.select-field select{padding-right:48px;appearance:none}
-.select-field__arrow{position:absolute;top:50%;right:16px;width:12px;height:8px;color:var(--ds-ink);transform:translateY(-50%);pointer-events:none}
-.contact-form__footer{display:flex;flex-direction:column;gap:12px}
-.contact-form__footer .btn{width:100%}
-.form-note{color:var(--ds-muted);font-size:var(--ds-text-xs);text-align:center}
-.form-status:empty{display:none}
-.form-status.is-error{padding:12px 16px;border:1px solid var(--ds-error);border-radius:var(--ds-radius-control);color:var(--ds-error);font-size:var(--ds-text-sm);line-height:1.6}
-.form-status.is-error a{color:inherit;text-decoration:underline;text-underline-offset:3px}
-.contact-confirmation{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:380px;padding:32px;border:1px solid var(--ds-green);border-radius:var(--ds-radius-card);background:var(--ds-green-soft);color:var(--ds-green);text-align:center}
-.contact-confirmation h3{color:var(--ds-green);font-size:var(--ds-h2)}
-.contact-confirmation p{max-width:34ch;color:var(--ds-body);font-size:var(--ds-text-md);line-height:1.7}
-.contact-confirmation__check{flex:none;width:64px;height:64px}
-.contact-confirmation:not([hidden]) .contact-confirmation__check{animation:confirmation-arrive .35s ease-out both}
-.contact-confirmation:not([hidden]) .contact-confirmation__check path{stroke-dasharray:40;animation:confirmation-check .4s .15s ease-out both}
-@keyframes confirmation-arrive{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-@keyframes confirmation-check{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+/* Contact: one invitation and the way in. */
+.home-invite{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--ds-block-gap)}
+.home-invite h3{font-size:var(--ds-title);letter-spacing:-.02em}
+.home-invite p{max-width:52ch;margin-top:8px;font-size:var(--ds-text-md);line-height:1.7}
+.home-invite__actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+.home-invite__actions .text-link{display:inline-flex;align-items:center;min-height:var(--ds-control)}
 
 /* ---------- Responsive ---------- */
-@media (width < 1200px){
- .home-about{grid-template-columns:120px minmax(0,1fr)}
- .home-about__photo{width:120px;height:120px}
- .home-about__facts{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));padding:var(--ds-block-gap) 0 0;border-top:1px solid var(--ds-line);border-left:0}
- .home-contact{gap:var(--ds-space-6)}
-}
 @media (width < 1000px){
  .experience{grid-template-columns:1fr;gap:var(--ds-block-gap)}
  .discipline-card__art{margin-bottom:var(--ds-block-gap)}
 }
 @media (width < 800px){
- .home-library,.home-contact{grid-template-columns:1fr}
+ .home-split{grid-template-columns:1fr}
  .discipline-grid{grid-template-columns:1fr}
  /* Below 800px: one compact row per discipline, illustration beside the text, arrow in its own column. */
  .discipline-card{display:grid;grid-template-columns:48px minmax(0,1fr) 20px;grid-template-areas:"art title arrow" "art text arrow";column-gap:16px;align-items:start;padding:var(--ds-panel-pad)}
@@ -136,21 +96,12 @@
  .home-section{margin-top:var(--ds-space-4)}
  .home-about{grid-template-columns:1fr;gap:var(--ds-block-gap)}
  .home-about__photo{width:96px;height:96px}
- .contact-form{grid-template-columns:1fr}
- .contact-confirmation{min-height:320px;padding:24px 16px}
-}
-@media (prefers-reduced-motion:reduce){
- .contact-confirmation:not([hidden]) .contact-confirmation__check,.contact-confirmation:not([hidden]) .contact-confirmation__check path{animation:none}
+ .home-invite__actions .btn{width:100%}
 }
 
 @media print{
   .home-workspace{gap:12px}
-  .discipline-card__arrow,.contact-form,.contact-confirmation,.home-hero .btn{display:none!important}
-  .home-library,.home-about,.home-contact,.experience{grid-template-columns:1fr}
+  .discipline-card__arrow,.home-hero .btn,.home-invite__actions .btn{display:none!important}
+  .home-split,.home-about,.experience{grid-template-columns:1fr}
   .experience li,.learning-books a,.discipline-card{break-inside:avoid}
-  .contact-email>svg{display:none}
 }
-
-/* The sending state keeps focus on the button; a failure message scrolls fully clear of the frame edge. */
-.btn[aria-disabled=true]{opacity:.65;cursor:progress}
-#form-status{scroll-margin-block:calc(var(--frame-inset,16px) + 16px)}

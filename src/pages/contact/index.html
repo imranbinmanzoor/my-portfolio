@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Contact Muhammad Imran</title>
+<link rel="canonical" href="https://imranbinmanzoor.com/contact/"/>
+<meta content="Contact Muhammad Imran about an AI-evaluation task, mathematics or Python lessons, or a correction to the free worked solutions." name="description"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+
+@@SOURCE(src/components/site-foundation.html)@@
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-site>
+<a class="skip-link" href="#main">Skip to content</a>
+@@SOURCE(src/components/site-header.html)@@
+<main id="main"><nav class="page-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page"><span>Contact</span></li></ol></nav>
+<div class="wrap">
+<section class="page-hero"><p class="eyebrow page-hero__eyebrow">Contact</p><h1 class="page-hero__title">Get in touch</h1><p class="lede page-hero__lede">An AI-evaluation task, a lesson, or a correction to one of the solutions. Tell me a little about it.</p></section>
+<section class="contact-layout" aria-label="Contact details and form">
+<div class="contact-copy"><p>Use the form, or write to me directly.</p><a class="contact-email" href="mailto:imranbinmanzoor1@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></svg><span>imranbinmanzoor1@gmail.com</span></a><div class="contact-links"><a href="https://github.com/imranbinmanzoor" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a><a href="https://linkedin.com/in/imranbinmanzoor-dev/" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></div></div>
+<div><form action="https://formspree.io/f/xzzangvz" class="contact-form" id="contact-form" method="POST">
+<div class="field">
+<label for="f-name">Name</label>
+<input autocomplete="name" id="f-name" name="name" required type="text" aria-describedby="f-name-error"/>
+<p class="field-error" id="f-name-error" hidden>Enter your name.</p>
+</div>
+<div class="field">
+<label for="f-email">Email</label>
+<input autocomplete="email" id="f-email" name="email" placeholder="you@example.com" required type="email" aria-describedby="f-email-error"/>
+<p class="field-error" id="f-email-error" hidden>Enter an email address like name@example.com.</p>
+</div>
+<div class="field">
+<label for="f-topic">What is it about?</label>
+<div class="select-field">
+<select id="f-topic" name="topic"><option value="AI evaluation or research">AI evaluation or research</option><option value="Tutoring inquiry">Tutoring</option><option value="Library feedback">A correction or feedback on the library</option><option value="Other">Something else</option></select>
+<svg class="select-field__arrow" aria-hidden="true" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="m1 1 5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+</div>
+<div class="field">
+<label for="f-message">Message</label>
+<textarea id="f-message" name="message" required aria-describedby="f-message-error"></textarea>
+<p class="field-error" id="f-message-error" hidden>Write a short message.</p>
+</div>
+<input name="_subject" type="hidden" value="New message from imranbinmanzoor.com"/>
+<div class="contact-form__footer">
+<div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+<button class="btn" id="submit-btn" type="submit"><span class="btn__inner"><span class="btn__text">Send message</span></span></button>
+<p class="form-note">Messages are delivered to my inbox through Formspree.</p>
+</div>
+</form>@@SOURCE(src/components/contact-confirmation.html)@@</div>
+</section>
+</div></main>
+@@SOURCE(src/components/site-footer.html)@@
+<script src="/assets/scripts.js"></script>
+</body>
+</html>

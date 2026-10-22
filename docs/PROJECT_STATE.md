@@ -26,6 +26,9 @@ direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
   discipline cards, canvas-titled Work / Worked solutions / About / Contact sections; work map,
   project browser and Tools grid removed; navigation Home, Work, Library, Tutoring, About,
   Contact; photo identity; new social preview image.
+- Navigation fix (owner request, after pausing the redesign concepts): the homepage became a brief of
+  every page and each menu item a real page; new /work/, /about/ and /contact/ pages. See
+  DESIGN_SYSTEM.md. Next step agreed with the owner: move toward the Adaptify design gradually.
 - Next: sample AI-evaluation tasks for /work/ (only from the owner's own material); library shell
   (maths rendered at build time; exercise pages open on questions), Class 9 router bugs
   (skip link and #generator), and migration of book.css and the legacy book CSS.

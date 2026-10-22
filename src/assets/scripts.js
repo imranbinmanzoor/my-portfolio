@@ -167,56 +167,22 @@
     if (desktopNavigation.matches && mobileMenu && mobileMenu.classList.contains('is-open')) closeMenu();
   });
 
-  /* ---------- 4. Active nav link (main page only) ---------- */
+  /* ---------- 4. Current page in the menu ----------
+     Every menu item is a page. Home is current only on the homepage; any other item is
+     current on its page and the pages below it (the books under Library). */
   function localAnchor(link) {
     var url = new URL(link.href, location.href);
     if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search || !url.hash) return null;
     try { return document.getElementById(decodeURIComponent(url.hash.slice(1))); }
     catch (e) { return null; }
   }
-  var navLinks = document.querySelectorAll('[data-nav-link]');
-  document.querySelectorAll('.nav__links a,.mobile-menu__links a').forEach(function(link){
-    const path=new URL(link.href,location.href).pathname;
-    if(path!=='/'&&location.pathname.startsWith(path))link.setAttribute('aria-current','page');
+  document.querySelectorAll('.nav__links a,.mobile-menu__links a').forEach(function (link) {
+    var path = new URL(link.href, location.href).pathname;
+    var current = path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+    if (current) link.setAttribute('aria-current', 'page');
   });
-  var observedIds = [];
-  navLinks.forEach(function (link) {
-    var target = localAnchor(link);
-    if (target && !observedIds.includes(target.id)) observedIds.push(target.id);
-  });
-  if (document.getElementById('home') && !observedIds.includes('home')) observedIds.unshift('home');
-  var observedSections = observedIds
-    .map(function (id) { return document.getElementById(id); })
-    .filter(Boolean)
-    .sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
-
-  if (observedSections.length) {
-    var activeFrame = 0;
-    function syncSectionLocation() {
-      activeFrame = 0;
-      // Mark the listed section that contains the reading line. Between listed sections
-      // (projects, learning, tools) nothing is marked rather than the last one passed.
-      var line = SiteScroll.top + Math.min(200, window.innerHeight * .25);
-      var current = null;
-      observedSections.forEach(function (section) {
-        var box = section.getBoundingClientRect();
-        if (!current && box.top <= line && box.bottom > line) current = section;
-      });
-      if (SiteScroll.y + SiteScroll.height >= SiteScroll.extent - 2) current = observedSections[observedSections.length - 1];
-      navLinks.forEach(function (link) {
-        var active = localAnchor(link) === current;
-        link.classList.toggle('is-active', active);
-        if (active) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    }
-    function scheduleSectionLocation() {
-      if (!activeFrame) activeFrame = requestAnimationFrame(syncSectionLocation);
-    }
-    syncSectionLocation();
-    SiteScroll.on(scheduleSectionLocation);
-    window.addEventListener('resize', scheduleSectionLocation);
-  }
+  // Older links such as /?topic=tutoring#contact now open the contact page with that topic.
+  if (location.pathname === '/' && /[?&]topic=/.test(location.search)) location.replace('/contact/' + location.search);
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

@@ -77,7 +77,10 @@ export function checkSite({check, htmlFiles, files}) {
     const home = read('dist/index.html');
     for (const id of ['home', 'professional-work', 'research', 'about', 'work', 'learning', 'tutoring', 'contact'])
       assert(new RegExp(`id="${id}"`).test(home), `missing #${id}`);
-    assert(home.includes('href="/projects/"'), 'homepage links the project archive');
+    // The homepage is a brief of every page; each brief links to its full page.
+    for (const page of ['/work/', '/solutions/', '/tutoring/', '/about/', '/contact/'])
+      assert(home.includes('href="' + page + '"'), 'homepage links ' + page);
+    assert(read('dist/about/index.html').includes('href="/projects/"'), 'About links the project archive');
     const projects = JSON.parse(read('content/projects.json'));
     const index = read('dist/projects/index.html');
     for (const p of projects) {
@@ -87,7 +90,7 @@ export function checkSite({check, htmlFiles, files}) {
   });
 
   check('Contact form: native validation without JavaScript, labelled fields, visible error text', () => {
-    const home = read('dist/index.html');
+    const home = read('dist/contact/index.html');
     const form = home.match(/<form\b[\s\S]*?<\/form>/i)[0];
     assert(!/novalidate/i.test(form.match(/<form\b[^>]*>/i)[0]), 'form must validate natively without script');
     for (const id of ['f-name', 'f-email', 'f-message']) {

@@ -117,16 +117,15 @@ Book introductions place a modest cover beside the text instead of at the far en
 
 ## Interaction and grouping
 
-Homepage (2026-10-22, direction A): greeting panel with one action → three discipline cards
-(AI evaluation green, Worked solutions study blue, Teaching purple; Adaptify-style washes) →
-Work → Worked solutions → About → Contact. Section titles sit on the canvas above their panel
-(`--ds-h-canvas`, 32px; 24px on phones), aligned with the panel edge, 48px below the previous
-panel (28px on phones). Older anchors (#research, #professional-work, #learning, #tutoring)
-remain on the matching elements. The work map, project browser and Tools grid were removed;
-the course projects live on /projects/, linked from About and the footer.
+Homepage and navigation (2026-10-22, owner request): the homepage is a brief of every page,
+Adaptify-style: greeting, three discipline cards, then Work, Worked solutions, Teaching and
+About briefs, each with a "See all" link to its full page, and a Contact invitation. Every
+menu item is a real page: Home, Work (/work/), Library (/solutions/), Tutoring, About
+(/about/), Contact (/contact/); the current one is marked, Library also on book pages.
+Older homepage anchors (#work, #about, #contact, #research, #learning, #tutoring) stay on
+the briefs, and /?topic=...#contact links forward to /contact/ with the topic chosen.
 
-The sidebar marks the listed homepage section that contains the reading line, and the current
-page elsewhere. Navigation: Home, Work, Library, Tutoring, About, Contact. The identity is the
+The sidebar marks the current page. Navigation: Home, Work, Library, Tutoring, About, Contact. The identity is the
 owner's photo (avatar-96.webp, 2026-10-22 owner instruction), not the monogram.
 
 Discipline colours mean the same thing everywhere: AI evaluation green, worked solutions and
