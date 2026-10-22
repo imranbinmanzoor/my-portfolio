@@ -4,6 +4,18 @@
 
 Published and verified 2026-10-22: https://imranbinmanzoor.com/
 
+- Source commit: 6a3f573 (homepage rebuilt in direction A). `npm run check` passed 79 of 79.
+- All 160 served files matched the checked build byte for byte; /src/, /docs/, /tests/ and
+  /scripts/ returned 404. Live browser at 1440/1280/768/375px: no horizontal overflow,
+  discipline cards one height, section titles on the panel edge, owner-confirmed facts present,
+  no Mindrift codenames, photo identity loaded.
+- Immediate rollback: 2fa7bae (token foundation, previous live release). Run "Build, check and
+  publish Pages" with that source_ref. Earlier: 8f9cbd9.
+- Limits: Actions run not inspected directly (no gh CLI); A4 print not re-inspected; the
+  portfolio case-study screenshots still show the September design.
+
+## Previous release (same day)
+
 - Source commit: 5a81008 (design-token foundation, direction A), build source digest
   prefix 377a3df2145f; `npm run check` passed 82 of 82 on that build.
 - All 161 served files matched the checked build byte for byte; /src/, /docs/, /tests/ and

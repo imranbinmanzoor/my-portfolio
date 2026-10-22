@@ -22,7 +22,7 @@ direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
   page titles 32px at the same edge, book unit pages included). See DESIGN_SYSTEM.md.
 - Published 2026-10-22 as `5a81008`; 161 of 161 live files verified. Rollback: `8f9cbd9`.
   Release record: DEPLOYMENT.md.
-- Homepage rebuilt in direction A (second release, see DEPLOYMENT.md): greeting, three
+- Homepage rebuilt in direction A (published as 6a3f573; 160 of 160 live files verified; rollback 2fa7bae): greeting, three
   discipline cards, canvas-titled Work / Worked solutions / About / Contact sections; work map,
   project browser and Tools grid removed; navigation Home, Work, Library, Tutoring, About,
   Contact; photo identity; new social preview image.
