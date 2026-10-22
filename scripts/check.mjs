@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import {checkSEO} from '../tests/seo.mjs';
 import {checkSite} from '../tests/site.mjs';
+import {checkTokens} from '../tests/tokens.mjs';
 import path from 'node:path';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
@@ -146,6 +147,7 @@ check('Math explorer: exact coin probabilities agree with exhaustive outcomes',(
 
 checkSEO({check,htmlFiles});
 checkSite({check,htmlFiles,files});
+checkTokens({check});
 
 fs.mkdirSync('test-results',{recursive:true});
 fs.writeFileSync('test-results/check.json',JSON.stringify({build:JSON.parse(read('dist/build-info.json')),checks,failed:results.filter(x=>x.status==='fail').length,results,limitations:['Content preservation is not mathematical verification.','Browser and A4 evidence are recorded separately.']},null,2));

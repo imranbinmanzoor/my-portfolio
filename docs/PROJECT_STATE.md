@@ -1,12 +1,32 @@
 # Project state
 
-Updated: 2026-09-23. Phase: full audit, redesign and verification candidate on local branch
-`claude/portfolio-audit-2026-09`, based on `8421208` (byte-identical to the live site on
-2026-09-23: 81 of 81 served files). **Not pushed or published**: the owner's brief for this
-work withheld publication authority, which overrides the standing approval below for this
-candidate. Evidence and the change report are delivered outside the repository.
+Updated: 2026-10-22. Phase: reset after four redesign passes; design-token foundation for
+direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
 
-## Audit candidate (2026-09-23)
+## Reset and direction (2026-10-22)
+
+- The owner judged the live site unsatisfactory ("trash") and asked for a deep diagnosis.
+  The private brief "Portfolio Reset Brief" (claude.ai artifact NvxkraDsb4VfAhxY9tMNF8)
+  records the research, measured inconsistencies (25 font sizes, 14 text colours, 11 radii,
+  22 button variants), a JavaScript audit and the proposed structure.
+- The owner chose **direction A**: the original sidebar-and-panels design, rebuilt on a
+  strict token system. Positioning, facts (Photomath dates, 2017 start, toolkit, Mindrift
+  codenames), photo, Arabic tutoring and library ambition are **still open owner decisions**;
+  do not rewrite homepage content or structure until they are answered.
+- Done in this milestone: canonical scale in tokens.css; every site stylesheet rewritten onto
+  it; `tests/tokens.mjs` in `npm run check` rejects off-scale type, spacing, radius, colour
+  and breakpoints (book CSS ratcheted by `tests/token-baseline.json`); hero work map and
+  evidence panels aligned structurally; one 44px pill button; one page header (all inner
+  page titles 32px at the same edge, book unit pages included). See DESIGN_SYSTEM.md.
+- Next: homepage restructure in direction A once the owner answers; then library shell
+  (maths rendered at build time; exercise pages open on questions), Class 9 router bugs
+  (skip link and #generator), and migration of book.css and the legacy book CSS.
+
+## Audit candidate (2026-09-23) — published
+
+The owner pushed this candidate to `main` themself on 2026-09-23 (`a211ff6`) and it went
+live; a Netlify-domain redirect followed on 2026-10-03 (`8f9cbd9`). The note that it was
+"not pushed or published" was out of date.
 
 - Desktop now scrolls the document (the fixed `<body>` scroller broke keyboard scrolling and
   back/forward restoration, and WebKit did not paint the sidebar); a mask keeps the inset frame.

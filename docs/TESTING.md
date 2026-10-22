@@ -26,6 +26,12 @@ uses US spelling; stylesheets use range media queries; homepage anchors and proj
 the contact form validates natively without script and each field is described by its error.
 Each of these checks fails on the pre-audit build (8421208) for the defect it names.
 
+`check` also runs `tests/tokens.mjs`: every site stylesheet (chrome, site, home, project-case,
+work-specimen, math-lab) may use only the token scale in `src/assets/tokens.css` for font
+sizes, spacing, radii, colours and breakpoints. Book stylesheets inherited from the original
+books may not exceed their recorded counts in `tests/token-baseline.json`; lower a count when
+a book stylesheet is migrated. The rules and exemptions are documented in DESIGN_SYSTEM.md.
+
 ## Browser regression suite
 
 `tests/browser.mjs` drives Chromium through real interactions on a served build and checks

@@ -2,6 +2,34 @@
 
 Current implementation: the owner's original portfolio foundation, rebuilt in the maintained static source system. This is a checked visual pilot for live review, not final aesthetic acceptance. Reference evidence: ORIGINAL_DESIGN_REVIEW.md. Current checks: FOUNDATION_QA.md.
 
+## Token system (2026-10-22, direction A)
+
+The owner chose direction A: the original sidebar-and-panels design, rebuilt on a strict
+token system. The owner is pixel-perfect; every value below is enforced by
+`tests/tokens.mjs` in `npm run check`, which fails on any site stylesheet value outside it.
+Where an older paragraph further down quotes a different number, this section wins.
+
+| Group | Values | Rule |
+|---|---|---|
+| Type | 12 · 14 · 16 · 20 · 24 · 32 · 40px (`--fs-*`) | Nothing below 12px. Body 16, UI 14, meta 12. Page titles 32 everywhere; the homepage title 40 (32 below 1000px). Section headings 24 (20 on phones), card titles 16 or 20. |
+| Spacing | 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64px | 1px and 2px only for hairline offsets. |
+| Rhythm | label → heading 8; heading → text 12; heading → component 24 | `--ds-label-gap`, `--ds-heading-gap`, `--ds-block-gap`. |
+| Frame | inset = panel gap: 16px (12px below 600px) | `--frame-inset` and `--ds-gap` are one value. Panel padding 32 / 24 (below 1000px) / 16 (below 600px). Book gutters use the same token. |
+| Radius | panel 16 · card 12 · control 8 · pill | Nested controls use calc(outer − inset) so corners stay concentric. |
+| Controls | 44px; compact toolbars 36px | One button: the dark pill (outlined for secondary), 14px/500, 24px side padding, also for book entry points and form fields. |
+| Breakpoints | 360 · 600 · 800 · 1000 · 1200 · 1760px | Range syntax only. |
+| Colour | tokens only | Literal colours only in print styles. Drawn book covers have their own `--ds-cover-*` tokens. |
+
+Exemptions: a declaration ending in `/*art*/` is a proportion inside a drawn book cover;
+lengths inside calc()/min()/max() are derived geometry. The phone header and menu share the
+panels' padding, so the monogram sits on the same left edge as panel text (28.7px at 375px).
+The homepage evidence panels share a subgrid, so headings and content start on one line;
+the hero work map stretches to the copy's height.
+
+Book stylesheets inherited from the original books (book.css, Class 9 and Class 10 CSS) are
+not migrated yet. They may not add off-scale values beyond `tests/token-baseline.json`;
+lower the baseline as they are migrated.
+
 Project detail pages use the shared case renderer and authored `content/projects.json`.
 Lead with context and inspectable work: genuine device captures, stable keyboard tabs,
 an enlarged-image dialog, then brief decisions and learning. Preserve learning-project
@@ -14,7 +42,7 @@ stay visible; mobile trails flow with the page to avoid competing with the mobil
 Use sentence case in the actual interface text, including labels and previous/next links.
 Preserve intentional brand marks, code, URLs and mathematical notation.
 
-The shared footer uses 20px internal vertical padding, a 16px preceding gap, compact
+The shared footer uses 24px internal vertical padding, a preceding gap equal to the panel gap, compact
 desktop identity/navigation columns and a two-column mobile link grid. Its gutter follows
 the surrounding site or book frame. Every footer is its own rounded surface, separated
 from the content by the page background. The scrolling workspace must not be painted
@@ -45,9 +73,9 @@ Do not add page-specific footer spacing patches.
 | Research / development / teaching | #28775c / #27697e / #8050a2 |
 | Mathematical study / hint | #456da4 / #47668b |
 
-Dark mode uses explicit semantic counterparts. Prefer shared tokens to literal screen colours. Panels use 12px radii and a very light shadow; primary actions are dark pills. Inputs and compact controls use 6–8px radii. Accent colour identifies a discipline, not every action.
+Dark mode uses explicit semantic counterparts. Use shared tokens, never literal screen colours. Panels use 16px radii and a very light shadow; primary actions are dark pills. Inputs and compact controls use 8px radii. Accent colour identifies a discipline, not every action.
 
-Use compact, purposeful spacing: enough separation to distinguish groups without empty columns, tall introductions, or gratuitous blank panels. Typical panel gaps are 20px desktop and 12–16px mobile; content padding is normally 24–28px desktop, 18–20px mobile. Mathematical derivations retain the space their structure needs. Do not compress reasoning to achieve visual density.
+Use compact, purposeful spacing: enough separation to distinguish groups without empty columns, tall introductions, or gratuitous blank panels. Panel gaps and padding follow the token table above. Mathematical derivations retain the space their structure needs. Do not compress reasoning to achieve visual density.
 
 Inter owns prose and controls, including genuine italic faces. Synthetic slant is disabled. KaTeX owns Class 10 mathematics and the library explorer; Class 9 mathematical SVGs remain preserved. Named operators are upright; mathematical variables use math italics. Standard operators replace bare Re/Im in rendered Class 10 expressions without changing authored data or paper identities.
 
@@ -56,10 +84,8 @@ latin and latin-ext, OFL) with a metric-matched fallback, and KaTeX 0.16.47 (MIT
 release as the build-time renderer. No page loads scripts, styles or fonts from another host;
 a blocked CDN previously left Class 10 showing raw LaTeX. `npm run check` enforces this.
 
-Type and rhythm tokens live in tokens.css: `--ds-h1` (40/36/31px), `--ds-h1-page`, `--ds-h2`
-(26/24/22px), `--ds-h3`, body 15px, lead 16px, UI 13px, meta 11–12px, `--ds-panel-pad`
-(28/20px) and `--ds-gap` (20/16px). Element defaults in site.css use zero-specificity
-`:where()` so component classes win without `!important`.
+Type and rhythm tokens live in tokens.css (see the token table above). Element defaults in
+site.css use zero-specificity `:where()` so component classes win without `!important`.
 
 Wide Class 10 expressions scroll inside their own box; an edge fade marks the side that still
 hides mathematics (as Class 9 already did) and disappears at each end. On phones and tablets,
@@ -81,7 +107,7 @@ computed from it, and `SiteScroll.top` reads the same property, so CSS and scrip
 Breakpoints use range syntax (`width < 800px`, `width >= 800px`): paired `max-width: 799px`
 and `min-width: 800px` leave fractional widths (reachable with browser zoom) unmatched.
 
-Shared content maximum is 1280px; book gutters are 24px, reducing to 18px on phones. Exercise navigation, section headings and reading wrappers share their appropriate content edge. At 1000px, a content-sized unit rail sits beside the reading area with a 16px gap. Its longest label determines the rail width, while each button fits its own label. Smaller screens use a horizontal exercise strip.
+Shared content maximum is 1280px; book gutters equal the panel padding token (32/24/16px). Exercise navigation, section headings and reading wrappers share their appropriate content edge. At 1000px, a content-sized unit rail sits beside the reading area with a 16px gap. Its longest label determines the rail width, while each button fits its own label. Smaller screens use a horizontal exercise strip.
 
 Exercise controls use 12px inline padding; local Concepts / Examples / Exercise links retain 6px. Apply these values at every viewport, including active highlights. Keep labels at 13px and control heights at 36px and 32px respectively. Use a 4px gap between controls, 2px vertical strip padding and 4px local-navigation padding. Breakpoints change the layout, not the button density; do not stretch active boxes across the desktop rail. The owner requested compact heights, then extra horizontal breathing room for exercise navigation only.
 
@@ -138,7 +164,7 @@ The explorer offers three independent views: odd-number square layers, a parabol
 
 Print uses normal document flow, independent of the fixed desktop workspace. Worked keys use block fragmentation instead of the answer stack's screen grid; short explanatory stages stay with their derivations. Preserve A4 section starts, measured MCQ options, split timing, lowercase key letters and existing paper serialization. Mathematical correctness remains a separate review obligation.
 
-Shared interface text is 13px; metadata is 11–12px, portfolio body 14–15px, and book reading prose 16px. Catalogue, project, tutoring and book overview intros share the same measured typography: 11px/1.5 eyebrow, 34px/1.15 title, and 15px/1.8 lead; phones use 30px titles and 14px leads. Eyebrow-to-title spacing is 12px and title-to-lead spacing is 20px. Page composition may differ: a book cover sits beside its text, while the catalogue has one text column. Unit/home headings are 32px on desktop and section headings normally 24px. KaTeX keeps its mathematical metrics. Library and project catalogue introductions share a divider and bottom spacing.
+Shared interface text is 14px; metadata is 12px, portfolio body 16px, and book reading prose 16px. Catalogue, project, tutoring and portfolio page intros share one page header: breadcrumb, 24px gap, 12px eyebrow, 8px gap, 32px/1.15 title, 12px gap, 16px lead, all on the same left edge. Book overviews still use their own intro sizes until book.css is migrated. Page composition may differ: a book cover sits beside its text, while the catalogue has one text column. Unit/home headings are 32px on desktop and section headings normally 24px. KaTeX keeps its mathematical metrics. Library and project catalogue introductions share a divider and bottom spacing.
 
 Functional icons use a common line family. Generic action labels stay stationary; primary pills are never underlined. Text links retain an underline at rest and on hover, with consistent colour and focus treatment. Decorative arrows and the earlier arriving-arrow motion are removed with the owner's permission. Directional icons remain where direction conveys meaning, such as Back, Next and breadcrumb separators. Do not reintroduce label shifts or duplicate arrows.
 
