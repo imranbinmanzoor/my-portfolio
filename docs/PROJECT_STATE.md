@@ -18,6 +18,8 @@ direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
   and breakpoints (book CSS ratcheted by `tests/token-baseline.json`); hero work map and
   evidence panels aligned structurally; one 44px pill button; one page header (all inner
   page titles 32px at the same edge, book unit pages included). See DESIGN_SYSTEM.md.
+- Published 2026-10-22 as `5a81008`; 161 of 161 live files verified. Rollback: `8f9cbd9`.
+  Release record: DEPLOYMENT.md.
 - Next: homepage restructure in direction A once the owner answers; then library shell
   (maths rendered at build time; exercise pages open on questions), Class 9 router bugs
   (skip link and #generator), and migration of book.css and the legacy book CSS.

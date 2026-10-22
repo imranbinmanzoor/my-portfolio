@@ -1,9 +1,21 @@
 # Deployment and rollback
 
-The 2026-09-20 integrated release is in final verification. See PROJECT_STATE.md for
-current identity and SEO_UX_REVIEW.md for scope/limits. Immediate rollback is the
-published source c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed (Pages run 35483735643).
-Earlier fully byte-verified fallback: 6128616b94f7d1366d818e1fe6b74d8c2d144407.
+## Current production release
+
+Published and verified 2026-10-22: https://imranbinmanzoor.com/
+
+- Source commit: 5a81008 (design-token foundation, direction A), build source digest
+  prefix 377a3df2145f; `npm run check` passed 82 of 82 on that build.
+- All 161 served files matched the checked build byte for byte; /src/, /docs/, /tests/ and
+  /scripts/ returned 404. Live browser measurements matched local: hero map and copy bottoms
+  0px apart, evidence panels aligned, every inner page title 32px at x=312.7 (1440px).
+- Immediate rollback: 8f9cbd9 (Netlify redirect on the 2026-09-23 audit release). Run
+  "Build, check and publish Pages" with source_ref 8f9cbd9fc9a5d0d42ccac3cf220602f689183012.
+- Limits: the GitHub Actions run itself was not inspected (no gh CLI on this machine); the
+  live files were verified directly instead. A4 print output was not re-inspected.
+
+Earlier rollback points: c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed (Pages run 35483735643)
+and the fully byte-verified 6128616b94f7d1366d818e1fe6b74d8c2d144407.
 
 ## Authority and verified configuration
 
