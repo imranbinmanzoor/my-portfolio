@@ -4,6 +4,12 @@
 
 Published and verified 2026-10-22: https://imranbinmanzoor.com/
 
+- Source commit: 4fac881 (homepage briefs; every menu item a real page; new /work/, /about/,
+  /contact/). `npm run check` passed 82 of 82; 30 HTML routes. All 163 served files matched
+  the checked build; source paths returned 404. Immediate rollback: baa3c33.
+
+## Earlier the same day
+
 - Source commit: 6a3f573 (homepage rebuilt in direction A). `npm run check` passed 79 of 79.
 - All 160 served files matched the checked build byte for byte; /src/, /docs/, /tests/ and
   /scripts/ returned 404. Live browser at 1440/1280/768/375px: no horizontal overflow,
