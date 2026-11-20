@@ -71,6 +71,32 @@ export function checkSEO({check,htmlFiles}) {
   const seen=new Set(),queue=['/'];while(queue.length){const u=queue.shift();if(seen.has(u))continue;seen.add(u);queue.push(...(edges.get(u)||[]));}
   for(const [url] of canonical)assert(seen.has(url),`orphan: ${url}`);
  });
+ check('SEO: titles fit search results; descriptions are 50 to 160 characters',()=>{
+  for(const [url,p] of canonical){
+   assert(p.title.length<=70,`${url}: title is ${p.title.length} characters`);
+   const d=p.descriptions[0];assert(d.length>=50&&d.length<=160,`${url}: description is ${d.length} characters`);
+  }
+ });
+ check('SEO: homepage is a ProfilePage for one Person, and library pages credit that Person',()=>{
+  const graph=pages.get('/').ld.flatMap(x=>x['@graph']||[x]);
+  const person=graph.find(x=>x['@type']==='Person'),profile=graph.find(x=>x['@type']==='ProfilePage'),site=graph.find(x=>x['@type']==='WebSite');
+  assert(person&&profile&&site,'Person, ProfilePage and WebSite');
+  assert.equal(profile.mainEntity['@id'],person['@id']);assert.equal(person['@id'],SITE+'/#person');
+  assert(person.name&&person.jobTitle&&person.image&&person.sameAs.length>=2,'Person details');
+  for(const [url,p] of canonical.filter(([u])=>u.startsWith('/solutions/class-10/complex-numbers/'))){
+   const lr=p.ld.find(x=>x['@type']==='LearningResource');assert.equal(lr.author['@id'],person['@id'],url);
+  }
+ });
+ check('SEO: sitemap dates every page; indexable pages allow large previews; llms.txt links resolve',()=>{
+  const entries=[...read('dist/sitemap.xml').matchAll(/<url><loc>([^<]+)<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod><\/url>/g)];
+  assert.equal(entries.length,canonical.length,'every sitemap entry has a lastmod');
+  for(const [url,p] of canonical){assert(/max-image-preview:large/.test(p.html),`${url}: robots preview`);assert(/rel="apple-touch-icon"/.test(p.html),`${url}: touch icon`);}
+  assert(fs.existsSync('dist/apple-touch-icon.png'));
+  for(const m of read('dist/llms.txt').matchAll(/\]\((https:\/\/imranbinmanzoor\.com[^)\s]*)\)/g)){
+   const u=new URL(m[1]);const local='dist'+u.pathname+(u.pathname.endsWith('/')?'index.html':'');assert(fs.existsSync(local),`llms.txt: ${m[1]}`);
+   if(u.hash)assert(pages.get(u.pathname).ids.has(u.hash.slice(1)),`llms.txt: ${m[1]}`);
+  }
+ });
  check('SEO: JSON-LD parses throughout the site; reading breadcrumbs match crawlable pages',()=>{
   for(const [url,p] of pages)for(const ld of p.ld){assert(ld&&typeof ld==='object');assert(!JSON.stringify(ld).includes('MathSolver'));}
   for(const [url,p] of canonical.filter(([u])=>u.startsWith('/solutions/class-10/complex-numbers/'))){

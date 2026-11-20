@@ -78,8 +78,8 @@ for(const cls of [9,10]) {
   if(cls===9){
     // The Class 9 shell is a locked, byte-preserved source (its mathematics exists only as
     // rendered SVG). Page-level metadata and landmarks are applied here, never in the shell.
-    html=replaceOnce(html,'<title>Class 9 Mathematics — worked solutions</title>','<title>Class 9 Mathematics Solutions (Punjab Textbook Board) — Muhammad Imran</title>');
-    html=replaceOnce(html,'<meta name="description" content="Punjab Textbook Board. Worked solutions for 1 of 13 units, exercise by exercise.">','<meta name="description" content="Free worked solutions for Punjab Textbook Board Class 9 Mathematics by Muhammad Imran. Unit 1, Real Numbers: concepts, examples, exercises, a unit test and practice papers.">\n<meta name="author" content="Muhammad Imran">\n<meta content="#f0f1f5" media="(prefers-color-scheme: light)" name="theme-color">\n<meta content="#17191e" media="(prefers-color-scheme: dark)" name="theme-color">');
+    html=replaceOnce(html,'<title>Class 9 Mathematics — worked solutions</title>','<title>Class 9 Math Unit 1 Real Numbers Solutions (Punjab Board)</title>');
+    html=replaceOnce(html,'<meta name="description" content="Punjab Textbook Board. Worked solutions for 1 of 13 units, exercise by exercise.">','<meta name="description" content="Free step-by-step solutions for Class 9 Math Unit 1, Real Numbers (Punjab Textbook Board): Exercises 1.1 to 1.3, review exercise, unit test and practice papers.">\n<meta name="author" content="Muhammad Imran">\n<meta content="#f0f1f5" media="(prefers-color-scheme: light)" name="theme-color">\n<meta content="#17191e" media="(prefers-color-scheme: dark)" name="theme-color">');
     html=html.replace(/(<body\b[^>]*>)/,'$1\n<a class="skip-link" href="#book-content">Skip to content</a>');
     html=replaceOnce(html,'<main class="book">','<main class="book" id="book-content" tabindex="-1">');
     // Interface copy only: the search scope and the Unit Test note name what readers can see.
@@ -105,7 +105,10 @@ buildBookPages({read,write,bookHTML:read(path.join(out,'solutions/class-10/index
 const routes=walk(out).filter(p=>p.endsWith('.html')).map(p=>p.slice(out.length+1).replaceAll('\\','/'));
 for(const route of routes) write(route,socialMetadata(read(path.join(out,route))));
 const canonicalRoutes=routes.filter(p=>!/(?:http-equiv="refresh"|name="robots" content="noindex)/i.test(read(path.join(out,p)))).map(p=>'/'+p.replace(/index.html$/,''));
-write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+canonicalRoutes.map(p=>`  <url><loc>https://imranbinmanzoor.com${p}</loc></url>`).join('\n')+'\n</urlset>\n');
+const lastmod=JSON.parse(read('content/lastmod.json')).routes;
+const modified=p=>lastmod[p]||Object.entries(lastmod).filter(([k])=>k.endsWith('*')&&p.startsWith(k.slice(0,-1))).sort((x,y)=>y[0].length-x[0].length)[0]?.[1];
+for(const p of canonicalRoutes)if(!/^\d{4}-\d{2}-\d{2}$/.test(modified(p)||''))throw new Error('content/lastmod.json has no date for '+p);
+write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+canonicalRoutes.map(p=>`  <url><loc>https://imranbinmanzoor.com${p}</loc><lastmod>${modified(p)}</lastmod></url>`).join('\n')+'\n</urlset>\n');
 const digest=createHash('sha256');
 for(const file of [...walk('src'),...walk('content'),...walk('public'),...walk('scripts')].sort()){digest.update(file);digest.update(fs.readFileSync(file));}
 const info={sourceDigest:digest.digest('hex'),baseline:'7a2d89409c81312b0439727e18dd93724357968e',routes:routes.map(p=>'/'+p.replace(/index.html$/,''))};

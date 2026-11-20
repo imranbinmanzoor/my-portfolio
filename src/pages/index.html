@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Muhammad Imran, Mathematician and AI Benchmark Engineer</title>
-<meta name="description" content="Muhammad Imran is a mathematician and AI benchmark engineer. He builds research-level tasks for frontier AI in Lean 4, scientific computing and terminal-agent formats, each with a reference solution, a Docker environment and a verifier.">
+<meta name="description" content="Muhammad Imran, mathematician and AI benchmark engineer. Research-level tasks for frontier AI in Lean 4, scientific computing and terminal-agent formats.">
 <meta name="author" content="Muhammad Imran">
 <meta property="og:type" content="profile">
 <meta content="#f1f2f5" media="(prefers-color-scheme: light)" name="theme-color">
 <meta content="#0b0d11" media="(prefers-color-scheme: dark)" name="theme-color">
 <link rel="canonical" href="https://imranbinmanzoor.com/">
 <link rel="icon" href="/favicon.svg">
-<script src="/assets/theme.js"></script>
+<script>@@SOURCE(src/assets/theme.js)@@document.documentElement.classList.add('js');</script>
 <link rel="preload" href="/vendor/mona-sans-5.3.0/mona-sans-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/portfolio.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Muhammad Imran","alternateName":"محمد عمران","jobTitle":"Mathematician and AI Benchmark Engineer","url":"https://imranbinmanzoor.com/","email":"mailto:imranbinmanzoor1@gmail.com","image":"https://imranbinmanzoor.com/IMAGES/avatar-320.webp","address":{"@type":"PostalAddress","addressLocality":"Layyah","addressRegion":"Punjab","addressCountry":"PK"},"alumniOf":{"@type":"CollegeOrUniversity","name":"University of Education, Lahore"},"knowsAbout":["Lean 4","Mathlib","Formal verification","Scientific computing","Python","Docker","LLM evaluation","Benchmark design","Terminal-Bench","Agent evaluation","Mathematics"],"sameAs":["https://linkedin.com/in/imranbinmanzoor-dev","https://github.com/imranbinmanzoor"]}</script>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>@@SOURCE(src/assets/portfolio.css)@@</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://imranbinmanzoor.com/#website", "url": "https://imranbinmanzoor.com/", "name": "Muhammad Imran", "alternateName": "imranbinmanzoor", "inLanguage": "en", "publisher": {"@id": "https://imranbinmanzoor.com/#person"}}, {"@type": "ProfilePage", "@id": "https://imranbinmanzoor.com/#profile", "url": "https://imranbinmanzoor.com/", "name": "Muhammad Imran, Mathematician and AI Benchmark Engineer", "isPartOf": {"@id": "https://imranbinmanzoor.com/#website"}, "inLanguage": "en", "dateModified": "2026-11-20", "mainEntity": {"@id": "https://imranbinmanzoor.com/#person"}}, {"@type": "Person", "@id": "https://imranbinmanzoor.com/#person", "name": "Muhammad Imran", "alternateName": ["محمد عمران", "imranbinmanzoor"], "jobTitle": "Mathematician and AI Benchmark Engineer", "description": "Mathematician and AI benchmark engineer who builds research-level tasks for frontier AI models in Lean 4, scientific computing and terminal-agent formats.", "url": "https://imranbinmanzoor.com/", "image": "https://imranbinmanzoor.com/IMAGES/avatar-320.webp", "email": "mailto:imranbinmanzoor1@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Layyah", "addressRegion": "Punjab", "addressCountry": "PK"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Education, Lahore"}, "hasCredential": {"@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": "BS Mathematics"}, "knowsLanguage": ["ur", "en"], "knowsAbout": ["Lean 4", "Mathlib", "Formal verification", "Proof engineering", "Scientific computing", "Python", "Docker", "LLM evaluation", "AI benchmark design", "Terminal-Bench", "Agent evaluation", "Red teaming", "Combinatorics", "Graph theory", "Number theory", "Front-end development"], "sameAs": ["https://www.linkedin.com/in/imranbinmanzoor-dev", "https://github.com/imranbinmanzoor"]}]}</script>
 </head>
 <body>
 <a class="skip skip-link" href="#main">Skip to content</a>
@@ -59,11 +60,36 @@
       <div class="con-top">
         <p>Release checks I run before submitting a task</p>
         <div class="con-tabs" role="tablist" aria-label="Task type">
-          <button type="button" role="tab" id="t-lean" aria-selected="true" aria-controls="con">Lean 4</button>
-          <button type="button" role="tab" id="t-py" aria-selected="false" aria-controls="con" tabindex="-1">Python</button>
+          <button type="button" role="tab" id="t-lean" aria-selected="true" aria-controls="con-lean">Lean 4</button>
+          <button type="button" role="tab" id="t-py" aria-selected="false" aria-controls="con-py" tabindex="-1">Python</button>
         </div>
       </div>
-      <div class="con-body" id="con" role="tabpanel" aria-labelledby="t-lean" aria-live="polite"></div>
+        <div class="con-body" id="con-lean" role="tabpanel" aria-labelledby="t-lean">
+          <span class="cmd">$ python tools/preflight.py <span>lean-task/</span></span>
+          <span class="ln" style="--d:180ms"><span class="ok" aria-hidden="true">✓</span><span class="key">files</span><span class="val">task.toml, instruction.md, environment, solution, tests</span></span>
+          <span class="ln" style="--d:330ms"><span class="ok" aria-hidden="true">✓</span><span class="key">instruction</span><span class="val">every output path named, no grading hints</span></span>
+          <span class="ln" style="--d:480ms"><span class="ok" aria-hidden="true">✓</span><span class="key">build</span><span class="val">Lean toolchain and Mathlib pinned to exact commits</span></span>
+          <span class="ln" style="--d:630ms"><span class="ok" aria-hidden="true">✓</span><span class="key">oracle</span><span class="val">reference proof checks: reward 1</span></span>
+          <span class="ln" style="--d:780ms"><span class="ok" aria-hidden="true">✓</span><span class="key">no-op</span><span class="val">empty submission: reward 0</span></span>
+          <span class="ln" style="--d:930ms"><span class="ok" aria-hidden="true">✓</span><span class="key">statement</span><span class="val">compared with a sealed copy</span></span>
+          <span class="ln" style="--d:1080ms"><span class="ok" aria-hidden="true">✓</span><span class="key">axioms</span><span class="val">[propext, Classical.choice, Quot.sound]</span></span>
+          <span class="ln" style="--d:1230ms"><span class="ok" aria-hidden="true">✓</span><span class="key">forgery</span><span class="val">sorry or a new axiom: reward 0</span></span>
+          <span class="ln" style="--d:1380ms"><span class="ok" aria-hidden="true">✓</span><span class="key">isolation</span><span class="val">agent processes stopped before grading</span></span>
+          <span class="done" style="--d:1650ms">all checks passed, ready to submit</span>
+        </div>
+        <div class="con-body" id="con-py" role="tabpanel" aria-labelledby="t-py" hidden>
+          <span class="cmd">$ python tools/preflight.py <span>compute-task/</span></span>
+          <span class="ln" style="--d:180ms"><span class="ok" aria-hidden="true">✓</span><span class="key">files</span><span class="val">task.toml, instruction.md, environment, solution, tests</span></span>
+          <span class="ln" style="--d:330ms"><span class="ok" aria-hidden="true">✓</span><span class="key">instruction</span><span class="val">units, precision and output format stated</span></span>
+          <span class="ln" style="--d:480ms"><span class="ok" aria-hidden="true">✓</span><span class="key">build</span><span class="val">base image and packages pinned</span></span>
+          <span class="ln" style="--d:630ms"><span class="ok" aria-hidden="true">✓</span><span class="key">oracle</span><span class="val">reference solution: reward 1</span></span>
+          <span class="ln" style="--d:780ms"><span class="ok" aria-hidden="true">✓</span><span class="key">no-op</span><span class="val">doing nothing: reward 0</span></span>
+          <span class="ln" style="--d:930ms"><span class="ok" aria-hidden="true">✓</span><span class="key">grading</span><span class="val">exact value, or a stated tolerance</span></span>
+          <span class="ln" style="--d:1080ms"><span class="ok" aria-hidden="true">✓</span><span class="key">determinism</span><span class="val">same result on every run</span></span>
+          <span class="ln" style="--d:1230ms"><span class="ok" aria-hidden="true">✓</span><span class="key">workers</span><span class="val">sized from the container CPU limit</span></span>
+          <span class="ln" style="--d:1380ms"><span class="ok" aria-hidden="true">✓</span><span class="key">isolation</span><span class="val">tests copied in only at grading time</span></span>
+          <span class="done" style="--d:1650ms">all checks passed, ready to submit</span>
+        </div>
     </figure>
   </div>
 
@@ -148,10 +174,90 @@
   <div class="panel anat">
     <div class="tree">
       <p>count-tilings/</p>
-      <div role="tablist" aria-label="Task files" aria-orientation="vertical" id="files"></div>
+      <div role="tablist" aria-label="Task files" aria-orientation="vertical" id="files">
+        <button type="button" role="tab" id="file-0" aria-controls="view-0" aria-selected="true" tabindex="0" aria-label="instruction.md"><span>instruction.md</span></button>
+        <button type="button" role="tab" id="file-1" aria-controls="view-1" aria-selected="false" tabindex="-1" aria-label="task.toml"><span>task.toml</span></button>
+        <div class="dir" aria-hidden="true">environment/</div>
+        <button type="button" role="tab" id="file-2" aria-controls="view-2" aria-selected="false" tabindex="-1" aria-label="environment/Dockerfile" class="in"><span>Dockerfile</span></button>
+        <div class="dir" aria-hidden="true">solution/</div>
+        <button type="button" role="tab" id="file-3" aria-controls="view-3" aria-selected="false" tabindex="-1" aria-label="solution/solve.sh" class="in"><span>solve.sh</span></button>
+        <div class="dir" aria-hidden="true">tests/</div>
+        <button type="button" role="tab" id="file-4" aria-controls="view-4" aria-selected="false" tabindex="-1" aria-label="tests/test.sh" class="in"><span>test.sh</span></button>
+        <button type="button" role="tab" id="file-5" aria-controls="view-5" aria-selected="false" tabindex="-1" aria-label="tests/test_outputs.py" class="in"><span>test_outputs.py</span></button>
+        <div class="dir" aria-hidden="true">Lean tasks add</div>
+        <button type="button" role="tab" id="file-6" aria-controls="view-6" aria-selected="false" tabindex="-1" aria-label="axiom audit" class="in"><span>axiom audit</span></button>
+      </div>
       <p class="note">Every task also passes my preflight script and a scan for blocked terms before it’s submitted.</p>
     </div>
-    <div class="view" id="view" role="tabpanel" tabindex="0"></div>
+    <div class="views">
+      <div class="view" id="view-0" role="tabpanel" aria-labelledby="file-0" tabindex="0">
+        <div class="code"><div class="code-h">instruction.md</div><pre><code>Count the domino tilings of the 12 × 12 square.
+Each domino covers two edge-adjacent cells, and
+the dominoes cover every cell exactly once.
+
+Write the exact count to <span class="s">`/app/answer.txt`</span> as a
+base-10 integer, with no other text.</code></pre></div>
+        <div class="checks"><h3>The instruction</h3><p>What the agent reads. It has to be complete, exact and written by hand.</p><ul><li>Every output path appears in backticks</li><li>States the exact format, so nothing is left to guess</li><li>Says nothing about how it will be graded</li><li>No headings, no first-person preamble, no repeated requirements</li></ul></div>
+      </div>
+      <div class="view later" id="view-1" role="tabpanel" aria-labelledby="file-1" tabindex="0">
+        <div class="code"><div class="code-h">task.toml</div><pre><code><span class="k">[metadata]</span>
+difficulty = <span class="s">"hard"</span>
+category = <span class="s">"scientific-computing"</span>
+
+<span class="k">[agent]</span>
+timeout_sec = <span class="n">3600.0</span>
+
+<span class="k">[verifier]</span>
+timeout_sec = <span class="n">600.0</span>
+
+<span class="k">[environment]</span>
+cpus = <span class="n">2</span>
+memory_mb = <span class="n">4096</span></code></pre></div>
+        <div class="checks"><h3>Task configuration</h3><p>Metadata, resources and time limits that match the real work.</p><ul><li>The field matches the core work: numerical work is scientific computing, not formal mathematics</li><li>Time limits sized from the reference run</li><li>The task name matches the platform record exactly</li></ul></div>
+      </div>
+      <div class="view later" id="view-2" role="tabpanel" aria-labelledby="file-2" tabindex="0">
+        <div class="code"><div class="code-h">environment/Dockerfile</div><pre><code><span class="k">FROM</span> python:3.12-slim@sha256:<span class="c">&lt;pinned digest&gt;</span>
+<span class="k">RUN</span> pip install --no-cache-dir \
+      numpy==<span class="n">2.1.3</span> sympy==<span class="n">1.13.3</span>
+<span class="k">RUN</span> mkdir -p /app
+<span class="k">WORKDIR</span> /app</code></pre></div>
+        <div class="checks"><h3>The environment</h3><p>The world the agent works in. It must build the same way every time.</p><ul><li>Base image pinned by digest, packages by exact version</li><li>Every download checked against a checksum</li><li>No solution or tests inside the image</li></ul></div>
+      </div>
+      <div class="view later" id="view-3" role="tabpanel" aria-labelledby="file-3" tabindex="0">
+        <div class="code"><div class="code-h">solution/solve.sh</div><pre><code><span class="c">#!/bin/bash</span>
+set -euo pipefail
+python3 <span class="s">"$(dirname "$0")/count.py"</span> &gt; /app/answer.txt</code></pre></div>
+        <div class="checks"><h3>The reference solution</h3><p>Proof that the task can be solved, run by the platform as an oracle.</p><ul><li>Scores 1 on every attempt</li><li>Exact integer arithmetic where the answer is exact</li><li>Worker pools sized from the container’s CPU limit, never os.cpu_count()</li></ul></div>
+      </div>
+      <div class="view later" id="view-4" role="tabpanel" aria-labelledby="file-4" tabindex="0">
+        <div class="code"><div class="code-h">tests/test.sh</div><pre><code><span class="c">#!/bin/bash</span>
+mkdir -p /logs/verifier
+echo <span class="n">0</span> &gt; /logs/verifier/reward.txt
+<span class="k">if</span> pytest --ctrf /logs/verifier/ctrf.json \
+     /tests/test_outputs.py -rA; <span class="k">then</span>
+  echo <span class="n">1</span> &gt; /logs/verifier/reward.txt
+<span class="k">fi</span></code></pre></div>
+        <div class="checks"><h3>The verifier entry point</h3><p>Runs after the agent finishes and writes the reward.</p><ul><li>The reward starts at 0, so a crash can’t pass</li><li>pytest and pytest-json-ctrf pinned</li><li>Doing nothing scores 0</li></ul></div>
+      </div>
+      <div class="view later" id="view-5" role="tabpanel" aria-labelledby="file-5" tabindex="0">
+        <div class="code"><div class="code-h">tests/test_outputs.py</div><pre><code><span class="k">from</span> pathlib <span class="k">import</span> Path
+
+EXPECTED = int(Path(<span class="s">"/tests/expected.txt"</span>).read_text())
+
+<span class="k">def</span> <span class="n">test_answer_is_exact</span>():
+    text = Path(<span class="s">"/app/answer.txt"</span>).read_text().strip()
+    <span class="k">assert</span> text.isdigit(), <span class="s">"answer must be an integer"</span>
+    <span class="k">assert</span> int(text) == EXPECTED</code></pre></div>
+        <div class="checks"><h3>The tests</h3><p>Check the result, not the method, and accept nothing vague.</p><ul><li>Instructions and tests agree on every requirement</li><li>Extra text is rejected, not guessed at</li><li>Hidden from the agent until grading</li></ul></div>
+      </div>
+      <div class="view later" id="view-6" role="tabpanel" aria-labelledby="file-6" tabindex="0">
+        <div class="code"><div class="code-h">axiom audit</div><pre><code><span class="k">#print axioms</span> Solution.main_theorem
+
+<span class="c">-- 'Solution.main_theorem' depends on axioms:</span>
+<span class="c">--   [propext, Classical.choice, Quot.sound]</span></code></pre></div>
+        <div class="checks"><h3>The axiom audit</h3><p>For proofs, passing the kernel isn’t enough. The proof must rest on standard axioms only.</p><ul><li>Any sorryAx or new axiom scores 0</li><li>The statement comes from a sealed copy, so a submission can’t change what it proves</li><li>Checked in a clean build after the agent’s processes have stopped</li></ul></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -289,10 +395,10 @@
       <p>A multiple-choice question platform with subject and topic filters, pagination, Urdu typography, a JSON admin workflow and a backend API deployed on Render.</p>
     </article>
     <article class="panel pj">
-      <h3>Free mathematics library</h3>
+      <h3><a href="/solutions/">Free mathematics library</a></h3>
       <p class="stack">HTML, CSS, JavaScript, KaTeX</p>
       <p>Step-by-step solutions for Punjab Class 9 and 10 mathematics, with every step typeset and board-style practice papers.</p>
-      <a class="go" href="/solutions/">Open the library</a>
+      <span class="go"><a href="/solutions/class-9/">Class 9 maths solutions</a> <a href="/solutions/class-10/">Class 10 maths solutions</a></span>
     </article>
     <article class="panel pj">
       <h3>Culina Aesthetics</h3>
@@ -354,8 +460,8 @@
     <div class="direct">
       <div class="mail"><a href="mailto:imranbinmanzoor1@gmail.com">imranbinmanzoor1@gmail.com</a><button type="button" class="copy" id="copyMail">Copy</button></div>
       <div class="links">
-        <a href="https://linkedin.com/in/imranbinmanzoor-dev">LinkedIn</a>
-        <a href="https://github.com/imranbinmanzoor">GitHub</a>
+        <a href="https://www.linkedin.com/in/imranbinmanzoor-dev" rel="me">LinkedIn</a>
+        <a href="https://github.com/imranbinmanzoor" rel="me">GitHub</a>
         <a href="/Muhammad_Imran_Resume.pdf">Résumé (PDF)</a>
       </div>
       <p class="tz" id="tz">I work remotely from Pakistan, UTC+5.</p>

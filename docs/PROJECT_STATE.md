@@ -3,6 +3,12 @@
 Updated: 2026-11-20. Phase: new one-page portfolio (AI benchmark engineer) replacing the
 direction-A homepage and its inner pages; branch `claude/portfolio-v2` from `main` at `8f14dea`.
 
+## SEO pass (2026-11-20)
+
+- Owner asked for complete SEO. Details and limits in SEO_INDEXING.md. Checks: `npm run check`
+  86 of 86; `tests/browser.mjs` 46 of 46; Lighthouse mobile on the local build of `/`:
+  performance 97, accessibility 100, best practices 100, SEO 100.
+
 ## One-page portfolio (2026-11-20)
 
 - The owner rejected an intermediate concept, sent his current résumé and asked for a fresh

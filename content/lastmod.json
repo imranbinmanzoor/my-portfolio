@@ -1,0 +1,10 @@
+{
+  "note": "Sitemap <lastmod> dates: the last significant change to each page's main content, not to its metadata. Update the matching entry when a page's content changes. An entry ending in * covers every route under that path.",
+  "routes": {
+    "/": "2026-11-20",
+    "/solutions/": "2026-09-23",
+    "/solutions/class-9/": "2026-09-23",
+    "/solutions/class-10/": "2026-09-23",
+    "/solutions/class-10/*": "2026-09-23"
+  }
+}

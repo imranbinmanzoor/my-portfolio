@@ -32,8 +32,10 @@ export function buildBookPages({read,write,bookHTML}) {
     for(const {ex,tab,label} of pages) {
       const ctx=bookRenderer(read,book,unit.n,tab);
       const url=ctx.routes.path(book,unit.n,tab);
-      const title=`Class 10 ${label} Solutions — ${unit.title} | PECTAA`;
-      const description=`${label} solutions for PECTAA Class 10 ${unit.title}. ${ex.questions.length} questions with explained steps, answers and compact working by Muhammad Imran.`;
+      // Titles and descriptions use the words students search with ("Class 10 Math Exercise 1.1 Solutions").
+      const title=`Class 10 Math ${label} Solutions | ${unit.title} | PECTAA`;
+      const count=ex.questions.length===1?'the question':ex.questions.length===2?'both questions':`all ${ex.questions.length} questions`;
+      const description=`Free step-by-step solutions to ${count} of Class 10 Math ${label}, Unit ${unit.n} ${unit.title} (PECTAA). Every step explained, with answers.`;
       const panel=typesetPanel(tab==='review'?ctx.render.reviewPanel(ex,tab):ctx.render.exercisePanel(ex,tab),ctx.render)
         .replaceAll('<details class="sol" hidden>','<details class="sol">')
         .replaceAll('<button type="button" data-q=','<button type="button" disabled data-q=');
@@ -52,7 +54,7 @@ export function buildBookPages({read,write,bookHTML}) {
         .replace('<div id="panels"></div>',`<div id="panels">${panels}</div>`)
         .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,'');
       const trail=[{name:'Home',href:'/'},{name:'Mathematics',href:'/solutions/'},{name:'Class 10',href:'/solutions/class-10/'},{name:`${unit.title} · ${label}`}];
-      html=html.replace('</head>',breadcrumbs(trail)+`<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'LearningResource',url:SITE+url,name:title,description,inLanguage:'en',educationalLevel:'Class 10',learningResourceType:'Worked mathematics solutions',author:{'@type':'Person',name:'Muhammad Imran',url:SITE+'/'},isAccessibleForFree:true}).replaceAll('<','\\u003c')}</script></head>`);
+      html=html.replace('</head>',breadcrumbs(trail)+`<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'LearningResource',url:SITE+url,name:`Class 10 Math ${label} Solutions: ${unit.title}`,description,inLanguage:'en',educationalLevel:'Class 10',teaches:unit.title,learningResourceType:'Worked mathematics solutions',author:{'@type':'Person','@id':SITE+'/#person',name:'Muhammad Imran',url:SITE+'/'},isAccessibleForFree:true}).replaceAll('<','\\u003c')}</script></head>`);
       write(url.slice(1)+'index.html',html);
     }
   }

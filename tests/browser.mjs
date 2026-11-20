@@ -101,15 +101,15 @@ await test('Blocked storage: pages load and the theme toggle still works', async
 // ---------- Homepage components ----------
 await test('Release checks: tabs switch runs with clicks and arrow keys', async page => {
   await go(page, '/');
-  const state = () => page.evaluate(() => ({sel: document.querySelector('.con-tabs [aria-selected=true]').id, cmd: document.querySelector('#con .cmd').textContent, lines: document.querySelectorAll('#con .ln').length, focus: document.activeElement.id}));
-  let s = await state(); assert(s.sel === 't-lean' && /lean-task/.test(s.cmd) && s.lines === 9, JSON.stringify(s));
+  const state = () => page.evaluate(() => ({sel: document.querySelector('.con-tabs [aria-selected=true]').id, cmd: document.querySelector('.con-body:not([hidden]) .cmd').textContent, lines: document.querySelectorAll('.con-body:not([hidden]) .ln').length, shown: document.querySelectorAll('.con-body:not([hidden])').length, focus: document.activeElement.id}));
+  let s = await state(); assert(s.sel === 't-lean' && /lean-task/.test(s.cmd) && s.lines === 9 && s.shown === 1, JSON.stringify(s));
   await page.click('#t-py'); s = await state(); assert(s.sel === 't-py' && /compute-task/.test(s.cmd), JSON.stringify(s));
   await page.keyboard.press('ArrowRight'); s = await state(); assert(s.sel === 't-lean' && s.focus === 't-lean', JSON.stringify(s));
 });
 await test('Task anatomy: files open with clicks and arrow keys; one tab stop', async page => {
   await go(page, '/');
-  const state = () => page.evaluate(() => ({sel: document.querySelector('#files [aria-selected=true]').textContent.trim(), head: document.querySelector('#view .code-h').textContent, stops: [...document.querySelectorAll('#files [role=tab]')].filter(b => b.tabIndex === 0).length, focus: document.activeElement.textContent.trim()}));
-  let s = await state(); assert(s.sel === 'instruction.md' && s.head === 'instruction.md' && s.stops === 1, JSON.stringify(s));
+  const state = () => page.evaluate(() => ({sel: document.querySelector('#files [aria-selected=true]').textContent.trim(), head: document.querySelector('.view:not([hidden]) .code-h').textContent, shown: [...document.querySelectorAll('.view')].filter(v => v.getClientRects().length).length, stops: [...document.querySelectorAll('#files [role=tab]')].filter(b => b.tabIndex === 0).length, focus: document.activeElement.textContent.trim()}));
+  let s = await state(); assert(s.sel === 'instruction.md' && s.head === 'instruction.md' && s.stops === 1 && s.shown === 1, JSON.stringify(s));
   await page.click('#files [role=tab]:has-text("Dockerfile")'); s = await state();
   assert(s.head === 'environment/Dockerfile', JSON.stringify(s));
   await page.keyboard.press('ArrowDown'); s = await state(); assert(s.head === 'solution/solve.sh' && s.focus === 'solve.sh', JSON.stringify(s));
@@ -362,6 +362,8 @@ await test('Without JavaScript: exercise solutions and navigation still work', a
   assert(new URL(page.url()).pathname.endsWith('/exercise-1-3/'), 'native link failed');
   await go(page, '/');
   assert(!(await page.evaluate(() => document.getElementById('contact-form').noValidate)), 'native validation disabled without script');
+  const home = await page.evaluate(() => ({files: [...document.querySelectorAll('.view')].filter(v => v.getClientRects().length).length, lines: [...document.querySelectorAll('#con-lean .ln')].filter(l => getComputedStyle(l).opacity === '1').length}));
+  assert(home.files === 7 && home.lines === 9, 'homepage without JavaScript: ' + JSON.stringify(home));
   await go(page, '/solutions/class-9/');
   const c9 = await page.evaluate(() => ({note: !!document.querySelector('.noscript-note') && document.querySelector('.noscript-note').getClientRects().length > 0, unit: document.querySelector('.unit-doc').getClientRects().length > 0, panels: [...document.querySelectorAll('.panel')].filter(p => p.getClientRects().length).length, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth}));
   assert(c9.note && c9.unit && c9.panels >= 5 && c9.overflow <= 0, 'Class 9 without JavaScript: ' + JSON.stringify(c9));

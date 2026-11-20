@@ -1,0 +1,23 @@
+# Muhammad Imran
+
+> Mathematician and AI benchmark engineer from Layyah, Pakistan, working remotely (UTC+5). He builds research-level tasks that test frontier AI models: formal proofs in Lean 4 with Mathlib, scientific-computing problems graded on exact or tightly bounded results, and terminal-agent tasks in the Terminal-Bench and Harbor format. Each task ships with a reference solution, a reproducible Docker environment and a verifier that rejects forged or incomplete work.
+
+He currently works as an independent contractor with AfterQuery (benchmark task author, Lean 4 and scientific computing), Turing (Python software engineer, LLM evaluation and repository validation) and Mindrift (STEM AI trainer and evaluation specialist). Earlier he wrote 2,811 and reviewed 6,599 step-by-step mathematics solutions at Photomath (2021 to 2025) and taught mathematics and physics for seven years (2014 to 2021). BS Mathematics, University of Education, Lahore (2017 to 2021). He is open to remote contract work.
+
+## Portfolio
+
+- [Homepage](https://imranbinmanzoor.com/): services, how he builds a task, experience, skills, projects, education and contact
+- [Résumé (PDF)](https://imranbinmanzoor.com/Muhammad_Imran_Resume.pdf)
+- [How he builds a benchmark task](https://imranbinmanzoor.com/#anatomy): the files of a task and the checks he runs on each
+- [Contact](https://imranbinmanzoor.com/#contact): imranbinmanzoor1@gmail.com
+
+## Free mathematics library
+
+- [Library](https://imranbinmanzoor.com/solutions/): free step-by-step solutions for Punjab school mathematics
+- [Class 9 Math, Unit 1 Real Numbers](https://imranbinmanzoor.com/solutions/class-9/): Punjab Textbook Board
+- [Class 10 Math, Unit 1 Complex Numbers](https://imranbinmanzoor.com/solutions/class-10/): PECTAA book, Exercises 1.1 to 1.4 and the review exercise
+
+## Profiles
+
+- [LinkedIn](https://www.linkedin.com/in/imranbinmanzoor-dev)
+- [GitHub](https://github.com/imranbinmanzoor)

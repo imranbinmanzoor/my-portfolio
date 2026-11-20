@@ -1,5 +1,4 @@
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Clock in Layyah */
   const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Karachi', hour: 'numeric', minute: '2-digit' });
@@ -39,169 +38,34 @@
     });
   });
 
-  /* Release-check console */
-  const runs = {
-    lean: {
-      cmd: ['python tools/preflight.py', 'lean-task/'],
-      lines: [
-        ['files', 'task.toml, instruction.md, environment, solution, tests'],
-        ['instruction', 'every output path named, no grading hints'],
-        ['build', 'Lean toolchain and Mathlib pinned to exact commits'],
-        ['oracle', 'reference proof checks: reward 1'],
-        ['no-op', 'empty submission: reward 0'],
-        ['statement', 'compared with a sealed copy'],
-        ['axioms', '[propext, Classical.choice, Quot.sound]'],
-        ['forgery', 'sorry or a new axiom: reward 0'],
-        ['isolation', 'agent processes stopped before grading'],
-      ],
-      done: 'all checks passed, ready to submit'
-    },
-    py: {
-      cmd: ['python tools/preflight.py', 'compute-task/'],
-      lines: [
-        ['files', 'task.toml, instruction.md, environment, solution, tests'],
-        ['instruction', 'units, precision and output format stated'],
-        ['build', 'base image and packages pinned'],
-        ['oracle', 'reference solution: reward 1'],
-        ['no-op', 'doing nothing: reward 0'],
-        ['grading', 'exact value, or a stated tolerance'],
-        ['determinism', 'same result on every run'],
-        ['workers', 'sized from the container CPU limit'],
-        ['isolation', 'tests copied in only at grading time'],
-      ],
-      done: 'all checks passed, ready to submit'
-    }
-  };
-  const con = document.getElementById('con');
-  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  function render(key, animate) {
-    const r = runs[key];
-    let h = '<span class="cmd">$ ' + esc(r.cmd[0]) + ' <span>' + esc(r.cmd[1]) + '</span></span>';
-    r.lines.forEach((l, i) => {
-      h += '<span class="ln" style="animation-delay:' + (animate ? 180 + i * 150 : 0) + 'ms"><span class="ok">✓</span><span class="key">' + esc(l[0]) + '</span><span class="val">' + esc(l[1]) + '</span></span>';
+  /* Tabs over panels that are already in the page (release checks and task files).
+     Arrow keys move between tabs; only the selected tab is in the Tab order. */
+  function tabset(tabs, onSelect) {
+    const select = (tab, focus) => {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) { panel.hidden = !on; panel.classList.remove('later'); }
+      });
+      if (onSelect) onSelect(tab);
+      if (focus) tab.focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t));
+      t.addEventListener('keydown', e => {
+        const n = tabs.length, next = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        if (next) { e.preventDefault(); select(tabs[(i + next + n) % n], true); }
+        else if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
+        else if (e.key === 'End') { e.preventDefault(); select(tabs[n - 1], true); }
+      });
     });
-    h += '<span class="done" style="animation-delay:' + (animate ? 180 + r.lines.length * 150 + 120 : 0) + 'ms">' + esc(r.done) + '</span>';
-    con.classList.toggle('anim', !!animate && !reduce);
-    con.innerHTML = h;
+    const current = tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0];
+    if (current) select(current);
   }
-  const tabs = [...document.querySelectorAll('.con-tabs [role="tab"]')];
-  function select(tab, focus) {
-    tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
-    con.setAttribute('aria-labelledby', tab.id);
-    render(tab.id === 't-lean' ? 'lean' : 'py', false);
-    if (focus) tab.focus();
-  }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(t));
-    t.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); select(tabs[(i + 1) % tabs.length], true); }
-    });
-  });
-  render('lean', true);
+  tabset([...document.querySelectorAll('.con-tabs [role="tab"]')]);
+  tabset([...document.querySelectorAll('#files [role="tab"]')]);
 
-  /* Task anatomy */
-  const files = [
-    { dir: '', name: 'instruction.md', lang: 'markdown', title: 'The instruction',
-      lead: 'What the agent reads. It has to be complete, exact and written by hand.',
-      code: `Count the domino tilings of the 12 × 12 square.
-Each domino covers two edge-adjacent cells, and
-the dominoes cover every cell exactly once.
-
-Write the exact count to <span class="s">\`/app/answer.txt\`</span> as a
-base-10 integer, with no other text.`,
-      checks: ['Every output path appears in backticks', 'States the exact format, so nothing is left to guess', 'Says nothing about how it will be graded', 'No headings, no first-person preamble, no repeated requirements'] },
-    { dir: '', name: 'task.toml', lang: 'toml', title: 'Task configuration',
-      lead: 'Metadata, resources and time limits that match the real work.',
-      code: `<span class="k">[metadata]</span>
-difficulty = <span class="s">"hard"</span>
-category = <span class="s">"scientific-computing"</span>
-
-<span class="k">[agent]</span>
-timeout_sec = <span class="n">3600.0</span>
-
-<span class="k">[verifier]</span>
-timeout_sec = <span class="n">600.0</span>
-
-<span class="k">[environment]</span>
-cpus = <span class="n">2</span>
-memory_mb = <span class="n">4096</span>`,
-      checks: ['The field matches the core work: numerical work is scientific computing, not formal mathematics', 'Time limits sized from the reference run', 'The task name matches the platform record exactly'] },
-    { dir: 'environment/', name: 'Dockerfile', lang: 'dockerfile', title: 'The environment',
-      lead: 'The world the agent works in. It must build the same way every time.',
-      code: `<span class="k">FROM</span> python:3.12-slim@sha256:<span class="c">&lt;pinned digest&gt;</span>
-<span class="k">RUN</span> pip install --no-cache-dir \\
-      numpy==<span class="n">2.1.3</span> sympy==<span class="n">1.13.3</span>
-<span class="k">RUN</span> mkdir -p /app
-<span class="k">WORKDIR</span> /app`,
-      checks: ['Base image pinned by digest, packages by exact version', 'Every download checked against a checksum', 'No solution or tests inside the image'] },
-    { dir: 'solution/', name: 'solve.sh', lang: 'bash', title: 'The reference solution',
-      lead: 'Proof that the task can be solved, run by the platform as an oracle.',
-      code: `<span class="c">#!/bin/bash</span>
-set -euo pipefail
-python3 <span class="s">"$(dirname "$0")/count.py"</span> &gt; /app/answer.txt`,
-      checks: ['Scores 1 on every attempt', 'Exact integer arithmetic where the answer is exact', 'Worker pools sized from the container’s CPU limit, never os.cpu_count()'] },
-    { dir: 'tests/', name: 'test.sh', lang: 'bash', title: 'The verifier entry point',
-      lead: 'Runs after the agent finishes and writes the reward.',
-      code: `<span class="c">#!/bin/bash</span>
-mkdir -p /logs/verifier
-echo <span class="n">0</span> &gt; /logs/verifier/reward.txt
-<span class="k">if</span> pytest --ctrf /logs/verifier/ctrf.json \\
-     /tests/test_outputs.py -rA; <span class="k">then</span>
-  echo <span class="n">1</span> &gt; /logs/verifier/reward.txt
-<span class="k">fi</span>`,
-      checks: ['The reward starts at 0, so a crash can’t pass', 'pytest and pytest-json-ctrf pinned', 'Doing nothing scores 0'] },
-    { dir: 'tests/', name: 'test_outputs.py', lang: 'python', title: 'The tests',
-      lead: 'Check the result, not the method, and accept nothing vague.',
-      code: `<span class="k">from</span> pathlib <span class="k">import</span> Path
-
-EXPECTED = int(Path(<span class="s">"/tests/expected.txt"</span>).read_text())
-
-<span class="k">def</span> <span class="n">test_answer_is_exact</span>():
-    text = Path(<span class="s">"/app/answer.txt"</span>).read_text().strip()
-    <span class="k">assert</span> text.isdigit(), <span class="s">"answer must be an integer"</span>
-    <span class="k">assert</span> int(text) == EXPECTED`,
-      checks: ['Instructions and tests agree on every requirement', 'Extra text is rejected, not guessed at', 'Hidden from the agent until grading'] },
-    { dir: 'Lean tasks add', name: 'axiom audit', lang: 'lean', title: 'The axiom audit',
-      lead: 'For proofs, passing the kernel isn’t enough. The proof must rest on standard axioms only.',
-      code: `<span class="k">#print axioms</span> Solution.main_theorem
-
-<span class="c">-- 'Solution.main_theorem' depends on axioms:</span>
-<span class="c">--   [propext, Classical.choice, Quot.sound]</span>`,
-      checks: ['Any sorryAx or new axiom scores 0', 'The statement comes from a sealed copy, so a submission can’t change what it proves', 'Checked in a clean build after the agent’s processes have stopped'] },
-  ];
-  const fileList = document.getElementById('files'), view = document.getElementById('view');
-  let lastDir = null;
-  files.forEach((f, i) => {
-    if (f.dir && f.dir !== lastDir) {
-      const d = document.createElement('div'); d.className = 'dir'; d.textContent = f.dir; d.setAttribute('aria-hidden', 'true'); fileList.appendChild(d);
-    }
-    lastDir = f.dir;
-    const b = document.createElement('button');
-    b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'file-' + i; b.setAttribute('aria-controls', 'view');
-    b.style.setProperty('--ind', f.dir ? '14px' : '0px');
-    b.innerHTML = '<span></span><span>' + f.name + '</span>';
-    b.setAttribute('aria-label', (f.dir && f.dir.endsWith('/') ? f.dir : '') + f.name);
-    b.addEventListener('click', () => show(i));
-    b.addEventListener('keydown', e => {
-      const n = files.length;
-      if (['ArrowDown', 'ArrowRight'].includes(e.key)) { e.preventDefault(); show((i + 1) % n, true); }
-      if (['ArrowUp', 'ArrowLeft'].includes(e.key)) { e.preventDefault(); show((i - 1 + n) % n, true); }
-    });
-    fileList.appendChild(b);
-  });
-  const btns = [...fileList.querySelectorAll('button')];
-  function show(i, focus) {
-    const f = files[i];
-    btns.forEach((b, j) => { b.setAttribute('aria-selected', String(i === j)); b.tabIndex = i === j ? 0 : -1; });
-    view.setAttribute('aria-labelledby', 'file-' + i);
-    const path = f.dir.endsWith('/') ? f.dir + f.name : f.name;
-    view.innerHTML = '<div class="code"><div class="code-h">' + path + '</div><pre><code>' + f.code + '</code></pre></div>' +
-      '<div class="checks"><h3>' + f.title + '</h3><p>' + f.lead + '</p><ul>' + f.checks.map(c => '<li>' + c + '</li>').join('') + '</ul></div>';
-    if (focus) btns[i].focus();
-  }
-  show(0);
-
-  /* Contact */
   const copyBtn = document.getElementById('copyMail');
   copyBtn.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText('imranbinmanzoor1@gmail.com'); copyBtn.textContent = 'Copied'; }

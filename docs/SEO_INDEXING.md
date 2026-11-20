@@ -1,5 +1,26 @@
 # SEO on the existing website
 
+## Site-wide SEO pass (2026-11-20)
+
+- Homepage: a ProfilePage, Person and WebSite graph in JSON-LD (`#person` is the single
+  identity; Class 10 LearningResource authors point at it). Description under 160 characters.
+  The release-check console and all seven task files are static HTML, so they are readable
+  without JavaScript; script only switches panels. Theme and page CSS are inlined (no
+  render-blocking requests). LinkedIn and GitHub links carry `rel="me"`.
+- Library titles and descriptions follow how students search ("Class 10 Math Exercise 1.1
+  Solutions | Complex Numbers | PECTAA"). Editions stay unclaimed: no "new book" or year.
+- Every indexable page gets `robots: index,follow,max-image-preview:large,max-snippet:-1` and
+  the touch icon (scripts/social-metadata.mjs). The sitemap carries `<lastmod>` dates from
+  `content/lastmod.json`; update that file when a page's main content changes, or the build stops.
+- `/llms.txt` summarizes the site for AI search tools; its links are checked.
+- `npm run check` guards title length (70 or fewer), description length (50 to 160), the
+  identity graph, sitemap dates, preview robots and llms.txt links.
+- Not done here (needs the owner's accounts): Google Search Console and Bing Webmaster Tools
+  verification, sitemap submission and URL inspection.
+- Remaining performance work: Class 9 and Class 10 book pages score about 65 on mobile
+  Lighthouse (LCP 3.5 to 4.5 s, 160 KB gzipped HTML, a 226 KB book stylesheet). Fixing that
+  is a book-architecture change, not a metadata change.
+
 Updated 2026-09-20. The owner explicitly rejected a separate continuous-reading
 format and duplicated content created only for SEO. This supersedes the initial SEO
 foundation published at c8dc702bcd8a9ad7c776aa7d8d5cb00e699b1eed.
