@@ -25,7 +25,9 @@ direction-A homepage and its inner pages; branch `claude/portfolio-v2` from `mai
 - New 1200 by 630 social preview image.
 - Checks on this build: `npm run check` 83 of 83; `tests/browser.mjs` 46 of 46 (Chromium 153),
   including homepage widths 320 to 1440 px, keyboard tabs, contact form failures and retired routes.
-- Rollback: `8f14dea` (the last direction-A release).
+- Published 2026-11-20 as `d72afee` through the Pages workflow (run 44730824165, success).
+  Live check: 173 of 173 served files byte-identical to the tested build (`.nojekyll` is not
+  served by Pages, as before). Rollback: `8f14dea` (the last direction-A release).
 
 ## Reset and direction (2026-10-22)
 
