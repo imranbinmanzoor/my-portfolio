@@ -8,6 +8,9 @@ direction-A homepage and its inner pages; branch `claude/portfolio-v2` from `mai
 - Owner asked for complete SEO. Details and limits in SEO_INDEXING.md. Checks: `npm run check`
   86 of 86; `tests/browser.mjs` 46 of 46; Lighthouse mobile on the local build of `/`:
   performance 97, accessibility 100, best practices 100, SEO 100.
+- Published as `1602f76` (Pages run 44733373515, success). Live check: 175 of 175 served
+  files byte-identical to the tested build. Live Lighthouse mobile on `/`: performance 95,
+  accessibility 100, best practices 100, SEO 100 (LCP 1.6 s, CLS 0). Rollback: `ff30d9d`.
 
 ## One-page portfolio (2026-11-20)
 
