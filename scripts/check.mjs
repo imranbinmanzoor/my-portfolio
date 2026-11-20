@@ -22,7 +22,9 @@ check('Build matches the current source inputs',()=>{
   assert.equal(JSON.parse(read('dist/build-info.json')).sourceDigest,digest.digest('hex'),'Rebuild before checking');
 });
 check('Public output excludes sources, documents, credentials and caches',()=>{
-  for(const f of files)assert(!/(?:^|\/)(?:src|content|docs|tests|scripts|node_modules|\.git|\.local)(?:\/|$)|\.(?:pdf|zip|md|env|pyc)$/.test(f),f);
+  // The owner's résumé is the one PDF published on purpose (approved 2026-11-20).
+  const published=new Set(['dist/Muhammad_Imran_Resume.pdf']);
+  for(const f of files)if(!published.has(f))assert(!/(?:^|\/)(?:src|content|docs|tests|scripts|node_modules|\.git|\.local)(?:\/|$)|\.(?:pdf|zip|md|env|pyc)$/.test(f),f);
   assert.equal(read('dist/CNAME').trim(),'imranbinmanzoor.com');
 });
 for(const f of htmlFiles)check(`HTML structure and local assets: ${f}`,()=>{

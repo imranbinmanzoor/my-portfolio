@@ -72,26 +72,27 @@ export function checkSite({check, htmlFiles, files}) {
     }
   });
 
-  check('Homepage: every anchor the site links to exists, and projects come from one data source', () => {
-    // research, professional-work, learning and tutoring are kept for older links.
+  check('Homepage: its sections, older anchors and retired pages all resolve', () => {
+    // The November 2026 portfolio is one page. Older addresses (/#about, /#tutoring, /work/ ...)
+    // must still land on the matching section instead of a missing anchor or a 404.
     const home = read('dist/index.html');
-    for (const id of ['home', 'professional-work', 'research', 'about', 'work', 'learning', 'tutoring', 'contact'])
+    for (const id of ['home', 'services', 'anatomy', 'experience', 'skills', 'projects', 'background', 'contact',
+      'professional-work', 'research', 'about', 'work', 'learning', 'tutoring'])
       assert(new RegExp(`id="${id}"`).test(home), `missing #${id}`);
-    // The homepage is a brief of every page; each brief links to its full page.
-    for (const page of ['/work/', '/solutions/', '/tutoring/', '/about/', '/contact/'])
-      assert(home.includes('href="' + page + '"'), 'homepage links ' + page);
-    assert(read('dist/about/index.html').includes('href="/projects/"'), 'About links the project archive');
-    const projects = JSON.parse(read('content/projects.json'));
-    const index = read('dist/projects/index.html');
-    for (const p of projects) {
-      assert(index.includes(`href="/projects/${p.slug}/"`), `project index lacks ${p.slug}`);
-      for (const img of [p.thumb, ...p.views.map(v => v.src)].filter(Boolean)) assert(fs.existsSync('dist' + img), `${p.slug}: missing ${img}`);
+    for (const href of ['/solutions/', '/Muhammad_Imran_Resume.pdf'])
+      assert(home.includes(`href="${href}"`), 'homepage links ' + href);
+    const moved = {about: 'background', work: 'experience', contact: 'contact', tutoring: 'contact', projects: 'projects',
+      'projects/omnifood': 'projects', 'projects/modern-page': 'projects', 'projects/pig-game': 'projects', 'projects/portfolio': 'projects'};
+    for (const [from, to] of Object.entries(moved)) {
+      const html = read(`dist/${from}/index.html`);
+      assert(isRedirect(html) && html.includes(`url=/#${to}"`), `/${from}/ should move to /#${to}`);
     }
   });
 
   check('Contact form: native validation without JavaScript, labelled fields, visible error text', () => {
-    const home = read('dist/contact/index.html');
+    const home = read('dist/index.html');
     const form = home.match(/<form\b[\s\S]*?<\/form>/i)[0];
+    assert(/action="https:\/\/formspree\.io\/f\/xzzangvz"/.test(form) && /method="POST"/i.test(form), 'posts without JavaScript');
     assert(!/novalidate/i.test(form.match(/<form\b[^>]*>/i)[0]), 'form must validate natively without script');
     for (const id of ['f-name', 'f-email', 'f-message']) {
       assert(new RegExp(`<label for="${id}"`).test(form), `${id}: label`);
@@ -101,7 +102,8 @@ export function checkSite({check, htmlFiles, files}) {
     assert(/role="status"/.test(form), 'status region');
   });
 
-  check('No status dot implies availability; favicon matches the monogram', () => {
+  check('Favicon matches the monogram; no old brand status dot', () => {
+    // The owner approved the homepage's "Open to remote contract work" status on 2026-11-20.
     for (const f of htmlFiles) assert(!/brand__mark" aria-hidden="true">mi<span>/.test(read(f)), `${f}: status dot`);
     assert(!read('dist/favicon.svg').includes('#2855d9'), 'retired blue favicon');
   });

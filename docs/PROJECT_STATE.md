@@ -1,7 +1,31 @@
 # Project state
 
-Updated: 2026-10-22. Phase: reset after four redesign passes; design-token foundation for
-direction A, on branch `claude/site-update-2026-10` from `main` at `8f9cbd9`.
+Updated: 2026-11-20. Phase: new one-page portfolio (AI benchmark engineer) replacing the
+direction-A homepage and its inner pages; branch `claude/portfolio-v2` from `main` at `8f14dea`.
+
+## One-page portfolio (2026-11-20)
+
+- The owner rejected an intermediate concept, sent his current résumé and asked for a fresh
+  portfolio built around it ("everything is up to you ... so that people hire me"), then asked
+  for it to replace the live site. The approved draft was claude.ai artifact XLMnA3V4LEvToJ5mHcqJXy.
+- Positioning comes from the résumé: mathematician and AI benchmark engineer (AfterQuery,
+  Turing, Mindrift; Photomath 2021 to 2025; teaching 2014 to 2021). Every fact on the page is
+  from the résumé; the research manuscript is listed without a review status on purpose.
+- `/` is now one page: hero with release-check console, services, task anatomy (public example
+  task in the Harbor format), experience, skills, projects, education and research, contact.
+  Styles and behavior: `src/assets/portfolio.css` and `portfolio.js` (own scale, not on
+  `tokens.css`; the library keeps the old design system). Fonts self-hosted under
+  `public/vendor/` (Mona Sans, Geist Mono, a Noto Nastaliq subset for the Urdu name).
+- `/about/`, `/work/`, `/contact/`, `/tutoring/`, `/projects/` and the project case pages now
+  redirect to the matching homepage section; older homepage anchors (`#about`, `#tutoring`,
+  `#work` ...) still resolve. Shared header, footer, 404 and the Class 11/12 pages point at the
+  new sections. `content/projects.json` and `src/projects/render.mjs` are no longer used by any page.
+- Owner approvals recorded here: the "Open to remote contract work" status and the résumé PDF
+  (`/Muhammad_Imran_Resume.pdf`, the one PDF the check allows; it contains his phone number).
+- New 1200 by 630 social preview image.
+- Checks on this build: `npm run check` 83 of 83; `tests/browser.mjs` 46 of 46 (Chromium 153),
+  including homepage widths 320 to 1440 px, keyboard tabs, contact form failures and retired routes.
+- Rollback: `8f14dea` (the last direction-A release).
 
 ## Reset and direction (2026-10-22)
 

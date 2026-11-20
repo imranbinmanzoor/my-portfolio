@@ -48,12 +48,12 @@ for (const viewport of [{width: 1366, height: 768}, {width: 390, height: 844}]) 
   await test(`Back/forward restores the scroll position (${viewport.width}px)`, async page => {
     await go(page, '/');
     await page.evaluate(() => scrollTo({top: 1500, behavior: 'instant'})); await page.waitForTimeout(300);
-    await go(page, '/projects/'); await page.goBack(); await settle(page); await page.waitForTimeout(300);
+    await go(page, '/solutions/'); await page.goBack(); await settle(page); await page.waitForTimeout(300);
     const y = await scrollY(page); assert(Math.abs(y - 1500) < 40, `restored to ${y}`);
   }, {viewport});
 }
 await test('Skip link is the first Tab stop, visible, and moves focus to the content', async page => {
-  for (const path of ['/', '/tutoring/', '/solutions/class-9/', '/solutions/class-10/', '/solutions/class-10/complex-numbers/exercise-1-2/']) {
+  for (const path of ['/', '/solutions/', '/solutions/class-9/', '/solutions/class-10/', '/solutions/class-10/complex-numbers/exercise-1-2/']) {
     await go(page, path); await page.keyboard.press('Tab');
     const s = await page.evaluate(() => { const a = document.activeElement, r = a.getBoundingClientRect(); return {cls: a.className, top: r.top, h: r.height}; });
     assert(/skip-link/.test(s.cls) && s.top >= 0 && s.h > 20, `${path}: first stop ${JSON.stringify(s)}`);
@@ -62,28 +62,24 @@ await test('Skip link is the first Tab stop, visible, and moves focus to the con
     assert(target === 'main', `${path}: focus went to ${target}`);
   }
 });
-await test('In-page links land below the frame edge and move keyboard focus', async page => {
+await test('In-page links land below the sticky header and move keyboard focus', async page => {
   await go(page, '/');
-  await page.click('.welcome-paths a[href="#professional-work"]'); await page.waitForTimeout(900);
-  const r = await page.evaluate(() => ({top: document.getElementById('professional-work').getBoundingClientRect().top, focus: document.activeElement.id}));
-  assert(r.top >= 16 && r.top < 120, `target top ${r.top}`); assert(r.focus === 'professional-work', `focus ${r.focus}`);
-  await page.goBack(); await page.waitForTimeout(400);
-  assert(!(await page.url()).includes('#professional-work'), 'history entry for the anchor');
+  await page.click('.bar nav a[href="#experience"]'); await page.waitForTimeout(900);
+  const r = await page.evaluate(() => ({top: document.getElementById('experience').getBoundingClientRect().top, header: document.querySelector('.top').getBoundingClientRect().bottom, focus: document.activeElement.id}));
+  assert(r.top >= r.header && r.top < 140, `target top ${r.top}, header bottom ${r.header}`); assert(r.focus === 'experience', `focus ${r.focus}`);
 });
-await test('Sidebar marks only the section being read', async page => {
+await test('Header marks only the section being read', async page => {
   await go(page, '/');
-  const current = () => page.evaluate(() => [...document.querySelectorAll('.nav__links a[aria-current=location]')].map(a => a.textContent.trim()));
-  await page.evaluate(() => document.getElementById('research').scrollIntoView({behavior: 'instant'})); await page.waitForTimeout(300);
-  assert((await current()).join() === 'Research', `research: ${await current()}`);
-  await page.evaluate(() => document.getElementById('work').scrollIntoView({behavior: 'instant'})); await page.waitForTimeout(300);
-  assert((await current()).length === 0, `projects: ${await current()}`);
-  await page.keyboard.press('End'); await page.waitForTimeout(900);
-  assert((await current()).join() === 'Contact', `bottom: ${await current()}`);
+  const current = () => page.evaluate(() => [...document.querySelectorAll('.bar nav a[aria-current="true"]')].map(a => a.textContent.trim()));
+  await page.evaluate(() => document.getElementById('skills').scrollIntoView({behavior: 'instant'})); await page.waitForTimeout(400);
+  assert((await current()).join() === 'Skills', `skills: ${await current()}`);
+  await page.evaluate(() => scrollTo({top: 0, behavior: 'instant'})); await page.waitForTimeout(400);
+  assert((await current()).length === 0, `top: ${await current()}`);
 });
 
 // ---------- Theme ----------
 await test('Theme toggle switches, announces state and persists across a reload', async page => {
-  await go(page, '/');
+  await go(page, '/solutions/');
   const toggle = page.locator('.nav__location [data-theme-toggle]');
   const before = await page.evaluate(() => document.documentElement.dataset.theme);
   await toggle.click();
@@ -98,48 +94,54 @@ await test('Blocked storage: pages load and the theme toggle still works', async
     await go(page, path);
     const t = await page.evaluate(() => document.documentElement.dataset.theme); assert(t === 'light' || t === 'dark', `theme ${t}`);
   }
-  await go(page, '/'); await page.locator('.nav__location [data-theme-toggle]').click();
+  await go(page, '/solutions/'); await page.locator('.nav__location [data-theme-toggle]').click();
   assert(await page.evaluate(() => document.documentElement.dataset.theme) === 'dark', 'toggle failed without storage');
 });
 
 // ---------- Homepage components ----------
-await test('Work map: arrow keys, Home and End select fields and update the link', async page => {
+await test('Release checks: tabs switch runs with clicks and arrow keys', async page => {
   await go(page, '/');
-  await page.locator('#field-research').focus();
-  await page.keyboard.press('ArrowRight');
-  let s = await page.evaluate(() => ({sel: document.querySelector('[role=tab][aria-selected=true]').id, focus: document.activeElement.id, href: document.querySelector('#field-panel a').getAttribute('href')}));
-  assert(s.sel === 'field-code' && s.focus === 'field-code' && s.href === '#work', JSON.stringify(s));
-  await page.keyboard.press('End'); s = await page.evaluate(() => document.querySelector('[role=tab][aria-selected=true]').id); assert(s === 'field-teaching', s);
-  await page.keyboard.press('Home'); s = await page.evaluate(() => document.querySelector('[role=tab][aria-selected=true]').id); assert(s === 'field-research', s);
+  const state = () => page.evaluate(() => ({sel: document.querySelector('.con-tabs [aria-selected=true]').id, cmd: document.querySelector('#con .cmd').textContent, lines: document.querySelectorAll('#con .ln').length, focus: document.activeElement.id}));
+  let s = await state(); assert(s.sel === 't-lean' && /lean-task/.test(s.cmd) && s.lines === 9, JSON.stringify(s));
+  await page.click('#t-py'); s = await state(); assert(s.sel === 't-py' && /compute-task/.test(s.cmd), JSON.stringify(s));
+  await page.keyboard.press('ArrowRight'); s = await state(); assert(s.sel === 't-lean' && s.focus === 't-lean', JSON.stringify(s));
 });
-await test('Project browser: Cards and List change the layout, pressed state and shown CSS', async page => {
+await test('Task anatomy: files open with clicks and arrow keys; one tab stop', async page => {
   await go(page, '/');
-  await page.click('.demo-format [data-layout=list]');
-  const s = await page.evaluate(() => ({layout: document.querySelector('.preview-projects').dataset.layout, pressed: document.querySelector('[data-layout=list]').getAttribute('aria-pressed'), css: document.querySelector('[data-layout-source]').textContent, cols: getComputedStyle(document.querySelector('.preview-projects')).gridTemplateColumns.split(' ').length}));
-  assert(s.layout === 'list' && s.pressed === 'true' && /list/.test(s.css) && s.cols === 1, JSON.stringify(s));
-  const cards = await page.locator('.preview-project').count(); assert(cards === 4, `${cards} projects`);
+  const state = () => page.evaluate(() => ({sel: document.querySelector('#files [aria-selected=true]').textContent.trim(), head: document.querySelector('#view .code-h').textContent, stops: [...document.querySelectorAll('#files [role=tab]')].filter(b => b.tabIndex === 0).length, focus: document.activeElement.textContent.trim()}));
+  let s = await state(); assert(s.sel === 'instruction.md' && s.head === 'instruction.md' && s.stops === 1, JSON.stringify(s));
+  await page.click('#files [role=tab]:has-text("Dockerfile")'); s = await state();
+  assert(s.head === 'environment/Dockerfile', JSON.stringify(s));
+  await page.keyboard.press('ArrowDown'); s = await state(); assert(s.head === 'solution/solve.sh' && s.focus === 'solve.sh', JSON.stringify(s));
+  await page.keyboard.press('ArrowUp'); await page.keyboard.press('ArrowUp'); await page.keyboard.press('ArrowUp'); s = await state();
+  assert(s.head === 'instruction.md', JSON.stringify(s));
+  await page.keyboard.press('ArrowUp'); s = await state(); assert(s.sel === 'axiom audit', 'wraps to the last file: ' + JSON.stringify(s));
 });
+for (const width of [320, 360, 390, 412, 768, 1024, 1440]) {
+  await test(`Homepage at ${width}px: no sideways scroll, nothing clipped`, async page => {
+    await go(page, '/');
+    const s = await page.evaluate(() => ({overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, h1: document.querySelector('h1').getBoundingClientRect().right <= innerWidth}));
+    assert(s.overflow <= 0 && s.h1, JSON.stringify(s));
+  }, {viewport: {width, height: 900}});
+}
 
 // ---------- Contact form (mocked endpoint; nothing is sent) ----------
 const fill = async page => { await page.fill('#f-name', 'Test Reader'); await page.fill('#f-email', 'reader@example.com'); await page.fill('#f-message', 'A local test message.'); };
 await test('Contact: empty submit flags each field and focuses the first', async page => {
   let posted = 0; await page.route(FORM, r => { posted++; r.fulfill({status: 200, body: '{}'}); });
-  await go(page, '/#contact'); await page.click('#submit-btn');
+  await go(page, '/#contact'); await page.click('#f-send');
   const s = await page.evaluate(() => ({invalid: ['f-name', 'f-email', 'f-message'].map(id => document.getElementById(id).getAttribute('aria-invalid')), shown: ['f-name', 'f-email', 'f-message'].map(id => !document.getElementById(id + '-error').hidden), focus: document.activeElement.id}));
   assert(s.invalid.every(v => v === 'true') && s.shown.every(Boolean) && s.focus === 'f-name' && posted === 0, JSON.stringify(s));
   await page.fill('#f-name', 'A'); assert(await page.getAttribute('#f-name', 'aria-invalid') === 'false', 'error did not clear');
-  await page.fill('#f-email', 'not-an-email'); await page.click('#submit-btn');
+  await page.fill('#f-email', 'not-an-email'); await page.click('#f-send');
   assert(await page.getAttribute('#f-email', 'aria-invalid') === 'true', 'bad email accepted');
 });
-await test('Contact: a confirmed response shows the confirmation, focused; another message resets', async page => {
+await test('Contact: a confirmed response says it was sent and clears the form', async page => {
   let body = ''; await page.route(FORM, async r => { body = r.request().postData() || ''; await r.fulfill({status: 200, contentType: 'application/json', body: '{"ok":true}'}); });
-  await go(page, '/#contact'); await fill(page); await page.click('#submit-btn');
-  await page.waitForSelector('#contact-confirmation:not([hidden])');
-  assert(await page.evaluate(() => document.activeElement.id) === 'contact-confirmation', 'confirmation not focused');
-  assert(body.includes('A local test message.'), 'payload');
-  await page.click('[data-contact-another]');
-  const s = await page.evaluate(() => ({form: !document.getElementById('contact-form').hidden, name: document.getElementById('f-name').value, focus: document.activeElement.id}));
-  assert(s.form && s.name === '' && s.focus === 'f-name', JSON.stringify(s));
+  await go(page, '/#contact'); await fill(page); await page.click('#f-send');
+  await page.waitForSelector('#form-status.ok');
+  const s = await page.evaluate(() => ({msg: document.getElementById('form-status').textContent, name: document.getElementById('f-name').value}));
+  assert(/Message sent/.test(s.msg) && s.name === '' && body.includes('A local test message.'), JSON.stringify(s));
 });
 for (const [label, reply, expect] of [
   ['a validation error (422 JSON)', r => r.fulfill({status: 422, contentType: 'application/json', body: '{"errors":[{"message":"Email is not valid"}]}'}), /Email is not valid/],
@@ -148,34 +150,40 @@ for (const [label, reply, expect] of [
 ]) {
   await test(`Contact: ${label} keeps the text and offers email`, async page => {
     await page.route(FORM, reply);
-    await go(page, '/#contact'); await fill(page); await page.click('#submit-btn');
+    await go(page, '/#contact'); await fill(page); await page.click('#f-send');
     await page.waitForSelector('#form-status.is-error');
-    const s = await page.evaluate(() => ({msg: document.getElementById('form-status').textContent, message: document.getElementById('f-message').value, disabled: document.getElementById('submit-btn').disabled, confirm: !document.getElementById('contact-confirmation').hidden, mail: !!document.querySelector('#form-status a[href^="mailto:"]'), focus: document.activeElement.id}));
-    assert(expect.test(s.msg) && s.message === 'A local test message.' && !s.disabled && !s.confirm && s.mail && s.focus === 'form-status', JSON.stringify(s));
+    const s = await page.evaluate(() => ({msg: document.getElementById('form-status').textContent, message: document.getElementById('f-message').value, busy: document.getElementById('f-send').getAttribute('aria-disabled'), mail: !!document.querySelector('#form-status a[href^="mailto:"]'), focus: document.activeElement.id}));
+    assert(expect.test(s.msg) && s.message === 'A local test message.' && s.busy !== 'true' && s.mail && s.focus === 'form-status', JSON.stringify(s));
   });
 }
 await test('Contact: a field rejected by the service is flagged on that field', async page => {
   await page.route(FORM, r => r.fulfill({status: 422, contentType: 'application/json', body: '{"errors":[{"field":"email","code":"TYPE_EMAIL","message":"should be an email"}]}'}));
-  await go(page, '/#contact'); await fill(page); await page.click('#submit-btn');
+  await go(page, '/#contact'); await fill(page); await page.click('#f-send');
   await page.waitForSelector('#form-status.is-error');
   const s = await page.evaluate(() => ({invalid: document.getElementById('f-email').getAttribute('aria-invalid'), note: !document.getElementById('f-email-error').hidden, focus: document.activeElement.id, msg: document.getElementById('form-status').textContent}));
   assert(s.invalid === 'true' && s.note && s.focus === 'f-email' && /highlighted/.test(s.msg), JSON.stringify(s));
 });
-await test('Contact: tutoring links open the form with Tutoring chosen', async page => {
-  await go(page, '/tutoring/');
-  const href = await page.getAttribute('.tutoring-inquiry a[href*="#contact"]', 'href');
-  assert(href === '/?topic=tutoring#contact', href);
-  await go(page, href);
-  assert(await page.inputValue('#f-topic') === 'Tutoring inquiry', await page.inputValue('#f-topic'));
+await test('Retired pages land on their new homepage section', async page => {
+  for (const [from, to] of [['/about/', '/#background'], ['/work/', '/#experience'], ['/tutoring/', '/#contact'], ['/contact/', '/#contact'], ['/projects/omnifood/', '/#projects']]) {
+    await page.goto(base + from); await page.waitForURL(u => u.pathname === '/', {timeout: 5000}).catch(() => {}); await settle(page);
+    const u = new URL(page.url()); assert(u.pathname + u.hash === to, `${from} -> ${u.pathname + u.hash}`);
+  }
+});
+await test('Contact: the “Discuss a project” button and résumé link work', async page => {
+  await go(page, '/');
+  await page.click('.hero .cta a[href="#contact"]'); await page.waitForTimeout(800);
+  assert(await page.evaluate(() => document.activeElement.id) === 'contact', 'focus moved to the contact section');
+  const pdf = await page.request.get(base + '/Muhammad_Imran_Resume.pdf');
+  assert(pdf.ok() && /pdf/.test(pdf.headers()['content-type'] || ''), 'résumé PDF is served');
 });
 await test('Contact: a second click while sending does not send twice', async page => {
   let posted = 0; await page.route(FORM, async r => { posted++; await new Promise(res => setTimeout(res, 800)); await r.fulfill({status: 200, body: '{}'}); });
   await go(page, '/#contact'); await fill(page);
-  await page.click('#submit-btn');
-  const during = await page.evaluate(() => ({focus: document.activeElement.id, busy: document.getElementById('submit-btn').getAttribute('aria-disabled')}));
-  await page.click('#submit-btn', {force: true}).catch(() => {});
-  await page.waitForSelector('#contact-confirmation:not([hidden])'); assert(posted === 1, `${posted} posts`);
-  assert(during.focus === 'submit-btn' && during.busy === 'true', 'focus while sending: ' + JSON.stringify(during));
+  await page.click('#f-send');
+  const during = await page.evaluate(() => ({focus: document.activeElement.id, busy: document.getElementById('f-send').getAttribute('aria-disabled')}));
+  await page.click('#f-send', {force: true}).catch(() => {});
+  await page.waitForSelector('#form-status.ok'); assert(posted === 1, `${posted} posts`);
+  assert(during.focus === 'f-send' && during.busy === 'true', 'focus while sending: ' + JSON.stringify(during));
 });
 
 // ---------- Routes ----------
@@ -184,7 +192,7 @@ await test('Unknown address returns 404 with the recovery page', async page => {
   assert(/find your way back/i.test(await page.textContent('h1')), 'recovery heading');
 });
 await test('Legacy addresses redirect and keep their fragment', async page => {
-  for (const [from, to] of [['/math-9.html#ex11', '/solutions/class-9/#ex11'], ['/math-9/', '/solutions/class-9/'], ['/projects/omnifood.html', '/projects/omnifood/'], ['/solutions/class-9-unit-1.html', '/solutions/class-9/#unit-1'], ['/solutions/class-10/complex-numbers/', '/solutions/class-10/complex-numbers/exercise-1-1/']]) {
+  for (const [from, to] of [['/math-9.html#ex11', '/solutions/class-9/#ex11'], ['/math-9/', '/solutions/class-9/'], ['/projects/omnifood.html', '/#projects'], ['/solutions/class-9-unit-1.html', '/solutions/class-9/#unit-1'], ['/solutions/class-10/complex-numbers/', '/solutions/class-10/complex-numbers/exercise-1-1/']]) {
     await page.goto(base + from); await page.waitForURL(u => u.pathname !== new URL(base + from).pathname || u.hash !== new URL(base + from).hash, {timeout: 5000}).catch(() => {}); await settle(page);
     const u = new URL(page.url()); assert(u.pathname + u.hash === to, `${from} -> ${u.pathname + u.hash}`);
   }
@@ -225,7 +233,7 @@ await test('Class 10 Practice: generate, one sticky layer, answer key, back to s
 await test('Class 10: Back from another page restores the reading position', async page => {
   await go(page, '/solutions/class-10/complex-numbers/exercise-1-2/');
   await page.evaluate(() => scrollTo({top: 4000, behavior: 'instant'})); await page.waitForTimeout(300);
-  await page.click('.nav a[href="/tutoring/"]'); await settle(page);
+  await page.click('.nav a[href="/solutions/"]'); await settle(page);
   await page.goBack(); await settle(page); await page.waitForTimeout(1500);
   const y = await scrollY(page);
   assert(Math.abs(y - 4000) < 150, `restored ${y}`);
@@ -256,7 +264,7 @@ await test('Class 9 Practice: one return bar, Randomize above the paper, focus o
 await test('Class 9: Back from another page restores the reading position', async page => {
   await page.goto(base + '/solutions/class-9/#ex11', {waitUntil: 'load'}); await page.waitForTimeout(800);
   await page.evaluate(() => scrollTo({top: 4000, behavior: 'instant'})); await page.waitForTimeout(400);
-  await page.evaluate(() => { location.href = '/tutoring/'; }); await page.waitForURL('**/tutoring/', {waitUntil: 'load'});
+  await page.evaluate(() => { location.href = '/solutions/'; }); await page.waitForURL('**/solutions/', {waitUntil: 'load'});
   await page.goBack({waitUntil: 'commit'}); await page.waitForTimeout(2500);
   const y = await scrollY(page);
   assert(Math.abs(y - 4000) < 150, `restored ${y}`);
@@ -273,18 +281,6 @@ await test('Library: the interactive-ideas link opens the explorer and focuses i
   const s = await page.evaluate(() => ({open: document.getElementById('interactive-ideas').open, focus: document.activeElement.tagName}));
   assert(s.open && s.focus === 'SUMMARY', JSON.stringify(s));
 });
-await test('Case study: device tabs change the preview; the dialog opens, closes on Escape and returns focus', async page => {
-  await go(page, '/projects/omnifood/');
-  const src = () => page.getAttribute('[data-preview-image]', 'src');
-  const first = await src(); await page.click('.gallery-tabs [role=tab]:nth-child(2)'); await page.waitForTimeout(300);
-  assert(await src() !== first, 'tab did not change image');
-  await page.click('[data-enlarge]'); await page.waitForTimeout(300);
-  assert(await page.evaluate(() => document.querySelector('.preview-dialog').open), 'dialog not open');
-  await page.keyboard.press('Escape'); await page.waitForTimeout(300);
-  const s = await page.evaluate(() => ({open: document.querySelector('.preview-dialog').open, focus: document.activeElement.matches('[data-enlarge]')}));
-  assert(!s.open && s.focus, JSON.stringify(s));
-});
-
 await test('Short viewports (zoom, landscape): no sticky layer covers the reading column', async page => {
   for (const [w, h] of [[320, 204], [683, 340], [844, 390]]) {
     await page.setViewportSize({width: w, height: h});
@@ -305,7 +301,9 @@ await test('Book prose keeps a readable measure on wide screens', async page => 
 // ---------- Phones ----------
 const phone = {viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2};
 await test('Phone menu: opens, traps focus, locks scroll, Escape closes and returns focus', async page => {
-  await go(page, '/'); await page.evaluate(() => scrollTo(0, 600));
+  // The library header hides while scrolling down; scrolling up a little shows it again.
+  await go(page, '/solutions/'); await page.evaluate(() => scrollTo(0, 700)); await page.waitForTimeout(200);
+  await page.evaluate(() => scrollTo(0, 600)); await page.waitForTimeout(400);
   await page.click('[data-menu-open]'); await page.waitForTimeout(200);
   let s = await page.evaluate(() => ({expanded: document.querySelector('[data-menu-open]').getAttribute('aria-expanded'), focus: document.activeElement.matches('[data-menu-close]'), locked: getComputedStyle(document.body).overflow === 'hidden'}));
   assert(s.expanded === 'true' && s.focus && s.locked, JSON.stringify(s));
@@ -316,8 +314,8 @@ await test('Phone menu: opens, traps focus, locks scroll, Escape closes and retu
   assert(!s.open && s.focus && !s.locked && Math.abs(s.y - 600) < 5 && s.x === 0, JSON.stringify(s));
 }, phone);
 await test('Phone menu: a link navigates and closes; widening the window closes it', async page => {
-  await go(page, '/'); await page.click('[data-menu-open]'); await page.click('#mobile-menu a[href="/tutoring/"]'); await settle(page);
-  assert(new URL(page.url()).pathname === '/tutoring/', page.url());
+  await go(page, '/solutions/'); await page.click('[data-menu-open]'); await page.click('#mobile-menu a[href="/solutions/"]'); await settle(page);
+  assert(new URL(page.url()).pathname === '/solutions/', page.url());
   await page.click('[data-menu-open]'); await page.setViewportSize({width: 1024, height: 768}); await page.waitForTimeout(300);
   assert(!(await page.evaluate(() => document.getElementById('mobile-menu').classList.contains('is-open'))), 'menu still open on desktop');
 }, phone);
@@ -373,6 +371,9 @@ await test('Third-party hosts unreachable: mathematics and fonts still render', 
   await go(page, '/solutions/class-10/complex-numbers/exercise-1-2/'); await page.waitForTimeout(800);
   const s = await page.evaluate(() => ({raw: /\$[a-z0-9\\]/i.test(document.getElementById('panels').innerText), katex: document.querySelectorAll('.katex').length, status: !document.getElementById('math-status').hidden, inter: document.fonts.check('16px Inter')}));
   assert(!s.raw && s.katex > 100 && !s.status && s.inter, JSON.stringify(s));
+  await go(page, '/'); await page.waitForTimeout(500);
+  const h = await page.evaluate(() => ({mona: document.fonts.check('700 40px "Mona Sans"'), mono: document.fonts.check('13px "Geist Mono"')}));
+  assert(h.mona && h.mono, 'homepage fonts: ' + JSON.stringify(h));
 });
 
 await browser.close();
